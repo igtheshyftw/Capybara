@@ -8,18 +8,17 @@ import { Icon } from "@/components/ui/Icon";
 import { RoleSwitcher } from "./RoleSwitcher";
 import { navByRole, isActive, roleForPath } from "@/lib/nav";
 import { useStats } from "@/lib/store";
-import { student, teacher, parent } from "@/lib/data/people";
+import { useViewer } from "@/lib/viewer";
+import { logoutAction } from "@/lib/actions/auth";
 
 export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
-  const role = roleForPath(pathname);
+  const viewer = useViewer();
+  const role = viewer.mode === "live" ? viewer.role : roleForPath(pathname);
   const stats = useStats();
   const sections = navByRole[role];
 
-  const person =
-    role === "student" ? { name: student.name, sub: student.grade, initials: student.initials }
-    : role === "parent" ? { name: parent.name, sub: "Parent account", initials: parent.initials }
-    : { name: teacher.name, sub: teacher.subject, initials: teacher.initials };
+  const person = { name: viewer.name, initials: viewer.initials, sub: subtitleFor(viewer, role) };
 
   return (
     <div className="flex h-full flex-col gap-6 overflow-y-auto px-4 py-5">
@@ -74,9 +73,9 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
       </nav>
 
       <div className="space-y-3">
-        <RoleSwitcher />
+        {viewer.mode === "demo" && <RoleSwitcher />}
         <Link
-          href={role === "student" ? "/profile" : "#"}
+          href={role === "student" ? "/profile" : "/account"}
           onClick={onNavigate}
           className="flex items-center gap-3 rounded-[11px] border border-transparent px-2 py-2 transition-colors hover:border-line hover:bg-surface"
         >
@@ -91,7 +90,24 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
             <span className="tabular shrink-0 text-[11px] text-ink-3">Lv {stats.level}</span>
           )}
         </Link>
+
+        {viewer.mode === "live" && (
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="flex w-full items-center gap-2.5 rounded-[9px] px-3 py-2 text-[12.5px] text-ink-3 transition-colors hover:bg-surface-2 hover:text-ink"
+            >
+              <Icon name="logout" size={15} />
+              Sign out
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
+}
+
+function subtitleFor(viewer: { mode: string; email: string; orgName: string | null }, role: string) {
+  if (viewer.mode === "live") return viewer.orgName ?? viewer.email;
+  return role === "student" ? "Grade 11" : role === "parent" ? "Parent account" : role === "admin" ? "Administrator" : "English & Test Preparation";
 }

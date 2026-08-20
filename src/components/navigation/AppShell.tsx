@@ -11,13 +11,16 @@ import { Icon } from "@/components/ui/Icon";
 import { IconButton } from "@/components/ui/Button";
 import { navByRole, isActive, roleForPath } from "@/lib/nav";
 import { useApp, useDispatch, useStats } from "@/lib/store";
+import { useViewer } from "@/lib/viewer";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { role: storedRole } = useApp();
   const dispatch = useDispatch();
   const stats = useStats();
-  const role = roleForPath(pathname);
+  const viewer = useViewer();
+  // A signed-in account has exactly one role; the URL only decides in demo mode.
+  const role = viewer.mode === "live" ? viewer.role : roleForPath(pathname);
   const [drawer, setDrawer] = useState(false);
   const [search, setSearch] = useState(false);
 

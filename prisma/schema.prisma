@@ -1,0 +1,530 @@
+// Capybara Motion — data model
+//
+// Single organisation to start, but every row that belongs to the institution
+// carries an orgId so a second school can be added without a migration.
+//
+// Accounts are invite-only: an admin invites teachers, a teacher invites
+// students, and a parent links to a child with a code the school issues.
+// Nothing here lets an unvetted stranger create a student account.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // unpooled connection, used for migrations
+}
+
+// ============================================================
+// Identity
+// ============================================================
+
+enum Role {
+  STUDENT
+  PARENT
+  TEACHER
+  ADMIN
+}
+
+enum UserStatus {
+  INVITED // invite issued, password not yet set
+  ACTIVE
+  SUSPENDED // retained for records, cannot sign in
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  users       User[]
+  classes     Class[]
+  invites     Invite[]
+  assignments Assignment[]
+  auditLogs   AuditLog[]
+}
+
+model User {
+  id    String       @id @default(cuid())
+  orgId String
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  /// Stored lowercase and trimmed; uniqueness is per organisation.
+  email        String
+  passwordHash String? // null until an invite is accepted
+  name         String
+  role         Role
+  status       UserStatus @default(INVITED)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  lastLoginAt DateTime?
+
+  /// Consecutive failed sign-ins; cleared on success. Drives lockout.
+  failedLoginCount Int       @default(0)
+  lockedUntil      DateTime?
+
+  sessions       Session[]
+  studentProfile StudentProfile?
+  teacherProfile TeacherProfile?
+  parentProfile  ParentProfile?
+  invitesSent    Invite[]             @relation("InviteCreatedBy")
+  resetTokens    PasswordResetToken[]
+  auditLogs      AuditLog[]           @relation("AuditActor")
+
+  @@unique([orgId, email])
+  @@index([orgId, role])
+}
+
+/// Opaque session tokens. Only the SHA-256 hash is stored, so a database
+/// leak cannot be replayed as a login.
+model Session {
+  id         String   @id @default(cuid())
+  tokenHash  String   @unique
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  ip         String?
+  userAgent  String?
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+/// An invite is the only way an account comes into existence.
+model Invite {
+  id    String       @id @default(cuid())
+  orgId String
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  email     String
+  name      String
+  role      Role
+  tokenHash String  @unique
+  /// Set when a teacher invites a student into a specific class.
+  classId   String?
+  class     Class?  @relation(fields: [classId], references: [id], onDelete: SetNull)
+  /// Set when inviting a parent, to link them to their child on acceptance.
+  childId   String?
+
+  createdById String
+  createdBy   User   @relation("InviteCreatedBy", fields: [createdById], references: [id], onDelete: Cascade)
+
+  expiresAt  DateTime
+  acceptedAt DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([orgId, email])
+}
+
+// ============================================================
+// Profiles — one per role, holding only what that role needs
+// ============================================================
+
+model StudentProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  grade      String?
+  targetExam String?
+  goal       String?
+  joinedAt   DateTime @default(now())
+
+  level         Int       @default(1)
+  xp            Int       @default(0)
+  streakDays    Int       @default(0)
+  longestStreak Int       @default(0)
+  /// Date-only marker used to decide whether the streak continues or resets.
+  lastStudyDay  DateTime?
+  dailyGoalMins Int       @default(40)
+
+  enrollments    Enrollment[]
+  parents        ParentLink[]
+  lessonProgress LessonProgress[]
+  courseProgress CourseProgress[]
+  attempts       QuestionAttempt[]
+  mistakes       Mistake[]
+  reviews        VocabularyReview[]
+  writing        WritingSubmission[]
+  studySessions  StudySession[]
+  notes          LessonNote[]
+  achievements   UserAchievement[]
+  submissions    AssignmentSubmission[]
+  teacherNotes   TeacherNote[]
+}
+
+model TeacherProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title   String?
+  subject String?
+
+  classes      Class[]
+  assignments  Assignment[]
+  teacherNotes TeacherNote[]
+}
+
+model ParentProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  children ParentLink[]
+}
+
+/// A parent sees a child only through this link. Nothing else grants access.
+model ParentLink {
+  id        String         @id @default(cuid())
+  parentId  String
+  parent    ParentProfile  @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  relationship String?
+  createdAt    DateTime @default(now())
+
+  @@unique([parentId, studentId])
+  @@index([studentId])
+}
+
+// ============================================================
+// Classes
+// ============================================================
+
+model Class {
+  id    String       @id @default(cuid())
+  orgId String
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  name      String
+  period    String?
+  teacherId String?
+  teacher   TeacherProfile? @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  archived  Boolean         @default(false)
+  createdAt DateTime        @default(now())
+
+  enrollments Enrollment[]
+  assignments Assignment[]
+  invites     Invite[]
+
+  @@index([orgId])
+}
+
+model Enrollment {
+  id        String         @id @default(cuid())
+  classId   String
+  class     Class          @relation(fields: [classId], references: [id], onDelete: Cascade)
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime       @default(now())
+
+  @@unique([classId, studentId])
+  @@index([studentId])
+}
+
+// ============================================================
+// Learning records
+//
+// Course, lesson, question and word identifiers stay as string keys into the
+// content library in src/lib/data. Content is versioned in code, not rows, so
+// a lesson edit never orphans a student's history.
+// ============================================================
+
+model CourseProgress {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  courseId  String
+  percent   Int      @default(0)
+  mastery   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, courseId])
+}
+
+model LessonProgress {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  lessonId    String
+  percent     Int       @default(0)
+  completedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([studentId, lessonId])
+}
+
+model LessonNote {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  lessonId  String
+  body      String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, lessonId])
+}
+
+enum Confidence {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model QuestionAttempt {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  questionId   String
+  chosen       String
+  correct      Boolean
+  confidence   Confidence?
+  seconds      Int?
+  /// Set when the attempt was made inside an assignment or exam.
+  submissionId String?
+  submission   AssignmentSubmission? @relation(fields: [submissionId], references: [id], onDelete: SetNull)
+  createdAt    DateTime              @default(now())
+
+  @@index([studentId, questionId])
+  @@index([studentId, createdAt])
+}
+
+enum MistakeReason {
+  VOCABULARY
+  MISREAD
+  MISSED_EVIDENCE
+  GRAMMAR_RULE
+  CARELESS
+  TIME
+  GUESSED
+  OVERTHOUGHT
+  CONCEPT
+}
+
+enum MistakeStatus {
+  NEW
+  REVIEWING
+  RESOLVED
+}
+
+model Mistake {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  questionId    String
+  chosen        String
+  correctAnswer String
+  skill         String
+  difficulty    String
+  confidence    Confidence?
+  reason        MistakeReason?
+  status        MistakeStatus  @default(NEW)
+  note          String?
+  createdAt     DateTime       @default(now())
+  resolvedAt    DateTime?
+
+  @@index([studentId, status])
+  @@index([studentId, skill])
+}
+
+enum VocabStatus {
+  NEW
+  LEARNING
+  FAMILIAR
+  MASTERED
+}
+
+/// SM-2 scheduling state, one row per student per word.
+model VocabularyReview {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  wordId       String
+  ease         Float       @default(2.5)
+  intervalDays Int         @default(0)
+  reps         Int         @default(0)
+  lapses       Int         @default(0)
+  dueAt        DateTime    @default(now())
+  status       VocabStatus @default(NEW)
+  lastGrade    String?
+  updatedAt    DateTime    @updatedAt
+
+  @@unique([studentId, wordId])
+  @@index([studentId, dueAt])
+}
+
+model WritingSubmission {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  promptId       String
+  body           String    @db.Text
+  wordCount      Int       @default(0)
+  submittedAt    DateTime?
+  /// Category scores from the structure analysis, stored as JSON.
+  feedback       Json?
+  teacherComment String?   @db.Text
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([studentId, promptId])
+}
+
+model StudySession {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  task      String
+  minutes   Int
+  completed Boolean  @default(true)
+  startedAt DateTime @default(now())
+
+  @@index([studentId, startedAt])
+}
+
+model UserAchievement {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  achievementId String
+  progress      Int       @default(0)
+  earnedAt      DateTime?
+
+  @@unique([studentId, achievementId])
+}
+
+/// Written feedback from a teacher, visible to the student and their parents.
+model TeacherNote {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  teacherId String
+  teacher   TeacherProfile @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  body            String   @db.Text
+  visibleToParent Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  @@index([studentId, createdAt])
+}
+
+// ============================================================
+// Assignments
+// ============================================================
+
+enum AssignmentType {
+  READING
+  VOCABULARY
+  WRITING
+  QUIZ
+  TIMED
+  MOCK_EXAM
+}
+
+enum SubmissionStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  GRADED
+}
+
+model Assignment {
+  id    String       @id @default(cuid())
+  orgId String
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  title         String
+  type          AssignmentType
+  courseId      String?
+  /// Skill keys the questions are drawn from.
+  skills        String[]
+  difficulty    String?
+  dueAt         DateTime?
+  timeLimitMins Int?
+  /// 0 means unlimited.
+  maxAttempts   Int            @default(1)
+  requiredScore Int?
+
+  classId     String?
+  class       Class?         @relation(fields: [classId], references: [id], onDelete: SetNull)
+  createdById String
+  createdBy   TeacherProfile @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now())
+
+  submissions AssignmentSubmission[]
+
+  @@index([orgId, dueAt])
+}
+
+model AssignmentSubmission {
+  id           String         @id @default(cuid())
+  assignmentId String
+  assignment   Assignment     @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  studentId    String
+  student      StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  status      SubmissionStatus @default(NOT_STARTED)
+  progress    Int              @default(0)
+  score       Int?
+  attemptNo   Int              @default(1)
+  startedAt   DateTime?
+  submittedAt DateTime?
+  gradedAt    DateTime?
+
+  attempts QuestionAttempt[]
+
+  @@unique([assignmentId, studentId, attemptNo])
+  @@index([studentId, status])
+}
+
+// ============================================================
+// Audit
+// ============================================================
+
+/// Append-only record of account actions, so an admin can answer
+/// "who created this account, and when".
+model AuditLog {
+  id    String       @id @default(cuid())
+  orgId String
+  org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  actorId    String?
+  actor      User?    @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+  action     String
+  targetType String?
+  targetId   String?
+  meta       Json?
+  ip         String?
+  createdAt  DateTime @default(now())
+
+  @@index([orgId, createdAt])
+}

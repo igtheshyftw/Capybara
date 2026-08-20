@@ -8,3 +8,7 @@ npm-debug.log*
 .env*
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# Prisma
+/prisma/migrations/dev.db*
+/prisma/*.db

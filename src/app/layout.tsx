@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Newsreader } from "next/font/google";
 import { AppStoreProvider } from "@/lib/store";
+import { getSessionUser } from "@/lib/auth/session";
+import { isDatabaseConfigured } from "@/lib/db";
 import { ToastHost } from "@/components/feedback/ToastHost";
 import "./globals.css";
 
@@ -33,7 +35,12 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // A signed-in student's work belongs in their rows; everyone else (and the
+  // no-database demo) keeps using this browser's storage.
+  const user = isDatabaseConfigured() ? await getSessionUser() : null;
+  const persistence = user?.role === "STUDENT" ? "server" : "local";
+
   return (
     <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
       <body className="min-h-dvh bg-paper antialiased">
@@ -43,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <AppStoreProvider>
+        <AppStoreProvider persistence={persistence}>
           {children}
           <ToastHost />
         </AppStoreProvider>

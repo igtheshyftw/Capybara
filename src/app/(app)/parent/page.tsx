@@ -1,190 +1,143 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
-import { Card, CardHeader, Tag } from "@/components/ui/Card";
+import { Card, Tag } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { LineChart, BarChart } from "@/components/ui/Charts";
-import { MasteryBar, CountUp } from "@/components/ui/Progress";
-import { student, parentWeekly, weeklyActivity, dailyMinutes, teacherComment, assignments, skillBreakdown } from "@/lib/data/people";
+import { MasteryBar } from "@/components/ui/Progress";
+import { EmptyState } from "@/components/learning/EmptyState";
+import { CapybaraGuide } from "@/components/learning/CapybaraGuide";
+import { getSessionUser } from "@/lib/auth/session";
+import { isDatabaseConfigured } from "@/lib/db";
+import { getVisibleStudentSummaries } from "@/lib/queries/students";
+import { DemoOverview } from "./DemoOverview";
 
-function Delta({ now, prev, suffix = "" }: { now: number; prev: number; suffix?: string }) {
-  const d = now - prev;
-  if (d === 0) return <span className="text-[12.5px] text-ink-3">no change</span>;
-  return (
-    <span className={`tabular flex items-center gap-1 text-[12.5px] font-medium ${d > 0 ? "text-correct" : "text-wrong"}`}>
-      <Icon name={d > 0 ? "trend-up" : "trend-down"} size={13} />
-      {d > 0 ? "+" : ""}{d}{suffix} on last week
-    </span>
-  );
-}
+export const metadata: Metadata = { title: "Parent overview" };
+export const dynamic = "force-dynamic";
 
-export default function ParentPage() {
-  const sorted = [...skillBreakdown].sort((a, b) => b.value - a.value);
-  const strengths = sorted.slice(0, 2);
-  const attention = [...sorted].reverse().slice(0, 2);
-  const done = assignments.filter((a) => a.status === "graded" || a.status === "submitted").length;
+export default async function ParentPage() {
+  if (!isDatabaseConfigured()) return <DemoOverview />;
+
+  const user = await getSessionUser();
+  if (!user) return null;
+
+  // Scoped by ParentLink — a parent can only ever reach their own children.
+  const children = await getVisibleStudentSummaries(user);
+
+  if (children.length === 0) {
+    return (
+      <PageBody>
+        <PageHeader
+          eyebrow="Parent account" title={`Welcome, ${user.name.split(" ")[0]}.`} serif
+          description="Your account is set up, but it is not linked to a child yet."
+        />
+        <div className="mt-7">
+          <EmptyState
+            level={2}
+            variant="professor"
+            title="No child linked to this account."
+            body="A link is created by the school when they invite you. Ask your child's teacher to send a parent invite that names them, and their progress will appear here."
+          />
+        </div>
+      </PageBody>
+    );
+  }
 
   return (
     <PageBody>
       <PageHeader
         eyebrow="Parent account"
-        title={`${student.name.split(" ")[0]}'s week`}
+        title={children.length === 1 ? `${children[0].name.split(" ")[0]}'s progress` : "Your children"}
         serif
-        description="A summary of what your child has been working on, how it is going, and what their teacher has said. Deliberately not a record of every click."
+        description="A summary of what your child has been working on. Deliberately not a record of every click."
         action={<ButtonLink href="/parent/report" variant="secondary" icon="print">Progress report</ButtonLink>}
       />
 
-      {/* ---------- weekly overview ---------- */}
-      <section className="mt-7" aria-labelledby="overview">
-        <h2 id="overview" className="sr-only">Weekly overview</h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { label: "Study time", value: parentWeekly.minutes, prev: parentWeekly.minutesPrev, format: (v: number) => `${Math.floor(v / 60)}h ${v % 60}m`, icon: "clock" as const },
-            { label: "Lessons completed", value: parentWeekly.lessons, prev: parentWeekly.lessonsPrev, format: (v: number) => `${v}`, icon: "book" as const },
-            { label: "Assignments done", value: parentWeekly.assignmentsDone, prev: 3, format: (v: number) => `${v} of ${parentWeekly.assignmentsTotal}`, icon: "clipboard" as const },
-            { label: "Accuracy", value: parentWeekly.accuracy, prev: parentWeekly.accuracyPrev, format: (v: number) => `${v}%`, icon: "target" as const },
-          ].map((s) => (
-            <Card key={s.label}>
-              <div className="flex items-start justify-between gap-3">
-                <p className="text-[12.5px] font-medium text-ink-2">{s.label}</p>
-                <Icon name={s.icon} size={16} className="shrink-0 text-ink-3" />
+      <div className="mt-7 space-y-3.5">
+        {children.map((child) => (
+          <Card key={child.id}>
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2 text-[14px] font-semibold text-ink-2">
+                  {child.initials}
+                </span>
+                <div>
+                  <h2 className="text-[18px] font-semibold tracking-[-0.01em] text-ink">{child.name}</h2>
+                  <p className="mt-0.5 text-[12.5px] text-ink-3">
+                    {child.courses.length ? child.courses.join(" · ") : "Not in a class yet"} · last active {child.lastActive.toLowerCase()}
+                  </p>
+                </div>
               </div>
-              <p className="tabular mt-2.5 text-[26px] font-semibold leading-none tracking-[-0.02em] text-ink">
-                {s.format(s.value)}
+              <Tag tone={child.streak > 0 ? "sage" : "neutral"}>{child.streak}-day streak</Tag>
+            </div>
+
+            {child.attempts === 0 ? (
+              <p className="mt-5 rounded-[11px] border border-line bg-surface-2/60 p-4 text-[13.5px] leading-relaxed text-ink-2">
+                {child.name.split(" ")[0]} has not answered any questions yet. Figures appear here
+                as soon as they start — nothing is estimated or filled in on their behalf.
               </p>
-              <div className="mt-3">
-                <Delta now={s.value} prev={s.prev} />
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
+            ) : (
+              <>
+                <dl className="mt-6 grid grid-cols-2 gap-5 border-y border-line py-5 sm:grid-cols-4">
+                  {[
+                    ["Accuracy", child.accuracy === null ? "—" : `${child.accuracy}%`],
+                    ["Questions answered", child.attempts.toString()],
+                    ["Study time this week", `${Math.floor(child.minutesWeek / 60)}h ${child.minutesWeek % 60}m`],
+                    ["Lessons completed", child.lessonsCompleted.toString()],
+                  ].map(([k, v]) => (
+                    <div key={k}>
+                      <dt className="eyebrow mb-1.5">{k}</dt>
+                      <dd className="tabular text-[22px] font-semibold leading-none text-ink">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
 
-      <div className="mt-3.5 grid gap-3.5 lg:grid-cols-[1.5fr_1fr]">
-        {/* ---------- trend ---------- */}
-        <div className="space-y-3.5">
-          <Card>
-            <CardHeader
-              eyebrow="Progress trend" title="Accuracy over eight weeks"
-              description="The clearest single measure of whether the work is paying off."
-            />
-            <div className="mt-6">
-              <LineChart
-                data={weeklyActivity.map((w) => ({ label: w.week, value: w.accuracy }))}
-                accent="var(--color-sage)" valueSuffix="%" height={180}
-                ariaLabel="Accuracy by week over eight weeks"
-              />
+                <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                  <MasteryBar
+                    label="Accuracy" value={child.accuracy ?? 0}
+                    accent={(child.accuracy ?? 0) >= 70 ? "var(--color-sage)" : "var(--color-clay)"}
+                    sublabel={`Across ${child.attempts} question${child.attempts === 1 ? "" : "s"}`}
+                  />
+                  <MasteryBar
+                    label="Vocabulary mastered" value={Math.min(100, child.wordsMastered)}
+                    accent="var(--color-ochre)" showValue={false}
+                    sublabel={`${child.wordsMastered} word${child.wordsMastered === 1 ? "" : "s"} in long-term review`}
+                  />
+                </div>
+
+                {child.openMistakes > 0 && (
+                  <p className="mt-5 flex items-start gap-2.5 rounded-[10px] border border-ochre/25 bg-ochre-soft/45 p-3 text-[13px] leading-snug text-ink-2">
+                    <Icon name="info" size={15} className="mt-[2px] shrink-0 text-ochre" />
+                    <span>
+                      {child.openMistakes} question{child.openMistakes === 1 ? "" : "s"} in their
+                      mistake notebook are waiting to be reviewed. This is normal and is how the
+                      platform is meant to be used.
+                    </span>
+                  </p>
+                )}
+              </>
+            )}
+
+            <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
+              <ButtonLink href="/parent/progress" variant="secondary" size="sm">Detailed progress</ButtonLink>
+              <ButtonLink href="/parent/notes" variant="tertiary" size="sm">Teacher notes</ButtonLink>
             </div>
-            <p className="mt-4 border-t border-line pt-4 text-[14px] leading-relaxed text-ink-2">
-              Accuracy has risen from <span className="tabular font-semibold text-ink">61%</span> to{" "}
-              <span className="tabular font-semibold text-ink">76%</span> since late June — a steady
-              improvement rather than a spike, which usually means the gains will hold.
-            </p>
           </Card>
+        ))}
 
-          <Card>
-            <CardHeader eyebrow="This week" title="Study pattern" description="Consistency matters more than any single long session." />
-            <div className="mt-6">
-              <BarChart
-                data={dailyMinutes.map((d) => ({ label: d.day, value: d.minutes }))}
-                target={40} accent="var(--color-blue)" ariaLabel="Study minutes each day this week"
-              />
-            </div>
-            <p className="mt-4 border-t border-line pt-4 text-[13.5px] text-ink-2">
-              Studied on <span className="font-semibold text-ink">7 of 7 days</span>, hitting the
-              40-minute daily target on four of them.
-            </p>
-          </Card>
+        <CapybaraGuide variant="plain" name="What you can see" tone="paper">
+          This account shows summaries, trends and teacher feedback for the children linked to it.
+          It does not show individual answers, tutor conversations, or minute-by-minute activity.
+          Parents need clarity, not surveillance.
+        </CapybaraGuide>
 
-          {/* ---------- teacher summary ---------- */}
-          <Card>
-            <CardHeader eyebrow="Teacher summary" title="Dr. Elena Marsh" description="English & Test Preparation · written 16 August" />
-            <blockquote className="mt-4 border-l-2 border-line-2 pl-4 font-serif text-[15.5px] leading-[1.75] text-ink">
-              {teacherComment}
-            </blockquote>
-            <ButtonLink href="/parent/notes" variant="secondary" size="sm" className="mt-5">
-              All teacher notes
-            </ButtonLink>
-          </Card>
-        </div>
-
-        {/* ---------- strengths / attention ---------- */}
-        <div className="space-y-3.5">
-          <Card>
-            <CardHeader eyebrow="Academic strengths" title="What is going well" />
-            <ul className="mt-4 space-y-4">
-              {strengths.map((s) => (
-                <li key={s.skill}>
-                  <MasteryBar label={s.skill} value={s.value} accent="var(--color-sage)" sublabel={`Based on ${s.attempts} questions`} />
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 border-t border-line pt-3.5 text-[13px] leading-relaxed text-ink-2">
-              These are stable across several weeks rather than a single good session.
-            </p>
-          </Card>
-
-          <Card>
-            <CardHeader eyebrow="Needs attention" title="Where the work is" />
-            <ul className="mt-4 space-y-4">
-              {attention.map((s) => (
-                <li key={s.skill}>
-                  <MasteryBar label={s.skill} value={s.value} accent="var(--color-clay)" sublabel={`Based on ${s.attempts} questions`} />
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 border-t border-line pt-3.5 text-[13px] leading-relaxed text-ink-2">
-              Both are being worked on in class. Neither indicates a problem with effort — the
-              pattern is a specific reasoning habit rather than a gap in knowledge.
-            </p>
-          </Card>
-
-          <Card>
-            <CardHeader
-              eyebrow="Assignments" title={`${done} graded`}
-              description={`${assignments.length - done} still open across all courses.`}
-              action={<Link href="/parent/assignments" className="text-[12.5px] text-ink-2 underline decoration-line-2 underline-offset-4 hover:text-ink">All</Link>}
-            />
-            <ul className="mt-4 space-y-2">
-              {assignments.slice(0, 4).map((a) => (
-                <li key={a.id} className="flex items-center gap-3 rounded-[10px] border border-line bg-surface-2/50 px-3.5 py-2.5">
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-medium text-ink">{a.title}</span>
-                    <span className="block text-[11.5px] text-ink-3">{a.due}</span>
-                  </span>
-                  <Tag tone={a.status === "overdue" ? "wrong" : a.status === "graded" ? "correct" : "neutral"} className="shrink-0">
-                    {a.status === "overdue" ? "Overdue" : a.status === "graded" ? `${a.score}%` : "Open"}
-                  </Tag>
-                </li>
-              ))}
-            </ul>
-          </Card>
-
-          <Card>
-            <CardHeader eyebrow="Consistency" title={`${student.streak}-day streak`} />
-            <p className="tabular mt-3 serif-display text-[34px] leading-none">
-              <CountUp to={student.streak} /> days
-            </p>
-            <p className="mt-2.5 text-[13px] leading-relaxed text-ink-2">
-              Longest run so far is {student.longestStreak} days. A missed day is not a setback —
-              the review schedule adjusts automatically.
-            </p>
-          </Card>
-
-          <div className="rounded-[13px] border border-line bg-surface-2/60 p-4">
-            <p className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-              <Icon name="info" size={15} className="text-ink-3" />
-              What you can see
-            </p>
-            <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-2">
-              This account shows summaries, trends and teacher feedback. It does not show
-              individual answers, chat history, or minute-by-minute activity. Parents need clarity,
-              not surveillance.
-            </p>
-          </div>
-        </div>
+        <p className="px-1 text-[12.5px] text-ink-3">
+          Something look wrong?{" "}
+          <Link href="/account" className="underline decoration-line-2 underline-offset-4 hover:text-ink">
+            Check which children are linked to your account
+          </Link>
+          .
+        </p>
       </div>
     </PageBody>
   );

@@ -5,30 +5,14 @@ import { schedule } from "@/lib/srs";
 import { questionById } from "@/lib/data/questions";
 import { student as baseStudent } from "@/lib/data/people";
 import { vocabularyWords } from "@/lib/data/vocabulary";
-import type {
-  Confidence, Mistake, MistakeReason, QuestionAttempt, ReviewGrade,
-  Role, VocabularyReview, WritingSubmission,
-} from "@/lib/types";
+import type { Confidence, Mistake, MistakeReason, QuestionAttempt, ReviewGrade, Role } from "@/lib/types";
+import type { AppState } from "@/lib/store-types";
+import { loadProgress, saveProgress, type ProgressDelta } from "@/lib/actions/progress";
+
+export type { AppState };
 
 const STORAGE_KEY = "capybara-motion/v1";
 
-export interface AppState {
-  role: Role;
-  hydrated: boolean;
-  attempts: QuestionAttempt[];
-  mistakes: Mistake[];
-  reviews: Record<string, VocabularyReview>;
-  lessonProgress: Record<string, number>;   // lessonId -> 0..100
-  completedLessons: string[];
-  writing: Record<string, WritingSubmission>;
-  bookmarks: string[];
-  notes: Record<string, string>;
-  focusMinutes: number;
-  focusSessions: number;
-  xp: number;
-  /** Transient toast queue for XP / achievement feedback. */
-  toasts: { id: string; title: string; body?: string; tone: "neutral" | "good" }[];
-}
 
 type Action =
   | { type: "hydrate"; payload: Partial<AppState> }
@@ -196,37 +180,139 @@ function reducer(state: AppState, action: Action): AppState {
 const StateCtx = createContext<AppState>(initialState);
 const DispatchCtx = createContext<React.Dispatch<Action>>(() => {});
 
-export function AppStoreProvider({ children }: { children: ReactNode }) {
+export function AppStoreProvider({
+  children,
+  persistence = "local",
+}: {
+  children: ReactNode;
+  /** "local" keeps everything in this browser; "server" syncs to the signed-in student's rows. */
+  persistence?: "local" | "server";
+}) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const loaded = useRef(false);
+  /** Last state successfully written, used to work out what actually changed. */
+  const saved = useRef<AppState | null>(null);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Hydrate after mount so server and client markup match.
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) dispatch({ type: "hydrate", payload: JSON.parse(raw) as Partial<AppState> });
-      else dispatch({ type: "hydrate", payload: {} });
-    } catch {
-      dispatch({ type: "hydrate", payload: {} });
+    let cancelled = false;
+
+    async function hydrate() {
+      if (persistence === "server") {
+        try {
+          const remote = await loadProgress();
+          if (!cancelled) dispatch({ type: "hydrate", payload: remote ?? {} });
+        } catch {
+          if (!cancelled) dispatch({ type: "hydrate", payload: {} });
+        }
+      } else {
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEY);
+          dispatch({ type: "hydrate", payload: raw ? (JSON.parse(raw) as Partial<AppState>) : {} });
+        } catch {
+          dispatch({ type: "hydrate", payload: {} });
+        }
+      }
+      loaded.current = true;
     }
-    loaded.current = true;
-  }, []);
+
+    hydrate();
+    return () => { cancelled = true; };
+  }, [persistence]);
 
   useEffect(() => {
     if (!loaded.current || !state.hydrated) return;
-    const { toasts: _toasts, hydrated: _hydrated, ...persisted } = state;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(persisted));
-    } catch {
-      /* storage full or unavailable — the session still works, it just will not persist */
+
+    if (persistence === "local") {
+      const { toasts: _t, hydrated: _h, ...persisted } = state;
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(persisted));
+      } catch {
+        /* storage full or unavailable — the session still works, it just will not persist */
+      }
+      return;
     }
-  }, [state]);
+
+    // Server mode: debounce, then send only the rows that differ.
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      const delta = diff(saved.current, state);
+      if (!delta) { saved.current = state; return; }
+      const snapshot = state;
+      saveProgress(delta)
+        .then(() => { saved.current = snapshot; })
+        .catch(() => { /* keep the old snapshot so the next tick retries */ });
+    }, 900);
+
+    return () => { if (saveTimer.current) clearTimeout(saveTimer.current); };
+  }, [state, persistence]);
 
   return (
     <StateCtx.Provider value={state}>
       <DispatchCtx.Provider value={dispatch}>{children}</DispatchCtx.Provider>
     </StateCtx.Provider>
   );
+}
+
+/** What changed between the last saved snapshot and now. Returns null if nothing did. */
+function diff(prev: AppState | null, next: AppState): ProgressDelta | null {
+  const seen = new Set((prev?.attempts ?? []).map((a) => `${a.questionId}:${a.at}`));
+  const attempts = next.attempts.filter((a) => !seen.has(`${a.questionId}:${a.at}`));
+
+  const prevMistakes = new Map((prev?.mistakes ?? []).map((m) => [m.id, m]));
+  const mistakes = next.mistakes.filter((m) => {
+    const before = prevMistakes.get(m.id);
+    return !before || before.status !== m.status || before.reason !== m.reason || before.note !== m.note;
+  });
+
+  const reviews = Object.values(next.reviews).filter((r) => {
+    const before = prev?.reviews?.[r.wordId];
+    return !before || before.due !== r.due || before.reps !== r.reps || before.status !== r.status;
+  });
+
+  const lessonProgress = Object.entries(next.lessonProgress)
+    .filter(([id, pct]) => {
+      const wasDone = prev?.completedLessons?.includes(id) ?? false;
+      const isDone = next.completedLessons.includes(id);
+      return prev?.lessonProgress?.[id] !== pct || wasDone !== isDone;
+    })
+    .map(([lessonId, percent]) => ({
+      lessonId, percent, completed: next.completedLessons.includes(lessonId),
+    }));
+
+  const notes = Object.entries(next.notes)
+    .filter(([id, body]) => prev?.notes?.[id] !== body)
+    .map(([lessonId, body]) => ({ lessonId, body }));
+
+  const writing = Object.values(next.writing).filter((w) => {
+    const before = prev?.writing?.[w.promptId];
+    return !before || before.text !== w.text || before.submitted !== w.submitted;
+  });
+
+  const xpChanged = prev?.xp !== next.xp;
+  const focusChanged = (prev?.focusSessions ?? 0) !== next.focusSessions;
+
+  const empty =
+    !attempts.length && !mistakes.length && !reviews.length && !lessonProgress.length &&
+    !notes.length && !writing.length && !xpChanged && !focusChanged;
+  if (empty) return null;
+
+  return {
+    ...(attempts.length && { attempts }),
+    ...(mistakes.length && { mistakes }),
+    ...(reviews.length && { reviews }),
+    ...(lessonProgress.length && { lessonProgress }),
+    ...(notes.length && { notes }),
+    ...(writing.length && { writing }),
+    ...(focusChanged && {
+      focusSession: {
+        task: "Focus session",
+        minutes: next.focusMinutes - (prev?.focusMinutes ?? 0),
+      },
+    }),
+    ...(xpChanged && { xp: next.xp }),
+  };
 }
 
 export const useApp = () => useContext(StateCtx);

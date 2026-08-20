@@ -67,6 +67,23 @@ export const navByRole: Record<Role, NavSection[]> = {
     },
   ],
 
+  admin: [
+    {
+      items: [
+        { label: "Overview", href: "/admin", icon: "home", mobile: true, keywords: "admin console organisation" },
+        { label: "People", href: "/admin/people", icon: "users", mobile: true, match: ["/admin/people"], keywords: "accounts users invites roster staff" },
+        { label: "Classes", href: "/admin/classes", icon: "layers", mobile: true, keywords: "class groups sections" },
+      ],
+    },
+    {
+      label: "Records",
+      items: [
+        { label: "Activity Log", short: "Log", href: "/admin/activity", icon: "list", mobile: true, keywords: "audit trail history security" },
+        { label: "Settings", href: "/admin/settings", icon: "settings", mobile: true, keywords: "organisation name preferences" },
+      ],
+    },
+  ],
+
   teacher: [
     {
       items: [
@@ -89,6 +106,7 @@ export const roleHome: Record<Role, string> = {
   student: "/dashboard",
   parent: "/parent",
   teacher: "/teacher",
+  admin: "/admin",
 };
 
 /**
@@ -96,6 +114,7 @@ export const roleHome: Record<Role, string> = {
  * landing on /teacher directly must not leave the student navigation up.
  */
 export function roleForPath(pathname: string): Role {
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) return "admin";
   if (pathname === "/teacher" || pathname.startsWith("/teacher/")) return "teacher";
   if (pathname === "/parent" || pathname.startsWith("/parent/")) return "parent";
   return "student";

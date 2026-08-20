@@ -110,6 +110,107 @@ and question interface, and `aria-live` on answer feedback.
 
 ---
 
+## Accounts and deployment
+
+Out of the box the app runs in **demo mode**: sample data, the role switcher,
+progress in `localStorage`, no sign-in. Setting `DATABASE_URL` switches it to
+**live mode**, where people sign in with their own accounts and each student's
+work is stored against them.
+
+Nothing about the demo is removed — it is what runs when no database is
+configured, which keeps `npm run dev` working with zero setup.
+
+### How accounts are created
+
+Invite-only. There is no public sign-up form anywhere in the app.
+
+```
+admin  ──invites──>  teacher  ──invites──>  student
+                              ──invites──>  parent ──linked to──> one student
+```
+
+* An **admin** can invite anyone, and suspend or reactivate accounts.
+* A **teacher** can invite students and parents. The administrator role is not
+  offered to them.
+* A **parent** sees only the children they are explicitly linked to. That link
+  is created when they are invited, and it is the only thing that grants access.
+* A **student** sees only their own work.
+
+Invite links work once and expire after 14 days. The invited person chooses
+their own password — nobody else ever sets or sees it.
+
+### Security
+
+| Concern | How it is handled |
+| --- | --- |
+| Password storage | scrypt (Node core), N=2^16, per-password 32-byte salt, 64-byte key. ~200 ms per hash. |
+| Sessions | 256-bit opaque tokens; only a SHA-256 digest is stored, so a database dump cannot be replayed. httpOnly, `SameSite=Lax`, `Secure` in production. 30 days, renewed while in use. |
+| Brute force | Locked for 15 minutes after 8 consecutive failures. |
+| User enumeration | Sign-in returns one message for every failure, and spends comparable time when the address does not exist. Password reset always reports the same thing. |
+| Password reset | Single-use, one-hour links. Resetting signs out every other device. |
+| Authorisation | Every role area is gated by a server-side layout, and student records go through one function (`assertCanViewStudent`). Middleware only redirects — it never grants access. |
+| Audit | Sign-ins, invites, suspensions and password changes are appended to `AuditLog`, visible at `/admin/activity`. |
+
+### Deploying to Vercel and Neon
+
+1. **Database.** Create a project at neon.tech. From the dashboard copy two
+   connection strings into your environment:
+   `DATABASE_URL` (the **pooled** one, with `-pooler` in the host) and
+   `DIRECT_URL` (the direct one, used only for migrations).
+2. **Push the code** to GitHub.
+3. **Vercel.** Import the repository. Add `DATABASE_URL`, `DIRECT_URL` and
+   `APP_URL` (your deployment URL) as environment variables. Deploy.
+4. **Create the tables.** From your machine, with the same variables set:
+   ```bash
+   npm run db:deploy
+   ```
+5. **Create the first administrator:**
+   ```bash
+   ORG_NAME="Your School" ADMIN_EMAIL="you@example.com" npm run db:seed
+   ```
+   It prints a generated password unless you set `ADMIN_PASSWORD`. Save it.
+6. Sign in at `/login`, then invite your teachers from **Admin → People**.
+
+`npm run build` runs `prisma generate` first, so Vercel needs no extra build
+configuration.
+
+### Sending invite and reset emails
+
+No mail transport is wired up. Invite links are shown in the admin UI to copy
+and send yourself; password-reset links are written to the server log. To send
+them automatically, replace the `console.info` in `requestResetAction`
+(`src/lib/actions/auth.ts`) and the returned link in `createInviteAction`
+(`src/lib/actions/admin.ts`) with a call to your provider. Everything else
+about the flow already works.
+
+### Useful commands
+
+```bash
+npm run db:migrate   # create a migration during development
+npm run db:deploy    # apply migrations in production
+npm run db:seed      # create the organisation and first admin
+npm run db:studio    # browse the data in a local GUI
+```
+
+### What is live and what is still sample content
+
+Adding a database does not retro-fit history that does not exist. In live mode:
+
+* **Real:** every account, session, role and permission; student progress
+  (attempts, mistakes, vocabulary scheduling, lesson completion, notes, writing
+  drafts, focus sessions); the teacher roster; the parent's children and their
+  headline figures; the activity log.
+* **Still sample content:** the eight-week trend charts, class-wide analytics
+  and the printable report's historical series. A newly created student has no
+  history, so these screens illustrate the shape rather than invent data. They
+  read from `src/lib/data/people.ts` and are the natural next thing to move onto
+  real queries once a deployment has a few weeks of use behind it.
+* **Course content** — lessons, questions, passages, vocabulary — is versioned
+  in code rather than in rows, so editing a lesson never orphans a student's
+  history.
+
+---
+
 ## The data
 
 Nothing is Lorem Ipsum. The demo student is Alex Chen, Grade 11, twelve-day

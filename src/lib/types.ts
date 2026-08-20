@@ -2,7 +2,7 @@
    Capybara Motion — domain model
    ============================================================ */
 
-export type Role = "student" | "parent" | "teacher";
+export type Role = "student" | "parent" | "teacher" | "admin";
 
 export type SkillId =
   | "inference"
