@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Capybara Motion — Design Tokens
+   Warm paper / Japanese stationery palette.
+   ============================================================ */
+
+@theme {
+  /* --- Paper surfaces --- */
+  --color-paper: #f7f4ed;          /* page background: warm ivory */
+  --color-surface: #fdfbf6;        /* card surface: lighter cream */
+  --color-surface-2: #f1ece1;      /* muted beige, secondary surface */
+  --color-surface-3: #e8e1d3;      /* deeper beige, wells & tracks */
+
+  /* --- Ink --- */
+  --color-ink: #26241f;            /* deep charcoal, primary text */
+  --color-ink-2: #55514a;          /* warm gray, secondary text */
+  --color-ink-3: #6f6a61;           /* tertiary / captions — 4.5:1+ on every surface it sits on */
+  --color-ink-inv: #faf7f1;        /* text on dark */
+
+  /* --- Lines --- */
+  --color-line: #ded6c7;           /* soft gray-beige border, separators */
+  --color-line-2: #cbc1ae;         /* stronger border, hover states */
+  /* Form-control boundaries: a field's border is the only thing identifying it,
+     so it must clear 3:1 against both the field fill and the page. */
+  --color-line-strong: #918673;
+
+  /* --- Restrained accents ---
+     Each accent has three roles: the mid tone for fills, bars and icons
+     (3:1 is enough for graphics), the soft tone for backgrounds, and an
+     -ink tone for small text, which must clear 4.5:1 on the soft tone. */
+  --color-sage: #6f8b6e;
+  --color-sage-soft: #e4ebe1;
+  --color-sage-ink: #576d57;
+  --color-blue: #62809d;
+  --color-blue-soft: #e2e8ee;
+  --color-blue-ink: #516981;
+  --color-clay: #b1705a;
+  --color-clay-soft: #f2e3dc;
+  --color-clay-ink: #905744;
+  --color-ochre: #b39244;
+  --color-ochre-soft: #f2e9d3;
+  --color-ochre-ink: #7d652f;
+  --color-plum: #7c6484;
+  --color-plum-soft: #eae3ec;
+  --color-plum-ink: #745d7b;
+
+  /* --- Semantic --- */
+  --color-correct: #4f7a52;
+  --color-correct-soft: #e2ecdf;
+  --color-correct-ink: #49714c;
+  --color-wrong: #a4544a;
+  --color-wrong-soft: #f2e0dd;
+  --color-wrong-ink: #9a4f45;
+
+  /* --- Capybara fur --- */
+  --color-fur: #b99a72;
+  --color-fur-dark: #9c7d58;
+  --color-fur-light: #d4bb99;
+
+  /* --- Type --- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
+
+  /* --- Radii: 12–20px range --- */
+  --radius-card: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+
+  /* --- Elevation: almost imperceptible --- */
+  --shadow-paper: 0 1px 2px rgba(38, 36, 31, 0.04), 0 1px 1px rgba(38, 36, 31, 0.03);
+  --shadow-lift: 0 6px 16px -6px rgba(38, 36, 31, 0.13), 0 2px 4px rgba(38, 36, 31, 0.04);
+  --shadow-float: 0 18px 44px -14px rgba(38, 36, 31, 0.22), 0 4px 10px rgba(38, 36, 31, 0.06);
+
+  /* --- Motion --- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  /* Visible, on-brand focus ring everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-ochre-soft);
+    color: var(--color-ink);
+  }
+
+  /* Restrained scrollbars */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border-radius: 99px;
+    border: 3px solid var(--color-paper);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-line-2); }
+
+  input, textarea, select, button { font: inherit; color: inherit; }
+}
+
+/* ============================================================
+   Component primitives
+   ============================================================ */
+
+@layer components {
+  .paper-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-paper);
+  }
+
+  /* Ruled-notebook texture, used sparingly on feature panels */
+  .ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 27px,
+      var(--color-line) 27px,
+      var(--color-line) 28px
+    );
+    /* Rules sit below the text baseline for a 28px line-height. */
+    background-position: 0 11px;
+  }
+
+  .grid-paper {
+    background-image:
+      linear-gradient(var(--color-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* Small uppercase editorial label */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+
+  .serif-display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.06;
+  }
+
+  /* Hand-drawn underline accent for a single emphasised word */
+  .marker {
+    background-image: linear-gradient(transparent 62%, var(--color-ochre-soft) 62%, var(--color-ochre-soft) 94%, transparent 94%);
+  }
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+
+@layer utilities {
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Fades a horizontally scrolling row at its edges */
+  .edge-fade {
+    mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+  }
+}
+
+/* ============================================================
+   Motion — everything respects prefers-reduced-motion
+   ============================================================ */
+
+@keyframes cm-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes cm-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes cm-draw {
+  from { stroke-dashoffset: var(--dash, 100); }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes cm-shimmer {
+  from { background-position: -180% 0; }
+  to   { background-position: 180% 0; }
+}
+
+/* Capybara idle: an almost imperceptible breath, ~5s cycle */
+@keyframes cm-breathe {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50%      { transform: translateY(-1.5px) scaleY(1.012); }
+}
+
+.animate-rise { animation: cm-rise 0.42s var(--ease-out-soft) both; }
+.animate-fade { animation: cm-fade 0.3s ease both; }
+.animate-breathe { animation: cm-breathe 5.5s ease-in-out infinite; transform-origin: bottom center; }
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-2) 25%,
+    var(--color-surface-3) 37%,
+    var(--color-surface-2) 63%
+  );
+  background-size: 260% 100%;
+  animation: cm-shimmer 1.7s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Print — academic reports render as clean A4
+   ============================================================ */
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+  .print-page {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  @page { size: A4; margin: 16mm; }
+}
