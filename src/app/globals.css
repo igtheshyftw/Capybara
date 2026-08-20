@@ -54,9 +54,9 @@
   --color-wrong-ink: #9a4f45;
 
   /* --- Capybara fur --- */
-  --color-fur: #b99a72;
-  --color-fur-dark: #9c7d58;
-  --color-fur-light: #d4bb99;
+  --color-fur: #cba077;
+  --color-fur-dark: #a97f52;
+  --color-fur-light: #e2c69f;
 
   /* --- Type --- */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
