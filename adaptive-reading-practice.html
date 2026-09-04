@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adaptive Reading Practice &mdash; Grade 4</title>
+<style>
+/* ============================================================
+   NEUTRAL ACADEMIC THEME
+   Visual only. No question content depends on styling.
+   ============================================================ */
+:root{
+  --ink:#16202b; --ink-2:#3d4c5c; --ink-3:#64748b;
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+  --line:#d9e0e8; --line-2:#c3cddb;
+  --accent:#2f5d8a; --accent-ink:#ffffff; --accent-soft:#e6eef6;
+  --ok:#1f6b45; --ok-soft:#e4f2ea;
+  --no:#a3341f; --no-soft:#fbe9e5;
+  --warn:#8a5a13; --warn-soft:#fdf1dc;
+  --focus:#2f5d8a;
+  --radius:10px; --radius-sm:6px;
+  --shadow:0 1px 2px rgba(16,32,48,.06), 0 4px 14px rgba(16,32,48,.05);
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:ui-serif,Georgia,Cambria,"Times New Roman",serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --measure:68ch;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#e8edf3; --ink-2:#b9c5d3; --ink-3:#8798aa;
+    --bg:#11171e; --surface:#182029; --surface-2:#1f2933;
+    --line:#2c3947; --line-2:#3a4a5c;
+    --accent:#7fb0e0; --accent-ink:#0d1319; --accent-soft:#1d2b39;
+    --ok:#6fcea0; --ok-soft:#16291f;
+    --no:#f0917c; --no-soft:#2c1a16;
+    --warn:#e6b768; --warn-soft:#2a2115;
+    --focus:#7fb0e0;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.3);
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{line-height:1.25; margin:0 0 .5em; font-weight:600; letter-spacing:-.01em}
+h1{font-size:1.5rem} h2{font-size:1.2rem} h3{font-size:1.02rem} h4{font-size:.94rem}
+p{margin:0 0 1em} p:last-child{margin-bottom:0}
+a{color:var(--accent)}
+small{font-size:.84rem}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:3px}
+
+.wrap{max-width:900px; margin:0 auto; padding:0 20px}
+.stack>*+*{margin-top:var(--gap,16px)}
+
+/* ---- app chrome ---- */
+.masthead{
+  background:var(--surface); border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:20;
+}
+.masthead .wrap{display:flex; align-items:center; gap:14px; min-height:58px; flex-wrap:wrap}
+.brand{font-weight:600; font-size:.98rem; letter-spacing:-.01em; margin-right:auto}
+.brand span{display:block; font-weight:400; font-size:.76rem; color:var(--ink-3); letter-spacing:0}
+
+.card{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius); padding:22px; box-shadow:var(--shadow);
+}
+.card+.card{margin-top:16px}
+.card-tight{padding:16px}
+
+main{padding:26px 0 60px}
+.screen[hidden]{display:none !important}
+
+/* ---- buttons ---- */
+.btn{
+  font:inherit; font-weight:550; font-size:.94rem;
+  padding:10px 18px; border-radius:var(--radius-sm);
+  border:1px solid var(--line-2); background:var(--surface); color:var(--ink);
+  cursor:pointer; transition:background .14s, border-color .14s, transform .06s;
+}
+.btn:hover{background:var(--surface-2)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.45; cursor:not-allowed; transform:none}
+.btn-primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent); filter:brightness(1.08)}
+.btn-quiet{border-color:transparent; background:transparent; color:var(--ink-2); padding:8px 12px}
+.btn-quiet:hover{background:var(--surface-2)}
+.btn-danger{border-color:var(--no); color:var(--no)}
+.btn-danger:hover{background:var(--no-soft)}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+/* ---- forms ---- */
+.field{display:block; margin-bottom:14px}
+.field>.label{display:block; font-weight:600; font-size:.9rem; margin-bottom:4px}
+.field>.hint{display:block; font-size:.83rem; color:var(--ink-3); margin-bottom:7px}
+select,input[type=number]{
+  font:inherit; font-size:.93rem; padding:8px 10px; width:100%; max-width:340px;
+  border:1px solid var(--line-2); border-radius:var(--radius-sm);
+  background:var(--surface); color:var(--ink);
+}
+
+/* radio-card group (mode chooser) */
+.choices{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.choice{position:relative}
+.choice input{position:absolute; opacity:0; width:0; height:0}
+.choice .box{
+  display:block; border:1px solid var(--line-2); border-radius:var(--radius);
+  padding:14px 16px; cursor:pointer; height:100%; transition:border-color .14s, background .14s;
+}
+.choice .box:hover{background:var(--surface-2)}
+.choice input:checked+.box{border-color:var(--accent); background:var(--accent-soft); box-shadow:inset 0 0 0 1px var(--accent)}
+.choice input:focus-visible+.box{outline:2px solid var(--focus); outline-offset:2px}
+.choice .box b{display:block; font-size:.96rem; margin-bottom:2px}
+.choice .box small{color:var(--ink-2); line-height:1.45; display:block}
+
+/* ---- notices ---- */
+.notice{
+  border:1px solid var(--line); border-left:3px solid var(--ink-3);
+  background:var(--surface-2); border-radius:var(--radius-sm);
+  padding:12px 14px; font-size:.88rem; color:var(--ink-2);
+}
+.notice strong{color:var(--ink)}
+.notice-warn{border-left-color:var(--warn); background:var(--warn-soft); color:var(--ink-2)}
+.notice-accent{border-left-color:var(--accent); background:var(--accent-soft)}
+
+/* ---- test screen ---- */
+.testbar{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px}
+.testbar .qnum{font-weight:600; font-size:.95rem}
+.testbar .spacer{margin-left:auto}
+.testbar .meta{font-size:.83rem; color:var(--ink-3)}
+.progress{
+  height:6px; background:var(--surface-2); border-radius:99px; overflow:hidden;
+  border:1px solid var(--line);
+}
+.progress>i{
+  display:block; height:100%; width:0%; background:var(--accent);
+  border-radius:99px; transition:width .35s ease;
+}
+.passage{
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:var(--radius); padding:18px 20px; margin-bottom:18px;
+  font-family:var(--serif); font-size:1.02rem; line-height:1.72;
+  max-height:min(42vh,460px); overflow:auto;
+}
+.passage h4{font-family:var(--sans); font-size:.78rem; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--ink-3); margin-bottom:.6em; font-weight:600}
+.passage p+p{margin-top:.85em}
+.stem{font-size:1.08rem; line-height:1.55; max-width:var(--measure); margin:0 0 16px}
+
+.opts{display:grid; gap:9px; margin:0; padding:0; border:0}
+.opt{position:relative}
+.opt input{position:absolute; opacity:0; width:0; height:0}
+.opt .box{
+  display:flex; gap:12px; align-items:flex-start;
+  border:1px solid var(--line-2); border-radius:var(--radius);
+  padding:13px 15px; cursor:pointer; background:var(--surface);
+  transition:border-color .14s, background .14s;
+}
+.opt .box:hover{background:var(--surface-2)}
+.opt .ltr{
+  flex:none; width:24px; height:24px; border-radius:50%;
+  border:1px solid var(--line-2); display:grid; place-items:center;
+  font-size:.8rem; font-weight:600; color:var(--ink-2); background:var(--surface);
+}
+.opt input:checked+.box{border-color:var(--accent); background:var(--accent-soft); box-shadow:inset 0 0 0 1px var(--accent)}
+.opt input:checked+.box .ltr{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.opt input:focus-visible+.box{outline:2px solid var(--focus); outline-offset:2px}
+.opt input:disabled+.box{cursor:default}
+.opt .box.is-correct{border-color:var(--ok); background:var(--ok-soft); box-shadow:inset 0 0 0 1px var(--ok)}
+.opt .box.is-correct .ltr{background:var(--ok); border-color:var(--ok); color:#fff}
+.opt .box.is-wrong{border-color:var(--no); background:var(--no-soft); box-shadow:inset 0 0 0 1px var(--no)}
+.opt .box.is-wrong .ltr{background:var(--no); border-color:var(--no); color:#fff}
+
+/* ---- learning feedback ---- */
+.feedback{margin-top:18px; border-radius:var(--radius); border:1px solid var(--line); overflow:hidden}
+.feedback>.head{padding:11px 16px; font-weight:600; font-size:.95rem; display:flex; gap:9px; align-items:center}
+.feedback.good>.head{background:var(--ok-soft); color:var(--ok)}
+.feedback.bad>.head{background:var(--no-soft); color:var(--no)}
+.feedback>.body{padding:16px; background:var(--surface)}
+.feedback .blk+.blk{margin-top:13px; padding-top:13px; border-top:1px solid var(--line)}
+.feedback .blk>h4{font-size:.76rem; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); margin-bottom:.4em}
+.feedback .blk>p{font-size:.94rem; color:var(--ink-2); max-width:var(--measure)}
+.tip{background:var(--accent-soft); border-radius:var(--radius-sm); padding:11px 14px; font-size:.92rem}
+.tip b{display:block; font-size:.76rem; letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin-bottom:.25em}
+
+/* ---- report ---- */
+.scorecard{display:grid; gap:18px; grid-template-columns:minmax(200px,260px) 1fr; align-items:center}
+@media(max-width:640px){.scorecard{grid-template-columns:1fr}}
+.bigscore{text-align:center; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:20px}
+.bigscore .n{font-size:3.1rem; font-weight:650; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.bigscore .lbl{font-size:.76rem; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); margin-top:8px}
+.bigscore .ci{font-size:.86rem; color:var(--ink-2); margin-top:6px; font-variant-numeric:tabular-nums}
+.kv{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px 20px}
+.kv>div>dt{font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3)}
+.kv>div>dd{margin:2px 0 0; font-size:1.12rem; font-weight:600; font-variant-numeric:tabular-nums}
+
+table{width:100%; border-collapse:collapse; font-size:.9rem}
+.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); font-weight:600; white-space:nowrap}
+td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
+tbody tr:last-child td{border-bottom:0}
+.bar{position:relative; height:7px; background:var(--surface-2); border-radius:99px; min-width:80px; border:1px solid var(--line)}
+.bar>i{position:absolute; inset:0 auto 0 0; background:var(--accent); border-radius:99px}
+
+.pill{display:inline-block; padding:2px 9px; border-radius:99px; font-size:.76rem; font-weight:600;
+  border:1px solid var(--line-2); color:var(--ink-2); background:var(--surface-2); white-space:nowrap}
+.pill-ok{color:var(--ok); background:var(--ok-soft); border-color:transparent}
+.pill-no{color:var(--no); background:var(--no-soft); border-color:transparent}
+.pill-warn{color:var(--warn); background:var(--warn-soft); border-color:transparent}
+
+/* ---- review ---- */
+.rev{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+.rev+.rev{margin-top:10px}
+.rev>summary{
+  padding:12px 15px; cursor:pointer; display:flex; gap:10px; align-items:center;
+  flex-wrap:wrap; background:var(--surface-2); font-size:.92rem; list-style:none;
+}
+.rev>summary::-webkit-details-marker{display:none}
+.rev>summary::before{content:"\25B8"; color:var(--ink-3); transition:transform .16s; flex:none}
+.rev[open]>summary::before{transform:rotate(90deg)}
+.rev>summary .t{font-weight:600; flex:1 1 auto; min-width:140px}
+.rev>.inner{padding:16px; border-top:1px solid var(--line)}
+.tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
+
+details.disclose>summary{
+  cursor:pointer; font-weight:600; font-size:.95rem; padding:4px 0; list-style:none;
+  display:flex; gap:9px; align-items:center;
+}
+details.disclose>summary::-webkit-details-marker{display:none}
+details.disclose>summary::before{content:"\25B8"; color:var(--ink-3); transition:transform .16s}
+details.disclose[open]>summary::before{transform:rotate(90deg)}
+details.disclose>.inner{padding-top:12px}
+
+.formula{
+  font-family:var(--mono); font-size:.85rem; background:var(--surface-2);
+  border:1px solid var(--line); border-radius:var(--radius-sm);
+  padding:10px 13px; overflow-x:auto; white-space:pre; color:var(--ink-2);
+}
+.disclaimer{
+  font-size:.85rem; color:var(--ink-2); border:1px solid var(--line);
+  border-left:3px solid var(--warn); background:var(--warn-soft);
+  border-radius:var(--radius-sm); padding:12px 14px;
+}
+.footnote{font-size:.82rem; color:var(--ink-3); max-width:var(--measure)}
+.sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+
+/* ---- modal ---- */
+.modal[hidden]{display:none}
+.modal{position:fixed; inset:0; z-index:50; display:grid; place-items:center; padding:20px;
+  background:rgba(12,20,28,.55); backdrop-filter:blur(2px)}
+.modal .card{max-width:440px; width:100%}
+
+@media print{
+  .masthead,.noprint{display:none !important}
+  body{background:#fff}
+  .card{box-shadow:none; border-color:#ccc; break-inside:avoid}
+  .rev{break-inside:avoid}
+  details.disclose>.inner,.rev>.inner{display:block !important}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead noprint">
+  <div class="wrap">
+    <div class="brand">Adaptive Reading Practice<span>Grade 4 &middot; practice assessment</span></div>
+    <button class="btn btn-quiet" id="btn-abandon" hidden>End test</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= START SCREEN ================= -->
+<section class="screen wrap" id="screen-start">
+  <div class="card">
+    <h1>Adaptive Reading Practice</h1>
+    <p class="footnote" style="margin-bottom:18px">
+      An adaptive practice test that adjusts question difficulty to the reader as they go.
+      Questions come from a fixed local item bank; nothing is sent over the network.
+    </p>
+
+    <div class="disclaimer" style="margin-bottom:22px">
+      <strong>This is a practice adaptive score and is not an official NWEA RIT score.</strong>
+      This tool is not affiliated with NWEA and is not MAP&nbsp;Growth. It approximates
+      publicly described computer-adaptive testing principles; it is not NWEA's proprietary
+      production engine.
+    </div>
+
+    <div id="resume-slot"></div>
+
+    <h3 style="margin-top:4px">Choose a mode</h3>
+    <div class="choices" role="radiogroup" aria-label="Test mode" style="margin-bottom:20px">
+      <label class="choice">
+        <input type="radio" name="mode" value="assessment" checked>
+        <span class="box">
+          <b>Assessment mode</b>
+          <small>One question at a time, no feedback until the end. No going back.
+          Full report and answer review are shown after the test finishes.</small>
+        </span>
+      </label>
+      <label class="choice">
+        <input type="radio" name="mode" value="learning">
+        <span class="box">
+          <b>Learning mode</b>
+          <small>Same adaptive engine, but each answer is explained immediately &mdash;
+          why the correct answer works, why the chosen one does not, and a rule to remember.</small>
+        </span>
+      </label>
+    </div>
+
+    <h3>Starting point</h3>
+    <label class="field" for="sel-start">
+      <span class="hint">Where the test begins. It adapts from here either way &mdash; this only
+      affects the first few questions.</span>
+      <select id="sel-start">
+        <option value="190">Easier start &mdash; 190</option>
+        <option value="200" selected>Standard Grade&nbsp;4 start &mdash; 200</option>
+        <option value="210">Challenge start &mdash; 210</option>
+      </select>
+    </label>
+
+    <div class="btn-row" style="margin-top:22px">
+      <button class="btn btn-primary" id="btn-start">Start test</button>
+      <button class="btn btn-quiet" id="btn-settings-toggle" aria-expanded="false">Advanced settings</button>
+    </div>
+  </div>
+
+  <div class="card" id="settings-card" hidden>
+    <h2>Advanced settings</h2>
+    <p class="footnote" style="margin-bottom:18px">Every value below feeds the live engine.
+      Defaults follow the specification this tool was built to.</p>
+    <div style="display:grid; gap:0 26px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+      <label class="field"><span class="label">Minimum scored items</span>
+        <input type="number" id="cfg-min" min="5" max="200" step="1"></label>
+      <label class="field"><span class="label">Maximum scored items</span>
+        <input type="number" id="cfg-max" min="5" max="200" step="1"></label>
+      <label class="field"><span class="label">Stop when SEM &le;</span>
+        <input type="number" id="cfg-sem" min="0.5" max="20" step="0.1"></label>
+      <label class="field"><span class="label">Min items per domain</span>
+        <input type="number" id="cfg-domainmin" min="0" max="40" step="1"></label>
+      <label class="field"><span class="label">Prior SD (logits)</span>
+        <input type="number" id="cfg-priorsd" min="0.3" max="4" step="0.05"></label>
+      <label class="field"><span class="label">Domain blend &mdash; overall weight</span>
+        <input type="number" id="cfg-blend" min="0" max="1" step="0.05"></label>
+      <label class="field"><span class="label">Field-test item share</span>
+        <input type="number" id="cfg-fieldtest" min="0" max="0.5" step="0.01"></label>
+      <label class="field"><span class="label">Student grade</span>
+        <input type="number" id="cfg-grade" min="1" max="12" step="1"></label>
+    </div>
+    <h4 style="margin-top:10px">Item-selection weights</h4>
+    <p class="footnote" style="margin-bottom:14px">Normalised automatically if they do not sum to 1.</p>
+    <div style="display:grid; gap:0 26px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <label class="field"><span class="label">Information</span>
+        <input type="number" id="cfg-w-info" min="0" max="1" step="0.01"></label>
+      <label class="field"><span class="label">Blueprint</span>
+        <input type="number" id="cfg-w-bp" min="0" max="1" step="0.01"></label>
+      <label class="field"><span class="label">Grade proximity</span>
+        <input type="number" id="cfg-w-grade" min="0" max="1" step="0.01"></label>
+      <label class="field"><span class="label">Skill coverage</span>
+        <input type="number" id="cfg-w-skill" min="0" max="1" step="0.01"></label>
+      <label class="field"><span class="label">Random tie-break</span>
+        <input type="number" id="cfg-w-rand" min="0" max="1" step="0.01"></label>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="btn-cfg-save">Save settings</button>
+      <button class="btn btn-quiet" id="btn-cfg-reset">Restore defaults</button>
+      <span class="footnote" id="cfg-msg" role="status"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Learner data on this device</h2>
+    <div id="profile-slot"></div>
+    <div class="btn-row" style="margin-top:16px">
+      <button class="btn btn-danger" id="btn-reset-learner">Reset learner data</button>
+      <button class="btn btn-quiet" id="btn-export">Export calibration data</button>
+    </div>
+  </div>
+
+  <div class="card" id="engine-card"></div>
+</section>
+
+<!-- ================= TEST SCREEN ================= -->
+<section class="screen wrap" id="screen-test" hidden>
+  <div class="card">
+    <div class="testbar">
+      <span class="qnum" id="t-qnum">Question 1</span>
+      <span class="meta" id="t-mode"></span>
+      <span class="spacer"></span>
+      <span class="meta" id="t-count"></span>
+    </div>
+    <div class="progress" role="progressbar" aria-labelledby="t-qnum" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <i id="t-progress"></i>
+    </div>
+
+    <div id="t-slowdown" hidden style="margin-top:18px">
+      <div class="notice notice-warn">Please slow down and read each question carefully before answering.</div>
+    </div>
+
+    <div id="t-passage-slot" style="margin-top:20px"></div>
+    <h2 class="stem" id="t-stem"></h2>
+    <div class="opts" id="t-opts" role="radiogroup" aria-label="Answer choices"></div>
+    <div id="t-feedback-slot"></div>
+
+    <div class="btn-row" style="margin-top:20px">
+      <button class="btn btn-primary" id="btn-next" disabled>Next</button>
+      <span class="footnote" id="t-hint">Choose an answer to continue.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REPORT SCREEN ================= -->
+<section class="screen wrap" id="screen-report" hidden>
+  <div id="report-slot"></div>
+</section>
+
+</main>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="card">
+    <h2 id="modal-title">Confirm</h2>
+    <p id="modal-body" style="color:var(--ink-2); font-size:.94rem"></p>
+    <div class="btn-row" style="margin-top:18px">
+      <button class="btn btn-danger" id="modal-ok">Confirm</button>
+      <button class="btn btn-quiet" id="modal-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ITEM BANK (generated by tools/build-bank.mjs from tools/bank.json)
+     Obfuscated so answer keys are not sitting in the page source as an obvious
+     readable block. Not a security measure - regenerate, do not hand-edit. -->
+<script id="bank-data">
+var BANK_PAYLOAD = "OnA9SBYATFE6cCNYAAsLCDVwag8wBA8PKDw3D05DCRkgNjUPWFVCSTE+MU4HCQEHJTciD1gHDwcyN3wPEQ4bGSI3chdAIDkqCAYZYyVBOzsNHRFpWEEjKhFyZFkKQSkZIDY1DTAEDw8oPDcNNgQdHzJyeB9LTx4PJ3B8DwwOGg5jaHJ9DREbByAmNQ0LFQsGMgkNDQQTAQZhJjhIQhIbGzE+OUgGQR8eJCEkRA0PTgkgPDsBQhUGDi9yIlgMW04FLjY1DRYOAQcyfTJYCw0KRiMzPkZMDAQYYy98DxIAHRggNTVeQFsVFm1wOVkHDB1JewkNUA==";
+</script>
+
+<script>
+/* ==========================================================================
+   ADAPTIVE READING PRACTICE — self-contained adaptive testing engine
+   --------------------------------------------------------------------------
+   Implements publicly documented computer-adaptive testing concepts:
+   Rasch (1PL) item response modelling, Bayesian MAP ability updating,
+   content-blueprint balancing, difficulty targeting, domain-specific
+   targeting, item exposure control, adaptive stopping, SEM estimation.
+
+   This is NOT NWEA's proprietary production engine and the scores it
+   produces are NOT official RIT scores. All parameters that would be
+   proprietary are replaced with transparent, configurable approximations.
+
+   NOTE ON THE SPEC FORMULAS: the source specification renders the additive
+   terms of the MAP derivatives, the test-information sum and the selection
+   reward with bullet glyphs that flatten to "*". They are sums, and are
+   implemented here as sums — an actual product would make the estimator
+   degenerate (d1 would vanish whenever the residual sum hit zero).
+   ========================================================================== */
+(function () {
+'use strict';
+
+/* ---------------------------------------------------------------- utility */
+const $  = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+const clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
+const isNum = (v) => typeof v === 'number' && isFinite(v);
+const LETTERS = 'ABCDEFGH';
+
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function pct(n) { return (isNum(n) ? Math.round(n * 100) : 0) + '%'; }
+function fmt(n, d) { return isNum(n) ? n.toFixed(d == null ? 1 : d) : '—'; }
+function plural(n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); }
+function duration(ms) {
+  const s = Math.max(0, Math.round(ms / 1000));
+  const m = Math.floor(s / 60);
+  return m > 0 ? m + 'm ' + (s % 60) + 's' : s + 's';
+}
+/* Deterministic PRNG so simulations are reproducible; Math.random in the app. */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+let RNG = Math.random;
+
+/* --------------------------------------------------- resilient localStorage
+   Every access is guarded: the app must run with storage disabled, full,
+   or throwing (Safari private mode, embedded webviews, file:// origins).   */
+const Store = (function () {
+  const PREFIX = 'arp.v1.';
+  let live = true;
+  const mem = Object.create(null);          /* in-memory fallback */
+  try {
+    const k = PREFIX + '__probe';
+    window.localStorage.setItem(k, '1');
+    window.localStorage.removeItem(k);
+  } catch (e) { live = false; }
+
+  return {
+    available: () => live,
+    get(key, fallback) {
+      try {
+        const raw = live ? window.localStorage.getItem(PREFIX + key) : mem[key];
+        return raw == null ? fallback : JSON.parse(raw);
+      } catch (e) { return fallback; }
+    },
+    set(key, value) {
+      let raw;
+      try { raw = JSON.stringify(value); } catch (e) { return false; }
+      try {
+        if (live) window.localStorage.setItem(PREFIX + key, raw);
+        else mem[key] = raw;
+        return true;
+      } catch (e) {
+        /* Quota exceeded or storage revoked mid-session: degrade, never throw. */
+        try { mem[key] = raw; } catch (e2) {}
+        return false;
+      }
+    },
+    remove(key) {
+      try { if (live) window.localStorage.removeItem(PREFIX + key); } catch (e) {}
+      try { delete mem[key]; } catch (e) {}
+    }
+  };
+})();
+
+/* ------------------------------------------------------------ configuration
+   Every number the engine uses is here and editable in Advanced settings.  */
+const DEFAULTS = {
+  studentGrade: 4,
+
+  /* difficulty scale: practiceIndex = 200 + 10 * theta ; b = (difficulty-200)/10 */
+  scaleCenter: 200,
+  scaleUnit: 10,
+
+  /* prior */
+  priorSD: 1.4,                 /* logits, spec suggests 1.3–1.5 */
+  domainPriorSD: 0.8,           /* stronger prior: fewer items per domain */
+  carryPriorSD: 1.1,            /* when seeding from a previous test        */
+
+  /* estimation */
+  maxIterations: 20,
+  convergence: 0.0001,
+  thetaClamp: 5,
+  maxNewtonStep: 1.0,           /* damping, prevents early overshoot        */
+
+  /* stopping */
+  minScoredItems: 30,
+  maxScoredItems: 40,
+  semTarget: 3.5,               /* practice points                          */
+  minItemsPerDomain: 7,
+  blueprintTolerance: 0.12,
+
+  /* selection weights (normalised at use) */
+  weights: { info: 0.55, blueprint: 0.25, grade: 0.10, skill: 0.05, random: 0.05 },
+
+  /* domain-specific targeting: effTheta = blend*overall + (1-blend)*domain */
+  domainBlend: 0.70,
+
+  /* exposure control */
+  minimumPool: 25,              /* below this, historical exposure is released */
+  releaseFraction: 0.30,        /* oldest share released per relief pass       */
+
+  /* field-test (unscored) items */
+  fieldTestRate: 0.00,
+
+  /* engagement */
+  rapidBaseMs: 1800,
+  rapidPerCharMs: 11,
+  rapidStreakTrigger: 3
+};
+
+let CFG = JSON.parse(JSON.stringify(DEFAULTS));
+(function loadCfg() {
+  const saved = Store.get('config', null);
+  if (saved && typeof saved === 'object') {
+    Object.keys(DEFAULTS).forEach(function (k) {
+      if (!(k in saved)) return;
+      if (k === 'weights') {
+        if (saved.weights && typeof saved.weights === 'object') {
+          Object.keys(DEFAULTS.weights).forEach(function (w) {
+            if (isNum(saved.weights[w]) && saved.weights[w] >= 0) CFG.weights[w] = saved.weights[w];
+          });
+        }
+      } else if (isNum(saved[k])) {
+        CFG[k] = saved[k];
+      }
+    });
+  }
+  if (CFG.maxScoredItems < CFG.minScoredItems) CFG.maxScoredItems = CFG.minScoredItems;
+})();
+
+const toPractice = (theta) => CFG.scaleCenter + CFG.scaleUnit * theta;
+const toTheta    = (index) => (index - CFG.scaleCenter) / CFG.scaleUnit;
+
+/* ------------------------------------------------------------- item bank IO
+   The bank ships obfuscated rather than as plain readable JSON so that answer
+   keys are not sitting in the page source in an obvious human-readable block
+   (spec §30). This is deliberately *not* security — anything shipped to a
+   browser is readable by a determined reader — it only stops casual "view
+   source" answer lookup during a test.
+   Regenerate with: node tools/build-bank.mjs                                */
+function decodeBank(payload) {
+  try {
+    const bin = atob(payload);
+    const bytes = new Uint8Array(bin.length);
+    const key = [0x41, 0x52, 0x50, 0x2d, 0x62, 0x61, 0x6e, 0x6b];
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i) ^ key[i % key.length];
+    return JSON.parse(new TextDecoder().decode(bytes));
+  } catch (e) {
+    return null;
+  }
+}
+
+/* ----------------------------------------------------------- Rasch (1PL) */
+/* P(correct) = 1 / (1 + exp(-(theta - b))) */
+function pCorrect(theta, b) {
+  const x = clamp(theta - b, -40, 40);         /* exp guard: no overflow */
+  return 1 / (1 + Math.exp(-x));
+}
+/* Fisher information for a 1PL item: I(theta) = P(1-P), max 0.25 at theta=b */
+function itemInfo(theta, b) {
+  const p = pCorrect(theta, b);
+  return p * (1 - p);
+}
+
+/* -------------------------------------------- Bayesian MAP ability estimate
+   Newton–Raphson on the log posterior of a Rasch likelihood with a normal
+   prior. The posterior is strictly log-concave, so this converges from the
+   prior mean; the step is damped and the result clamped for safety.        */
+function estimateTheta(responses, priorMean, priorSD) {
+  const priorVar = Math.max(1e-6, priorSD * priorSD);
+  let theta = isNum(priorMean) ? priorMean : 0;
+  let iterations = 0;
+
+  for (let it = 0; it < CFG.maxIterations; it++) {
+    iterations = it + 1;
+    let d1 = -(theta - priorMean) / priorVar;   /* prior term              */
+    let d2 = -1 / priorVar;
+    for (let i = 0; i < responses.length; i++) {
+      const p = pCorrect(theta, responses[i].b);
+      d1 += (responses[i].y - p);               /* + SUM(y - P)            */
+      d2 -= p * (1 - p);                        /* - SUM(P(1-P))           */
+    }
+    if (!isNum(d1) || !isNum(d2) || d2 === 0) break;
+
+    let step = d1 / d2;                         /* d2 < 0 always           */
+    if (!isNum(step)) break;
+    step = clamp(step, -CFG.maxNewtonStep, CFG.maxNewtonStep);
+
+    const next = clamp(theta - step, -CFG.thetaClamp, CFG.thetaClamp);
+    if (!isNum(next)) break;
+    const moved = Math.abs(next - theta);
+    theta = next;
+    if (moved < CFG.convergence) break;
+  }
+
+  if (!isNum(theta)) theta = isNum(priorMean) ? priorMean : 0;
+
+  /* testInformation = 1/priorVar + SUM(P(1-P)) */
+  let info = 1 / priorVar;
+  for (let i = 0; i < responses.length; i++) info += itemInfo(theta, responses[i].b);
+  if (!isNum(info) || info <= 0) info = 1 / priorVar;
+
+  const seTheta = 1 / Math.sqrt(info);
+  return {
+    theta: theta,
+    information: info,
+    seTheta: seTheta,
+    sem: CFG.scaleUnit * seTheta,               /* practice-scale SEM      */
+    practiceIndex: toPractice(theta),
+    iterations: iterations,
+    n: responses.length
+  };
+}
+
+/* ========================================================================== */
+/*  ITEM BANK — normalisation, de-duplication, validation                     */
+/* ========================================================================== */
+const ORDER_SENSITIVE = /\b(all|none|both|neither)\s+of\s+the\s+(above|these)\b|\bboth\s+[a-d]\s+and\s+[a-d]\b|\banswers?\s+[a-d]\s+and\s+[a-d]\b/i;
+
+function normaliseText(s) {
+  return String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
+}
+function fingerprint(item) {
+  const opts = (item.options || []).map(normaliseText).map(s => s.toLowerCase()).slice().sort();
+  return normaliseText(item.stem).toLowerCase() + '||' + opts.join('|');
+}
+
+/* Provisional difficulty when the bank supplies none (spec §23). Uses only
+   surface proxies for cognitive load — clearly an approximation, never a
+   calibration. */
+function provisionalDifficulty(item) {
+  let d = 195 + (Number(item.grade || CFG.studentGrade) - 4) * 8;
+  const stem = normaliseText(item.stem);
+  const words = stem.split(' ').filter(Boolean).length;
+  d += clamp((words - 14) * 0.35, -5, 8);                 /* stem length     */
+  const opts = (item.options || []).map(normaliseText);
+  const avgOpt = opts.length ? opts.reduce((a, o) => a + o.split(' ').length, 0) / opts.length : 0;
+  d += clamp((avgOpt - 4) * 0.6, -3, 7);                  /* option length   */
+  const longWords = stem.split(/\W+/).filter(w => w.length >= 9).length;
+  d += clamp(longWords * 1.4, 0, 8);                      /* vocabulary load */
+  if (/\b(infer|imply|implies|conclude|suggest|most likely|best describes|theme|author'?s purpose|point of view|compare|contrast|summar)/i.test(stem)) d += 5;
+  if (/\b(which word|what does the word|means?|definition)\b/i.test(stem)) d += 1.5;
+  return Math.round(clamp(d, 170, 240));
+}
+
+const Bank = (function () {
+  const raw = decodeBank(typeof BANK_PAYLOAD === 'string' ? BANK_PAYLOAD : '');
+  const problems = { duplicateIds: [], exactDuplicates: [], answerNotInOptions: [],
+                     ambiguousAnswer: [], missingExplanation: [], inferredDifficulty: [],
+                     tooFewOptions: [], dropped: [] };
+  const items = [];
+  const seenIds = Object.create(null);
+  const seenPrints = Object.create(null);
+
+  const source = (raw && Array.isArray(raw.items)) ? raw.items : [];
+
+  source.forEach(function (src, idx) {
+    const item = Object.assign({}, src);
+    const label = item.id || ('#' + (idx + 1));
+
+    /* options must exist and be distinct */
+    let options = Array.isArray(item.options) ? item.options.map(normaliseText).filter(Boolean) : [];
+    options = options.filter((o, i) => options.indexOf(o) === i);
+    if (options.length < 2) { problems.tooFewOptions.push(label); problems.dropped.push(label); return; }
+
+    /* the correct answer must be present exactly once */
+    const answer = normaliseText(item.answer);
+    const matches = options.filter(o => o === answer).length;
+    if (!answer || matches === 0) { problems.answerNotInOptions.push(label); problems.dropped.push(label); return; }
+    if (matches > 1) problems.ambiguousAnswer.push(label);
+
+    /* unique id */
+    let id = String(item.id || ('item_' + (idx + 1)));
+    if (seenIds[id]) { problems.duplicateIds.push(id); id = id + '_' + (idx + 1); }
+    seenIds[id] = true;
+
+    /* exact-duplicate de-duplication, meaningful variants retained */
+    const print = fingerprint({ stem: item.stem, options: options });
+    if (seenPrints[print]) { problems.exactDuplicates.push(label); return; }
+    seenPrints[print] = true;
+
+    if (!isNum(item.difficulty)) {
+      item.difficulty = provisionalDifficulty(Object.assign({}, item, { options: options }));
+      problems.inferredDifficulty.push(id);
+    }
+    const wrong = (item.wrongAnswerExplanations && typeof item.wrongAnswerExplanations === 'object')
+      ? item.wrongAnswerExplanations : {};
+    if (!normaliseText(item.explanation)) problems.missingExplanation.push(id);
+
+    items.push({
+      id: id,
+      domain: normaliseText(item.domain) || 'General',
+      skill: normaliseText(item.skill) || 'Unclassified',
+      grade: isNum(item.grade) ? item.grade : CFG.studentGrade,
+      difficulty: item.difficulty,
+      b: (item.difficulty - CFG.scaleCenter) / CFG.scaleUnit,
+      type: item.type || 'multiple_choice',
+      stem: normaliseText(item.stem),
+      options: options,
+      answer: answer,
+      explanation: normaliseText(item.explanation),
+      wrongAnswerExplanations: wrong,
+      teachingTip: normaliseText(item.teachingTip),
+      scored: item.scored === false ? false : true,
+      passageId: item.passageId ? String(item.passageId) : null,
+      setOrder: isNum(item.setOrder) ? item.setOrder : 0,
+      lockOptionOrder: item.lockOptionOrder === true ||
+                       options.some(o => ORDER_SENSITIVE.test(o))
+    });
+  });
+
+  /* passage text lives once, keyed by id, so a set never re-renders it twice */
+  const passages = Object.create(null);
+  if (raw && raw.passages && typeof raw.passages === 'object') {
+    Object.keys(raw.passages).forEach(function (k) { passages[k] = raw.passages[k]; });
+  }
+  source.forEach(function (s) {
+    if (s && s.passageId && s.passageText && !passages[s.passageId]) {
+      passages[s.passageId] = { title: s.passageTitle || '', text: s.passageText };
+    }
+  });
+
+  const byId = Object.create(null);
+  items.forEach(i => { byId[i.id] = i; });
+
+  const domains = [];
+  const skillsByDomain = Object.create(null);
+  items.forEach(function (i) {
+    if (domains.indexOf(i.domain) === -1) { domains.push(i.domain); skillsByDomain[i.domain] = []; }
+    if (skillsByDomain[i.domain].indexOf(i.skill) === -1) skillsByDomain[i.domain].push(i.skill);
+  });
+  domains.sort();
+
+  const scored = items.filter(i => i.scored);
+  const diffs = scored.map(i => i.difficulty).sort((a, b) => a - b);
+
+  return {
+    items: items, byId: byId, passages: passages,
+    domains: domains, skillsByDomain: skillsByDomain,
+    problems: problems,
+    meta: (raw && raw.meta) || {},
+    isPlaceholder: !!(raw && raw.meta && raw.meta.placeholder),
+    stats: {
+      total: items.length,
+      scored: scored.length,
+      fieldTest: items.length - scored.length,
+      minDifficulty: diffs.length ? diffs[0] : null,
+      maxDifficulty: diffs.length ? diffs[diffs.length - 1] : null,
+      medianDifficulty: diffs.length ? diffs[Math.floor(diffs.length / 2)] : null,
+      byDomain: (function () {
+        const m = Object.create(null);
+        domains.forEach(d => { m[d] = items.filter(i => i.domain === d && i.scored).length; });
+        return m;
+      })()
+    }
+  };
+})();
+
+/* ------------------------------------------------------------- blueprint
+   Target share per domain. Defaults to an even split across whatever
+   domains the bank actually contains, so the blueprint follows the item
+   bank rather than a hard-coded subject assumption.                       */
+const Blueprint = (function () {
+  const saved = Store.get('blueprint', null);
+  const target = Object.create(null);
+  const n = Bank.domains.length || 1;
+
+  if (saved && typeof saved === 'object' &&
+      Bank.domains.every(d => isNum(saved[d])) &&
+      Object.keys(saved).length === Bank.domains.length) {
+    Bank.domains.forEach(d => { target[d] = saved[d]; });
+  } else {
+    /* even split, with the rounding remainder given to the first domain */
+    const share = 1 / n;
+    Bank.domains.forEach(d => { target[d] = share; });
+  }
+  let sum = 0; Bank.domains.forEach(d => { sum += target[d]; });
+  if (sum > 0) Bank.domains.forEach(d => { target[d] = target[d] / sum; });
+
+  return {
+    target: target,
+    /* desiredCount = targetPct * nextQuestionNumber ; deficit = max(0, desired-actual) */
+    deficits(counts, nextQuestionNumber) {
+      const out = Object.create(null);
+      let max = 0;
+      Bank.domains.forEach(function (d) {
+        const desired = target[d] * nextQuestionNumber;
+        const deficit = Math.max(0, desired - (counts[d] || 0));
+        out[d] = deficit;
+        if (deficit > max) max = deficit;
+      });
+      return { deficit: out, max: max };
+    },
+    /* normalised 0..1 reward; neutral 0.5 when nothing is behind target */
+    reward(deficits, domain) {
+      if (deficits.max <= 1e-9) return 0.5;
+      return clamp(deficits.deficit[domain] / deficits.max, 0, 1);
+    },
+    balanced(counts, total) {
+      if (total <= 0) return false;
+      return Bank.domains.every(function (d) {
+        return Math.abs(((counts[d] || 0) / total) - target[d]) <= CFG.blueprintTolerance;
+      });
+    }
+  };
+})();
+
+/* --------------------------------------------------------- exposure control
+   sessionSeen  — never repeated within a test, unconditionally.
+   historicalSeen — avoided across tests, released oldest-first only when the
+   unseen pool would otherwise fall below CFG.minimumPool.                   */
+const Exposure = {
+  load() {
+    const h = Store.get('exposure', []);
+    return Array.isArray(h) ? h.filter(r => r && r.id) : [];
+  },
+  save(list) { Store.set('exposure', list.slice(-4000)); },
+  ids() {
+    const set = Object.create(null);
+    this.load().forEach(r => { set[r.id] = true; });
+    return set;
+  },
+  record(ids) {
+    const now = Date.now();
+    const list = this.load();
+    const have = Object.create(null);
+    list.forEach(r => { have[r.id] = true; });
+    ids.forEach(function (id) { if (!have[id]) list.push({ id: id, ts: now }); });
+    this.save(list);
+  },
+  /* Rotate the oldest records back into circulation rather than wiping all. */
+  release(needed) {
+    const list = this.load();
+    if (!list.length) return 0;
+    list.sort((a, b) => (a.ts || 0) - (b.ts || 0));
+    const byFraction = Math.ceil(list.length * CFG.releaseFraction);
+    const drop = Math.min(list.length, Math.max(needed, byFraction));
+    const kept = list.slice(drop);
+    this.save(kept);
+    return drop;
+  },
+  clear() { Store.remove('exposure'); }
+};
+
+/* ========================================================================== */
+/*  SESSION — adaptive selection, scoring, stopping                           */
+/* ========================================================================== */
+const Session = {
+  state: null,
+
+  create(opts) {
+    const priorMean = isNum(opts.priorMean) ? opts.priorMean : 0;
+    this.state = {
+      version: 1,
+      mode: opts.mode === 'learning' ? 'learning' : 'assessment',
+      startedAt: Date.now(),
+      elapsedBefore: 0,
+      priorMean: priorMean,
+      priorSD: isNum(opts.priorSD) ? opts.priorSD : CFG.priorSD,
+      priorSource: opts.priorSource || 'default',
+      responses: [],
+      sessionSeen: [],
+      pendingSet: [],
+      current: null,
+      rapidCount: 0,
+      rapidStreak: 0,
+      slowdownShown: false,
+      finished: false,
+      endReason: null,
+      released: 0
+    };
+    this.recompute();
+    return this.state;
+  },
+
+  /* ---- ability estimation over the full response history ---------------- */
+  recompute() {
+    const s = this.state;
+    const scored = s.responses.filter(r => r.scored);
+    s.overall = estimateTheta(scored.map(r => ({ b: r.b, y: r.y })), s.priorMean, s.priorSD);
+
+    s.domain = Object.create(null);
+    Bank.domains.forEach(function (d) {
+      const rs = scored.filter(r => r.domain === d).map(r => ({ b: r.b, y: r.y }));
+      /* the overall estimate acts as the prior mean, with a tighter SD so a
+         handful of items cannot throw a domain score to an extreme */
+      s.domain[d] = estimateTheta(rs, s.overall.theta, CFG.domainPriorSD);
+      s.domain[d].items = rs.length;
+      s.domain[d].correct = scored.filter(r => r.domain === d && r.y === 1).length;
+    });
+  },
+
+  domainCounts() {
+    const counts = Object.create(null);
+    Bank.domains.forEach(d => { counts[d] = 0; });
+    this.state.responses.forEach(function (r) {
+      if (r.scored) counts[r.domain] = (counts[r.domain] || 0) + 1;
+    });
+    return counts;
+  },
+  skillCounts() {
+    const counts = Object.create(null);
+    this.state.responses.forEach(function (r) {
+      const k = r.domain + ' | ' + r.skill;
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    return counts;
+  },
+  scoredCount() { return this.state.responses.filter(r => r.scored).length; },
+
+  /* ---- eligibility ------------------------------------------------------ */
+  eligible(wantScored) {
+    const s = this.state;
+    const seen = Object.create(null);
+    s.sessionSeen.forEach(id => { seen[id] = true; });
+    let historical = Exposure.ids();
+
+    const pool = Bank.items.filter(i => !seen[i.id] && i.scored === wantScored);
+    let fresh = pool.filter(i => !historical[i.id]);
+
+    /* Release the oldest exposure records if the unseen pool is too thin. */
+    if (fresh.length < CFG.minimumPool && pool.length > fresh.length) {
+      s.released += Exposure.release(CFG.minimumPool - fresh.length);
+      historical = Exposure.ids();
+      fresh = pool.filter(i => !historical[i.id]);
+    }
+    /* Last resort: allow cross-session repeats, but never within this test. */
+    return fresh.length ? fresh : pool;
+  },
+
+  /* ---- item selection --------------------------------------------------- */
+  /* totalReward = w.info*information + w.blueprint*blueprint
+                 + w.grade*gradeProximity + w.skill*skillCoverage + w.random*tieBreak */
+  selectNext() {
+    const s = this.state;
+
+    /* A passage set already in progress must finish before anything else. */
+    while (s.pendingSet.length) {
+      const id = s.pendingSet.shift();
+      if (Bank.byId[id] && s.sessionSeen.indexOf(id) === -1) return Bank.byId[id];
+    }
+
+    /* Field-test items are interleaved at a configurable rate, never scored. */
+    const wantField = CFG.fieldTestRate > 0 &&
+                      Bank.stats.fieldTest > 0 &&
+                      this.scoredCount() >= 3 &&
+                      RNG() < CFG.fieldTestRate;
+    let pool = this.eligible(!wantField);
+    if (!pool.length && wantField) pool = this.eligible(true);
+    if (!pool.length) return null;
+
+    const counts = this.domainCounts();
+    const skills = this.skillCounts();
+    const deficits = Blueprint.deficits(counts, this.scoredCount() + 1);
+
+    const w = CFG.weights;
+    let wsum = w.info + w.blueprint + w.grade + w.skill + w.random;
+    if (!(wsum > 0)) wsum = 1;
+
+    let best = null, bestScore = -Infinity;
+    for (let i = 0; i < pool.length; i++) {
+      const item = pool[i];
+
+      /* difficulty targeting blends overall and domain ability (spec 11) */
+      const dTheta = s.domain[item.domain] ? s.domain[item.domain].theta : s.overall.theta;
+      const effTheta = CFG.domainBlend * s.overall.theta + (1 - CFG.domainBlend) * dTheta;
+
+      const informationReward = itemInfo(effTheta, item.b) / 0.25;      /* 0..1 */
+      const blueprintReward   = Blueprint.reward(deficits, item.domain);
+      const gradeReward       = Math.max(0, 1 - 0.30 * Math.abs(CFG.studentGrade - item.grade));
+      const seen              = skills[item.domain + ' | ' + item.skill] || 0;
+      const skillReward       = 1 / (1 + seen);
+      const tieBreak          = RNG();
+
+      const score = (w.info      * informationReward +
+                     w.blueprint * blueprintReward +
+                     w.grade     * gradeReward +
+                     w.skill     * skillReward +
+                     w.random    * tieBreak) / wsum;
+
+      if (isNum(score) && score > bestScore) { bestScore = score; best = item; }
+    }
+    /* Fallback: never return nothing while the pool is non-empty. */
+    if (!best) best = pool[Math.floor(RNG() * pool.length)] || null;
+
+    /* Queue the rest of a passage set so it is delivered uninterrupted. */
+    if (best && best.passageId) {
+      const seenIds = Object.create(null);
+      s.sessionSeen.forEach(id => { seenIds[id] = true; });
+      s.pendingSet = Bank.items
+        .filter(i => i.passageId === best.passageId && i.id !== best.id && !seenIds[i.id])
+        .sort((a, b) => a.setOrder - b.setOrder)
+        .map(i => i.id);
+    }
+    return best;
+  },
+
+  /* ---- presentation ----------------------------------------------------- */
+  present(item) {
+    const s = this.state;
+    const options = item.options.slice();
+    if (!item.lockOptionOrder) {
+      /* Fisher-Yates. The correct answer is tracked by value, so shuffling
+         can never desynchronise scoring from presentation. */
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(RNG() * (i + 1));
+        const t = options[i]; options[i] = options[j]; options[j] = t;
+      }
+    }
+    s.current = { itemId: item.id, options: options, shownAt: Date.now() };
+    if (s.sessionSeen.indexOf(item.id) === -1) s.sessionSeen.push(item.id);
+    return { item: item, options: options };
+  },
+
+  /* Minimum plausible reading time, scaled by how much text the item holds. */
+  minPlausibleMs(item) {
+    let chars = item.stem.length;
+    item.options.forEach(o => { chars += o.length; });
+    if (item.passageId && Bank.passages[item.passageId]) {
+      /* the passage is only new reading on the first item of the set */
+      const first = this.state.responses.every(function (r) {
+        return !Bank.byId[r.itemId] || Bank.byId[r.itemId].passageId !== item.passageId;
+      });
+      if (first) chars += String(Bank.passages[item.passageId].text || '').length * 0.5;
+    }
+    return CFG.rapidBaseMs + chars * CFG.rapidPerCharMs;
+  },
+
+  /* ---- scoring ---------------------------------------------------------- */
+  answer(choice) {
+    const s = this.state;
+    if (!s.current) return null;
+    const item = Bank.byId[s.current.itemId];
+    if (!item) return null;
+
+    const ms = Date.now() - s.current.shownAt;
+    const correct = normaliseText(choice) === item.answer;
+    const rapid = ms < this.minPlausibleMs(item);
+
+    /* Rapid responses are recorded and surfaced in the report, never scored
+       as wrong and never used to end the test (spec 17). */
+    if (rapid) { s.rapidCount++; s.rapidStreak++; } else { s.rapidStreak = 0; }
+
+    s.responses.push({
+      order: s.responses.length + 1,
+      itemId: item.id,
+      domain: item.domain,
+      skill: item.skill,
+      b: item.b,
+      difficulty: item.difficulty,
+      y: correct ? 1 : 0,
+      scored: item.scored,
+      chosen: normaliseText(choice),
+      answer: item.answer,
+      options: s.current.options.slice(),
+      ms: ms,
+      rapid: rapid
+    });
+    s.current = null;
+    this.recompute();
+    Exposure.record([item.id]);
+    return { item: item, correct: correct, rapid: rapid };
+  },
+
+  shouldPause() {
+    const s = this.state;
+    if (s.rapidStreak >= CFG.rapidStreakTrigger) { s.rapidStreak = 0; return true; }
+    return false;
+  },
+
+  /* ---- stopping rule ---------------------------------------------------- */
+  stopCheck() {
+    const s = this.state;
+    const n = this.scoredCount();
+    if (n >= CFG.maxScoredItems) return { stop: true, reason: 'maximum-length' };
+
+    /* An exhausted bank ends the test cleanly rather than crashing. */
+    if (!this.eligible(true).length && !s.pendingSet.length) {
+      return { stop: true, reason: 'bank-exhausted' };
+    }
+    if (n < CFG.minScoredItems) return { stop: false, reason: 'below-minimum' };
+
+    const counts = this.domainCounts();
+    const semOk    = s.overall.sem <= CFG.semTarget;
+    const domainOk = Bank.domains.every(d => (counts[d] || 0) >= CFG.minItemsPerDomain);
+    const bpOk     = Blueprint.balanced(counts, n);
+
+    if (semOk && domainOk && bpOk) return { stop: true, reason: 'precision-reached' };
+    return { stop: false, reason: !semOk ? 'sem' : (!domainOk ? 'domain-coverage' : 'blueprint') };
+  },
+
+  finish(reason) {
+    const s = this.state;
+    s.finished = true;
+    s.endReason = reason || 'complete';
+    s.finishedAt = Date.now();
+    this.recompute();
+    return s;
+  },
+
+  elapsedMs() {
+    const s = this.state;
+    return s.elapsedBefore + ((s.finishedAt || Date.now()) - s.startedAt);
+  },
+
+  /* ---- persistence ------------------------------------------------------ */
+  save() {
+    const s = this.state;
+    if (!s || s.finished) return;
+    Store.set('session', {
+      version: 1, mode: s.mode, priorMean: s.priorMean, priorSD: s.priorSD,
+      priorSource: s.priorSource, responses: s.responses, sessionSeen: s.sessionSeen,
+      pendingSet: s.pendingSet, rapidCount: s.rapidCount, slowdownShown: s.slowdownShown,
+      elapsedBefore: s.elapsedBefore + (Date.now() - s.startedAt),
+      savedAt: Date.now(), released: s.released
+    });
+  },
+  clearSaved() { Store.remove('session'); },
+
+  restore(saved) {
+    if (!saved || !Array.isArray(saved.responses)) return null;
+    this.create({ mode: saved.mode, priorMean: saved.priorMean,
+                  priorSD: saved.priorSD, priorSource: saved.priorSource });
+    const s = this.state;
+    /* Drop any response whose item is no longer in the bank. */
+    s.responses = saved.responses.filter(r => r && Bank.byId[r.itemId]);
+    s.sessionSeen = (saved.sessionSeen || []).filter(id => Bank.byId[id]);
+    s.pendingSet = (saved.pendingSet || []).filter(id => Bank.byId[id]);
+    s.rapidCount = saved.rapidCount || 0;
+    s.slowdownShown = !!saved.slowdownShown;
+    s.elapsedBefore = saved.elapsedBefore || 0;
+    s.released = saved.released || 0;
+    this.recompute();
+    return s;
+  }
+};
+
+/* --------------------------------------------------------- learner profile */
+const Profile = {
+  read() {
+    const p = Store.get('profile', null);
+    return (p && typeof p === 'object') ? p : null;
+  },
+  write(session) {
+    const s = session;
+    const domainThetas = Object.create(null);
+    Bank.domains.forEach(d => { domainThetas[d] = s.domain[d] ? s.domain[d].theta : null; });
+
+    const prev = this.read() || {};
+    const skillPerformance = (prev.skillPerformance && typeof prev.skillPerformance === 'object')
+      ? prev.skillPerformance : Object.create(null);
+    s.responses.forEach(function (r) {
+      if (!r.scored) return;
+      const k = r.domain + ' | ' + r.skill;
+      const rec = skillPerformance[k] || { seen: 0, correct: 0 };
+      rec.seen++; if (r.y === 1) rec.correct++;
+      skillPerformance[k] = rec;
+    });
+
+    this.writeRaw({
+      previousOverallTheta: s.overall.theta,
+      previousDomainThetas: domainThetas,
+      previousSEM: s.overall.sem,
+      previousPracticeIndex: s.overall.practiceIndex,
+      date: new Date().toISOString(),
+      skillPerformance: skillPerformance,
+      numberOfTests: (prev.numberOfTests || 0) + 1
+    });
+  },
+  writeRaw(p) { Store.set('profile', p); },
+  clear() { Store.remove('profile'); },
+
+  /* Anonymous per-item response tallies, for optional between-session
+     recalibration analysis. Never used to change difficulty mid-test. */
+  recordCalibration(session) {
+    const cal = Store.get('calibration', {}) || {};
+    session.responses.forEach(function (r) {
+      if (!r.scored) return;
+      const rec = cal[r.itemId] ||
+        { id: r.itemId, numberCorrect: 0, numberIncorrect: 0, thetaAtResponse: [] };
+      if (r.y === 1) rec.numberCorrect++; else rec.numberIncorrect++;
+      rec.thetaAtResponse.push(Math.round(session.overall.theta * 1000) / 1000);
+      if (rec.thetaAtResponse.length > 50) rec.thetaAtResponse = rec.thetaAtResponse.slice(-50);
+      cal[r.itemId] = rec;
+    });
+    Store.set('calibration', cal);
+  },
+  clearCalibration() { Store.remove('calibration'); }
+};
+
+/* ========================================================================== */
+/*  USER INTERFACE                                                            */
+/* ========================================================================== */
+const DISCLAIMER = 'This is a practice adaptive score and is not an official NWEA RIT score.';
+
+const el = {
+  screens:   { start: $('#screen-start'), test: $('#screen-test'), report: $('#screen-report') },
+  qnum:      $('#t-qnum'),
+  mode:      $('#t-mode'),
+  count:     $('#t-count'),
+  progress:  $('#t-progress'),
+  passage:   $('#t-passage-slot'),
+  stem:      $('#t-stem'),
+  opts:      $('#t-opts'),
+  feedback:  $('#t-feedback-slot'),
+  next:      $('#btn-next'),
+  hint:      $('#t-hint'),
+  slowdown:  $('#t-slowdown'),
+  abandon:   $('#btn-abandon'),
+  report:    $('#report-slot')
+};
+
+let ui = { choice: null, answered: false, item: null, presented: null };
+
+function showScreen(name) {
+  Object.keys(el.screens).forEach(function (k) {
+    if (el.screens[k]) el.screens[k].hidden = (k !== name);
+  });
+  el.abandon.hidden = (name !== 'test');
+  window.scrollTo(0, 0);
+}
+
+/* ------------------------------------------------------------ start screen */
+function bandLabel(index) {
+  if (!isNum(index)) return 'Not established';
+  if (index < 185) return 'Prerequisite skills';
+  if (index < 195) return 'Basic Grade 4';
+  if (index < 205) return 'Typical Grade 4';
+  if (index < 215) return 'More demanding Grade 4';
+  if (index < 225) return 'Advanced Grade 4 / early Grade 5';
+  return 'Challenging extension';
+}
+
+function renderStart() {
+  /* --- bank health gate --- */
+  const empty = Bank.items.length === 0;
+  $('#btn-start').disabled = empty;
+
+  /* --- resume an interrupted test --- */
+  const saved = Store.get('session', null);
+  const slot = $('#resume-slot');
+  slot.innerHTML = '';
+  if (saved && Array.isArray(saved.responses) && saved.responses.length && !empty) {
+    const when = saved.savedAt ? new Date(saved.savedAt).toLocaleString() : 'earlier';
+    slot.innerHTML =
+      '<div class="notice notice-accent" style="margin-bottom:20px">' +
+        '<strong>You have a test in progress.</strong> ' +
+        esc(plural(saved.responses.length, 'question')) + ' answered in ' +
+        esc(saved.mode === 'learning' ? 'Learning' : 'Assessment') + ' mode, saved ' + esc(when) + '.' +
+        '<div class="btn-row" style="margin-top:10px">' +
+          '<button class="btn btn-primary" id="btn-resume">Resume test</button>' +
+          '<button class="btn btn-quiet" id="btn-discard">Discard and start fresh</button>' +
+        '</div>' +
+      '</div>';
+    $('#btn-resume').addEventListener('click', resumeTest);
+    $('#btn-discard').addEventListener('click', function () {
+      Session.clearSaved(); renderStart();
+    });
+  }
+
+  /* --- stored learner profile --- */
+  const p = Profile.read();
+  const pslot = $('#profile-slot');
+  if (!Store.available()) {
+    pslot.innerHTML = '<div class="notice notice-warn">Browser storage is unavailable, so results ' +
+      'will not be saved between tests. Everything else works normally.</div>';
+  } else if (!p) {
+    pslot.innerHTML = '<p class="footnote" style="margin:0">No previous results saved on this device. ' +
+      'After the first test, the score can be carried forward as the starting point for the next one.</p>';
+  } else {
+    const dom = p.previousDomainThetas || {};
+    const rows = Object.keys(dom).filter(d => isNum(dom[d])).map(function (d) {
+      return '<tr><td>' + esc(d) + '</td><td class="num">' + Math.round(toPractice(dom[d])) + '</td></tr>';
+    }).join('');
+    pslot.innerHTML =
+      '<div class="kv" style="margin-bottom:16px">' +
+        '<div><dt>Last practice score</dt><dd>' + Math.round(p.previousPracticeIndex || toPractice(p.previousOverallTheta)) + '</dd></div>' +
+        '<div><dt>Tests completed</dt><dd>' + (p.numberOfTests || 0) + '</dd></div>' +
+        '<div><dt>Last taken</dt><dd style="font-size:.95rem">' + esc(p.date ? new Date(p.date).toLocaleDateString() : '—') + '</dd></div>' +
+      '</div>' +
+      (rows ? '<div class="tablewrap"><table><thead><tr><th>Domain</th><th class="num">Practice index</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '') +
+      '<p class="footnote" style="margin-top:14px">Carrying this forward starts the next test near ' +
+      'this level. The prior is deliberately weak, so new answers can still move the estimate a long way.</p>';
+
+    /* offer the carry-forward start option */
+    const sel = $('#sel-start');
+    if (!$('#opt-carry')) {
+      const o = document.createElement('option');
+      o.id = 'opt-carry';
+      o.value = 'carry';
+      o.textContent = 'Continue from last result — ' + Math.round(p.previousPracticeIndex || toPractice(p.previousOverallTheta));
+      sel.insertBefore(o, sel.firstChild);
+      sel.value = 'carry';
+    }
+  }
+
+  renderEngineCard(empty);
+  syncSettingsInputs();
+}
+
+/* ------------------------------------------- transparency panel (spec §29) */
+function renderEngineCard(empty) {
+  const w = CFG.weights;
+  const wsum = (w.info + w.blueprint + w.grade + w.skill + w.random) || 1;
+  const pw = k => (w[k] / wsum).toFixed(2);
+
+  const bpRows = Bank.domains.map(function (d) {
+    return '<tr><td>' + esc(d) + '</td><td class="num">' + pct(Blueprint.target[d]) +
+           '</td><td class="num">' + (Bank.stats.byDomain[d] || 0) + '</td></tr>';
+  }).join('');
+
+  const probs = Bank.problems;
+  const probList = [];
+  const addProb = (label, arr) => { if (arr && arr.length) probList.push(
+    '<li><strong>' + esc(label) + ':</strong> ' + arr.length +
+    ' <span class="footnote">(' + esc(arr.slice(0, 6).join(', ')) + (arr.length > 6 ? ', …' : '') + ')</span></li>'); };
+  addProb('Exact duplicates removed', probs.exactDuplicates);
+  addProb('Duplicate IDs renamed', probs.duplicateIds);
+  addProb('Dropped — answer not among options', probs.answerNotInOptions);
+  addProb('Dropped — fewer than two options', probs.tooFewOptions);
+  addProb('Answer text appears more than once', probs.ambiguousAnswer);
+  addProb('Missing explanation', probs.missingExplanation);
+  addProb('Difficulty inferred, not supplied', probs.inferredDifficulty);
+
+  $('#engine-card').innerHTML =
+    (empty ? '<div class="notice notice-warn" style="margin-bottom:20px"><strong>No items are loaded.</strong> ' +
+      'The bundled question bank is empty, so a test cannot start. Rebuild the file with a populated ' +
+      'bank to enable testing.</div>' : '') +
+    (Bank.isPlaceholder ? '<div class="notice notice-warn" style="margin-bottom:20px"><strong>Placeholder bank.</strong> ' +
+      'These items are a small smoke-test set for exercising the engine, not a real assessment bank. ' +
+      'Scores from them are not meaningful.</div>' : '') +
+
+    '<details class="disclose"><summary>How the adaptive engine works</summary><div class="inner">' +
+
+    '<p class="footnote">Written for parents and teachers. Every formula below is the one this ' +
+    'file actually runs — nothing here is decorative.</p>' +
+
+    '<h4>Item response model</h4>' +
+    '<p class="footnote">A one-parameter (Rasch) model. The chance of a correct answer depends on the ' +
+    'gap between the reader\'s estimated ability and the question\'s difficulty:</p>' +
+    '<div class="formula">P(correct) = 1 / (1 + exp(-(theta - b)))\n' +
+    'I(theta)   = P * (1 - P)          maximum 0.25, reached when theta = b</div>' +
+    '<p class="footnote">A question is most informative when its difficulty sits near the reader\'s ' +
+    'current level, which is why the test converges on questions that are challenging but not hopeless.</p>' +
+
+    '<h4>Practice-score transformation</h4>' +
+    '<div class="formula">practiceIndex = 200 + 10 * theta      b = (difficulty - 200) / 10</div>' +
+    '<p class="footnote">The 200-centred shape is for readability only. ' + esc(DISCLAIMER) + '</p>' +
+
+    '<h4>Bayesian ability updating</h4>' +
+    '<p class="footnote">After every scored answer the ability estimate is recalculated from the ' +
+    '<em>entire</em> response history using maximum a posteriori estimation with Newton-Raphson — ' +
+    'never by adding or subtracting fixed points:</p>' +
+    '<div class="formula">d1 = -(theta - priorMean) / priorVar + SUM(y - P)\n' +
+    'd2 = -1 / priorVar               - SUM(P * (1 - P))\n' +
+    'theta = theta - d1 / d2          repeated to convergence</div>' +
+    '<p class="footnote">Convergence threshold ' + CFG.convergence + ', at most ' + CFG.maxIterations +
+    ' iterations, theta clamped to ±' + CFG.thetaClamp + '. Prior SD ' + fmt(CFG.priorSD, 2) + ' logits.</p>' +
+
+    '<h4>Standard error</h4>' +
+    '<div class="formula">testInformation = 1 / priorVar + SUM(P * (1 - P))\n' +
+    'SE(theta)       = 1 / sqrt(testInformation)\n' +
+    'SEM             = 10 * SE(theta)</div>' +
+    '<p class="footnote">SEM falls as informative answers accumulate. It is one of the conditions for ' +
+    'ending the test.</p>' +
+
+    '<h4>Item selection</h4>' +
+    '<p class="footnote">Each candidate item is scored on five weighted components. These weights are ' +
+    'this implementation\'s own transparent approximation, not anyone\'s proprietary values:</p>' +
+    '<div class="formula">totalReward = ' + pw('info') + ' * information\n' +
+    '            + ' + pw('blueprint') + ' * blueprintNeed\n' +
+    '            + ' + pw('grade') + ' * gradeProximity\n' +
+    '            + ' + pw('skill') + ' * skillCoverage\n' +
+    '            + ' + pw('random') + ' * randomTieBreak</div>' +
+    '<p class="footnote">The random component is small on purpose: it stops two readers with identical ' +
+    'answer patterns from seeing an identical test, without letting chance override difficulty targeting.</p>' +
+
+    '<h4>Domain targeting</h4>' +
+    '<div class="formula">effectiveTheta = ' + fmt(CFG.domainBlend, 2) + ' * overallTheta + ' +
+    fmt(1 - CFG.domainBlend, 2) + ' * domainTheta[domain]</div>' +
+    '<p class="footnote">A reader who is stronger in one domain than another will be given harder ' +
+    'questions in the stronger domain and easier ones in the weaker domain, within the same test. ' +
+    'Domain estimates use the overall estimate as a prior with a tighter SD (' + fmt(CFG.domainPriorSD, 2) +
+    ') so that a small number of answers cannot produce a wild domain score.</p>' +
+
+    '<h4>Content blueprint</h4>' +
+    '<div class="formula">desiredCount = targetShare * nextQuestionNumber\n' +
+    'deficit      = max(0, desiredCount - actualCount)</div>' +
+    '<div class="tablewrap" style="margin-top:10px"><table><thead><tr><th>Domain</th>' +
+    '<th class="num">Target share</th><th class="num">Items in bank</th></tr></thead><tbody>' +
+    bpRows + '</tbody></table></div>' +
+
+    '<h4>Item exposure control</h4>' +
+    '<p class="footnote">An item is never repeated inside a test. Items seen in previous tests on this ' +
+    'device are avoided too; when the unseen pool drops below ' + CFG.minimumPool + ' items, the ' +
+    '<em>oldest</em> exposure records are released so old questions rotate back gradually rather than ' +
+    'the whole history being wiped.</p>' +
+
+    '<h4>Stopping rule</h4>' +
+    '<p class="footnote">At least ' + CFG.minScoredItems + ' and at most ' + CFG.maxScoredItems +
+    ' scored items. After the minimum, the test ends only when <em>all</em> of these hold: ' +
+    'SEM ≤ ' + fmt(CFG.semTarget, 1) + ' practice points; every domain has at least ' +
+    CFG.minItemsPerDomain + ' scored answers; and the blueprint is within ' +
+    pct(CFG.blueprintTolerance) + ' of target. A high or low score never ends the test early.</p>' +
+
+    '<h4>Item bank</h4>' +
+    '<div class="kv" style="margin:12px 0">' +
+      '<div><dt>Unique items</dt><dd>' + Bank.stats.total + '</dd></div>' +
+      '<div><dt>Scored</dt><dd>' + Bank.stats.scored + '</dd></div>' +
+      '<div><dt>Field-test</dt><dd>' + Bank.stats.fieldTest + '</dd></div>' +
+      '<div><dt>Difficulty range</dt><dd>' + (Bank.stats.minDifficulty == null ? '—' :
+        Bank.stats.minDifficulty + '–' + Bank.stats.maxDifficulty) + '</dd></div>' +
+    '</div>' +
+    (probList.length ? '<h4>Bank issues detected at load</h4><ul class="footnote" style="padding-left:18px">' +
+      probList.join('') + '</ul>' : '') +
+
+    '<div class="disclaimer" style="margin-top:18px">This implementation approximates publicly ' +
+    'described computer-adaptive testing principles. It is not NWEA\'s proprietary production engine ' +
+    'and its practice scores are not official RIT scores.</div>' +
+
+    '</div></details>';
+}
+
+/* ---------------------------------------------------------- settings panel */
+const SETTING_FIELDS = [
+  ['cfg-min', 'minScoredItems'], ['cfg-max', 'maxScoredItems'], ['cfg-sem', 'semTarget'],
+  ['cfg-domainmin', 'minItemsPerDomain'], ['cfg-priorsd', 'priorSD'], ['cfg-blend', 'domainBlend'],
+  ['cfg-fieldtest', 'fieldTestRate'], ['cfg-grade', 'studentGrade']
+];
+const WEIGHT_FIELDS = [
+  ['cfg-w-info', 'info'], ['cfg-w-bp', 'blueprint'], ['cfg-w-grade', 'grade'],
+  ['cfg-w-skill', 'skill'], ['cfg-w-rand', 'random']
+];
+function syncSettingsInputs() {
+  SETTING_FIELDS.forEach(function (f) { const n = $('#' + f[0]); if (n) n.value = CFG[f[1]]; });
+  WEIGHT_FIELDS.forEach(function (f) { const n = $('#' + f[0]); if (n) n.value = CFG.weights[f[1]]; });
+}
+function readSettingsInputs() {
+  SETTING_FIELDS.forEach(function (f) {
+    const n = $('#' + f[0]); if (!n) return;
+    const v = parseFloat(n.value);
+    if (isNum(v)) CFG[f[1]] = v;
+  });
+  WEIGHT_FIELDS.forEach(function (f) {
+    const n = $('#' + f[0]); if (!n) return;
+    const v = parseFloat(n.value);
+    if (isNum(v) && v >= 0) CFG.weights[f[1]] = v;
+  });
+  CFG.minScoredItems  = clamp(Math.round(CFG.minScoredItems), 1, 200);
+  CFG.maxScoredItems  = clamp(Math.round(CFG.maxScoredItems), CFG.minScoredItems, 200);
+  CFG.minItemsPerDomain = clamp(Math.round(CFG.minItemsPerDomain), 0, 100);
+  CFG.studentGrade    = clamp(Math.round(CFG.studentGrade), 1, 12);
+  CFG.semTarget       = clamp(CFG.semTarget, 0.1, 50);
+  CFG.priorSD         = clamp(CFG.priorSD, 0.1, 5);
+  CFG.domainBlend     = clamp(CFG.domainBlend, 0, 1);
+  CFG.fieldTestRate   = clamp(CFG.fieldTestRate, 0, 0.9);
+  const ws = WEIGHT_FIELDS.reduce((a, f) => a + CFG.weights[f[1]], 0);
+  if (!(ws > 0)) CFG.weights = JSON.parse(JSON.stringify(DEFAULTS.weights));
+  Store.set('config', CFG);
+  syncSettingsInputs();
+}
+
+/* --------------------------------------------------------------- test flow */
+function startTest(mode, priorMean, priorSD, source) {
+  RNG = Math.random;
+  Session.create({ mode: mode, priorMean: priorMean, priorSD: priorSD, priorSource: source });
+  Session.clearSaved();
+  showScreen('test');
+  nextQuestion();
+}
+
+function resumeTest() {
+  const saved = Store.get('session', null);
+  if (!Session.restore(saved)) { renderStart(); return; }
+  RNG = Math.random;
+  showScreen('test');
+  nextQuestion();
+}
+
+function nextQuestion() {
+  const s = Session.state;
+  const check = Session.stopCheck();
+  if (check.stop) { finishTest(check.reason); return; }
+
+  const item = Session.selectNext();
+  if (!item) { finishTest('bank-exhausted'); return; }
+
+  ui.presented = Session.present(item);
+  ui.item = item;
+  ui.choice = null;
+  ui.answered = false;
+  ui.pendingAdvance = false;
+  renderQuestion();
+  Session.save();
+}
+
+function renderQuestion() {
+  const s = Session.state;
+  const item = ui.item;
+  const n = s.responses.length + 1;
+  const scoredSoFar = Session.scoredCount();
+
+  el.qnum.textContent = 'Question ' + n;
+  el.mode.textContent = s.mode === 'learning' ? 'Learning mode' : 'Assessment mode';
+
+  /* Progress is expressed against the maximum length so it never runs
+     backwards; difficulty and ability are never shown during the test. */
+  const frac = clamp(scoredSoFar / Math.max(1, CFG.maxScoredItems), 0, 1);
+  el.progress.style.width = pct(frac);
+  el.progress.parentNode.setAttribute('aria-valuenow', Math.round(frac * 100));
+  el.count.textContent = 'at least ' + CFG.minScoredItems + ' questions, at most ' + CFG.maxScoredItems;
+
+  /* passage, rendered once per set */
+  el.passage.innerHTML = '';
+  if (item.passageId && Bank.passages[item.passageId]) {
+    const prev = s.responses.length ? Bank.byId[s.responses[s.responses.length - 1].itemId] : null;
+    const samePassage = prev && prev.passageId === item.passageId;
+    const p = Bank.passages[item.passageId];
+    const body = String(p.text || '').split(/\n\s*\n/).map(t => '<p>' + esc(t) + '</p>').join('');
+    el.passage.innerHTML =
+      '<div class="passage" tabindex="0" aria-label="Reading passage">' +
+      '<h4>' + esc(p.title || 'Read the passage') + (samePassage ? ' (continued)' : '') + '</h4>' +
+      body + '</div>';
+  }
+
+  el.stem.textContent = item.stem;
+
+  el.opts.innerHTML = ui.presented.options.map(function (opt, i) {
+    const id = 'opt-' + i;
+    return '<div class="opt">' +
+      '<input type="radio" name="answer" id="' + id + '" value="' + esc(opt) + '">' +
+      '<label class="box" for="' + id + '">' +
+        '<span class="ltr" aria-hidden="true">' + LETTERS[i] + '</span>' +
+        '<span class="txt">' + esc(opt) + '</span>' +
+      '</label></div>';
+  }).join('');
+
+  $$('#t-opts input').forEach(function (input) {
+    input.addEventListener('change', function () {
+      ui.choice = input.value;
+      el.next.disabled = false;
+      el.hint.textContent = s.mode === 'learning' ? 'Check your answer to see the explanation.' : '';
+    });
+  });
+
+  el.feedback.innerHTML = '';
+  el.next.disabled = true;
+  el.next.textContent = s.mode === 'learning' ? 'Check answer' : 'Next';
+  el.hint.textContent = 'Choose an answer to continue.';
+  el.slowdown.hidden = true;
+}
+
+function onNext() {
+  const s = Session.state;
+
+  /* A pause is waiting to be dismissed: this press only continues. */
+  if (ui.pendingAdvance) { ui.pendingAdvance = false; nextQuestion(); return; }
+
+  /* Learning mode: first press scores and explains, second press advances. */
+  if (s.mode === 'learning' && !ui.answered) {
+    if (!ui.choice) return;
+    const res = Session.answer(ui.choice);
+    ui.answered = true;
+    renderLearningFeedback(res);
+    $$('#t-opts input').forEach(i => { i.disabled = true; });
+    markOptionBoxes(res.item, ui.choice);
+    el.next.textContent = 'Next question';
+    el.hint.textContent = '';
+    if (Session.shouldPause()) { el.slowdown.hidden = false; s.slowdownShown = true; }
+    Session.save();
+    return;
+  }
+
+  if (s.mode === 'assessment') {
+    if (!ui.choice || ui.answered) return;
+    Session.answer(ui.choice);
+    ui.answered = true;
+    Session.save();
+    if (Session.shouldPause()) {
+      /* A neutral pause the reader dismisses themselves. Nothing is scored
+         down, and the test only advances on their next press — never on a
+         timer that could race with it. */
+      el.slowdown.hidden = false;
+      s.slowdownShown = true;
+      ui.pendingAdvance = true;
+      el.next.textContent = 'Continue';
+      el.next.disabled = true;
+      window.setTimeout(function () {
+        if (ui.pendingAdvance) el.next.disabled = false;
+      }, 1200);
+      return;
+    }
+  }
+  nextQuestion();
+}
+
+function markOptionBoxes(item, chosen) {
+  $$('#t-opts .opt').forEach(function (wrap) {
+    const input = $('input', wrap);
+    const box = $('.box', wrap);
+    if (!input || !box) return;
+    if (input.value === item.answer) box.classList.add('is-correct');
+    else if (input.value === chosen) box.classList.add('is-wrong');
+  });
+}
+
+/* --------------------------------- detailed feedback (spec §14, 7 elements) */
+function feedbackBlocks(item, chosen, correct) {
+  const blocks = [];
+  const distractor = item.wrongAnswerExplanations && item.wrongAnswerExplanations[chosen];
+
+  if (!correct) {
+    blocks.push(['What you chose',
+      'You chose “' + esc(chosen) + '”.' +
+      (distractor ? ' ' + esc(distractor) : '')]);
+    if (!distractor) {
+      blocks.push(['Why that choice does not work',
+        'That option does not satisfy what the question asks for. Compare it directly against ' +
+        'the wording of the question — an answer has to match every part of the question, not just ' +
+        'part of it.']);
+    }
+    blocks.push(['The correct answer', '“' + esc(item.answer) + '” is correct.']);
+  } else {
+    blocks.push(['Correct', 'You chose “' + esc(chosen) + '”, which is right.']);
+  }
+
+  if (item.explanation) blocks.push(['Why the correct answer works', esc(item.explanation)]);
+  return blocks;
+}
+
+function renderLearningFeedback(res) {
+  const item = res.item;
+  const correct = res.correct;
+  const chosen = ui.choice;
+  const blocks = feedbackBlocks(item, chosen, correct);
+
+  el.feedback.innerHTML =
+    '<div class="feedback ' + (correct ? 'good' : 'bad') + '">' +
+      '<div class="head">' + (correct ? 'Correct' : 'Not quite') + '</div>' +
+      '<div class="body">' +
+        blocks.map(b => '<div class="blk"><h4>' + esc(b[0]) + '</h4><p>' + b[1] + '</p></div>').join('') +
+        (item.teachingTip ? '<div class="blk"><div class="tip"><b>Rule to remember</b>' +
+          esc(item.teachingTip) + '</div></div>' : '') +
+      '</div>' +
+    '</div>';
+  el.feedback.firstChild.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+/* ------------------------------------------------------------ finish + report */
+function finishTest(reason) {
+  const s = Session.finish(reason);
+  Session.clearSaved();
+  try { Profile.write(s); Profile.recordCalibration(s); } catch (e) {}
+  renderReport(s);
+  showScreen('report');
+}
+
+function difficultyTag(d) {
+  if (!isNum(d)) return 'Unrated';
+  if (d < 190) return 'Easier';
+  if (d < 200) return 'Moderate';
+  if (d < 210) return 'Harder';
+  return 'Most challenging';
+}
+
+function renderReport(s) {
+  const scored   = s.responses.filter(r => r.scored);
+  const nScored  = scored.length;
+  const nCorrect = scored.filter(r => r.y === 1).length;
+  const index    = s.overall.practiceIndex;
+  const sem      = s.overall.sem;
+  const lo       = index - 1.96 * sem;
+  const hi       = index + 1.96 * sem;
+
+  /* ---- domain rows ---- */
+  const domainRows = Bank.domains.map(function (d) {
+    const est = s.domain[d] || {};
+    const n = est.items || 0;
+    const c = est.correct || 0;
+    const di = isNum(est.practiceIndex) ? est.practiceIndex : null;
+    const delta = (di == null) ? null : di - index;
+    let strength = 'Not enough items';
+    let cls = '';
+    if (n >= 3 && delta != null) {
+      if (delta >= 4)       { strength = 'Relative strength'; cls = 'pill-ok'; }
+      else if (delta <= -4) { strength = 'Priority for practice'; cls = 'pill-no'; }
+      else                  { strength = 'In line with overall'; cls = ''; }
+    } else if (n > 0) { strength = 'Provisional'; cls = 'pill-warn'; }
+
+    /* skills within this domain that the reader missed */
+    const weak = {};
+    scored.filter(r => r.domain === d && r.y === 0).forEach(function (r) {
+      weak[r.skill] = (weak[r.skill] || 0) + 1;
+    });
+    const weakList = Object.keys(weak).sort((a, b) => weak[b] - weak[a]);
+
+    return { domain: d, n: n, c: c, index: di, sem: est.sem, strength: strength,
+             cls: cls, delta: delta, weak: weakList };
+  });
+
+  const measured = domainRows.filter(r => r.n >= 3 && isNum(r.index));
+  let strongest = null, weakest = null;
+  if (measured.length >= 2) {
+    const sorted = measured.slice().sort((a, b) => b.index - a.index);
+    strongest = sorted[0];
+    weakest = sorted[sorted.length - 1];
+    if (strongest.domain === weakest.domain) { strongest = null; weakest = null; }
+  }
+
+  /* ---- skill aggregation ---- */
+  const skillMap = Object.create(null);
+  scored.forEach(function (r) {
+    const key = r.domain + ' | ' + r.skill;
+    const rec = skillMap[key] || { domain: r.domain, skill: r.skill, n: 0, c: 0 };
+    rec.n++; if (r.y === 1) rec.c++;
+    skillMap[key] = rec;
+  });
+  const skillRows = Object.keys(skillMap).map(k => skillMap[k])
+    .sort(function (a, b) {
+      const ra = a.c / a.n, rb = b.c / b.n;
+      if (ra !== rb) return ra - rb;
+      return b.n - a.n;
+    });
+
+  /* ---- review entries ---- */
+  const reviewHtml = s.responses.map(function (r) {
+    const item = Bank.byId[r.itemId];
+    if (!item) return '';
+    const ok = r.y === 1;
+    const distractor = item.wrongAnswerExplanations && item.wrongAnswerExplanations[r.chosen];
+    return '<details class="rev">' +
+      '<summary>' +
+        '<span class="t">Q' + r.order + '. ' + esc(item.stem.length > 90 ? item.stem.slice(0, 90) + '…' : item.stem) + '</span>' +
+        '<span class="pill ' + (ok ? 'pill-ok' : 'pill-no') + '">' + (ok ? 'Correct' : 'Incorrect') + '</span>' +
+        (!r.scored ? '<span class="pill pill-warn">Unscored</span>' : '') +
+        (r.rapid ? '<span class="pill pill-warn">Very fast</span>' : '') +
+      '</summary>' +
+      '<div class="inner">' +
+        '<div class="tags">' +
+          '<span class="pill">' + esc(item.domain) + '</span>' +
+          '<span class="pill">' + esc(item.skill) + '</span>' +
+          '<span class="pill">' + esc(difficultyTag(item.difficulty)) + '</span>' +
+          '<span class="pill">Grade ' + esc(item.grade) + '</span>' +
+        '</div>' +
+        (item.passageId && Bank.passages[item.passageId] ?
+          '<details class="disclose" style="margin-bottom:12px"><summary>Show the passage</summary>' +
+          '<div class="inner"><div class="passage">' +
+          String(Bank.passages[item.passageId].text || '').split(/\n\s*\n/)
+            .map(t => '<p>' + esc(t) + '</p>').join('') +
+          '</div></div></details>' : '') +
+        '<p style="font-weight:600">' + esc(item.stem) + '</p>' +
+        '<div class="opts" style="margin-bottom:14px">' +
+          (r.options || item.options).map(function (opt, i) {
+            let cls = '';
+            if (opt === item.answer) cls = ' is-correct';
+            else if (opt === r.chosen) cls = ' is-wrong';
+            return '<div class="opt"><span class="box' + cls + '">' +
+              '<span class="ltr" aria-hidden="true">' + LETTERS[i] + '</span>' +
+              '<span class="txt">' + esc(opt) +
+              (opt === r.chosen ? ' <em class="footnote">— your answer</em>' : '') +
+              (opt === item.answer && opt !== r.chosen ? ' <em class="footnote">— correct answer</em>' : '') +
+              '</span></span></div>';
+          }).join('') +
+        '</div>' +
+        (!ok && distractor ? '<div class="blk"><h4 style="font-size:.76rem;letter-spacing:.07em;' +
+          'text-transform:uppercase;color:var(--ink-3)">Why your choice does not work</h4>' +
+          '<p class="footnote">' + esc(distractor) + '</p></div>' : '') +
+        (item.explanation ? '<div class="blk" style="margin-top:10px"><h4 style="font-size:.76rem;' +
+          'letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)">Why the correct answer works</h4>' +
+          '<p class="footnote">' + esc(item.explanation) + '</p></div>' : '') +
+        (item.teachingTip ? '<div class="tip" style="margin-top:12px"><b>Rule to remember</b>' +
+          esc(item.teachingTip) + '</div>' : '') +
+      '</div></details>';
+  }).join('');
+
+  const endNote = {
+    'precision-reached': 'The test ended because the score was measured precisely enough and every ' +
+                         'domain had sufficient coverage.',
+    'maximum-length':    'The test ended at its maximum length.',
+    'bank-exhausted':    'The test ended because the item bank ran out of unseen questions.',
+    'abandoned':         'The test was ended early, so this result is less precise than a full test.'
+  }[s.endReason] || 'The test is complete.';
+
+  el.report.innerHTML =
+    /* ---------------- overall ---------------- */
+    '<div class="card">' +
+      '<h1>Practice reading report</h1>' +
+      '<p class="footnote" style="margin-bottom:20px">' + esc(new Date().toLocaleString()) +
+      ' &middot; ' + esc(s.mode === 'learning' ? 'Learning mode' : 'Assessment mode') + '</p>' +
+
+      '<div class="scorecard">' +
+        '<div class="bigscore">' +
+          '<div class="n">' + Math.round(index) + '</div>' +
+          '<div class="lbl">Practice index</div>' +
+          '<div class="ci">95% interval ' + Math.round(lo) + '–' + Math.round(hi) + '</div>' +
+        '</div>' +
+        '<dl class="kv">' +
+          '<div><dt>Standard error</dt><dd>' + fmt(sem, 1) + '</dd></div>' +
+          '<div><dt>Scored items</dt><dd>' + nScored + '</dd></div>' +
+          '<div><dt>Percent correct</dt><dd>' + (nScored ? Math.round(100 * nCorrect / nScored) : 0) + '%</dd></div>' +
+          '<div><dt>Level</dt><dd style="font-size:.95rem">' + esc(bandLabel(index)) + '</dd></div>' +
+          '<div><dt>Duration</dt><dd style="font-size:.95rem">' + esc(duration(Session.elapsedMs())) + '</dd></div>' +
+          '<div><dt>Very fast answers</dt><dd>' + s.rapidCount + '</dd></div>' +
+        '</dl>' +
+      '</div>' +
+
+      '<div class="notice" style="margin-top:20px">' + esc(endNote) +
+        (s.priorSource === 'carry' ? ' The starting estimate was carried over from the previous test.' : '') +
+      '</div>' +
+
+      '<p class="footnote" style="margin-top:14px"><strong>Percent correct is not the adaptive score</strong> ' +
+      'because question difficulty changed throughout the test. A reader answering hard questions at 60% ' +
+      'is placed higher than one answering easy questions at 90%.</p>' +
+
+      '<div class="disclaimer" style="margin-top:16px">' + esc(DISCLAIMER) +
+      ' This tool is not affiliated with NWEA, is not MAP Growth, and does not report percentiles.</div>' +
+    '</div>' +
+
+    /* ---------------- domains ---------------- */
+    '<div class="card">' +
+      '<h2>Domain results</h2>' +
+      '<div class="tablewrap"><table><thead><tr>' +
+        '<th>Domain</th><th class="num">Practice index</th><th class="num">SEM</th>' +
+        '<th class="num">Items</th><th class="num">Correct</th><th>Level</th>' +
+      '</tr></thead><tbody>' +
+      domainRows.map(function (d) {
+        return '<tr>' +
+          '<td><strong>' + esc(d.domain) + '</strong>' +
+            (d.weak.length ? '<div class="footnote" style="margin-top:3px">Review: ' +
+              esc(d.weak.slice(0, 3).join('; ')) + '</div>' : '') + '</td>' +
+          '<td class="num">' + (isNum(d.index) ? Math.round(d.index) : '—') + '</td>' +
+          '<td class="num">' + (isNum(d.sem) ? fmt(d.sem, 1) : '—') + '</td>' +
+          '<td class="num">' + d.n + '</td>' +
+          '<td class="num">' + d.c + '</td>' +
+          '<td><span class="pill ' + d.cls + '">' + esc(d.strength) + '</span></td>' +
+        '</tr>';
+      }).join('') +
+      '</tbody></table></div>' +
+
+      (strongest && weakest ?
+        '<div class="kv" style="margin-top:20px">' +
+          '<div><dt>Strongest domain</dt><dd style="font-size:1rem">' + esc(strongest.domain) +
+            ' <span class="footnote">(' + Math.round(strongest.index) + ')</span></dd></div>' +
+          '<div><dt>Weakest domain</dt><dd style="font-size:1rem">' + esc(weakest.domain) +
+            ' <span class="footnote">(' + Math.round(weakest.index) + ')</span></dd></div>' +
+        '</div>' +
+        '<div class="notice notice-accent" style="margin-top:16px"><strong>Suggested next practice focus:</strong> ' +
+        esc(weakest.domain) +
+        (weakest.weak.length ? ', starting with ' + esc(weakest.weak.slice(0, 2).join(' and ')) + '.' : '.') +
+        ' The gap between domains is ' + Math.round(Math.abs(strongest.index - weakest.index)) +
+        ' practice points; treat differences smaller than about ' + Math.round(2 * sem) +
+        ' points as noise rather than a real difference.</div>'
+        : '<p class="footnote" style="margin-top:16px">Not enough items per domain to compare domains ' +
+          'reliably in this test.</p>') +
+    '</div>' +
+
+    /* ---------------- skills ---------------- */
+    '<div class="card">' +
+      '<h2>Skill breakdown</h2>' +
+      '<p class="footnote" style="margin-bottom:16px">Ordered by accuracy, weakest first. Skills with ' +
+      'only one or two questions are indicative only.</p>' +
+      '<div class="tablewrap"><table><thead><tr>' +
+        '<th>Skill</th><th>Domain</th><th class="num">Asked</th><th class="num">Correct</th>' +
+        '<th class="num">Missed</th><th style="min-width:110px">Accuracy</th>' +
+      '</tr></thead><tbody>' +
+      skillRows.map(function (r) {
+        const acc = r.c / r.n;
+        return '<tr>' +
+          '<td><strong>' + esc(r.skill) + '</strong>' +
+            (acc < 0.6 ? '<div class="footnote" style="margin-top:3px">Recommended review</div>' : '') + '</td>' +
+          '<td class="footnote">' + esc(r.domain) + '</td>' +
+          '<td class="num">' + r.n + '</td>' +
+          '<td class="num">' + r.c + '</td>' +
+          '<td class="num">' + (r.n - r.c) + '</td>' +
+          '<td><div class="bar"><i style="width:' + pct(acc) + '"></i></div>' +
+            '<span class="footnote">' + pct(acc) + '</span></td>' +
+        '</tr>';
+      }).join('') +
+      '</tbody></table></div>' +
+    '</div>' +
+
+    /* ---------------- review ---------------- */
+    '<div class="card">' +
+      '<h2>Question review</h2>' +
+      '<p class="footnote" style="margin-bottom:16px">Every question that was administered, in order, ' +
+      'with the reader\'s answer, the correct answer and the full explanation.</p>' +
+      '<div class="btn-row noprint" style="margin-bottom:16px">' +
+        '<button class="btn btn-quiet" id="btn-expand-all">Expand all</button>' +
+        '<button class="btn btn-quiet" id="btn-collapse-all">Collapse all</button>' +
+      '</div>' +
+      reviewHtml +
+    '</div>' +
+
+    '<div class="card noprint">' +
+      '<div class="btn-row">' +
+        '<button class="btn btn-primary" id="btn-print">Print report</button>' +
+        '<button class="btn" id="btn-again">New assessment</button>' +
+      '</div>' +
+    '</div>';
+
+  $('#btn-print').addEventListener('click', function () { window.print(); });
+  $('#btn-again').addEventListener('click', function () { renderStart(); showScreen('start'); });
+  $('#btn-expand-all').addEventListener('click', function () {
+    $$('#report-slot details.rev').forEach(d => { d.open = true; });
+  });
+  $('#btn-collapse-all').addEventListener('click', function () {
+    $$('#report-slot details.rev').forEach(d => { d.open = false; });
+  });
+}
+
+/* ------------------------------------------------------------------ modal */
+function confirmAction(title, body, onOk) {
+  const m = $('#modal');
+  $('#modal-title').textContent = title;
+  $('#modal-body').textContent = body;
+  m.hidden = false;
+  const ok = $('#modal-ok'), cancel = $('#modal-cancel');
+  function close() {
+    m.hidden = true;
+    ok.removeEventListener('click', accept);
+    cancel.removeEventListener('click', close);
+    document.removeEventListener('keydown', onKey);
+  }
+  function accept() { close(); onOk(); }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+  ok.addEventListener('click', accept);
+  cancel.addEventListener('click', close);
+  document.addEventListener('keydown', onKey);
+  ok.focus();
+}
+
+/* --------------------------------------------------- calibration data export */
+function exportCalibration() {
+  const cal = Store.get('calibration', {}) || {};
+  const rows = Object.keys(cal).map(function (id) {
+    const r = cal[id];
+    const item = Bank.byId[id];
+    const n = r.numberCorrect + r.numberIncorrect;
+    const pObs = n ? r.numberCorrect / n : null;
+    const meanTheta = r.thetaAtResponse.length
+      ? r.thetaAtResponse.reduce((a, b) => a + b, 0) / r.thetaAtResponse.length : null;
+    /* Empirical difficulty from the observed proportion correct, expressed on
+       the practice scale. EXPERIMENTAL — never applied during a test. */
+    let empirical = null;
+    if (n >= 8 && pObs != null && pObs > 0 && pObs < 1 && meanTheta != null) {
+      empirical = Math.round(toPractice(meanTheta - Math.log(pObs / (1 - pObs))));
+    }
+    return {
+      itemId: id,
+      domain: item ? item.domain : null,
+      skill: item ? item.skill : null,
+      provisionalDifficulty: item ? item.difficulty : null,
+      numberCorrect: r.numberCorrect,
+      numberIncorrect: r.numberIncorrect,
+      observedProportionCorrect: pObs == null ? null : Math.round(pObs * 1000) / 1000,
+      meanAbilityAtResponse: meanTheta == null ? null : Math.round(meanTheta * 1000) / 1000,
+      empiricalDifficultyExperimental: empirical
+    };
+  });
+  const payload = {
+    note: 'EXPERIMENTAL local calibration data. Empirical difficulties are unvalidated estimates ' +
+          'from small local samples and are never applied during a test.',
+    generated: new Date().toISOString(),
+    itemsWithData: rows.length,
+    items: rows
+  };
+  const text = JSON.stringify(payload, null, 2);
+  try {
+    const blob = new Blob([text], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'reading-practice-calibration.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (e) {
+    /* Download blocked: show the data so it can still be copied out. */
+    const slot = $('#profile-slot');
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('aria-label', 'Calibration data');
+    ta.style.cssText = 'width:100%;min-height:200px;margin-top:14px;font-family:var(--mono);font-size:.8rem';
+    slot.appendChild(ta);
+    ta.select();
+  }
+}
+
+/* ============================================================== simulation
+   Spec §26. Runs synthetic readers through the real engine so the adaptive
+   behaviour can be checked without a human. Exposed for console use:
+     ReadingPractice.simulate({ theta: 0.5 })
+     ReadingPractice.selfTest()
+   ========================================================================= */
+function simulate(opts) {
+  opts = opts || {};
+  const trueTheta = isNum(opts.theta) ? opts.theta : 0;
+  const domainTheta = opts.domainTheta || null;
+  const seed = isNum(opts.seed) ? opts.seed : 12345;
+
+  const savedRNG = RNG;
+  const savedState = Session.state;
+  RNG = mulberry32(seed);
+
+  Session.create({ mode: 'assessment', priorMean: isNum(opts.priorMean) ? opts.priorMean : 0,
+                   priorSD: CFG.priorSD, priorSource: 'simulation' });
+  const s = Session.state;
+  const trace = [];
+  let guard = 0;
+
+  while (guard++ < 500) {
+    const check = Session.stopCheck();
+    if (check.stop) { s.endReason = check.reason; break; }
+    const item = Session.selectNext();
+    if (!item) { s.endReason = 'bank-exhausted'; break; }
+    Session.present(item);
+
+    /* simulated reader: Rasch-generated response at the true ability */
+    const ability = (domainTheta && isNum(domainTheta[item.domain])) ? domainTheta[item.domain] : trueTheta;
+    const correct = RNG() < pCorrect(ability, item.b);
+    s.current.shownAt = Date.now() - 20000;           /* never counted as rapid */
+    Session.answer(correct ? item.answer : (item.options.find(o => o !== item.answer) || item.answer));
+
+    trace.push({ n: s.responses.length, difficulty: item.difficulty, domain: item.domain,
+                 correct: correct, theta: s.overall.theta, sem: s.overall.sem });
+  }
+
+  const scored = s.responses.filter(r => r.scored);
+  const counts = Session.domainCounts();
+  const domainOut = Object.create(null);
+  Bank.domains.forEach(function (d) {
+    domainOut[d] = { index: Math.round(s.domain[d].practiceIndex * 10) / 10,
+                     items: counts[d] || 0 };
+  });
+  const uniqueIds = {}; let repeats = 0;
+  s.responses.forEach(function (r) { if (uniqueIds[r.itemId]) repeats++; uniqueIds[r.itemId] = true; });
+
+  const result = {
+    trueTheta: trueTheta,
+    trueIndex: Math.round(toPractice(trueTheta) * 10) / 10,
+    estimatedIndex: Math.round(s.overall.practiceIndex * 10) / 10,
+    estimatedTheta: Math.round(s.overall.theta * 1000) / 1000,
+    sem: Math.round(s.overall.sem * 100) / 100,
+    items: scored.length,
+    percentCorrect: scored.length ? Math.round(100 * scored.filter(r => r.y === 1).length / scored.length) : 0,
+    endReason: s.endReason,
+    repeats: repeats,
+    domains: domainOut,
+    meanDifficultyFirst5: mean(trace.slice(0, 5).map(t => t.difficulty)),
+    meanDifficultyLast10: mean(trace.slice(-10).map(t => t.difficulty)),
+    semFirst: trace.length ? Math.round(trace[0].sem * 100) / 100 : null,
+    semLast: trace.length ? Math.round(trace[trace.length - 1].sem * 100) / 100 : null,
+    trace: trace
+  };
+
+  RNG = savedRNG;
+  Session.state = savedState;
+  return result;
+}
+function mean(a) {
+  if (!a.length) return null;
+  return Math.round((a.reduce((x, y) => x + y, 0) / a.length) * 10) / 10;
+}
+
+/* Runs the five learner profiles from spec §26 and checks the behavioural
+   claims the engine is supposed to satisfy. Returns {passed, checks[]}. */
+function selfTest(verbose) {
+  const checks = [];
+  const add = (name, pass, detail) => checks.push({ name: name, pass: !!pass, detail: detail });
+
+  if (Bank.stats.scored < 5) {
+    add('bank has items', false, 'only ' + Bank.stats.scored + ' scored items in the bank');
+    return { passed: false, checks: checks, profiles: {} };
+  }
+
+  const domains = Bank.domains;
+  const dA = domains[0], dB = domains[domains.length - 1];
+
+  const profiles = {
+    A: simulate({ theta: -1.0, seed: 1001 }),
+    B: simulate({ theta:  0.0, seed: 1002 }),
+    C: simulate({ theta:  1.0, seed: 1003 }),
+    D: simulate({ theta:  0.0, seed: 1004,
+                  domainTheta: (function () { const m = {}; domains.forEach(d => { m[d] = 0; });
+                                m[dA] = 1.2; m[dB] = -1.2; return m; })() }),
+    E: simulate({ theta:  0.0, seed: 1005,
+                  domainTheta: (function () { const m = {}; domains.forEach(d => { m[d] = 0; });
+                                m[dA] = -1.2; m[dB] = 1.2; return m; })() })
+  };
+
+  /* 1. recovery: the estimate should land near the simulated ability */
+  ['A', 'B', 'C'].forEach(function (k) {
+    const p = profiles[k];
+    const err = Math.abs(p.estimatedIndex - p.trueIndex);
+    add('profile ' + k + ' recovers ability (±' + Math.round(3 * p.sem) + ')',
+        err <= Math.max(6, 3 * p.sem),
+        'true ' + p.trueIndex + ', estimated ' + p.estimatedIndex + ', error ' + fmt(err, 1));
+  });
+
+  /* 2. ordering: higher ability must produce a higher estimate */
+  add('estimates are ordered A < B < C',
+      profiles.A.estimatedIndex < profiles.B.estimatedIndex &&
+      profiles.B.estimatedIndex < profiles.C.estimatedIndex,
+      [profiles.A, profiles.B, profiles.C].map(p => p.estimatedIndex).join(' < '));
+
+  /* 3. difficulty targeting: a strong reader must end on harder items than a weak one */
+  add('item difficulty adapts toward ability',
+      isNum(profiles.C.meanDifficultyLast10) && isNum(profiles.A.meanDifficultyLast10) &&
+      profiles.C.meanDifficultyLast10 > profiles.A.meanDifficultyLast10,
+      'last-10 mean difficulty: A ' + profiles.A.meanDifficultyLast10 +
+      ', B ' + profiles.B.meanDifficultyLast10 + ', C ' + profiles.C.meanDifficultyLast10);
+
+  /* 4. not just alternating easy/hard at random: difficulty must track the reader */
+  const spread = Math.abs(profiles.C.meanDifficultyLast10 - profiles.A.meanDifficultyLast10);
+  add('targeting is systematic, not random', spread >= 2,
+      'difficulty separation between weak and strong readers: ' + fmt(spread, 1) + ' points');
+
+  /* 5. SEM falls as information accumulates */
+  ['A', 'B', 'C'].forEach(function (k) {
+    const p = profiles[k];
+    add('profile ' + k + ' SEM decreases', p.semLast < p.semFirst,
+        'first ' + p.semFirst + ' -> last ' + p.semLast);
+  });
+
+  /* 6. no item is ever administered twice inside one test */
+  Object.keys(profiles).forEach(function (k) {
+    add('profile ' + k + ' repeats no item', profiles[k].repeats === 0,
+        profiles[k].repeats + ' repeats');
+  });
+
+  /* 7. blueprint balance */
+  Object.keys(profiles).forEach(function (k) {
+    const p = profiles[k];
+    const total = p.items;
+    const worst = domains.reduce(function (acc, d) {
+      const share = total ? (p.domains[d].items / total) : 0;
+      return Math.max(acc, Math.abs(share - Blueprint.target[d]));
+    }, 0);
+    add('profile ' + k + ' blueprint within tolerance',
+        worst <= CFG.blueprintTolerance + 0.08,
+        'largest deviation from target share: ' + pct(worst));
+  });
+
+  /* 8. domains diverge when the simulated reader is uneven */
+  if (domains.length >= 2) {
+    const dSpreadD = profiles.D.domains[dA].index - profiles.D.domains[dB].index;
+    const dSpreadE = profiles.E.domains[dA].index - profiles.E.domains[dB].index;
+    add('profile D domains diverge in the right direction', dSpreadD > 2,
+        dA + ' ' + profiles.D.domains[dA].index + ' vs ' + dB + ' ' + profiles.D.domains[dB].index);
+    add('profile E domains diverge in the right direction', dSpreadE < -2,
+        dA + ' ' + profiles.E.domains[dA].index + ' vs ' + dB + ' ' + profiles.E.domains[dB].index);
+  }
+
+  /* 9. length respects the configured bounds */
+  Object.keys(profiles).forEach(function (k) {
+    const p = profiles[k];
+    const ok = p.endReason === 'bank-exhausted'
+      ? true
+      : (p.items >= Math.min(CFG.minScoredItems, Bank.stats.scored) && p.items <= CFG.maxScoredItems);
+    add('profile ' + k + ' length within bounds', ok, p.items + ' items, ended: ' + p.endReason);
+  });
+
+  /* 10. estimates stay finite */
+  Object.keys(profiles).forEach(function (k) {
+    const p = profiles[k];
+    add('profile ' + k + ' estimate is finite',
+        isNum(p.estimatedTheta) && isNum(p.sem), 'theta ' + p.estimatedTheta + ', sem ' + p.sem);
+  });
+
+  const passed = checks.every(c => c.pass);
+  if (verbose && typeof console !== 'undefined') {
+    checks.forEach(c => console.log((c.pass ? 'PASS  ' : 'FAIL  ') + c.name + '  —  ' + c.detail));
+    console.log(passed ? 'ALL CHECKS PASSED' : 'SOME CHECKS FAILED');
+  }
+  return { passed: passed, checks: checks, profiles: profiles };
+}
+
+/* ========================================================================== */
+/*  BOOT                                                                      */
+/* ========================================================================== */
+function boot() {
+  renderStart();
+  showScreen('start');
+
+  $('#btn-start').addEventListener('click', function () {
+    const modeInput = $$('input[name=mode]').filter(i => i.checked)[0];
+    const mode = modeInput ? modeInput.value : 'assessment';
+    const startVal = $('#sel-start').value;
+
+    let priorMean = 0, priorSD = CFG.priorSD, source = 'selected';
+    if (startVal === 'carry') {
+      const p = Profile.read();
+      if (p && isNum(p.previousOverallTheta)) {
+        priorMean = p.previousOverallTheta;
+        priorSD = CFG.carryPriorSD;   /* deliberately weak: new answers must dominate */
+        source = 'carry';
+      }
+    } else {
+      priorMean = toTheta(parseFloat(startVal) || CFG.scaleCenter);
+    }
+    startTest(mode, priorMean, priorSD, source);
+  });
+
+  $('#btn-settings-toggle').addEventListener('click', function () {
+    const card = $('#settings-card');
+    card.hidden = !card.hidden;
+    this.setAttribute('aria-expanded', String(!card.hidden));
+    if (!card.hidden) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  $('#btn-cfg-save').addEventListener('click', function () {
+    readSettingsInputs();
+    renderEngineCard(Bank.items.length === 0);
+    $('#cfg-msg').textContent = 'Saved.';
+    window.setTimeout(function () { $('#cfg-msg').textContent = ''; }, 2500);
+  });
+  $('#btn-cfg-reset').addEventListener('click', function () {
+    CFG = JSON.parse(JSON.stringify(DEFAULTS));
+    Store.set('config', CFG);
+    syncSettingsInputs();
+    renderEngineCard(Bank.items.length === 0);
+    $('#cfg-msg').textContent = 'Defaults restored.';
+    window.setTimeout(function () { $('#cfg-msg').textContent = ''; }, 2500);
+  });
+
+  $('#btn-reset-learner').addEventListener('click', function () {
+    confirmAction('Reset learner data?',
+      'This permanently deletes the saved score history, the record of which questions have been ' +
+      'seen, and the local calibration data on this device. It cannot be undone.',
+      function () {
+        Profile.clear();
+        Profile.clearCalibration();
+        Exposure.clear();
+        Session.clearSaved();
+        const opt = $('#opt-carry');
+        if (opt && opt.parentNode) opt.parentNode.removeChild(opt);
+        $('#sel-start').value = '200';
+        renderStart();
+      });
+  });
+
+  $('#btn-export').addEventListener('click', exportCalibration);
+
+  el.next.addEventListener('click', onNext);
+
+  el.abandon.addEventListener('click', function () {
+    confirmAction('End the test now?',
+      'The report will be produced from the questions answered so far. Because fewer questions were ' +
+      'answered, the score will be less precise than a completed test.',
+      function () { finishTest('abandoned'); });
+  });
+
+  /* keyboard: 1-8 selects an option, Enter advances */
+  document.addEventListener('keydown', function (e) {
+    if (el.screens.test.hidden) return;
+    /* Only real text entry should swallow the digit shortcuts; a focused
+       radio button must not stop the reader picking another option. */
+    const t = e.target;
+    if (t && (t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' ||
+              (t.tagName === 'INPUT' && t.type !== 'radio'))) return;
+    const idx = '12345678'.indexOf(e.key);
+    if (idx >= 0) {
+      const inputs = $$('#t-opts input');
+      if (inputs[idx] && !inputs[idx].disabled) {
+        inputs[idx].checked = true;
+        inputs[idx].dispatchEvent(new Event('change'));
+        e.preventDefault();
+      }
+    } else if (e.key === 'Enter' && !el.next.disabled) {
+      onNext();
+      e.preventDefault();
+    }
+  });
+
+  /* preserve progress across a refresh or accidental close */
+  window.addEventListener('beforeunload', function () {
+    try { if (Session.state && !Session.state.finished) Session.save(); } catch (e) {}
+  });
+  window.addEventListener('pagehide', function () {
+    try { if (Session.state && !Session.state.finished) Session.save(); } catch (e) {}
+  });
+}
+
+/* A failure while building the UI must not leave a blank page. */
+try {
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+} catch (err) {
+  if (typeof console !== 'undefined') console.error(err);
+  const slot = document.getElementById('screen-start');
+  if (slot) {
+    slot.innerHTML = '<div class="card"><h1>Something went wrong</h1>' +
+      '<p>The test could not start. Reloading the page usually fixes this.</p>' +
+      '<p class="footnote">' + esc(String(err && err.message || err)) + '</p></div>';
+  }
+}
+
+/* Console surface for verification and tuning. */
+window.ReadingPractice = {
+  simulate: simulate,
+  selfTest: selfTest,
+  estimateTheta: estimateTheta,
+  pCorrect: pCorrect,
+  itemInfo: itemInfo,
+  bank: Bank,
+  blueprint: Blueprint,
+  config: () => CFG,
+  session: () => Session.state
+};
+
+})();
+</script>
+</body>
+</html>

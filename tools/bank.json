@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "subject": "Reading",
+    "grade": 4,
+    "placeholder": false,
+    "source": "AWAITING UPLOAD: MAP 4th Grade Reading Tests (2).pdf",
+    "note": "Populate items[] from the supplied question bank, then run: node tools/build-bank.mjs"
+  },
+  "passages": {},
+  "items": []
+}
