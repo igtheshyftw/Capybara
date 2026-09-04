@@ -1,0 +1,302 @@
+[
+ {
+  "ref": "Foundational Skills and Vocabulary - Basic Q3 (p10) #10",
+  "reason": "question refers to a visual that is not part of the text",
+  "stem": "The map showed the latitude and height of the cliff. In this sentence “latitude” most nearly means:"
+ },
+ {
+  "ref": "Foundational Skills and Vocabulary - Advanced Q3 (p34) #1",
+  "reason": "answer key missing or does not match an option",
+  "stem": "What is the root of the word “mismanagement”?"
+ },
+ {
+  "ref": "Informational Text - Basic Q1 (p38) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "How much protein is in a Peanut Power Protein Bar?"
+ },
+ {
+  "ref": "Informational Text - Basic Q1 (p38) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "We can guess from the label that ——"
+ },
+ {
+  "ref": "Informational Text - Basic Q1 (p38) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which is the third lesson of the day?"
+ },
+ {
+  "ref": "Informational Text - Basic Q1 (p38) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "How long is the last lesson of the day?"
+ },
+ {
+  "ref": "Informational Text - Basic Q1 (p38) #10",
+  "reason": "options could not be recovered from the scan (1 of 4)",
+  "stem": "Which shape most nearly represents a wigwam?"
+ },
+ {
+  "ref": "Informational Text - Basic Q2 (p43) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "When should the ticket be used?"
+ },
+ {
+  "ref": "Informational Text - Basic Q2 (p43) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "If l only take one trip during this time, I would"
+ },
+ {
+  "ref": "Informational Text - Basic Q2 (p43) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "You are 5 years old. How long would it take to double your allowance?"
+ },
+ {
+  "ref": "Informational Text - Basic Q2 (p43) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "In terms of a raise in your allowance, which is the WORST birthday?"
+ },
+ {
+  "ref": "Informational Text - Basic Q3 (p48) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which day is Mr. Cenk free?"
+ },
+ {
+  "ref": "Informational Text - Basic Q3 (p48) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "How many days a week does Miss Gregory help out?"
+ },
+ {
+  "ref": "Informational Text - Basic Q3 (p48) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which proverb sums up this infographic?"
+ },
+ {
+  "ref": "Informational Text - Basic Q3 (p48) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "What does the infographic suggest?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q1 (p54) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which statement is FALSE?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q1 (p54) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "You live at the junction of College Way and Main Street. How would you get to the post office?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q1 (p54) #10",
+  "reason": "options could not be recovered from the scan (2 of 4)",
+  "stem": "Look at the following diagrams. Based on the text, which is the best plan for a diamante poem?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q2 (p59) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "According to the chart, which statement is TRUE?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q2 (p59) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "What does the chart suggests about children 8 years old or younger?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q2 (p59) #9",
+  "reason": "question refers to a visual that is not part of the text",
+  "stem": "What is the number of the ticket?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q3 (p65) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "If you wanted to go shopping, which area would be best?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q3 (p65) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Overall, which is the best place to visit?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q3 (p65) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "In which of the following scenarios would you NOT be able to take part in the competition?"
+ },
+ {
+  "ref": "Informational Text - Proficient Q3 (p65) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "For what reason would you visit www.openart.org?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q1 (p70) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which statement is FALSE?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q1 (p70) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "To get from X to the camp, whose directions are most accurate?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q1 (p70) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "There are four ice hockey teams mentioned: The Sticklebacks, The Loblollies, The Ice Kings, and The Snipes. Wh"
+ },
+ {
+  "ref": "Informational Text - Advanced Q1 (p70) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Why does the notice give details about the four ice hockey teams?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q2 (p75) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which statement is TRUE?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q2 (p75) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "What does the ticket tell us about where Mr. A i mes will be sitting?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q2 (p75) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "In which grade is actual homework most exceeded by the recommended amount?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q2 (p75) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which fact is most significant?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q3 (p81) #3",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Fora family holiday, where would it be best to stay?"
+ },
+ {
+  "ref": "Informational Text - Advanced Q3 (p81) #4",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "We can infer from the The Tikki Palace that it"
+ },
+ {
+  "ref": "Informational Text - Advanced Q3 (p81) #7",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "The poster implies that"
+ },
+ {
+  "ref": "Informational Text - Advanced Q3 (p81) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "What conclusion can you draw from the poster?"
+ },
+ {
+  "ref": "Reading - Basic Q1 (p147) #11",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "We can infer from the map that Petertown:"
+ },
+ {
+  "ref": "Reading - Basic Q1 (p147) #12",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which of the following statements is FALSE?"
+ },
+ {
+  "ref": "Reading - Basic Q1 (p147) #13",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Their path ran parallel to the road but some hundred feet higher. What is meant by “parallel”?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #11",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which feature is at 25 degrees south, 70 degrees west?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #12",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which of the following statements can we infer to be TRUE?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #13",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Look at this word: “discovery”. What is the root word?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #23",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "What is the main idea of the poster?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #24",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "As it is used in the poster, what does “rethink” mean?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #25",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which suffix makes “dark” into a noun?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #29",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Based on the chart, which statement is probably FALSE?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #30",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which of the following is NOT implied by the chart?"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #31",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "The information can be transmitted to your phone by wireless technology. Which choice can replace “transmitted"
+ },
+ {
+  "ref": "Reading - Proficient Q1 (p165) #34",
+  "reason": "options could not be recovered from the scan (3 of 4)",
+  "stem": "How many affixes does the root of “internationally” have?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #8",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which statement is TRUE?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #9",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Who is the poster primarily aimed at?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #10",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "After the long wait, Jessica felt limp with relief: Tony was safe. Which choice can replace “limp” in this sen"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #20",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which statement is FALSE?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #21",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "What can we conclude from the chart about changes as children grow older?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #22",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which choice correctly shows the stress on the word “technological”?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #23",
+  "reason": "options could not be recovered from the scan (3 of 4)",
+  "stem": "Which choice is a traditional haiku?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #35",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "How far is it from Hong Kong Island to Hong Kong Airport?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #36",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which of these is the most northerly feature?"
+ },
+ {
+  "ref": "Reading - Advanced Q1 (p183) #37",
+  "reason": "stimulus is a visual (chart/map/table/poster) that cannot be shown as text",
+  "stem": "Which word rhymes with this one: /slahyt/?"
+ }
+]
