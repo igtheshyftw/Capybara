@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build a Sentence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   Build a Sentence — a working replica of the ETS-style
+   drag-into-the-blanks item used on the TOEFL.
+   Palette: test-delivery steel. Semantic green/red kept apart
+   from the accent so "selected" never reads as "correct".
+   ============================================================ */
+:root{
+  --ground:#d7dde4;
+  --paper:#ffffff;
+  --paper-2:#f3f6f9;
+  --well:#e8ecf1;
+  --chrome-a:#3a587a;
+  --chrome-b:#23374e;
+  --chrome-ink:#eef3f8;
+  --chrome-ink-2:#b9c9da;
+  --ink:#141c26;
+  --ink-2:#4a5867;
+  --ink-3:#6e7c8b;
+  --rule:#c2cad3;
+  --rule-strong:#8a97a6;
+  --tile:#eef2f7;
+  --tile-edge:#98a5b3;
+  --tile-hi:#ffffff;
+  --accent:#1d5fa8;
+  --accent-soft:#d8e7f7;
+  --ok:#1c6b46;
+  --ok-soft:#e2f0e9;
+  --no:#96271f;
+  --no-soft:#f7e4e2;
+  --warn:#8a5a10;
+  --shadow-tile:0 1px 0 rgba(20,28,38,.18);
+  --shadow-lift:0 10px 24px -8px rgba(20,28,38,.45);
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
+  --serif:"IBM Plex Serif",ui-serif,Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0f151c;
+    --paper:#18212b;
+    --paper-2:#1e2934;
+    --well:#141d26;
+    --chrome-a:#22364b;
+    --chrome-b:#16222f;
+    --chrome-ink:#dde8f2;
+    --chrome-ink-2:#8fa4b8;
+    --ink:#e7eef5;
+    --ink-2:#aebccb;
+    --ink-3:#8b9aa9;
+    --rule:#36444f;
+    --rule-strong:#5e7083;
+    --tile:#27333f;
+    --tile-edge:#546575;
+    --tile-hi:#32404e;
+    --accent:#74aae8;
+    --accent-soft:#20344a;
+    --ok:#6cc39a;
+    --ok-soft:#173029;
+    --no:#e78e86;
+    --no-soft:#331f1e;
+    --warn:#d7a955;
+    --shadow-tile:0 1px 0 rgba(0,0,0,.5);
+    --shadow-lift:0 10px 24px -8px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0f151c; --paper:#18212b; --paper-2:#1e2934; --well:#141d26;
+  --chrome-a:#22364b; --chrome-b:#16222f; --chrome-ink:#dde8f2; --chrome-ink-2:#8fa4b8;
+  --ink:#e7eef5; --ink-2:#aebccb; --ink-3:#8b9aa9;
+  --rule:#36444f; --rule-strong:#5e7083;
+  --tile:#27333f; --tile-edge:#546575; --tile-hi:#32404e;
+  --accent:#74aae8; --accent-soft:#20344a;
+  --ok:#6cc39a; --ok-soft:#173029; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
+  --shadow-tile:0 1px 0 rgba(0,0,0,.5);
+  --shadow-lift:0 10px 24px -8px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit}
+
+/* ---------- command bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:40;
+  background:linear-gradient(180deg,var(--chrome-a),var(--chrome-b));
+  color:var(--chrome-ink);
+  border-bottom:1px solid rgba(0,0,0,.45);
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:8px 16px;
+}
+.brand{display:flex;align-items:baseline;gap:8px;margin-right:auto;min-width:0}
+.brand b{font-weight:600;letter-spacing:.01em;font-size:15px}
+.brand .sec{
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--chrome-ink-2);
+}
+.meters{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.meter{
+  font-family:var(--mono);font-variant-numeric:tabular-nums;
+  font-size:12.5px;letter-spacing:.02em;
+  background:rgba(0,0,0,.26);border:1px solid rgba(255,255,255,.14);
+  border-radius:3px;padding:5px 9px;color:var(--chrome-ink);
+}
+.meter.low{color:#ffd9d2;border-color:rgba(255,150,140,.6);background:rgba(120,20,10,.45)}
+.meter.hidden-time{color:var(--chrome-ink-2)}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+.cbtn{
+  appearance:none;cursor:pointer;
+  background:linear-gradient(180deg,#f6f8fa,#d8dee6);
+  color:#1b2735;border:1px solid #7d8b99;border-radius:3px;
+  padding:5px 13px;font-size:13px;font-weight:500;
+  box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 1px 1px rgba(0,0,0,.28);
+}
+.cbtn:hover{background:linear-gradient(180deg,#ffffff,#e4e9ef)}
+.cbtn:active{box-shadow:0 1px 2px rgba(0,0,0,.35) inset;transform:translateY(1px)}
+.cbtn[disabled]{opacity:.42;cursor:default;box-shadow:none;transform:none}
+.cbtn.primary{
+  background:linear-gradient(180deg,#4b7fba,#28568c);color:#fff;border-color:#1c3f68;
+  box-shadow:0 1px 0 rgba(255,255,255,.3) inset,0 1px 1px rgba(0,0,0,.3);
+}
+.cbtn.primary:hover{background:linear-gradient(180deg,#5a8cc6,#2e6099)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar :focus-visible{outline-color:#ffffff}
+
+/* ---------- directions strip ---------- */
+.strip{
+  background:var(--paper-2);border-bottom:1px solid var(--rule);
+  padding:10px 16px;
+}
+.strip-in{max-width:880px;margin:0 auto;display:flex;gap:12px;align-items:flex-start}
+.strip .dirlabel{
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;padding-top:2px;white-space:nowrap;
+}
+.strip p{margin:0;color:var(--ink-2);font-size:13.5px;max-width:66ch}
+
+/* ---------- test page ---------- */
+main{padding:22px 16px 120px}
+.page{
+  max-width:880px;margin:0 auto;background:var(--paper);
+  border:1px solid var(--rule);border-radius:2px;
+  box-shadow:0 1px 3px rgba(20,28,38,.08);
+}
+.qhead{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:16px 26px 0;flex-wrap:wrap;
+}
+.qnum{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  color:var(--ink-3);text-transform:uppercase;
+}
+.qtag{
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);background:var(--accent-soft);
+  border-radius:2px;padding:3px 8px;
+}
+.prompt{
+  margin:12px 26px 0;font-family:var(--serif);font-size:17px;line-height:1.55;
+  color:var(--ink);
+}
+.prompt em{font-style:italic}
+
+/* ---------- the ruled answer line ---------- */
+.lineWrap{padding:20px 26px 22px;}
+.line{
+  display:flex;flex-wrap:wrap;align-items:flex-end;
+  gap:10px 12px;
+  min-height:64px;
+  padding:14px 4px 6px;
+}
+.slot{
+  position:relative;display:flex;align-items:flex-end;justify-content:center;
+  min-width:118px;min-height:46px;
+  border-bottom:2px solid var(--rule-strong);
+  border-radius:2px 2px 0 0;
+  padding:0 2px 3px;
+  transition:background .12s ease,border-color .12s ease;
+  cursor:pointer;
+}
+.slot[data-empty="1"]::after{
+  content:attr(data-ord);
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:var(--mono);font-size:12px;color:var(--ink-3);opacity:.5;
+}
+.slot.over{background:var(--accent-soft);border-bottom-color:var(--accent)}
+.slot.armed{background:var(--accent-soft);border-bottom-color:var(--accent)}
+.period{
+  font-family:var(--serif);font-size:20px;line-height:1;
+  padding-bottom:6px;color:var(--ink);
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- tiles ---------- */
+.tile{
+  font-family:var(--serif);font-size:16.5px;line-height:1.25;
+  background:linear-gradient(180deg,var(--tile-hi),var(--tile));
+  border:1px solid var(--tile-edge);border-radius:3px;
+  padding:7px 12px;margin:0;
+  box-shadow:var(--shadow-tile);
+  cursor:grab;user-select:none;touch-action:none;
+  text-align:center;color:var(--ink);
+  display:inline-block;max-width:100%;
+}
+.tile:hover{border-color:var(--accent)}
+.tile.sel{
+  border-color:var(--accent);background:var(--accent-soft);
+  box-shadow:0 0 0 2px var(--accent-soft),var(--shadow-tile);
+}
+.tile.lifting{opacity:.3}
+.tile.ghost{
+  position:fixed;z-index:90;pointer-events:none;cursor:grabbing;
+  box-shadow:var(--shadow-lift);transform:rotate(-.6deg);
+  border-color:var(--accent);
+}
+.slot .tile{width:100%}
+
+/* ---------- bank ---------- */
+.bank-hd{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border-top:1px solid var(--rule);
+  padding:12px 26px 0;flex-wrap:wrap;
+}
+.bank-hd h2{
+  margin:0;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;
+}
+.tools{display:flex;gap:6px}
+.tbtn{
+  appearance:none;cursor:pointer;background:transparent;
+  border:1px solid var(--rule);border-radius:3px;color:var(--ink-2);
+  padding:3px 10px;font-size:12px;
+}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn[disabled]{opacity:.4;cursor:default;border-color:var(--rule);color:var(--ink-3)}
+.bank{
+  margin:10px 26px 24px;padding:14px;
+  background:var(--well);border:1px solid var(--rule);border-radius:3px;
+  display:flex;flex-wrap:wrap;gap:10px;min-height:76px;align-items:flex-start;
+  transition:background .12s ease;
+}
+.bank.over{background:var(--accent-soft);border-color:var(--accent)}
+.bank .empty{color:var(--ink-3);font-size:13px;font-style:italic;padding:6px 2px}
+
+/* ---------- footer status ---------- */
+.foot{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:var(--paper);border-top:1px solid var(--rule);
+  padding:9px 16px;
+}
+.foot-in{
+  max-width:880px;margin:0 auto;display:flex;align-items:center;
+  gap:12px;flex-wrap:wrap;justify-content:space-between;
+}
+.status{font-size:13px;color:var(--ink-2)}
+.status b{color:var(--ink);font-weight:600}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{
+  width:22px;height:22px;border-radius:2px;border:1px solid var(--rule);
+  background:var(--paper-2);font-family:var(--mono);font-size:10.5px;
+  color:var(--ink-3);cursor:pointer;display:grid;place-items:center;padding:0;
+}
+.dot[data-done="1"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.dot[data-cur="1"]{outline:2px solid var(--ink);outline-offset:1px}
+
+/* ---------- review + results ---------- */
+.panel{max-width:880px;margin:0 auto}
+.panel h1{
+  font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 6px;
+  text-wrap:balance;
+}
+.panel .lede{margin:0 0 20px;color:var(--ink-2);max-width:64ch}
+table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px}
+.tableWrap{overflow-x:auto;border:1px solid var(--rule)}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule)}
+th{
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);background:var(--paper-2);font-weight:600;
+}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--accent-soft)}
+td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
+.pill{
+  display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;border-radius:2px;padding:2px 7px;
+}
+.pill.done{background:var(--accent-soft);color:var(--accent)}
+.pill.part{background:var(--no-soft);color:var(--warn)}
+.pill.none{background:var(--well);color:var(--ink-3)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.no{background:var(--no-soft);color:var(--no)}
+
+.score{
+  display:flex;gap:24px;align-items:baseline;flex-wrap:wrap;
+  background:var(--paper);border:1px solid var(--rule);
+  border-left:4px solid var(--accent);
+  padding:18px 22px;margin-bottom:22px;
+}
+.score .big{
+  font-family:var(--mono);font-size:38px;line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.score .cap{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.rep{
+  background:var(--paper);border:1px solid var(--rule);
+  border-left:4px solid var(--rule-strong);padding:16px 20px;margin-bottom:12px;
+}
+.rep.right{border-left-color:var(--ok)}
+.rep.wrong{border-left-color:var(--no)}
+.rep-hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+.rep-hd .n{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.rep-hd .tgt{font-size:13px;font-weight:600;color:var(--ink);margin-right:auto}
+.sent{
+  font-family:var(--serif);font-size:16px;line-height:1.6;margin:0 0 4px;
+  color:var(--ink);
+}
+.sent.bad{color:var(--no)}
+.sent.alt{color:var(--ink-2)}
+.slab{
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;margin:12px 0 2px;
+}
+.why{margin:10px 0 0;font-size:14px;color:var(--ink-2);max-width:70ch}
+.why i{font-family:var(--serif);font-style:italic;color:var(--ink)}
+
+/* ---------- help overlay ---------- */
+.scrim{
+  position:fixed;inset:0;z-index:60;background:rgba(14,22,32,.62);
+  display:grid;place-items:center;padding:20px;
+}
+.modal{
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  max-width:620px;width:100%;max-height:86vh;overflow:auto;
+  box-shadow:var(--shadow-lift);
+}
+.modal header{
+  background:linear-gradient(180deg,var(--chrome-a),var(--chrome-b));
+  color:var(--chrome-ink);padding:11px 20px;font-weight:600;font-size:14px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.modal .body{padding:20px}
+.modal h3{
+  margin:18px 0 6px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;
+}
+.modal h3:first-child{margin-top:0}
+.modal p,.modal li{font-size:14px;color:var(--ink-2);margin:0 0 8px}
+.modal ul{margin:0 0 8px;padding-left:20px}
+.modal kbd{
+  font-family:var(--mono);font-size:11.5px;background:var(--well);
+  border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;
+  padding:1px 5px;color:var(--ink);
+}
+.modal footer{padding:0 20px 20px;display:flex;justify-content:flex-end;gap:8px}
+
+.sr{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;
+}
+@media (max-width:560px){
+  .brand .sec{display:none}
+  .prompt,.qhead,.bank-hd{padding-left:16px;padding-right:16px}
+  .lineWrap{padding:16px}
+  .bank{margin-left:16px;margin-right:16px}
+  .slot{min-width:96px}
+  .tile{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand">
+    <b>Build a Sentence</b>
+    <span class="sec">Writing &middot; Section 1 of 1</span>
+  </div>
+  <div class="meters">
+    <span class="meter" id="clock">15:00</span>
+    <span class="meter" id="counter">Question 1 of 12</span>
+  </div>
+  <div class="btns">
+    <button class="cbtn" id="bTime">Hide Time</button>
+    <button class="cbtn" id="bHelp">Help</button>
+    <button class="cbtn" id="bReview">Review</button>
+    <button class="cbtn" id="bBack">Back</button>
+    <button class="cbtn primary" id="bNext">Next</button>
+  </div>
+</div>
+
+<div class="strip" id="strip">
+  <div class="strip-in">
+    <span class="dirlabel">Directions</span>
+    <p>Build a grammatically correct sentence using <b>all</b> of the answer choices. Drag a choice onto a blank, or select a choice and then select a blank. To move a choice, drag it to a different blank or back to the answer-choice area. Some sentences can be built in more than one correct way. The capital letter and the final period are supplied; internal punctuation is not shown.</p>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<div class="foot" id="foot"></div>
+
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   Items. Each chunk is a word group the test-taker orders.
+   `orders` lists every arrangement scored as correct.
+   `display` is the properly punctuated sentence, shown only
+   in the score report.
+   ============================================================ */
+const ITEMS = [
+  {
+    target:"Subject–verb agreement across an intervening phrase",
+    chunks:["the results","of the long-term experiment","were","far more conclusive","than the researchers had expected"],
+    orders:[[0,1,2,3,4]],
+    display:"The results of the long-term experiment were far more conclusive than the researchers had expected.",
+    why:"The subject is <i>the results</i>, not <i>experiment</i>, so the plural verb <i>were</i> is required. The prepositional phrase <i>of the long-term experiment</i> separates the subject from its verb without changing the agreement."
+  },
+  {
+    target:"Relative clause modifying the subject",
+    chunks:["scientists who study glacial movement","rely on satellite imagery","to track changes","that occur over decades"],
+    orders:[[0,1,2,3],[2,3,0,1]],
+    display:"Scientists who study glacial movement rely on satellite imagery to track changes that occur over decades.",
+    alt:"To track changes that occur over decades, scientists who study glacial movement rely on satellite imagery.",
+    why:"<i>who study glacial movement</i> is a relative clause and must sit immediately after the noun it modifies. <i>that occur over decades</i> must likewise follow <i>changes</i>. The purpose infinitive can open the sentence or close it."
+  },
+  {
+    target:"Reduced participial clause in initial position",
+    chunks:["founded in 1867","the university","has produced","more Nobel laureates","than any other institution in the region"],
+    orders:[[0,1,2,3,4]],
+    display:"Founded in 1867, the university has produced more Nobel laureates than any other institution in the region.",
+    why:"<i>Founded in 1867</i> is a reduced passive clause with no subject of its own, so the noun it describes — <i>the university</i> — has to come directly after it. Anything else leaves the participle dangling."
+  },
+  {
+    target:"Inversion after a negative adverbial",
+    chunks:["rarely","has a single documentary","generated","such intense debate","among economists"],
+    orders:[[0,1,2,3,4]],
+    display:"Rarely has a single documentary generated such intense debate among economists.",
+    why:"When a limiting adverb such as <i>rarely</i>, <i>seldom</i> or <i>never</i> opens a sentence, the subject and the auxiliary invert: <i>has a single documentary generated</i>, not <i>a single documentary has generated</i>."
+  },
+  {
+    target:"Parallel structure with correlative conjunctions",
+    chunks:["the new policy is intended","not only to reduce","carbon emissions","but also to lower","household energy costs"],
+    orders:[[0,1,2,3,4]],
+    display:"The new policy is intended not only to reduce carbon emissions but also to lower household energy costs.",
+    why:"<i>not only … but also</i> is a correlative pair, and the two halves must be grammatically parallel — here an infinitive phrase on each side: <i>to reduce carbon emissions</i> / <i>to lower household energy costs</i>."
+  },
+  {
+    target:"Passive voice with an agent and a time clause",
+    chunks:["the manuscript was discovered","by a graduate student","while she was cataloging","a collection of medieval letters"],
+    orders:[[0,1,2,3],[2,3,0,1]],
+    display:"The manuscript was discovered by a graduate student while she was cataloging a collection of medieval letters.",
+    alt:"While she was cataloging a collection of medieval letters, the manuscript was discovered by a graduate student.",
+    why:"A passive verb takes its agent in a <i>by</i> phrase placed immediately after it. The <i>while</i> clause carries its own subject, so it may stand before or after the main clause."
+  },
+  {
+    target:"Noun clause as the subject",
+    chunks:["what the survey revealed","about commuting habits","surprised","even the city's most experienced planners"],
+    orders:[[0,1,2,3]],
+    display:"What the survey revealed about commuting habits surprised even the city's most experienced planners.",
+    why:"A noun clause beginning with <i>what</i> can serve as the whole subject of a sentence, and it counts as singular: <i>surprised</i> takes it as its subject. No additional subject is needed before the verb."
+  },
+  {
+    target:"Past unreal conditional",
+    chunks:["if the bridge had been inspected regularly","the structural damage","would have been detected","long before the collapse"],
+    orders:[[0,1,2,3],[1,2,3,0]],
+    display:"If the bridge had been inspected regularly, the structural damage would have been detected long before the collapse.",
+    alt:"The structural damage would have been detected long before the collapse if the bridge had been inspected regularly.",
+    why:"The past unreal conditional pairs <i>if</i> + past perfect (<i>had been inspected</i>) with <i>would have</i> + past participle (<i>would have been detected</i>). Either clause may come first."
+  },
+  {
+    target:"Gerund after a preposition",
+    chunks:["many technology firms","attribute their recent growth","to investing heavily","in the training of their employees"],
+    orders:[[0,1,2,3]],
+    display:"Many technology firms attribute their recent growth to investing heavily in the training of their employees.",
+    why:"<i>attribute X to Y</i> puts a preposition before the second element, and a preposition must be followed by a gerund rather than an infinitive: <i>to investing</i>, never <i>to invest</i>."
+  },
+  {
+    target:"Concessive clause with a gerund subject",
+    chunks:["although the vaccine proved highly effective in trials","distributing it","to remote communities","remained a considerable challenge"],
+    orders:[[0,1,2,3],[1,2,3,0]],
+    display:"Although the vaccine proved highly effective in trials, distributing it to remote communities remained a considerable challenge.",
+    alt:"Distributing it to remote communities remained a considerable challenge although the vaccine proved highly effective in trials.",
+    why:"<i>Although</i> introduces a subordinate clause, so the sentence still needs an independent clause with its own subject. Here that subject is the gerund phrase <i>distributing it to remote communities</i>."
+  },
+  {
+    target:"Double comparative",
+    chunks:["the more closely","the two species are compared","the more apparent","their common ancestry becomes"],
+    orders:[[0,1,2,3]],
+    display:"The more closely the two species are compared, the more apparent their common ancestry becomes.",
+    why:"The <i>the more … the more</i> pattern needs a full clause after each half, and the comparative phrase leads each half: <i>the more apparent their common ancestry becomes</i>, not <i>their common ancestry becomes the more apparent</i>."
+  },
+  {
+    target:"Appositive between subject and verb",
+    chunks:["Marie Tharp","a geologist and oceanographic cartographer","produced the first detailed map","of the ocean floor"],
+    orders:[[0,1,2,3]],
+    display:"Marie Tharp, a geologist and oceanographic cartographer, produced the first detailed map of the ocean floor.",
+    why:"An appositive renames the noun beside it and sits between the subject and the verb, enclosed by commas. Removing it must leave a complete sentence: <i>Marie Tharp produced the first detailed map of the ocean floor.</i>"
+  }
+];
+
+const TOTAL_SECONDS = 15 * 60;
+
+/* deterministic shuffle so the bank never opens in the answer order */
+function shuffled(n, seed){
+  const a = Array.from({length:n}, (_,i)=>i);
+  let s = seed * 9301 + 49297;
+  for (let i = a.length - 1; i > 0; i--){
+    s = (s * 9301 + 49297) % 233280;
+    const j = Math.floor((s / 233280) * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  // never hand back the correct order
+  if (a.every((v,i)=>v===i)) { [a[0], a[1]] = [a[1], a[0]]; }
+  return a;
+}
+
+const S = {
+  screen:"test",
+  idx:0,
+  slots: ITEMS.map(it => it.chunks.map(()=>null)),
+  bankOrder: ITEMS.map((it,i) => shuffled(it.chunks.length, i + 3)),
+  history: ITEMS.map(()=>[]),
+  seconds: TOTAL_SECONDS,
+  timeHidden:false,
+  sel:null,          // chunk index currently picked up
+  timedOut:false
+};
+
+/* ---------- element helpers ---------- */
+const $ = id => document.getElementById(id);
+const main = $("main"), foot = $("foot"), live = $("live");
+const say = m => { live.textContent = m; };
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+const item = () => ITEMS[S.idx];
+const slots = () => S.slots[S.idx];
+const bankList = () => S.bankOrder[S.idx].filter(c => !slots().includes(c));
+const filled = () => slots().filter(v => v !== null).length;
+const complete = i => S.slots[i].every(v => v !== null);
+const touched = i => S.slots[i].some(v => v !== null);
+const isRight = i =>
+  complete(i) && ITEMS[i].orders.some(o => o.every((v,p) => S.slots[i][p] === v));
+
+/* ---------- mutations ---------- */
+function snapshot(){ S.history[S.idx].push(slots().slice()); }
+function undo(){
+  const h = S.history[S.idx];
+  if (!h.length) return;
+  S.slots[S.idx] = h.pop();
+  S.sel = null;
+  render();
+  say("Undone.");
+}
+function clearAll(){
+  if (!touched(S.idx)) return;
+  snapshot();
+  S.slots[S.idx] = item().chunks.map(()=>null);
+  S.sel = null;
+  render();
+  say("All blanks cleared.");
+}
+function place(chunk, pos){
+  const sl = slots();
+  if (sl[pos] === chunk) { S.sel = null; render(); return; }
+  snapshot();
+  const from = sl.indexOf(chunk);
+  const displaced = sl[pos];
+  if (from !== -1) sl[from] = null;
+  sl[pos] = chunk;
+  if (displaced !== null && from !== -1) sl[from] = displaced;   // straight swap
+  S.sel = null;
+  render({focus:`.slot[data-i="${pos}"] .tile`});
+  say(`${esc(item().chunks[chunk])} placed in blank ${pos + 1}.`);
+}
+function toBank(chunk){
+  const sl = slots();
+  const from = sl.indexOf(chunk);
+  if (from === -1) { S.sel = null; render(); return; }
+  snapshot();
+  sl[from] = null;
+  S.sel = null;
+  render({focus:`.bank .tile[data-c="${chunk}"]`});
+  say(`${esc(item().chunks[chunk])} returned to the answer choices.`);
+}
+
+/* ============================================================
+   Rendering
+   ============================================================ */
+function render(opts){
+  opts = opts || {};
+  if (S.screen === "test") renderTest();
+  else if (S.screen === "review") renderReview();
+  else renderResults();
+  renderChrome();
+  if (opts.focus){
+    const el = document.querySelector(opts.focus);
+    if (el) el.focus();
+  }
+}
+
+function renderChrome(){
+  const onTest = S.screen === "test";
+  $("strip").style.display = onTest ? "" : "none";
+  $("counter").textContent = onTest
+    ? `Question ${S.idx + 1} of ${ITEMS.length}`
+    : (S.screen === "review" ? "Review" : "Score report");
+  $("bBack").disabled = !onTest || S.idx === 0;
+  $("bReview").disabled = S.screen === "results";
+  $("bNext").textContent =
+    S.screen === "results" ? "Restart" :
+    (S.screen === "review" ? "End Section" :
+     (S.idx === ITEMS.length - 1 ? "Review" : "Next"));
+  const scored = S.screen === "results";
+  $("bTime").style.display = scored ? "none" : "";
+  const c = $("clock");
+  c.style.display = scored ? "none" : "";
+  c.textContent = S.timeHidden ? "Time ──:──" : fmt(S.seconds);
+  c.className = "meter" + (S.timeHidden ? " hidden-time" : (S.seconds <= 60 ? " low" : ""));
+  $("bTime").textContent = S.timeHidden ? "Show Time" : "Hide Time";
+}
+
+function fmt(s){
+  const m = Math.floor(Math.max(0,s) / 60), r = Math.max(0,s) % 60;
+  return `${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`;
+}
+
+function tileHTML(c, where, pos){
+  const it = item();
+  let text = it.chunks[c];
+  if (where === "slot" && pos === 0) text = cap(text);
+  const sel = S.sel === c ? " sel" : "";
+  const label = where === "slot"
+    ? `${text}, in blank ${pos + 1}. Press Enter to pick up.`
+    : `${text}, answer choice. Press Enter to pick up.`;
+  return `<button type="button" class="tile${sel}" data-c="${c}" data-where="${where}"${
+    pos !== undefined ? ` data-pos="${pos}"` : ""
+  } aria-label="${esc(label)}">${esc(text)}</button>`;
+}
+
+function renderTest(){
+  const it = item();
+  const sl = slots();
+  const bank = bankList();
+
+  const line = sl.map((c,i) => {
+    const armed = S.sel !== null && c === null ? " armed" : "";
+    return `<div class="slot${armed}" data-i="${i}" data-empty="${c===null?1:0}" data-ord="${i+1}" tabindex="0" role="button" aria-label="Blank ${i+1} of ${sl.length}${c===null?", empty":", contains "+esc(it.chunks[c])}">${
+      c === null ? "" : tileHTML(c, "slot", i)
+    }</div>`;
+  }).join("");
+
+  main.innerHTML = `
+    <div class="page">
+      <div class="qhead">
+        <span class="qnum">Question ${S.idx + 1} of ${ITEMS.length}</span>
+        <span class="qtag">${it.chunks.length} answer choices</span>
+      </div>
+      <p class="prompt">Arrange the answer choices to build a grammatically correct sentence.</p>
+      <div class="lineWrap">
+        <div class="line" id="line">${line}<span class="period">.</span></div>
+      </div>
+      <div class="bank-hd">
+        <h2>Answer choices</h2>
+        <div class="tools">
+          <button class="tbtn" id="bUndo" ${S.history[S.idx].length ? "" : "disabled"}>Undo</button>
+          <button class="tbtn" id="bClear" ${touched(S.idx) ? "" : "disabled"}>Clear</button>
+        </div>
+      </div>
+      <div class="bank" id="bank" role="group" aria-label="Answer choices not yet used">${
+        bank.length
+          ? bank.map(c => tileHTML(c, "bank")).join("")
+          : `<span class="empty">All answer choices have been used.</span>`
+      }</div>
+    </div>`;
+
+  $("bUndo").onclick = undo;
+  $("bClear").onclick = clearAll;
+  wireDnD();
+  renderFoot();
+}
+
+function renderFoot(){
+  if (S.screen === "results"){ foot.innerHTML = ""; foot.style.display = "none"; return; }
+  foot.style.display = "";
+  const dots = ITEMS.map((_,i) =>
+    `<button class="dot" data-go="${i}" data-done="${complete(i)?1:0}" data-cur="${i===S.idx&&S.screen==='test'?1:0}" title="Question ${i+1}" aria-label="Go to question ${i+1}">${i+1}</button>`
+  ).join("");
+  const n = ITEMS.filter((_,i)=>complete(i)).length;
+  foot.innerHTML = `<div class="foot-in">
+    <span class="status"><b>${n}</b> of ${ITEMS.length} sentences built${
+      S.screen === "test" ? ` &middot; blank ${filled()} of ${slots().length} filled on this question` : ""
+    }</span>
+    <div class="dots">${dots}</div>
+  </div>`;
+  foot.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+    S.idx = +b.dataset.go; S.screen = "test"; S.sel = null; render();
+  });
+}
+
+function renderReview(){
+  const rows = ITEMS.map((it,i) => {
+    const st = complete(i) ? `<span class="pill done">Answered</span>`
+      : touched(i) ? `<span class="pill part">Incomplete</span>`
+      : `<span class="pill none">Not answered</span>`;
+    return `<tr data-go="${i}"><td class="n">${i+1}</td><td>${st}</td><td>${
+      S.slots[i].filter(v=>v!==null).length} of ${it.chunks.length} blanks filled</td></tr>`;
+  }).join("");
+  main.innerHTML = `<div class="panel">
+    <h1>Review your answers</h1>
+    <p class="lede">Select a question to return to it. When you end the section your sentences are scored and you will not be able to change them.</p>
+    <div class="tableWrap"><table>
+      <thead><tr><th>No.</th><th>Status</th><th>Progress</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+  </div>`;
+  main.querySelectorAll("[data-go]").forEach(tr => tr.onclick = () => {
+    S.idx = +tr.dataset.go; S.screen = "test"; render();
+  });
+  renderFoot();
+}
+
+function renderResults(){
+  const right = ITEMS.filter((_,i)=>isRight(i)).length;
+  const cards = ITEMS.map((it,i) => {
+    const ok = isRight(i);
+    const mine = complete(i)
+      ? cap(S.slots[i].map(c => it.chunks[c]).join(" ")) + "."
+      : null;
+    return `<div class="rep ${ok?"right":"wrong"}">
+      <div class="rep-hd">
+        <span class="n">${i+1}</span>
+        <span class="tgt">${esc(it.target)}</span>
+        <span class="pill ${ok?"ok":"no"}">${ok?"Correct":(mine?"Incorrect":"No response")}</span>
+      </div>
+      ${mine ? `<div class="slab">Your sentence</div><p class="sent${ok?"":" bad"}">${esc(mine)}</p>` : `<p class="sent bad">You did not build this sentence.</p>`}
+      ${ok ? "" : `<div class="slab">Correct sentence</div><p class="sent">${esc(it.display)}</p>`}
+      ${it.alt ? `<div class="slab">Also accepted</div><p class="sent alt">${esc(it.alt)}</p>` : ""}
+      <p class="why">${it.why}</p>
+    </div>`;
+  }).join("");
+  main.innerHTML = `<div class="panel">
+    <h1>Score report</h1>
+    <p class="lede">${S.timedOut ? "Time expired and the section was submitted automatically. " : ""}Each sentence is scored right or wrong; a sentence counts as correct only when every word group is in a grammatical order.</p>
+    <div class="score">
+      <div><div class="big">${right}/${ITEMS.length}</div><div class="cap">Sentences correct</div></div>
+      <div><div class="big">${Math.round(right/ITEMS.length*100)}%</div><div class="cap">Accuracy</div></div>
+      <div><div class="big">${fmt(TOTAL_SECONDS - S.seconds)}</div><div class="cap">Time used</div></div>
+    </div>
+    ${cards}
+  </div>`;
+  renderFoot();
+}
+
+/* ============================================================
+   Drag, click-to-place, keyboard
+   ============================================================ */
+let drag = null;
+
+function wireDnD(){
+  const line = $("line"), bank = $("bank");
+
+  document.querySelectorAll(".tile").forEach(t => {
+    t.addEventListener("pointerdown", onPointerDown);
+    t.addEventListener("click", e => {
+      e.stopPropagation();
+      if (drag && drag.moved) return;
+      const c = +t.dataset.c;
+      if (S.sel === c){ S.sel = null; render(); say("Selection cancelled."); return; }
+      if (S.sel !== null){                       // swap two selected tiles
+        const target = t.dataset.where === "slot" ? +t.dataset.pos : null;
+        if (target !== null){ place(S.sel, target); return; }
+        toBank(S.sel); return;
+      }
+      S.sel = c;
+      render({focus:`.tile[data-c="${c}"]`});
+      say(`${item().chunks[c]} selected. Choose a blank.`);
+    });
+    t.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " "){ e.preventDefault(); t.click(); }
+    });
+  });
+
+  line.querySelectorAll(".slot").forEach(s => {
+    const act = () => {
+      const pos = +s.dataset.i;
+      if (S.sel !== null){ place(S.sel, pos); return; }
+      const occ = slots()[pos];
+      if (occ !== null){
+        S.sel = occ;
+        render({focus:`.slot[data-i="${pos}"] .tile`});
+        say(`${item().chunks[occ]} picked up. Choose another blank, or press Backspace to return it.`);
+      }
+    };
+    s.addEventListener("click", act);
+    s.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " "){ e.preventDefault(); act(); }
+      if (e.key === "Backspace" || e.key === "Delete"){
+        e.preventDefault();
+        const occ = slots()[+s.dataset.i];
+        if (occ !== null) toBank(occ);
+      }
+    });
+  });
+
+  bank.addEventListener("click", () => {
+    if (S.sel !== null && slots().includes(S.sel)) toBank(S.sel);
+    else if (S.sel !== null){ S.sel = null; render(); }
+  });
+}
+
+function onPointerDown(e){
+  if (e.button !== undefined && e.button !== 0) return;
+  const el = e.currentTarget;
+  drag = {
+    chunk:+el.dataset.c, el, moved:false,
+    x0:e.clientX, y0:e.clientY, ghost:null, dx:0, dy:0, over:null
+  };
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("pointerup", onPointerUp, {once:true});
+  window.addEventListener("pointercancel", onPointerUp, {once:true});
+}
+
+function onPointerMove(e){
+  if (!drag) return;
+  if (!drag.moved){
+    if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 5) return;
+    drag.moved = true;
+    const r = drag.el.getBoundingClientRect();
+    drag.dx = drag.x0 - r.left;
+    drag.dy = drag.y0 - r.top;
+    const g = drag.el.cloneNode(true);
+    g.className = "tile ghost";
+    g.style.width = r.width + "px";
+    document.body.appendChild(g);
+    drag.ghost = g;
+    drag.el.classList.add("lifting");
+    document.body.style.cursor = "grabbing";
+  }
+  drag.ghost.style.left = (e.clientX - drag.dx) + "px";
+  drag.ghost.style.top  = (e.clientY - drag.dy) + "px";
+
+  const under = document.elementFromPoint(e.clientX, e.clientY);
+  const zone = under && under.closest(".slot, .bank");
+  if (zone !== drag.over){
+    if (drag.over) drag.over.classList.remove("over");
+    if (zone) zone.classList.add("over");
+    drag.over = zone;
+  }
+}
+
+function onPointerUp(){
+  window.removeEventListener("pointermove", onPointerMove);
+  if (!drag) return;
+  const d = drag;
+  drag = null;
+  document.body.style.cursor = "";
+  if (d.ghost) d.ghost.remove();
+  d.el.classList.remove("lifting");
+  if (d.over) d.over.classList.remove("over");
+  if (!d.moved) return;                      // a plain click; the click handler runs
+  if (!d.over) { render(); return; }         // dropped nowhere — snaps back
+  if (d.over.classList.contains("bank")) toBank(d.chunk);
+  else place(d.chunk, +d.over.dataset.i);
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){
+    if (document.querySelector(".scrim")) { closeHelp(); return; }
+    if (S.sel !== null){ S.sel = null; render(); say("Selection cancelled."); }
+  }
+});
+
+/* ============================================================
+   Navigation, timer, help
+   ============================================================ */
+$("bBack").onclick = () => {
+  if (S.screen === "test" && S.idx > 0){ S.idx--; S.sel = null; render(); }
+};
+$("bNext").onclick = () => {
+  if (S.screen === "results"){ restart(); return; }
+  if (S.screen === "review"){ endSection(); return; }
+  if (S.idx === ITEMS.length - 1){ S.screen = "review"; S.sel = null; render(); return; }
+  S.idx++; S.sel = null; render();
+};
+$("bReview").onclick = () => {
+  if (S.screen === "results") return;
+  S.screen = S.screen === "review" ? "test" : "review";
+  S.sel = null; render();
+};
+$("bTime").onclick = () => { S.timeHidden = !S.timeHidden; renderChrome(); };
+$("bHelp").onclick = openHelp;
+
+function endSection(){
+  const left = ITEMS.filter((_,i)=>!complete(i)).length;
+  const msg = left
+    ? `${left} sentence${left>1?"s are":" is"} not finished. End the section and score your answers?`
+    : "End the section and score your answers?";
+  if (!confirm(msg)) return;
+  clearInterval(tick);
+  S.screen = "results"; S.sel = null; render();
+  window.scrollTo(0,0);
+}
+function restart(){
+  S.screen = "test"; S.idx = 0; S.sel = null; S.timedOut = false;
+  S.slots = ITEMS.map(it => it.chunks.map(()=>null));
+  S.history = ITEMS.map(()=>[]);
+  S.seconds = TOTAL_SECONDS;
+  tick = setInterval(onTick, 1000);
+  render(); window.scrollTo(0,0);
+}
+
+let tick = setInterval(onTick, 1000);
+function onTick(){
+  if (S.screen === "results") return;
+  S.seconds--;
+  if (S.seconds <= 0){
+    S.seconds = 0;
+    clearInterval(tick);
+    S.timedOut = true;
+    S.screen = "results";
+    render(); window.scrollTo(0,0);
+    return;
+  }
+  renderChrome();
+}
+
+function openHelp(){
+  const d = document.createElement("div");
+  d.className = "scrim";
+  d.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Help">
+    <header><span>Help &mdash; Build a Sentence</span></header>
+    <div class="body">
+      <h3>What the question asks</h3>
+      <p>Every answer choice must be used exactly once, and the finished sentence must be grammatically correct. Some sentences have more than one correct arrangement; any correct one is scored as right.</p>
+      <h3>With a mouse or on a touchscreen</h3>
+      <ul>
+        <li>Drag an answer choice onto a blank.</li>
+        <li>Drag a choice already on a blank to another blank to trade their places, or back to the answer-choice area to remove it.</li>
+        <li>Or select a choice, then select a blank.</li>
+      </ul>
+      <h3>With the keyboard</h3>
+      <ul>
+        <li><kbd>Tab</kbd> moves between blanks and answer choices.</li>
+        <li><kbd>Enter</kbd> picks up a choice, then <kbd>Enter</kbd> on a blank places it.</li>
+        <li><kbd>Backspace</kbd> on a blank returns that choice.</li>
+        <li><kbd>Esc</kbd> cancels a selection.</li>
+      </ul>
+      <h3>Moving through the section</h3>
+      <p><b>Next</b> and <b>Back</b> move between questions; <b>Review</b> shows which sentences are unfinished. The section is scored when you end it or when the clock runs out. <b>Hide Time</b> conceals the clock without stopping it.</p>
+    </div>
+    <footer><button class="cbtn primary" id="bCloseHelp">Return to Question</button></footer>
+  </div>`;
+  document.body.appendChild(d);
+  d.addEventListener("click", e => { if (e.target === d) closeHelp(); });
+  $("bCloseHelp").onclick = closeHelp;
+  $("bCloseHelp").focus();
+}
+function closeHelp(){
+  const d = document.querySelector(".scrim");
+  if (d) d.remove();
+  $("bHelp").focus();
+}
+
+/* carry state across a republish when the host supports it */
+function boot(saved){
+  if (saved && saved.slots && saved.slots.length === ITEMS.length){
+    Object.assign(S, saved);
+    S.sel = null;
+  }
+  render();
+}
+if (window.claude && window.claude.hot){
+  window.claude.hot.snapshot(() => ({
+    screen:S.screen, idx:S.idx, slots:S.slots, history:S.history,
+    seconds:S.seconds, timeHidden:S.timeHidden, timedOut:S.timedOut
+  }));
+  window.claude.hot.ready ? window.claude.hot.ready(boot) : boot(window.claude.hot.data);
+} else {
+  boot(null);
+}
+</script>
+</body>
+</html>
