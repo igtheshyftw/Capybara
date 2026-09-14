@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
 <style>
 /* ============================================================
-   Build a Sentence — a working replica of the ETS-style
-   drag-into-the-blanks item used on the TOEFL.
-   Palette: test-delivery steel. Semantic green/red kept apart
-   from the accent so "selected" never reads as "correct".
+   Build a Sentence — a working replica of Task 1 of the
+   writing section on the 2026 TOEFL iBT: a short conversation,
+   a reply with blanks in it, and a bank of words and phrases
+   that may contain more options than there are blanks.
+   Palette: test-delivery steel.
    ============================================================ */
 :root{
   --ground:#d7dde4;
@@ -46,29 +47,13 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#0f151c;
-    --paper:#18212b;
-    --paper-2:#1e2934;
-    --well:#141d26;
-    --chrome-a:#22364b;
-    --chrome-b:#16222f;
-    --chrome-ink:#dde8f2;
-    --chrome-ink-2:#8fa4b8;
-    --ink:#e7eef5;
-    --ink-2:#aebccb;
-    --ink-3:#8b9aa9;
-    --rule:#36444f;
-    --rule-strong:#5e7083;
-    --tile:#27333f;
-    --tile-edge:#546575;
-    --tile-hi:#32404e;
-    --accent:#74aae8;
-    --accent-soft:#20344a;
-    --ok:#6cc39a;
-    --ok-soft:#173029;
-    --no:#e78e86;
-    --no-soft:#331f1e;
-    --warn:#d7a955;
+    --ground:#0f151c; --paper:#18212b; --paper-2:#1e2934; --well:#141d26;
+    --chrome-a:#22364b; --chrome-b:#16222f; --chrome-ink:#dde8f2; --chrome-ink-2:#8fa4b8;
+    --ink:#e7eef5; --ink-2:#aebccb; --ink-3:#8b9aa9;
+    --rule:#36444f; --rule-strong:#5e7083;
+    --tile:#27333f; --tile-edge:#546575; --tile-hi:#32404e;
+    --accent:#74aae8; --accent-soft:#20344a;
+    --ok:#6cc39a; --ok-soft:#173029; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
     --shadow-tile:0 1px 0 rgba(0,0,0,.5);
     --shadow-lift:0 10px 24px -8px rgba(0,0,0,.7);
   }
@@ -100,15 +85,11 @@ button{font:inherit;color:inherit}
   color:var(--chrome-ink);
   border-bottom:1px solid rgba(0,0,0,.45);
   box-shadow:0 1px 0 rgba(255,255,255,.12) inset;
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:8px 16px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 16px;
 }
 .brand{display:flex;align-items:baseline;gap:8px;margin-right:auto;min-width:0}
 .brand b{font-weight:600;letter-spacing:.01em;font-size:15px}
-.brand .sec{
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--chrome-ink-2);
-}
+.brand .sec{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--chrome-ink-2)}
 .meters{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .meter{
   font-family:var(--mono);font-variant-numeric:tabular-nums;
@@ -138,11 +119,8 @@ button{font:inherit;color:inherit}
 .bar :focus-visible{outline-color:#ffffff}
 
 /* ---------- directions strip ---------- */
-.strip{
-  background:var(--paper-2);border-bottom:1px solid var(--rule);
-  padding:10px 16px;
-}
-.strip-in{max-width:880px;margin:0 auto;display:flex;gap:12px;align-items:flex-start}
+.strip{background:var(--paper-2);border-bottom:1px solid var(--rule);padding:10px 16px}
+.strip-in{max-width:860px;margin:0 auto;display:flex;gap:12px;align-items:flex-start}
 .strip .dirlabel{
   font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-3);font-weight:600;padding-top:2px;white-space:nowrap;
@@ -152,88 +130,75 @@ button{font:inherit;color:inherit}
 /* ---------- test page ---------- */
 main{padding:22px 16px 120px}
 .page{
-  max-width:880px;margin:0 auto;background:var(--paper);
+  max-width:860px;margin:0 auto;background:var(--paper);
   border:1px solid var(--rule);border-radius:2px;
   box-shadow:0 1px 3px rgba(20,28,38,.08);
 }
 .qhead{
   display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  padding:16px 26px 0;flex-wrap:wrap;
+  padding:14px 26px;border-bottom:1px solid var(--rule);flex-wrap:wrap;
 }
-.qnum{
-  font-family:var(--mono);font-size:12px;letter-spacing:.08em;
-  color:var(--ink-3);text-transform:uppercase;
-}
-.qtag{
-  font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--accent);background:var(--accent-soft);
-  border-radius:2px;padding:3px 8px;
-}
-.prompt{
-  margin:12px 26px 0;font-family:var(--serif);font-size:17px;line-height:1.55;
-  color:var(--ink);
-}
-.prompt em{font-style:italic}
+.qnum{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase}
+.qhint{font-size:12.5px;color:var(--ink-3)}
 
-/* ---------- the ruled answer line ---------- */
-.lineWrap{padding:20px 26px 22px;}
-.line{
-  display:flex;flex-wrap:wrap;align-items:flex-end;
-  gap:10px 12px;
-  min-height:64px;
-  padding:14px 4px 6px;
+/* ---------- the conversation ---------- */
+.convo{padding:22px 26px 6px}
+.turn{display:flex;gap:14px;margin-bottom:18px}
+.who{
+  flex:0 0 78px;text-align:right;
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-3);padding-top:6px;
 }
+.turn.you .who{color:var(--accent)}
+.said{
+  margin:0;font-family:var(--serif);font-size:17px;line-height:1.55;
+  color:var(--ink-2);flex:1;min-width:0;
+}
+.rline{
+  margin:0;flex:1;min-width:0;
+  font-family:var(--serif);font-size:17px;line-height:2.5;color:var(--ink);
+}
+.fixed{white-space:pre-wrap}
 .slot{
-  position:relative;display:flex;align-items:flex-end;justify-content:center;
-  min-width:118px;min-height:46px;
+  display:inline-block;vertical-align:baseline;
+  min-width:96px;min-height:34px;
   border-bottom:2px solid var(--rule-strong);
-  border-radius:2px 2px 0 0;
-  padding:0 2px 3px;
+  padding:0 4px;margin:0 2px;text-align:center;
+  position:relative;cursor:pointer;
   transition:background .12s ease,border-color .12s ease;
-  cursor:pointer;
 }
 .slot[data-empty="1"]::after{
   content:attr(data-ord);
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  font-family:var(--mono);font-size:12px;color:var(--ink-3);opacity:.5;
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);opacity:.45;
+  line-height:34px;
 }
-.slot.over{background:var(--accent-soft);border-bottom-color:var(--accent)}
-.slot.armed{background:var(--accent-soft);border-bottom-color:var(--accent)}
-.period{
-  font-family:var(--serif);font-size:20px;line-height:1;
-  padding-bottom:6px;color:var(--ink);
-}
+.slot.hug{margin-right:0}
+.slot.over,.slot.armed{background:var(--accent-soft);border-bottom-color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* ---------- tiles ---------- */
 .tile{
-  font-family:var(--serif);font-size:16.5px;line-height:1.25;
+  font-family:var(--serif);font-size:16px;line-height:1.2;
   background:linear-gradient(180deg,var(--tile-hi),var(--tile));
   border:1px solid var(--tile-edge);border-radius:3px;
-  padding:7px 12px;margin:0;
+  padding:5px 11px;margin:0;
   box-shadow:var(--shadow-tile);
   cursor:grab;user-select:none;touch-action:none;
-  text-align:center;color:var(--ink);
-  display:inline-block;max-width:100%;
+  text-align:center;color:var(--ink);display:inline-block;max-width:100%;
 }
 .tile:hover{border-color:var(--accent)}
-.tile.sel{
-  border-color:var(--accent);background:var(--accent-soft);
-  box-shadow:0 0 0 2px var(--accent-soft),var(--shadow-tile);
-}
+.tile.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow-tile)}
 .tile.lifting{opacity:.3}
 .tile.ghost{
   position:fixed;z-index:90;pointer-events:none;cursor:grabbing;
-  box-shadow:var(--shadow-lift);transform:rotate(-.6deg);
-  border-color:var(--accent);
+  box-shadow:var(--shadow-lift);transform:rotate(-.6deg);border-color:var(--accent);
 }
-.slot .tile{width:100%}
+.slot .tile{display:block;width:100%;padding:4px 6px;font-size:15.5px}
 
 /* ---------- bank ---------- */
 .bank-hd{
   display:flex;align-items:center;justify-content:space-between;gap:12px;
-  border-top:1px solid var(--rule);
-  padding:12px 26px 0;flex-wrap:wrap;
+  border-top:1px solid var(--rule);padding:12px 26px 0;flex-wrap:wrap;
 }
 .bank-hd h2{
   margin:0;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
@@ -250,22 +215,15 @@ main{padding:22px 16px 120px}
 .bank{
   margin:10px 26px 24px;padding:14px;
   background:var(--well);border:1px solid var(--rule);border-radius:3px;
-  display:flex;flex-wrap:wrap;gap:10px;min-height:76px;align-items:flex-start;
+  display:flex;flex-wrap:wrap;gap:10px;min-height:72px;align-items:flex-start;
   transition:background .12s ease;
 }
 .bank.over{background:var(--accent-soft);border-color:var(--accent)}
 .bank .empty{color:var(--ink-3);font-size:13px;font-style:italic;padding:6px 2px}
 
-/* ---------- footer status ---------- */
-.foot{
-  position:fixed;left:0;right:0;bottom:0;z-index:30;
-  background:var(--paper);border-top:1px solid var(--rule);
-  padding:9px 16px;
-}
-.foot-in{
-  max-width:880px;margin:0 auto;display:flex;align-items:center;
-  gap:12px;flex-wrap:wrap;justify-content:space-between;
-}
+/* ---------- footer ---------- */
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--rule);padding:9px 16px}
+.foot-in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
 .status{font-size:13px;color:var(--ink-2)}
 .status b{color:var(--ink);font-weight:600}
 .dots{display:flex;gap:4px;flex-wrap:wrap}
@@ -277,107 +235,64 @@ main{padding:22px 16px 120px}
 .dot[data-done="1"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .dot[data-cur="1"]{outline:2px solid var(--ink);outline-offset:1px}
 
-/* ---------- review + results ---------- */
-.panel{max-width:880px;margin:0 auto}
-.panel h1{
-  font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 6px;
-  text-wrap:balance;
-}
+/* ---------- review + report ---------- */
+.panel{max-width:860px;margin:0 auto}
+.panel h1{font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 6px;text-wrap:balance}
 .panel .lede{margin:0 0 20px;color:var(--ink-2);max-width:64ch}
 table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px}
 .tableWrap{overflow-x:auto;border:1px solid var(--rule)}
 th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule)}
-th{
-  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);background:var(--paper-2);font-weight:600;
-}
+th{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:var(--paper-2);font-weight:600}
 tbody tr{cursor:pointer}
 tbody tr:hover{background:var(--accent-soft)}
 td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
-.pill{
-  display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;
-  text-transform:uppercase;border-radius:2px;padding:2px 7px;
-}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;padding:2px 7px}
 .pill.done{background:var(--accent-soft);color:var(--accent)}
 .pill.part{background:var(--no-soft);color:var(--warn)}
 .pill.none{background:var(--well);color:var(--ink-3)}
 .pill.ok{background:var(--ok-soft);color:var(--ok)}
 .pill.no{background:var(--no-soft);color:var(--no)}
-
 .score{
   display:flex;gap:24px;align-items:baseline;flex-wrap:wrap;
-  background:var(--paper);border:1px solid var(--rule);
-  border-left:4px solid var(--accent);
+  background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--accent);
   padding:18px 22px;margin-bottom:22px;
 }
-.score .big{
-  font-family:var(--mono);font-size:38px;line-height:1;color:var(--ink);
-  font-variant-numeric:tabular-nums;
-}
+.score .big{font-family:var(--mono);font-size:38px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
 .score .cap{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.rep{
-  background:var(--paper);border:1px solid var(--rule);
-  border-left:4px solid var(--rule-strong);padding:16px 20px;margin-bottom:12px;
-}
+.rep{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--rule-strong);padding:16px 20px;margin-bottom:12px}
 .rep.right{border-left-color:var(--ok)}
 .rep.wrong{border-left-color:var(--no)}
 .rep-hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
 .rep-hd .n{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
 .rep-hd .tgt{font-size:13px;font-weight:600;color:var(--ink);margin-right:auto}
-.sent{
-  font-family:var(--serif);font-size:16px;line-height:1.6;margin:0 0 4px;
-  color:var(--ink);
-}
+.ctx{font-family:var(--serif);font-size:14.5px;color:var(--ink-3);font-style:italic;margin:0 0 10px}
+.sent{font-family:var(--serif);font-size:16px;line-height:1.6;margin:0 0 4px;color:var(--ink)}
 .sent.bad{color:var(--no)}
-.sent.alt{color:var(--ink-2)}
-.slab{
-  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:600;margin:12px 0 2px;
-}
+.slab{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:12px 0 2px}
 .why{margin:10px 0 0;font-size:14px;color:var(--ink-2);max-width:70ch}
 .why i{font-family:var(--serif);font-style:italic;color:var(--ink)}
 
-/* ---------- help overlay ---------- */
-.scrim{
-  position:fixed;inset:0;z-index:60;background:rgba(14,22,32,.62);
-  display:grid;place-items:center;padding:20px;
-}
-.modal{
-  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
-  max-width:620px;width:100%;max-height:86vh;overflow:auto;
-  box-shadow:var(--shadow-lift);
-}
-.modal header{
-  background:linear-gradient(180deg,var(--chrome-a),var(--chrome-b));
-  color:var(--chrome-ink);padding:11px 20px;font-weight:600;font-size:14px;
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-}
+/* ---------- help ---------- */
+.scrim{position:fixed;inset:0;z-index:60;background:rgba(14,22,32,.62);display:grid;place-items:center;padding:20px}
+.modal{background:var(--paper);border:1px solid var(--rule);border-radius:3px;max-width:620px;width:100%;max-height:86vh;overflow:auto;box-shadow:var(--shadow-lift)}
+.modal header{background:linear-gradient(180deg,var(--chrome-a),var(--chrome-b));color:var(--chrome-ink);padding:11px 20px;font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .modal .body{padding:20px}
-.modal h3{
-  margin:18px 0 6px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:600;
-}
+.modal h3{margin:18px 0 6px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .modal h3:first-child{margin-top:0}
 .modal p,.modal li{font-size:14px;color:var(--ink-2);margin:0 0 8px}
 .modal ul{margin:0 0 8px;padding-left:20px}
-.modal kbd{
-  font-family:var(--mono);font-size:11.5px;background:var(--well);
-  border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;
-  padding:1px 5px;color:var(--ink);
-}
+.modal kbd{font-family:var(--mono);font-size:11.5px;background:var(--well);border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;padding:1px 5px;color:var(--ink)}
 .modal footer{padding:0 20px 20px;display:flex;justify-content:flex-end;gap:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-.sr{
-  position:absolute;width:1px;height:1px;overflow:hidden;
-  clip:rect(0 0 0 0);white-space:nowrap;
-}
 @media (max-width:560px){
   .brand .sec{display:none}
-  .prompt,.qhead,.bank-hd{padding-left:16px;padding-right:16px}
-  .lineWrap{padding:16px}
+  .qhead,.bank-hd{padding-left:16px;padding-right:16px}
+  .convo{padding:18px 16px 4px}
   .bank{margin-left:16px;margin-right:16px}
-  .slot{min-width:96px}
-  .tile{font-size:15px}
+  .turn{flex-direction:column;gap:2px}
+  .who{flex:none;text-align:left;padding-top:0}
+  .slot{min-width:80px}
 }
 </style>
 </head>
@@ -386,11 +301,11 @@ td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
 <div class="bar">
   <div class="brand">
     <b>Build a Sentence</b>
-    <span class="sec">Writing &middot; Section 1 of 1</span>
+    <span class="sec">Writing &middot; Task 1 of 3</span>
   </div>
   <div class="meters">
-    <span class="meter" id="clock">15:00</span>
-    <span class="meter" id="counter">Question 1 of 12</span>
+    <span class="meter" id="clock">06:00</span>
+    <span class="meter" id="counter">Question 1 of 10</span>
   </div>
   <div class="btns">
     <button class="cbtn" id="bTime">Hide Time</button>
@@ -404,117 +319,108 @@ td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
 <div class="strip" id="strip">
   <div class="strip-in">
     <span class="dirlabel">Directions</span>
-    <p>Build a grammatically correct sentence using <b>all</b> of the answer choices. Drag a choice onto a blank, or select a choice and then select a blank. To move a choice, drag it to a different blank or back to the answer-choice area. Some sentences can be built in more than one correct way. The capital letter and the final period are supplied; internal punctuation is not shown.</p>
+    <p>You will move words and phrases into the blanks so that they form a grammatical sentence that fits the conversation. For some questions there are more words than blanks; move only the words you need. Each sentence is scored correct or incorrect &mdash; there is no partial credit.</p>
   </div>
 </div>
 
 <main id="main"></main>
-
 <div class="foot" id="foot"></div>
-
 <div class="sr" id="live" aria-live="polite"></div>
 
 <script>
 /* ============================================================
-   Items. Each chunk is a word group the test-taker orders.
-   `orders` lists every arrangement scored as correct.
-   `display` is the properly punctuated sentence, shown only
-   in the score report.
+   Ten items. Each has a conversational context line, a reply
+   whose `frame` mixes fixed text with blanks, and a bank that
+   holds the answer words plus one or two that are not used.
+   Scoring is all-or-nothing, as on the real task.
    ============================================================ */
+const B = null;                 // marks a blank inside a frame
 const ITEMS = [
   {
-    target:"Subject–verb agreement across an intervening phrase",
-    chunks:["the results","of the long-term experiment","were","far more conclusive","than the researchers had expected"],
-    orders:[[0,1,2,3,4]],
-    display:"The results of the long-term experiment were far more conclusive than the researchers had expected.",
-    why:"The subject is <i>the results</i>, not <i>experiment</i>, so the plural verb <i>were</i> is required. The prepositional phrase <i>of the long-term experiment</i> separates the subject from its verb without changing the agreement."
+    target:"Word order in an embedded question",
+    who:"Classmate", says:"Did the advisor say anything about the deadline?",
+    frame:["She asked",B,B,B,B,B,"the application."],
+    answer:["when","I","planned","to","submit"],
+    bank:["when","I","planned","to","submit","did"],
+    why:"An embedded question keeps statement word order: <i>when I planned</i>, not <i>when did I plan</i>. The auxiliary <i>did</i> belongs only to a direct question, which is why it is left in the bank."
   },
   {
-    target:"Relative clause modifying the subject",
-    chunks:["scientists who study glacial movement","rely on satellite imagery","to track changes","that occur over decades"],
-    orders:[[0,1,2,3],[2,3,0,1]],
-    display:"Scientists who study glacial movement rely on satellite imagery to track changes that occur over decades.",
-    alt:"To track changes that occur over decades, scientists who study glacial movement rely on satellite imagery.",
-    why:"<i>who study glacial movement</i> is a relative clause and must sit immediately after the noun it modifies. <i>that occur over decades</i> must likewise follow <i>changes</i>. The purpose infinitive can open the sentence or close it."
+    target:"Infinitive complement after <i>mean</i>",
+    who:"Professor", says:"I didn't see you at office hours yesterday.",
+    frame:["I",B,B,B,B,"but my lab ran late."],
+    answer:["meant","to","stop","by"],
+    bank:["meant","to","stop","by","stopping"],
+    why:"<i>Mean</i> takes an infinitive, not a gerund: <i>meant to stop by</i>. <i>Stopping</i> would need a different verb in front of it, such as <i>kept</i> or <i>considered</i>."
   },
   {
-    target:"Reduced participial clause in initial position",
-    chunks:["founded in 1867","the university","has produced","more Nobel laureates","than any other institution in the region"],
-    orders:[[0,1,2,3,4]],
-    display:"Founded in 1867, the university has produced more Nobel laureates than any other institution in the region.",
-    why:"<i>Founded in 1867</i> is a reduced passive clause with no subject of its own, so the noun it describes — <i>the university</i> — has to come directly after it. Anything else leaves the participle dangling."
+    target:"Present perfect with <i>since</i>",
+    who:"Friend", says:"How long have you been on the swim team?",
+    frame:["I",B,B,B,B,"the team since my first year."],
+    answer:["have","been","part","of"],
+    bank:["have","been","part","of","am"],
+    why:"A state that began in the past and still continues takes the present perfect with <i>since</i>. English uses <i>have been</i> here where many languages use a simple present, so <i>am</i> is the trap."
   },
   {
-    target:"Inversion after a negative adverbial",
-    chunks:["rarely","has a single documentary","generated","such intense debate","among economists"],
-    orders:[[0,1,2,3,4]],
-    display:"Rarely has a single documentary generated such intense debate among economists.",
-    why:"When a limiting adverb such as <i>rarely</i>, <i>seldom</i> or <i>never</i> opens a sentence, the subject and the auxiliary invert: <i>has a single documentary generated</i>, not <i>a single documentary has generated</i>."
+    target:"Backshift in reported speech",
+    who:"Roommate", says:"What did the librarian tell you?",
+    frame:["She said",B,B,B,B,B,"until Friday."],
+    answer:["that","the book","would","be","held"],
+    bank:["that","the book","would","be","held","will"],
+    why:"After a past reporting verb such as <i>said</i>, <i>will</i> backshifts to <i>would</i>. The reported clause is also passive, so it needs <i>be</i> + past participle: <i>would be held</i>."
   },
   {
-    target:"Parallel structure with correlative conjunctions",
-    chunks:["the new policy is intended","not only to reduce","carbon emissions","but also to lower","household energy costs"],
-    orders:[[0,1,2,3,4]],
-    display:"The new policy is intended not only to reduce carbon emissions but also to lower household energy costs.",
-    why:"<i>not only … but also</i> is a correlative pair, and the two halves must be grammatically parallel — here an infinitive phrase on each side: <i>to reduce carbon emissions</i> / <i>to lower household energy costs</i>."
+    target:"Possessive relative pronoun <i>whose</i>",
+    who:"Classmate", says:"Wait, which professor are you talking about?",
+    frame:["The one",B,B,B,B,B,"last week."],
+    answer:["whose","seminar","we","all","attended"],
+    bank:["whose","seminar","we","all","attended","who"],
+    why:"<i>Whose</i> is the relative pronoun that shows possession and attaches directly to the noun it owns: <i>whose seminar</i>. <i>Who</i> cannot be followed by a noun this way."
   },
   {
-    target:"Passive voice with an agent and a time clause",
-    chunks:["the manuscript was discovered","by a graduate student","while she was cataloging","a collection of medieval letters"],
-    orders:[[0,1,2,3],[2,3,0,1]],
-    display:"The manuscript was discovered by a graduate student while she was cataloging a collection of medieval letters.",
-    alt:"While she was cataloging a collection of medieval letters, the manuscript was discovered by a graduate student.",
-    why:"A passive verb takes its agent in a <i>by</i> phrase placed immediately after it. The <i>while</i> clause carries its own subject, so it may stand before or after the main clause."
+    target:"Comparison with <i>as … as</i>",
+    who:"Advisor", says:"How does this course compare with the one you took last term?",
+    frame:["It",B,B,B,B,B,"that one was."],
+    answer:["isn't","nearly","as","demanding","as"],
+    bank:["isn't","nearly","as","demanding","as","more"],
+    why:"An equal comparison brackets the adjective: <i>as demanding as</i>. <i>Nearly</i> intensifies the negative and sits before the first <i>as</i>. <i>More</i> belongs to a <i>-er … than</i> comparison instead."
   },
   {
-    target:"Noun clause as the subject",
-    chunks:["what the survey revealed","about commuting habits","surprised","even the city's most experienced planners"],
-    orders:[[0,1,2,3]],
-    display:"What the survey revealed about commuting habits surprised even the city's most experienced planners.",
-    why:"A noun clause beginning with <i>what</i> can serve as the whole subject of a sentence, and it counts as singular: <i>surprised</i> takes it as its subject. No additional subject is needed before the verb."
+    target:"Present unreal conditional",
+    who:"Friend", says:"Should I take the 8 a.m. section?",
+    frame:["If I",B,B,", I",B,B,B,"the afternoon one."],
+    answer:["were","you","would","definitely","choose"],
+    bank:["were","you","would","definitely","choose","was"],
+    why:"An unreal conditional uses <i>were</i> for every subject &mdash; <i>if I were you</i> &mdash; and pairs it with <i>would</i> + the base verb. The adverb sits between <i>would</i> and the verb."
   },
   {
-    target:"Past unreal conditional",
-    chunks:["if the bridge had been inspected regularly","the structural damage","would have been detected","long before the collapse"],
-    orders:[[0,1,2,3],[1,2,3,0]],
-    display:"If the bridge had been inspected regularly, the structural damage would have been detected long before the collapse.",
-    alt:"The structural damage would have been detected long before the collapse if the bridge had been inspected regularly.",
-    why:"The past unreal conditional pairs <i>if</i> + past perfect (<i>had been inspected</i>) with <i>would have</i> + past participle (<i>would have been detected</i>). Either clause may come first."
+    target:"Statement order inside a question",
+    who:"Classmate", says:"I'm meeting my group at the library later.",
+    frame:["So",B,B,B,B,B,B,"the project by then?"],
+    answer:["do","you","think","you'll","have","finished"],
+    bank:["do","you","think","you'll","have","finished","will"],
+    why:"Only the outer question inverts (<i>do you think</i>). What follows <i>think</i> is a statement, so it stays <i>you'll have finished</i>, never <i>will you have finished</i>."
   },
   {
-    target:"Gerund after a preposition",
-    chunks:["many technology firms","attribute their recent growth","to investing heavily","in the training of their employees"],
-    orders:[[0,1,2,3]],
-    display:"Many technology firms attribute their recent growth to investing heavily in the training of their employees.",
-    why:"<i>attribute X to Y</i> puts a preposition before the second element, and a preposition must be followed by a gerund rather than an infinitive: <i>to investing</i>, never <i>to invest</i>."
+    target:"Passive voice",
+    who:"Classmate", says:"Did someone already grade the midterms?",
+    frame:["Yes,",B,B,B,B,B,"this morning."],
+    answer:["they","were","all","posted","online"],
+    bank:["they","were","all","posted","online","been"],
+    why:"The passive is a form of <i>be</i> plus a past participle: <i>were posted</i>. <i>Been</i> only appears after <i>have</i> or <i>had</i>, so it has no place in this sentence."
   },
   {
-    target:"Concessive clause with a gerund subject",
-    chunks:["although the vaccine proved highly effective in trials","distributing it","to remote communities","remained a considerable challenge"],
-    orders:[[0,1,2,3],[1,2,3,0]],
-    display:"Although the vaccine proved highly effective in trials, distributing it to remote communities remained a considerable challenge.",
-    alt:"Distributing it to remote communities remained a considerable challenge although the vaccine proved highly effective in trials.",
-    why:"<i>Although</i> introduces a subordinate clause, so the sentence still needs an independent clause with its own subject. Here that subject is the gerund phrase <i>distributing it to remote communities</i>."
-  },
-  {
-    target:"Double comparative",
-    chunks:["the more closely","the two species are compared","the more apparent","their common ancestry becomes"],
-    orders:[[0,1,2,3]],
-    display:"The more closely the two species are compared, the more apparent their common ancestry becomes.",
-    why:"The <i>the more … the more</i> pattern needs a full clause after each half, and the comparative phrase leads each half: <i>the more apparent their common ancestry becomes</i>, not <i>their common ancestry becomes the more apparent</i>."
-  },
-  {
-    target:"Appositive between subject and verb",
-    chunks:["Marie Tharp","a geologist and oceanographic cartographer","produced the first detailed map","of the ocean floor"],
-    orders:[[0,1,2,3]],
-    display:"Marie Tharp, a geologist and oceanographic cartographer, produced the first detailed map of the ocean floor.",
-    why:"An appositive renames the noun beside it and sits between the subject and the verb, enclosed by commas. Removing it must leave a complete sentence: <i>Marie Tharp produced the first detailed map of the ocean floor.</i>"
+    target:"Separable phrasal verb with a pronoun object",
+    who:"Roommate", says:"I found your notes on the kitchen table.",
+    frame:["Oh, could you",B,B,B,B,"the front desk before dinner?"],
+    answer:["drop","them","off","at"],
+    bank:["drop","them","off","at","to"],
+    why:"When the object of a separable phrasal verb is a pronoun, it must split the verb: <i>drop them off</i>. <i>Drop off them</i> is ungrammatical, even though the same words are available."
   }
 ];
 
-const TOTAL_SECONDS = 15 * 60;
+const TOTAL_SECONDS = 6 * 60;
 
-/* deterministic shuffle so the bank never opens in the answer order */
+/* deterministic shuffle so the bank never opens in answer order */
 function shuffled(n, seed){
   const a = Array.from({length:n}, (_,i)=>i);
   let s = seed * 9301 + 49297;
@@ -523,38 +429,55 @@ function shuffled(n, seed){
     const j = Math.floor((s / 233280) * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
-  // never hand back the correct order
   if (a.every((v,i)=>v===i)) { [a[0], a[1]] = [a[1], a[0]]; }
   return a;
 }
 
+const nBlanks = it => it.frame.filter(p => p === B).length;
+
 const S = {
   screen:"test",
   idx:0,
-  slots: ITEMS.map(it => it.chunks.map(()=>null)),
-  bankOrder: ITEMS.map((it,i) => shuffled(it.chunks.length, i + 3)),
+  slots: ITEMS.map(it => Array(nBlanks(it)).fill(null)),
+  bankOrder: ITEMS.map((it,i) => shuffled(it.bank.length, i + 5)),
   history: ITEMS.map(()=>[]),
   seconds: TOTAL_SECONDS,
   timeHidden:false,
-  sel:null,          // chunk index currently picked up
+  sel:null,
   timedOut:false
 };
 
-/* ---------- element helpers ---------- */
 const $ = id => document.getElementById(id);
 const main = $("main"), foot = $("foot"), live = $("live");
 const say = m => { live.textContent = m; };
-const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
 const item = () => ITEMS[S.idx];
 const slots = () => S.slots[S.idx];
-const bankList = () => S.bankOrder[S.idx].filter(c => !slots().includes(c));
+const bankList = () => S.bankOrder[S.idx].filter(o => !slots().includes(o));
 const filled = () => slots().filter(v => v !== null).length;
 const complete = i => S.slots[i].every(v => v !== null);
 const touched = i => S.slots[i].some(v => v !== null);
+/* all-or-nothing, compared by the word itself so repeated
+   options such as the two "as" in item 6 are interchangeable */
 const isRight = i =>
-  complete(i) && ITEMS[i].orders.some(o => o.every((v,p) => S.slots[i][p] === v));
+  complete(i) && S.slots[i].every((o,p) => ITEMS[i].bank[o] === ITEMS[i].answer[p]);
+
+function builtSentence(i){
+  const it = ITEMS[i];
+  let k = -1;
+  return it.frame.map(p => {
+    if (p !== B) return p;
+    k++;
+    const o = S.slots[i][k];
+    return o === null ? "_____" : it.bank[o];
+  }).join(" ").replace(/\s+([,.?!;:])/g, "$1");
+}
+function modelSentence(i){
+  const it = ITEMS[i];
+  let k = -1;
+  return it.frame.map(p => p !== B ? p : it.answer[++k]).join(" ").replace(/\s+([,.?!;:])/g, "$1");
+}
 
 /* ---------- mutations ---------- */
 function snapshot(){ S.history[S.idx].push(slots().slice()); }
@@ -562,40 +485,36 @@ function undo(){
   const h = S.history[S.idx];
   if (!h.length) return;
   S.slots[S.idx] = h.pop();
-  S.sel = null;
-  render();
-  say("Undone.");
+  S.sel = null; render(); say("Undone.");
 }
 function clearAll(){
   if (!touched(S.idx)) return;
   snapshot();
-  S.slots[S.idx] = item().chunks.map(()=>null);
-  S.sel = null;
-  render();
-  say("All blanks cleared.");
+  S.slots[S.idx] = Array(nBlanks(item())).fill(null);
+  S.sel = null; render(); say("All blanks cleared.");
 }
-function place(chunk, pos){
+function place(opt, pos){
   const sl = slots();
-  if (sl[pos] === chunk) { S.sel = null; render(); return; }
+  if (sl[pos] === opt){ S.sel = null; render(); return; }
   snapshot();
-  const from = sl.indexOf(chunk);
+  const from = sl.indexOf(opt);
   const displaced = sl[pos];
   if (from !== -1) sl[from] = null;
-  sl[pos] = chunk;
-  if (displaced !== null && from !== -1) sl[from] = displaced;   // straight swap
+  sl[pos] = opt;
+  if (displaced !== null && from !== -1) sl[from] = displaced;
   S.sel = null;
   render({focus:`.slot[data-i="${pos}"] .tile`});
-  say(`${esc(item().chunks[chunk])} placed in blank ${pos + 1}.`);
+  say(`${item().bank[opt]} placed in blank ${pos + 1}.`);
 }
-function toBank(chunk){
+function toBank(opt){
   const sl = slots();
-  const from = sl.indexOf(chunk);
-  if (from === -1) { S.sel = null; render(); return; }
+  const from = sl.indexOf(opt);
+  if (from === -1){ S.sel = null; render(); return; }
   snapshot();
   sl[from] = null;
   S.sel = null;
-  render({focus:`.bank .tile[data-c="${chunk}"]`});
-  say(`${esc(item().chunks[chunk])} returned to the answer choices.`);
+  render({focus:`.bank .tile[data-c="${opt}"]`});
+  say(`${item().bank[opt]} returned to the word bank.`);
 }
 
 /* ============================================================
@@ -607,25 +526,21 @@ function render(opts){
   else if (S.screen === "review") renderReview();
   else renderResults();
   renderChrome();
-  if (opts.focus){
-    const el = document.querySelector(opts.focus);
-    if (el) el.focus();
-  }
+  if (opts.focus){ const el = document.querySelector(opts.focus); if (el) el.focus(); }
 }
 
 function renderChrome(){
   const onTest = S.screen === "test";
+  const scored = S.screen === "results";
   $("strip").style.display = onTest ? "" : "none";
   $("counter").textContent = onTest
     ? `Question ${S.idx + 1} of ${ITEMS.length}`
     : (S.screen === "review" ? "Review" : "Score report");
   $("bBack").disabled = !onTest || S.idx === 0;
-  $("bReview").disabled = S.screen === "results";
-  $("bNext").textContent =
-    S.screen === "results" ? "Restart" :
-    (S.screen === "review" ? "End Section" :
-     (S.idx === ITEMS.length - 1 ? "Review" : "Next"));
-  const scored = S.screen === "results";
+  $("bReview").disabled = scored;
+  $("bNext").textContent = scored ? "Restart"
+    : (S.screen === "review" ? "End Task"
+    : (S.idx === ITEMS.length - 1 ? "Review" : "Next"));
   $("bTime").style.display = scored ? "none" : "";
   const c = $("clock");
   c.style.display = scored ? "none" : "";
@@ -639,52 +554,63 @@ function fmt(s){
   return `${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`;
 }
 
-function tileHTML(c, where, pos){
+function tileHTML(o, where, pos){
   const it = item();
-  let text = it.chunks[c];
-  if (where === "slot" && pos === 0) text = cap(text);
-  const sel = S.sel === c ? " sel" : "";
+  const text = it.bank[o];
+  const sel = S.sel === o ? " sel" : "";
   const label = where === "slot"
     ? `${text}, in blank ${pos + 1}. Press Enter to pick up.`
-    : `${text}, answer choice. Press Enter to pick up.`;
-  return `<button type="button" class="tile${sel}" data-c="${c}" data-where="${where}"${
+    : `${text}, word bank. Press Enter to pick up.`;
+  return `<button type="button" class="tile${sel}" data-c="${o}" data-where="${where}"${
     pos !== undefined ? ` data-pos="${pos}"` : ""
   } aria-label="${esc(label)}">${esc(text)}</button>`;
 }
 
 function renderTest(){
-  const it = item();
-  const sl = slots();
-  const bank = bankList();
-
-  const line = sl.map((c,i) => {
-    const armed = S.sel !== null && c === null ? " armed" : "";
-    return `<div class="slot${armed}" data-i="${i}" data-empty="${c===null?1:0}" data-ord="${i+1}" tabindex="0" role="button" aria-label="Blank ${i+1} of ${sl.length}${c===null?", empty":", contains "+esc(it.chunks[c])}">${
-      c === null ? "" : tileHTML(c, "slot", i)
-    }</div>`;
+  const it = item(), sl = slots(), bank = bankList();
+  const n = nBlanks(it);
+  let k = -1;
+  const parts = it.frame.map(p => p !== B ? {t:"f", v:p} : {t:"s", i:++k});
+  const opensPunct = q => q && q.t === "f" && /^[,.?!;:]/.test(q.v);
+  const reply = parts.map((p, idx) => {
+    // no space before a piece that opens with punctuation, so "you , I" reads "you, I"
+    const hugs = opensPunct(p);
+    const sep = (idx === 0 || hugs) ? "" : " ";
+    if (p.t === "f") return `${sep}<span class="fixed">${esc(p.v)}</span>`;
+    const o = sl[p.i];
+    const armed = S.sel !== null && o === null ? " armed" : "";
+    const hug = opensPunct(parts[idx+1]) ? " hug" : "";
+    return `${sep}<span class="slot${armed}${hug}" data-i="${p.i}" data-empty="${o===null?1:0}" data-ord="${p.i+1}" tabindex="0" role="button" aria-label="Blank ${p.i+1} of ${n}${o===null?", empty":", contains "+esc(it.bank[o])}">${
+      o === null ? "" : tileHTML(o, "slot", p.i)
+    }</span>`;
   }).join("");
 
   main.innerHTML = `
     <div class="page">
       <div class="qhead">
         <span class="qnum">Question ${S.idx + 1} of ${ITEMS.length}</span>
-        <span class="qtag">${it.chunks.length} answer choices</span>
+        <span class="qhint">${n} blanks &middot; ${it.bank.length} words</span>
       </div>
-      <p class="prompt">Arrange the answer choices to build a grammatically correct sentence.</p>
-      <div class="lineWrap">
-        <div class="line" id="line">${line}<span class="period">.</span></div>
+      <div class="convo">
+        <div class="turn">
+          <span class="who">${esc(it.who)}</span>
+          <p class="said">&ldquo;${esc(it.says)}&rdquo;</p>
+        </div>
+        <div class="turn you">
+          <span class="who">You</span>
+          <p class="rline" id="line">${reply}</p>
+        </div>
       </div>
       <div class="bank-hd">
-        <h2>Answer choices</h2>
+        <h2>Word bank</h2>
         <div class="tools">
           <button class="tbtn" id="bUndo" ${S.history[S.idx].length ? "" : "disabled"}>Undo</button>
           <button class="tbtn" id="bClear" ${touched(S.idx) ? "" : "disabled"}>Clear</button>
         </div>
       </div>
-      <div class="bank" id="bank" role="group" aria-label="Answer choices not yet used">${
-        bank.length
-          ? bank.map(c => tileHTML(c, "bank")).join("")
-          : `<span class="empty">All answer choices have been used.</span>`
+      <div class="bank" id="bank" role="group" aria-label="Words not yet placed">${
+        bank.length ? bank.map(o => tileHTML(o, "bank")).join("")
+                    : `<span class="empty">Every word has been placed.</span>`
       }</div>
     </div>`;
 
@@ -698,12 +624,12 @@ function renderFoot(){
   if (S.screen === "results"){ foot.innerHTML = ""; foot.style.display = "none"; return; }
   foot.style.display = "";
   const dots = ITEMS.map((_,i) =>
-    `<button class="dot" data-go="${i}" data-done="${complete(i)?1:0}" data-cur="${i===S.idx&&S.screen==='test'?1:0}" title="Question ${i+1}" aria-label="Go to question ${i+1}">${i+1}</button>`
+    `<button class="dot" data-go="${i}" data-done="${complete(i)?1:0}" data-cur="${i===S.idx&&S.screen==='test'?1:0}" aria-label="Go to question ${i+1}">${i+1}</button>`
   ).join("");
-  const n = ITEMS.filter((_,i)=>complete(i)).length;
+  const done = ITEMS.filter((_,i)=>complete(i)).length;
   foot.innerHTML = `<div class="foot-in">
-    <span class="status"><b>${n}</b> of ${ITEMS.length} sentences built${
-      S.screen === "test" ? ` &middot; blank ${filled()} of ${slots().length} filled on this question` : ""
+    <span class="status"><b>${done}</b> of ${ITEMS.length} sentences built${
+      S.screen === "test" ? ` &middot; ${filled()} of ${slots().length} blanks filled here` : ""
     }</span>
     <div class="dots">${dots}</div>
   </div>`;
@@ -718,11 +644,11 @@ function renderReview(){
       : touched(i) ? `<span class="pill part">Incomplete</span>`
       : `<span class="pill none">Not answered</span>`;
     return `<tr data-go="${i}"><td class="n">${i+1}</td><td>${st}</td><td>${
-      S.slots[i].filter(v=>v!==null).length} of ${it.chunks.length} blanks filled</td></tr>`;
+      S.slots[i].filter(v=>v!==null).length} of ${nBlanks(it)} blanks filled</td></tr>`;
   }).join("");
   main.innerHTML = `<div class="panel">
     <h1>Review your answers</h1>
-    <p class="lede">Select a question to return to it. When you end the section your sentences are scored and you will not be able to change them.</p>
+    <p class="lede">Select a question to return to it. When you end the task your sentences are scored and you will not be able to change them.</p>
     <div class="tableWrap"><table>
       <thead><tr><th>No.</th><th>Status</th><th>Progress</th></tr></thead>
       <tbody>${rows}</tbody>
@@ -737,28 +663,26 @@ function renderReview(){
 function renderResults(){
   const right = ITEMS.filter((_,i)=>isRight(i)).length;
   const cards = ITEMS.map((it,i) => {
-    const ok = isRight(i);
-    const mine = complete(i)
-      ? cap(S.slots[i].map(c => it.chunks[c]).join(" ")) + "."
-      : null;
+    const ok = isRight(i), any = touched(i);
     return `<div class="rep ${ok?"right":"wrong"}">
       <div class="rep-hd">
         <span class="n">${i+1}</span>
-        <span class="tgt">${esc(it.target)}</span>
-        <span class="pill ${ok?"ok":"no"}">${ok?"Correct":(mine?"Incorrect":"No response")}</span>
+        <span class="tgt">${it.target}</span>
+        <span class="pill ${ok?"ok":"no"}">${ok?"1.0":"0.0"}</span>
       </div>
-      ${mine ? `<div class="slab">Your sentence</div><p class="sent${ok?"":" bad"}">${esc(mine)}</p>` : `<p class="sent bad">You did not build this sentence.</p>`}
-      ${ok ? "" : `<div class="slab">Correct sentence</div><p class="sent">${esc(it.display)}</p>`}
-      ${it.alt ? `<div class="slab">Also accepted</div><p class="sent alt">${esc(it.alt)}</p>` : ""}
+      <p class="ctx">${esc(it.who)}: &ldquo;${esc(it.says)}&rdquo;</p>
+      ${any ? `<div class="slab">Your sentence</div><p class="sent${ok?"":" bad"}">${esc(builtSentence(i))}</p>` 
+            : `<p class="sent bad">You did not build this sentence.</p>`}
+      ${ok ? "" : `<div class="slab">Correct sentence</div><p class="sent">${esc(modelSentence(i))}</p>`}
       <p class="why">${it.why}</p>
     </div>`;
   }).join("");
   main.innerHTML = `<div class="panel">
     <h1>Score report</h1>
-    <p class="lede">${S.timedOut ? "Time expired and the section was submitted automatically. " : ""}Each sentence is scored right or wrong; a sentence counts as correct only when every word group is in a grammatical order.</p>
+    <p class="lede">${S.timedOut ? "Time expired and the task was submitted automatically. " : ""}Each sentence is scored 1.0 or 0.0 with no partial credit: every word must be in the correct blank.</p>
     <div class="score">
       <div><div class="big">${right}/${ITEMS.length}</div><div class="cap">Sentences correct</div></div>
-      <div><div class="big">${Math.round(right/ITEMS.length*100)}%</div><div class="cap">Accuracy</div></div>
+      <div><div class="big">${(right).toFixed(1)}</div><div class="cap">Raw points</div></div>
       <div><div class="big">${fmt(TOTAL_SECONDS - S.seconds)}</div><div class="cap">Time used</div></div>
     </div>
     ${cards}
@@ -779,16 +703,16 @@ function wireDnD(){
     t.addEventListener("click", e => {
       e.stopPropagation();
       if (drag && drag.moved) return;
-      const c = +t.dataset.c;
-      if (S.sel === c){ S.sel = null; render(); say("Selection cancelled."); return; }
-      if (S.sel !== null){                       // swap two selected tiles
+      const o = +t.dataset.c;
+      if (S.sel === o){ S.sel = null; render(); say("Selection cancelled."); return; }
+      if (S.sel !== null){
         const target = t.dataset.where === "slot" ? +t.dataset.pos : null;
         if (target !== null){ place(S.sel, target); return; }
         toBank(S.sel); return;
       }
-      S.sel = c;
-      render({focus:`.tile[data-c="${c}"]`});
-      say(`${item().chunks[c]} selected. Choose a blank.`);
+      S.sel = o;
+      render({focus:`.tile[data-c="${o}"]`});
+      say(`${item().bank[o]} selected. Choose a blank.`);
     });
     t.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " "){ e.preventDefault(); t.click(); }
@@ -803,7 +727,7 @@ function wireDnD(){
       if (occ !== null){
         S.sel = occ;
         render({focus:`.slot[data-i="${pos}"] .tile`});
-        say(`${item().chunks[occ]} picked up. Choose another blank, or press Backspace to return it.`);
+        say(`${item().bank[occ]} picked up. Choose another blank, or press Backspace to return it.`);
       }
     };
     s.addEventListener("click", act);
@@ -826,10 +750,7 @@ function wireDnD(){
 function onPointerDown(e){
   if (e.button !== undefined && e.button !== 0) return;
   const el = e.currentTarget;
-  drag = {
-    chunk:+el.dataset.c, el, moved:false,
-    x0:e.clientX, y0:e.clientY, ghost:null, dx:0, dy:0, over:null
-  };
+  drag = { opt:+el.dataset.c, el, moved:false, x0:e.clientX, y0:e.clientY, ghost:null, dx:0, dy:0, over:null };
   window.addEventListener("pointermove", onPointerMove);
   window.addEventListener("pointerup", onPointerUp, {once:true});
   window.addEventListener("pointercancel", onPointerUp, {once:true});
@@ -853,7 +774,6 @@ function onPointerMove(e){
   }
   drag.ghost.style.left = (e.clientX - drag.dx) + "px";
   drag.ghost.style.top  = (e.clientY - drag.dy) + "px";
-
   const under = document.elementFromPoint(e.clientX, e.clientY);
   const zone = under && under.closest(".slot, .bank");
   if (zone !== drag.over){
@@ -866,21 +786,20 @@ function onPointerMove(e){
 function onPointerUp(){
   window.removeEventListener("pointermove", onPointerMove);
   if (!drag) return;
-  const d = drag;
-  drag = null;
+  const d = drag; drag = null;
   document.body.style.cursor = "";
   if (d.ghost) d.ghost.remove();
   d.el.classList.remove("lifting");
   if (d.over) d.over.classList.remove("over");
-  if (!d.moved) return;                      // a plain click; the click handler runs
-  if (!d.over) { render(); return; }         // dropped nowhere — snaps back
-  if (d.over.classList.contains("bank")) toBank(d.chunk);
-  else place(d.chunk, +d.over.dataset.i);
+  if (!d.moved) return;
+  if (!d.over){ render(); return; }
+  if (d.over.classList.contains("bank")) toBank(d.opt);
+  else place(d.opt, +d.over.dataset.i);
 }
 
 document.addEventListener("keydown", e => {
   if (e.key === "Escape"){
-    if (document.querySelector(".scrim")) { closeHelp(); return; }
+    if (document.querySelector(".scrim")){ closeHelp(); return; }
     if (S.sel !== null){ S.sel = null; render(); say("Selection cancelled."); }
   }
 });
@@ -888,12 +807,10 @@ document.addEventListener("keydown", e => {
 /* ============================================================
    Navigation, timer, help
    ============================================================ */
-$("bBack").onclick = () => {
-  if (S.screen === "test" && S.idx > 0){ S.idx--; S.sel = null; render(); }
-};
+$("bBack").onclick = () => { if (S.screen === "test" && S.idx > 0){ S.idx--; S.sel = null; render(); } };
 $("bNext").onclick = () => {
   if (S.screen === "results"){ restart(); return; }
-  if (S.screen === "review"){ endSection(); return; }
+  if (S.screen === "review"){ endTask(); return; }
   if (S.idx === ITEMS.length - 1){ S.screen = "review"; S.sel = null; render(); return; }
   S.idx++; S.sel = null; render();
 };
@@ -905,19 +822,18 @@ $("bReview").onclick = () => {
 $("bTime").onclick = () => { S.timeHidden = !S.timeHidden; renderChrome(); };
 $("bHelp").onclick = openHelp;
 
-function endSection(){
+function endTask(){
   const left = ITEMS.filter((_,i)=>!complete(i)).length;
   const msg = left
-    ? `${left} sentence${left>1?"s are":" is"} not finished. End the section and score your answers?`
-    : "End the section and score your answers?";
+    ? `${left} sentence${left>1?"s are":" is"} not finished. End the task and score your answers?`
+    : "End the task and score your answers?";
   if (!confirm(msg)) return;
   clearInterval(tick);
-  S.screen = "results"; S.sel = null; render();
-  window.scrollTo(0,0);
+  S.screen = "results"; S.sel = null; render(); window.scrollTo(0,0);
 }
 function restart(){
   S.screen = "test"; S.idx = 0; S.sel = null; S.timedOut = false;
-  S.slots = ITEMS.map(it => it.chunks.map(()=>null));
+  S.slots = ITEMS.map(it => Array(nBlanks(it)).fill(null));
   S.history = ITEMS.map(()=>[]);
   S.seconds = TOTAL_SECONDS;
   tick = setInterval(onTick, 1000);
@@ -929,12 +845,9 @@ function onTick(){
   if (S.screen === "results") return;
   S.seconds--;
   if (S.seconds <= 0){
-    S.seconds = 0;
-    clearInterval(tick);
-    S.timedOut = true;
-    S.screen = "results";
-    render(); window.scrollTo(0,0);
-    return;
+    S.seconds = 0; clearInterval(tick);
+    S.timedOut = true; S.screen = "results";
+    render(); window.scrollTo(0,0); return;
   }
   renderChrome();
 }
@@ -946,22 +859,22 @@ function openHelp(){
     <header><span>Help &mdash; Build a Sentence</span></header>
     <div class="body">
       <h3>What the question asks</h3>
-      <p>Every answer choice must be used exactly once, and the finished sentence must be grammatically correct. Some sentences have more than one correct arrangement; any correct one is scored as right.</p>
+      <p>Someone speaks to you. Fill the blanks in your reply so that it is grammatical and fits what was said. Some questions give you more words than blanks &mdash; move only the words you need, and leave the rest in the bank.</p>
       <h3>With a mouse or on a touchscreen</h3>
       <ul>
-        <li>Drag an answer choice onto a blank.</li>
-        <li>Drag a choice already on a blank to another blank to trade their places, or back to the answer-choice area to remove it.</li>
-        <li>Or select a choice, then select a blank.</li>
+        <li>Drag a word onto a blank.</li>
+        <li>Drag a word already in a blank to another blank to trade their places, or back to the bank to remove it.</li>
+        <li>Or select a word, then select a blank.</li>
       </ul>
       <h3>With the keyboard</h3>
       <ul>
-        <li><kbd>Tab</kbd> moves between blanks and answer choices.</li>
-        <li><kbd>Enter</kbd> picks up a choice, then <kbd>Enter</kbd> on a blank places it.</li>
-        <li><kbd>Backspace</kbd> on a blank returns that choice.</li>
+        <li><kbd>Tab</kbd> moves between blanks and words.</li>
+        <li><kbd>Enter</kbd> picks up a word, then <kbd>Enter</kbd> on a blank places it.</li>
+        <li><kbd>Backspace</kbd> on a blank returns that word.</li>
         <li><kbd>Esc</kbd> cancels a selection.</li>
       </ul>
-      <h3>Moving through the section</h3>
-      <p><b>Next</b> and <b>Back</b> move between questions; <b>Review</b> shows which sentences are unfinished. The section is scored when you end it or when the clock runs out. <b>Hide Time</b> conceals the clock without stopping it.</p>
+      <h3>Scoring and timing</h3>
+      <p>Ten questions in six minutes, about 36 seconds each. A sentence earns 1.0 only when every word is in the right blank; one word out of place scores 0.0. The task is scored when you end it or when the clock runs out.</p>
     </div>
     <footer><button class="cbtn primary" id="bCloseHelp">Return to Question</button></footer>
   </div>`;
@@ -979,8 +892,7 @@ function closeHelp(){
 /* carry state across a republish when the host supports it */
 function boot(saved){
   if (saved && saved.slots && saved.slots.length === ITEMS.length){
-    Object.assign(S, saved);
-    S.sel = null;
+    Object.assign(S, saved); S.sel = null;
   }
   render();
 }
@@ -990,9 +902,7 @@ if (window.claude && window.claude.hot){
     seconds:S.seconds, timeHidden:S.timeHidden, timedOut:S.timedOut
   }));
   window.claude.hot.ready ? window.claude.hot.ready(boot) : boot(window.claude.hot.data);
-} else {
-  boot(null);
-}
+} else { boot(null); }
 </script>
 </body>
 </html>
