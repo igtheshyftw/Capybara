@@ -126,6 +126,26 @@ button{font:inherit;color:inherit}
   color:var(--ink-3);font-weight:600;padding-top:2px;white-space:nowrap;
 }
 .strip p{margin:0;color:var(--ink-2);font-size:13.5px;max-width:66ch}
+.strip-in{align-items:flex-start}
+.mode{display:flex;align-items:center;gap:0;margin-left:auto;flex:none}
+.mode-lab{
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;margin-right:8px;
+}
+.mode button{
+  appearance:none;cursor:pointer;background:var(--paper);
+  border:1px solid var(--rule);border-right-width:0;
+  color:var(--ink-2);font-size:12px;padding:4px 11px;
+}
+.mode button:first-of-type{border-radius:3px 0 0 3px}
+.mode button:last-of-type{border-right-width:1px;border-radius:0 3px 3px 0}
+.mode button:hover{color:var(--accent)}
+.mode button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.mode button.on + button{border-left-color:var(--accent)}
+@media (max-width:720px){
+  .strip-in{flex-wrap:wrap}
+  .mode{margin-left:0;margin-top:10px}
+}
 
 /* ---------- test page ---------- */
 main{padding:22px 16px 120px}
@@ -265,6 +285,11 @@ td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
 .rep-hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
 .rep-hd .n{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
 .rep-hd .tgt{font-size:13px;font-weight:600;color:var(--ink);margin-right:auto}
+.tier{
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  color:var(--warn);border:1px solid var(--warn);border-radius:2px;
+  padding:1px 5px;margin-left:4px;vertical-align:1px;
+}
 .ctx{font-family:var(--serif);font-size:14.5px;color:var(--ink-3);font-style:italic;margin:0 0 10px}
 .sent{font-family:var(--serif);font-size:16px;line-height:1.6;margin:0 0 4px;color:var(--ink)}
 .sent.bad{color:var(--no)}
@@ -320,6 +345,12 @@ td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
   <div class="strip-in">
     <span class="dirlabel">Directions</span>
     <p>You will move words and phrases into the blanks so that they form a grammatical sentence that fits the conversation. For some questions there are more words than blanks; move only the words you need. Each sentence is scored correct or incorrect &mdash; there is no partial credit.</p>
+    <div class="mode" role="group" aria-label="Question difficulty">
+      <span class="mode-lab">Level</span>
+      <button type="button" data-mode="mixed" class="on">Mixed</button>
+      <button type="button" data-mode="standard">Standard</button>
+      <button type="button" data-mode="hard">Hard</button>
+    </div>
   </div>
 </div>
 
@@ -377,7 +408,27 @@ const PATTERNS = [
 {"target": "Frequency adverb placement", "why": "A frequency adverb goes before a main verb, but after <i>be</i> and after the first auxiliary: {ans}."},
 {"target": "Future perfect and future continuous", "why": "<i>Will have</i> plus a past participle looks back from a future point; <i>will be</i> plus an <i>-ing</i> form describes something in progress then: {ans}."},
 {"target": "Concessive clause", "why": "<i>Although</i> and <i>even though</i> introduce a clause, while <i>despite</i> and <i>in spite of</i> introduce a noun phrase or gerund: {ans}."},
-{"target": "Purpose clause", "why": "Purpose is expressed by <i>so that</i> plus a clause or <i>in order to</i> plus a base verb: {ans}."}
+{"target": "Purpose clause", "why": "Purpose is expressed by <i>so that</i> plus a clause or <i>in order to</i> plus a base verb: {ans}."},
+{"target": "Conditional inversion without <i>if</i>", "why": "A conditional can drop <i>if</i> and invert the subject with <i>had</i>, <i>were</i> or <i>should</i> instead: {ans}.", "h": 1},
+{"target": "Mandative subjunctive", "why": "After verbs and adjectives of demand or recommendation the <i>that</i> clause takes the bare base form, with no tense marking and no <i>to</i>: {ans}.", "h": 1},
+{"target": "<i>It</i>-cleft for emphasis", "why": "An <i>it</i>-cleft moves the emphasised element next to <i>it was</i> and puts the rest in a <i>that</i> or <i>who</i> clause: {ans}.", "h": 1},
+{"target": "Pseudo-cleft with <i>what</i>", "why": "A <i>what</i> clause can serve as the whole subject, with <i>is</i> or <i>was</i> linking it to the emphasised element: {ans}.", "h": 1},
+{"target": "Fronted <i>no sooner</i> and <i>hardly</i>", "why": "<i>No sooner</i>, <i>hardly</i> and <i>scarcely</i> at the front force inversion, and are answered by <i>than</i> or <i>when</i>: {ans}.", "h": 1},
+{"target": "Preposition before <i>whom</i> or <i>which</i>", "why": "In formal English the preposition moves to the front of the relative clause and takes <i>whom</i> or <i>which</i>, never <i>who</i> or <i>that</i>: {ans}.", "h": 1},
+{"target": "Concessive inversion", "why": "A fronted adjective followed by <i>though</i> or <i>as</i> concedes a point, inverting the usual order: {ans}.", "h": 1},
+{"target": "Absolute participial construction", "why": "An absolute clause keeps its own subject and attaches a participle to it, with no conjunction: {ans}.", "h": 1},
+{"target": "Inversion after fronted <i>not only</i>", "why": "<i>Not only</i> at the front of a clause forces the auxiliary in front of the subject, and the second clause carries <i>but</i>: {ans}.", "h": 1},
+{"target": "Extraposed subject clause", "why": "<i>It</i> stands in for a clause that has been moved to the end of the sentence: {ans}.", "h": 1},
+{"target": "Reporting passive with a perfect infinitive", "why": "<i>Is said/believed/thought to have</i> plus a past participle reports a claim about an earlier event: {ans}.", "h": 1},
+{"target": "Modal perfect passive", "why": "A modal followed by <i>have been</i> plus a past participle judges something that was or was not done to the subject: {ans}.", "h": 1},
+{"target": "Nested embedded question", "why": "A question inside a question keeps statement order at every level, however deep the nesting: {ans}.", "h": 1},
+{"target": "Quantifier with <i>of whom</i> or <i>of which</i>", "why": "A non-restrictive clause can open with a quantifier plus <i>of whom</i> or <i>of which</i>, which replaces a pronoun rather than adding one: {ans}.", "h": 1},
+{"target": "Ellipsis with <i>so</i>, <i>neither</i> and <i>nor</i>", "why": "A short agreeing clause inverts the auxiliary after <i>so</i>, <i>neither</i> or <i>nor</i>, and the main verb is left out: {ans}.", "h": 1},
+{"target": "Inversion after fronted <i>only</i>", "why": "A fronted <i>only</i> phrase pushes the auxiliary in front of the subject of the main clause, while the <i>only</i> clause itself keeps normal order: {ans}.", "h": 1},
+{"target": "Comparative with an elliptical <i>than</i> clause", "why": "A formal <i>than</i> clause can leave out the repeated element entirely, keeping only what contrasts: {ans}.", "h": 1},
+{"target": "Locative inversion", "why": "When a place or time phrase opens the sentence, the verb can come before its subject: {ans}.", "h": 1},
+{"target": "Agreement inside <i>one of the …</i>", "why": "In <i>one of the X that/who …</i> the relative clause describes the plural group, so its verb is plural: {ans}.", "h": 1},
+{"target": "Clause after a preposition", "why": "A preposition can take a whole clause as its object, introduced by <i>whether</i> or a question word but never by <i>that</i> or <i>if</i>: {ans}.", "h": 1}
 ];
 const BANK = [
 [0, "Classmate", "Did the advisor say anything about the deadline?", "She asked _ _ _ _ _ the application.", ["when", "I", "planned", "to", "submit"], ["did"]],
@@ -1179,7 +1230,407 @@ const BANK = [
 [39, "Group member", "Why the second sensor?", "We added one _ _ _ _ the readings.", ["in", "order", "to", "check"], ["for"]],
 [39, "Dorm RA", "Why email the group?", "I messaged everyone _ _ _ _ it.", ["so", "that", "nobody", "misses"], ["for"]],
 [39, "Trainer", "Why leave a margin?", "Leave space _ _ _ _ comments.", ["in", "order", "to", "add"], ["for"]],
-[39, "Mentor", "Why the rehearsal?", "We rehearse _ _ _ _ feels natural.", ["so", "that", "the", "timing"], []]
+[39, "Mentor", "Why the rehearsal?", "We rehearse _ _ _ _ feels natural.", ["so", "that", "the", "timing"], []],
+[40, "Classmate", "Why didn't you come to the opening?", "Honestly, _ _ _ _ _ _ , I would have come.", ["had", "I", "known", "about", "it", "earlier"], ["if", "would"]],
+[40, "Roommate", "Could the project have been saved?", "Frankly, _ _ _ _ _ _ , we would have finished.", ["had", "the", "funding", "arrived", "on", "time"], ["if", "would"]],
+[40, "Professor", "What if I need an extension?", "Just ask; _ _ _ _ _ , the office can help.", ["should", "you", "need", "more", "time"], ["if", "would"]],
+[40, "Advisor", "Was the trip ever in doubt?", "Certainly; _ _ _ _ _ _ , we would have cancelled.", ["were", "it", "not", "for", "her", "passport"], ["if", "would"]],
+[40, "Friend", "Why did the talk go so well?", "Simply put, _ _ _ _ _ _ , it would have failed.", ["had", "he", "not", "rehearsed", "so", "carefully"], ["if", "would"]],
+[40, "Coach", "Do I have to decide tonight?", "No; _ _ _ _ _ _ day, nobody will mind.", ["should", "you", "prefer", "to", "wait", "a"], ["if", "would"]],
+[40, "Librarian", "Would the result have changed?", "Probably; _ _ _ _ _ , the effect would have shown.", ["had", "the", "sample", "been", "larger"], ["if", "would"]],
+[40, "Teammate", "Is the grant secure?", "Barely; _ _ _ _ _ , the lab would close.", ["were", "the", "sponsor", "to", "withdraw"], ["if", "would"]],
+[40, "Neighbor", "Why was the flight so cheap?", "Apparently, _ _ _ _ _ _ , it would have doubled.", ["had", "we", "booked", "a", "week", "later"], ["if", "would"]],
+[40, "Tutor", "Can I still join the trip?", "Yes; _ _ _ _ _ , I will tell you.", ["should", "a", "place", "become", "available"], ["if", "would"]],
+[40, "Lab partner", "Did anyone predict the failure?", "Nobody did; _ _ _ _ _ , nothing would have broken.", ["had", "the", "warning", "been", "read"], ["if", "would"]],
+[40, "Counselor", "What if the weather turns?", "Relax; _ _ _ _ _ , we would move indoors.", ["were", "it", "to", "rain", "tomorrow"], ["if", "would"]],
+[40, "Colleague", "Why is she so far ahead?", "Simply, _ _ _ _ _ , she would be behind.", ["had", "she", "started", "any", "later"], ["if", "would"]],
+[40, "Supervisor", "Is the deadline negotiable?", "Occasionally; _ _ _ _ _ _ , an extension is possible.", ["should", "the", "committee", "agree", "in", "writing"], ["if", "would"]],
+[40, "Host", "Would you have taken the job?", "Certainly; _ _ _ _ _ _ , I would have accepted.", ["had", "the", "offer", "come", "in", "spring"], ["if", "would"]],
+[40, "Coworker", "Was the evacuation necessary?", "Absolutely; _ _ _ _ _ _ , the road would flood.", ["were", "the", "river", "to", "rise", "further"], ["if", "would"]],
+[40, "Group member", "Why did the deal collapse?", "Put simply, _ _ _ _ _ , it would have held.", ["had", "either", "side", "compromised", "slightly"], ["if", "would"]],
+[40, "Dorm RA", "Can the equipment be replaced?", "Possibly; _ _ _ _ _ , we will order more.", ["should", "the", "budget", "allow", "it"], ["if", "would"]],
+[40, "Trainer", "Did the delay matter?", "Enormously; _ _ _ _ _ _ , we would have launched.", ["had", "the", "parts", "shipped", "on", "schedule"], ["if", "would"]],
+[40, "Mentor", "What if nobody signs up?", "Well, _ _ _ _ _ _ , the course would close.", ["were", "attendance", "to", "fall", "below", "ten"], ["if", "would"]],
+[41, "Classmate", "What did the professor insist on?", "She insisted _ _ _ _ _ _ time.", ["that", "every", "student", "be", "present", "on"], ["is", "to"]],
+[41, "Roommate", "What did the committee recommend?", "They recommended _ _ _ _ _ _ submission.", ["that", "the", "proposal", "be", "revised", "before"], ["is", "to"]],
+[41, "Professor", "What did he ask for?", "He demanded _ _ _ _ _ _ the list.", ["that", "his", "name", "be", "removed", "from"], ["is", "to"]],
+[41, "Advisor", "What was the advice?", "The dean suggested _ _ _ _ _ _ next term.", ["that", "she", "take", "a", "lighter", "load"], ["is", "to"]],
+[41, "Friend", "What did the board decide?", "It was essential _ _ _ _ _ _ personally.", ["that", "every", "member", "sign", "the", "form"], ["is", "to"]],
+[41, "Coach", "What did the doctor say?", "She insisted _ _ _ _ _ _ week.", ["that", "he", "rest", "for", "a", "full"], ["is", "to"]],
+[41, "Librarian", "What did the panel require?", "They required _ _ _ _ _ _ in advance.", ["that", "each", "applicant", "submit", "two", "references"], ["is", "to"]],
+[41, "Teammate", "What did the union propose?", "They proposed _ _ _ _ _ _ year.", ["that", "the", "policy", "be", "reviewed", "every"], ["is", "to"]],
+[41, "Neighbor", "What did she request?", "She asked _ _ _ _ _ _ Thursday.", ["that", "the", "meeting", "be", "moved", "to"], ["is", "was"]],
+[41, "Tutor", "What is the rule?", "Regulations demand _ _ _ _ _ _ leaves.", ["that", "equipment", "be", "logged", "before", "it"], ["is", "to"]],
+[41, "Lab partner", "What did the editor insist on?", "He insisted _ _ _ _ _ _ second time.", ["that", "the", "figures", "be", "checked", "a"], ["is", "to"]],
+[41, "Counselor", "What did the council urge?", "They urged _ _ _ _ _ _ .", ["that", "construction", "be", "halted", "until", "spring"], ["is", "to"]],
+[41, "Colleague", "What did the advisor propose?", "He proposed _ _ _ _ _ _ June.", ["that", "I", "defer", "the", "exam", "until"], ["is", "to"]],
+[41, "Supervisor", "What does the grant require?", "It requires _ _ _ _ _ _ years.", ["that", "results", "be", "published", "within", "two"], ["is", "to"]],
+[41, "Host", "What did the chair move?", "She moved _ _ _ _ _ _ week.", ["that", "the", "vote", "be", "postponed", "one"], ["is", "to"]],
+[41, "Coworker", "What did the landlord insist?", "He insisted _ _ _ _ _ _ first.", ["that", "we", "give", "a", "month's", "notice"], ["is", "to"]],
+[41, "Group member", "What did the court order?", "It ordered _ _ _ _ _ _ a decade.", ["that", "the", "records", "be", "sealed", "for"], ["is", "to"]],
+[41, "Dorm RA", "What was the recommendation?", "It was vital _ _ _ _ _ _ announcement.", ["that", "nobody", "be", "told", "before", "the"], ["is", "to"]],
+[41, "Trainer", "What did the coach demand?", "He demanded _ _ _ _ _ _ .", ["that", "everyone", "arrive", "thirty", "minutes", "early"], ["is", "to"]],
+[41, "Mentor", "What did the office suggest?", "They suggested _ _ _ _ _ _ instead.", ["that", "the", "form", "be", "completed", "online"], ["is", "to"]],
+[42, "Classmate", "Who actually found the error?", "It _ _ _ _ _ _ it.", ["was", "a", "second-year", "student", "who", "spotted"], ["what", "which"]],
+[42, "Roommate", "Was it the data that failed?", "No, it _ _ _ _ _ _ wrong readings.", ["was", "the", "sensor", "that", "gave", "the"], ["what", "which"]],
+[42, "Professor", "Did she choose the topic?", "Actually it _ _ _ _ _ _ originally.", ["was", "her", "supervisor", "who", "suggested", "it"], ["what", "which"]],
+[42, "Advisor", "Why is this edition special?", "It _ _ _ _ _ _ version valuable.", ["is", "the", "preface", "that", "makes", "this"], ["what", "which"]],
+[42, "Friend", "What caused the delay?", "It _ _ _ _ _ _ everything up.", ["was", "the", "customs", "check", "that", "held"], ["what", "which"]],
+[42, "Coach", "Did the storm close the road?", "No, it _ _ _ _ _ _ pass.", ["was", "the", "landslide", "that", "blocked", "the"], ["what", "which"]],
+[42, "Librarian", "Who paid for the trip?", "It _ _ _ _ _ _ flights.", ["was", "the", "department", "that", "covered", "the"], ["what", "which"]],
+[42, "Teammate", "When did she decide?", "It _ _ _ _ _ _ chose.", ["was", "only", "last", "week", "that", "she"], ["what", "which"]],
+[42, "Neighbor", "What convinced the panel?", "It _ _ _ _ _ _ most.", ["was", "the", "fieldwork", "that", "impressed", "them"], ["what", "which"]],
+[42, "Tutor", "Was it the noise?", "No, it _ _ _ _ _ _ samples.", ["was", "the", "temperature", "that", "ruined", "the"], ["what", "which"]],
+[42, "Lab partner", "Who suggested the change?", "It _ _ _ _ _ _ it.", ["was", "a", "junior", "colleague", "who", "raised"], ["what", "which"]],
+[42, "Counselor", "Where did they meet?", "It _ _ _ _ _ _ first met.", ["was", "in", "the", "archive", "that", "they"], ["what", "which"]],
+[42, "Colleague", "What does the paper argue?", "It _ _ _ _ _ _ disputes.", ["is", "the", "timing", "that", "the", "author"], ["what", "which"]],
+[42, "Supervisor", "Did the funding help?", "It _ _ _ _ _ _ difference.", ["was", "the", "equipment", "that", "made", "the"], ["what", "which"]],
+[42, "Host", "Who wrote the report?", "It _ _ _ _ _ _ it.", ["was", "the", "two", "interns", "who", "drafted"], ["what", "which"]],
+[42, "Coworker", "Why did the plan change?", "It _ _ _ _ _ _ delay.", ["was", "the", "weather", "that", "forced", "the"], ["what", "which"]],
+[42, "Group member", "What worried the reviewers?", "It _ _ _ _ _ _ them.", ["was", "the", "sample", "size", "that", "troubled"], ["what", "which"]],
+[42, "Dorm RA", "Did he mention the cost?", "It _ _ _ _ _ _ , not the cost.", ["was", "the", "schedule", "that", "he", "questioned"], ["what", "which"]],
+[42, "Trainer", "Who runs the seminar?", "It _ _ _ _ _ _ it.", ["is", "a", "visiting", "fellow", "who", "leads"], ["what", "which"]],
+[42, "Mentor", "What made the difference?", "It _ _ _ _ _ _ the prize.", ["was", "her", "second", "draft", "that", "won"], ["what", "which"]],
+[43, "Classmate", "Why are you rewriting it?", "What _ _ _ _ _ _ opening.", ["the", "argument", "needs", "is", "a", "clearer"], ["that", "which"]],
+[43, "Roommate", "What did the study actually show?", "What _ _ _ _ _ _ matters most.", ["the", "data", "suggest", "is", "that", "temperature"], ["which", "it"]],
+[43, "Professor", "Why did she leave?", "What _ _ _ _ _ _ research.", ["she", "wanted", "was", "more", "time", "for"], ["that", "which"]],
+[43, "Advisor", "What went wrong?", "What _ _ _ _ _ _ failed.", ["surprised", "everyone", "was", "how", "quickly", "it"], ["that", "which"]],
+[43, "Friend", "What should I focus on?", "What _ _ _ _ _ _ the steps.", ["matters", "here", "is", "the", "order", "of"], ["that", "which"]],
+[43, "Coach", "Why change the method?", "What _ _ _ _ _ _ sampling.", ["the", "committee", "objected", "to", "was", "the"], ["that", "which"]],
+[43, "Librarian", "What impressed the panel?", "What _ _ _ _ _ _ her answers.", ["impressed", "them", "was", "the", "clarity", "of"], ["that", "which"]],
+[43, "Teammate", "Why is the section confusing?", "What _ _ _ _ _ _ example.", ["the", "chapter", "lacks", "is", "a", "worked"], ["that", "which"]],
+[43, "Neighbor", "What did he actually say?", "What _ _ _ _ _ _ checked.", ["he", "meant", "was", "that", "nobody", "had"], ["which", "it"]],
+[43, "Tutor", "Why did the plan fail?", "What _ _ _ _ _ _ transport.", ["nobody", "anticipated", "was", "the", "cost", "of"], ["that", "which"]],
+[43, "Lab partner", "What do you need from me?", "What _ _ _ _ _ _ reader.", ["would", "help", "most", "is", "a", "second"], ["that", "which"]],
+[43, "Counselor", "What changed your mind?", "What _ _ _ _ _ _ of results.", ["convinced", "me", "was", "the", "third", "set"], ["that", "which"]],
+[43, "Colleague", "What is the real problem?", "What _ _ _ _ _ _ group.", ["worries", "me", "is", "the", "missing", "control"], ["that", "which"]],
+[43, "Supervisor", "Why did they reject it?", "What _ _ _ _ _ _ the abstract.", ["they", "disliked", "was", "the", "tone", "of"], ["that", "which"]],
+[43, "Host", "What should we cut?", "What _ _ _ _ _ _ section.", ["we", "can", "remove", "is", "the", "historical"], ["that", "which"]],
+[43, "Coworker", "What did the review recommend?", "What _ _ _ _ _ _ detail.", ["the", "reviewers", "asked", "for", "was", "more"], ["that", "which"]],
+[43, "Group member", "Why is she ahead?", "What _ _ _ _ _ _ whole term.", ["she", "does", "differently", "is", "plan", "the"], ["that", "which"]],
+[43, "Dorm RA", "What made the talk work?", "What _ _ _ _ _ _ anecdote.", ["held", "the", "room", "was", "the", "opening"], ["that", "which"]],
+[43, "Trainer", "What do you remember most?", "What _ _ _ _ _ _ question.", ["stayed", "with", "me", "was", "the", "final"], ["that", "which"]],
+[43, "Mentor", "Why are the results odd?", "What _ _ _ _ _ _ pattern.", ["the", "numbers", "show", "is", "an", "unexpected"], ["that", "which"]],
+[44, "Classmate", "Did the rain hold off?", "No sooner _ _ _ _ _ _ poured.", ["had", "we", "set", "up", "than", "it"], ["then", "as"]],
+[44, "Roommate", "Was there time to prepare?", "Hardly _ _ _ _ _ _ the power cut.", ["had", "I", "opened", "the", "file", "when"], ["then", "as"]],
+[44, "Professor", "Did she settle in quickly?", "No sooner _ _ _ _ _ _ organising everyone.", ["had", "she", "arrived", "than", "she", "was"], ["then", "as"]],
+[44, "Advisor", "Did the news travel?", "Scarcely _ _ _ _ _ _ the phone rang.", ["had", "the", "email", "gone", "out", "when"], ["then", "as"]],
+[44, "Friend", "Was the repair quick?", "No sooner _ _ _ _ _ _ another started.", ["had", "they", "fixed", "one", "leak", "than"], ["then", "as"]],
+[44, "Coach", "Did the meeting run smoothly?", "Hardly _ _ _ _ _ _ alarm sounded.", ["had", "we", "begun", "when", "the", "fire"], ["then", "as"]],
+[44, "Librarian", "Did he rest at all?", "No sooner _ _ _ _ _ _ straight to work.", ["had", "he", "landed", "than", "he", "went"], ["then", "as"]],
+[44, "Teammate", "Was the queue long?", "Scarcely _ _ _ _ _ _ it moved.", ["had", "I", "joined", "the", "line", "when"], ["then", "as"]],
+[44, "Neighbor", "Did the storm pass?", "No sooner _ _ _ _ _ _ rain began.", ["had", "the", "wind", "dropped", "than", "the"], ["then", "as"]],
+[44, "Tutor", "Did anyone notice?", "Hardly _ _ _ _ _ _ audience quieted.", ["had", "the", "lights", "dimmed", "when", "the"], ["then", "as"]],
+[44, "Lab partner", "Did they start work?", "No sooner _ _ _ _ _ _ began.", ["had", "the", "permit", "arrived", "than", "digging"], ["then", "as"]],
+[44, "Counselor", "Was the book popular?", "Scarcely _ _ _ _ _ _ printing sold out.", ["had", "it", "appeared", "when", "the", "first"], ["then", "as"]],
+[44, "Colleague", "Did she reply?", "No sooner _ _ _ _ _ _ answered.", ["had", "I", "pressed", "send", "than", "she"], ["then", "as"]],
+[44, "Supervisor", "Did the term feel long?", "Hardly _ _ _ _ _ _ announced.", ["had", "classes", "started", "when", "exams", "were"], ["then", "as"]],
+[44, "Host", "Was the road cleared?", "No sooner _ _ _ _ _ _ appeared.", ["had", "the", "snow", "stopped", "than", "ploughs"], ["then", "as"]],
+[44, "Coworker", "Did the crowd settle?", "Scarcely _ _ _ _ _ _ interrupted.", ["had", "the", "speaker", "begun", "when", "someone"], ["then", "as"]],
+[44, "Group member", "Did you get a seat?", "No sooner _ _ _ _ _ _ seat filled.", ["had", "the", "doors", "opened", "than", "every"], ["then", "as"]],
+[44, "Dorm RA", "Was the fault found?", "Hardly _ _ _ _ _ _ saw it.", ["had", "the", "engineer", "looked", "when", "she"], ["then", "as"]],
+[44, "Trainer", "Did the price hold?", "No sooner _ _ _ _ _ _ changed.", ["had", "we", "agreed", "than", "the", "rate"], ["then", "as"]],
+[44, "Mentor", "Did they finish the season?", "Scarcely _ _ _ _ _ _ returned.", ["had", "the", "team", "recovered", "when", "injuries"], ["then", "as"]],
+[45, "Classmate", "Which colleague do you mean?", "I mean the researcher _ _ _ _ _ _ office.", ["with", "whom", "I", "have", "shared", "an"], ["who", "that"]],
+[45, "Roommate", "Which journal published it?", "It appeared in a journal _ _ _ _ _ _ subscribes.", ["to", "which", "our", "library", "no", "longer"], ["who", "that"]],
+[45, "Professor", "Which committee decided?", "It was the panel _ _ _ _ _ _ .", ["on", "which", "she", "served", "last", "year"], ["who", "that"]],
+[45, "Advisor", "Which supervisor signed it?", "The professor _ _ _ _ _ _ signed it.", ["under", "whom", "I", "worked", "last", "year"], ["who", "that"]],
+[45, "Friend", "Which building was it?", "The hall _ _ _ _ _ _ has closed.", ["in", "which", "the", "lecture", "was", "held"], ["who", "that"]],
+[45, "Coach", "Which grant paid for it?", "The fund _ _ _ _ _ _ has ended.", ["from", "which", "we", "drew", "the", "money"], ["who", "that"]],
+[45, "Librarian", "Which student did you mention?", "The candidate _ _ _ _ _ _ withdrew.", ["about", "whom", "we", "spoke", "last", "week"], ["who", "that"]],
+[45, "Teammate", "Which method did you use?", "The technique _ _ _ _ _ _ is standard.", ["by", "which", "the", "samples", "were", "dated"], ["who", "that"]],
+[45, "Neighbor", "Which archive holds it?", "The collection _ _ _ _ _ _ private.", ["to", "which", "the", "letters", "belong", "is"], ["who", "that"]],
+[45, "Tutor", "Which colleagues attended?", "The delegates _ _ _ _ _ _ economists.", ["among", "whom", "she", "sat", "were", "all"], ["who", "that"]],
+[45, "Lab partner", "Which chapter covers it?", "The section _ _ _ _ _ _ is short.", ["in", "which", "he", "outlines", "the", "model"], ["who", "that"]],
+[45, "Counselor", "Which laboratory tested it?", "The facility _ _ _ _ _ _ has moved.", ["at", "which", "the", "work", "was", "done"], ["who", "that"]],
+[45, "Colleague", "Which mentor helped most?", "The tutor _ _ _ _ _ _ retired.", ["without", "whom", "I", "would", "have", "failed"], ["who", "that"]],
+[45, "Supervisor", "Which river was surveyed?", "The valley _ _ _ _ _ _ protected.", ["through", "which", "the", "river", "runs", "is"], ["who", "that"]],
+[45, "Host", "Which author do you cite?", "The historian _ _ _ _ _ _ contested.", ["upon", "whom", "the", "argument", "rests", "is"], ["who", "that"]],
+[45, "Coworker", "Which period does it cover?", "The decade _ _ _ _ _ _ documented.", ["during", "which", "the", "trade", "collapsed", "is"], ["who", "that"]],
+[45, "Group member", "Which conference was it?", "The meeting _ _ _ _ _ _ small.", ["at", "which", "they", "first", "presented", "was"], ["who", "that"]],
+[45, "Dorm RA", "Which colleagues signed?", "The staff _ _ _ _ _ _ objected.", ["for", "whom", "the", "policy", "was", "written"], ["who", "that"]],
+[45, "Trainer", "Which sources survive?", "The records _ _ _ _ _ _ medieval.", ["of", "which", "only", "fragments", "remain", "are"], ["who", "that"]],
+[45, "Mentor", "Which bridge collapsed?", "The crossing _ _ _ _ _ _ old.", ["over", "which", "the", "lorries", "passed", "was"], ["who", "that"]],
+[46, "Classmate", "Was the climb hard?", "Yes; _ _ _ _ _ , we reached the summit.", ["hard", "though", "the", "climb", "was"], ["although", "however"]],
+[46, "Roommate", "Did you manage to persuade her?", "No; _ _ _ _ _ , I could not persuade her.", ["much", "as", "I", "wanted", "to"], ["although", "however"]],
+[46, "Professor", "Was the evidence convincing?", "Somewhat; _ _ _ _ _ , doubts remained.", ["strong", "though", "the", "data", "were"], ["although", "however"]],
+[46, "Advisor", "Did the delay matter?", "A little; _ _ _ _ _ , we still finished.", ["late", "as", "the", "parts", "arrived"], ["although", "however"]],
+[46, "Friend", "Is the method popular?", "Rarely; _ _ _ _ _ , few laboratories use it.", ["elegant", "though", "the", "method", "is"], ["although", "however"]],
+[46, "Coach", "Did she enjoy the course?", "Mostly; _ _ _ _ _ , she learned a lot.", ["demanding", "as", "the", "course", "was"], ["although", "however"]],
+[46, "Librarian", "Was the room adequate?", "Barely; _ _ _ _ _ , everyone fitted.", ["small", "though", "the", "space", "was"], ["although", "however"]],
+[46, "Teammate", "Did the argument persuade you?", "Partly; _ _ _ _ _ , I disagreed.", ["clever", "as", "the", "reasoning", "was"], ["although", "however"]],
+[46, "Neighbor", "Was the journey worth it?", "Certainly; _ _ _ _ _ , the site amazed us.", ["long", "though", "the", "drive", "was"], ["although", "however"]],
+[46, "Tutor", "Did he finish the race?", "He did; _ _ _ _ _ , he finished.", ["exhausted", "though", "he", "clearly", "was"], ["although", "however"]],
+[46, "Lab partner", "Was the funding enough?", "Hardly; _ _ _ _ _ , costs rose.", ["generous", "though", "the", "grant", "seemed"], ["although", "however"]],
+[46, "Counselor", "Did the plan convince the board?", "Eventually; _ _ _ _ _ , they approved it.", ["risky", "as", "the", "proposal", "looked"], ["although", "however"]],
+[46, "Colleague", "Is the software reliable?", "Mostly; _ _ _ _ _ , it rarely fails.", ["old", "though", "the", "system", "is"], ["although", "however"]],
+[46, "Supervisor", "Did the team improve?", "Slowly; _ _ _ _ _ , results came late.", ["talented", "as", "the", "players", "were"], ["although", "however"]],
+[46, "Host", "Was the lecture clear?", "Broadly; _ _ _ _ _ , he explained it well.", ["technical", "though", "the", "subject", "was"], ["although", "however"]],
+[46, "Coworker", "Did you finish the novel?", "Eventually; _ _ _ _ _ , I persevered.", ["dense", "as", "the", "prose", "was"], ["although", "however"]],
+[46, "Group member", "Was the museum worth visiting?", "Very; _ _ _ _ _ , the collection impressed.", ["crowded", "though", "the", "galleries", "were"], ["although", "however"]],
+[46, "Dorm RA", "Did the repair hold?", "So far; _ _ _ _ _ , nothing has leaked.", ["temporary", "as", "the", "fix", "is"], ["although", "however"]],
+[46, "Trainer", "Was the summer productive?", "Fairly; _ _ _ _ _ , we gathered enough.", ["short", "though", "the", "season", "was"], ["although", "however"]],
+[46, "Mentor", "Did she accept the criticism?", "Gracefully; _ _ _ _ _ , she thanked them.", ["harsh", "as", "the", "review", "was"], ["although", "however"]],
+[47, "Classmate", "When did the analysis start?", "The data _ _ _ _ _ , we began analysis.", ["having", "been", "collected", "over", "winter"], ["because", "and"]],
+[47, "Roommate", "Why did the meeting end early?", "The agenda _ _ _ , _ _ _ it.", ["having", "been", "exhausted", "the", "chair", "closed"], ["because", "and"]],
+[47, "Professor", "When can we publish?", "The results _ _ _ _ _ _ , publication can proceed.", ["having", "been", "verified", "by", "two", "reviewers"], ["because", "and"]],
+[47, "Advisor", "Why is the site quiet?", "The permits _ _ _ _ _ , work has stopped.", ["having", "been", "withdrawn", "last", "month"], ["because", "and"]],
+[47, "Friend", "When did they leave?", "The storm _ _ _ _ _ , the crew departed.", ["having", "passed", "by", "early", "morning"], ["because", "and"]],
+[47, "Coach", "Why was the room rearranged?", "The seating _ _ _ _ _ , staff rebuilt it.", ["having", "proved", "inadequate", "once", "before"], ["because", "and"]],
+[47, "Librarian", "When did the price fall?", "Demand _ _ _ _ _ , prices fell sharply.", ["having", "dropped", "through", "the", "winter"], ["because", "and"]],
+[47, "Teammate", "Why did she take the role?", "Her thesis _ _ _ _ _ , she was free.", ["having", "been", "accepted", "that", "spring"], ["because", "and"]],
+[47, "Neighbor", "When will the road reopen?", "The repairs _ _ _ _ _ schedule, it opens tomorrow.", ["having", "been", "completed", "ahead", "of"], ["because", "and"]],
+[47, "Tutor", "Why did they change suppliers?", "The contract _ _ _ _ _ , they looked elsewhere.", ["having", "expired", "in", "the", "autumn"], ["because", "and"]],
+[47, "Lab partner", "When did the term end?", "The examinations _ _ _ _ _ , the campus emptied.", ["having", "finished", "at", "the", "weekend"], ["because", "and"]],
+[47, "Counselor", "Why is the lab empty?", "The grant _ _ _ _ _ , the team dispersed.", ["having", "run", "out", "last", "spring"], ["because", "and"]],
+[47, "Colleague", "When did you start writing?", "The fieldwork _ _ _ _ _ , I began drafting.", ["having", "ended", "in", "late", "summer"], ["because", "and"]],
+[47, "Supervisor", "Why did the case close?", "The witness _ _ _ _ _ , the case collapsed.", ["having", "withdrawn", "her", "written", "statement"], ["because", "and"]],
+[47, "Host", "When did the price stabilise?", "Supply _ _ _ _ _ , costs levelled off.", ["having", "recovered", "over", "the", "spring"], ["because", "and"]],
+[47, "Coworker", "Why was the talk moved?", "The hall _ _ _ _ _ , they used the annexe.", ["having", "been", "double", "booked", "again"], ["because", "and"]],
+[47, "Group member", "When did the work resume?", "The inspection _ _ _ _ _ , building continued.", ["having", "been", "passed", "without", "comment"], ["because", "and"]],
+[47, "Dorm RA", "Why did she decline?", "Another offer _ _ _ _ _ , she chose it.", ["having", "arrived", "the", "same", "week"], ["because", "and"]],
+[47, "Trainer", "When did the river subside?", "The rain _ _ _ _ _ , the level dropped.", ["having", "stopped", "two", "days", "earlier"], ["because", "and"]],
+[47, "Mentor", "Why is the archive closed?", "The catalogue _ _ _ _ _ , access is suspended.", ["having", "been", "lost", "in", "transit"], ["because", "and"]],
+[48, "Classmate", "Did she just finish the draft?", "Not only _ _ _ _ , _ _ also revised twice.", ["did", "she", "finish", "it", "but", "she"], ["and", "too"]],
+[48, "Roommate", "Was the talk just informative?", "Not only _ _ _ , _ _ _ entertaining.", ["was", "it", "informative", "but", "it", "was"], ["and", "too"]],
+[48, "Professor", "Did the grant cover travel?", "Not only _ _ _ _ , _ _ funded equipment.", ["did", "it", "cover", "travel", "but", "it"], ["and", "too"]],
+[48, "Advisor", "Was he late again?", "Not only _ _ _ , _ _ _ the slides.", ["was", "he", "late", "but", "he", "forgot"], ["and", "too"]],
+[48, "Friend", "Did they publish the data?", "Not only _ _ _ _ , _ _ released the code.", ["did", "they", "publish", "it", "but", "they"], ["and", "too"]],
+[48, "Coach", "Was the winter cold?", "Not only _ _ _ , _ _ _ until April.", ["was", "it", "cold", "but", "it", "lasted"], ["and", "too"]],
+[48, "Librarian", "Did she pass the exam?", "Not only _ _ _ , _ _ _ the year.", ["did", "she", "pass", "but", "she", "topped"], ["and", "too"]],
+[48, "Teammate", "Was the museum free?", "Not only _ _ _ , _ _ _ was too.", ["was", "entry", "free", "but", "the", "tour"], ["and", "too"]],
+[48, "Neighbor", "Did the repair work?", "Not only _ _ _ , _ _ _ almost nothing.", ["did", "it", "hold", "but", "it", "cost"], ["and", "too"]],
+[48, "Tutor", "Was the room booked?", "Not only _ _ _ , _ _ _ booked twice.", ["was", "it", "booked", "but", "it", "was"], ["and", "too"]],
+[48, "Lab partner", "Did he apologise?", "Not only _ _ _ , _ _ _ the section.", ["did", "he", "apologise", "but", "he", "rewrote"], ["and", "too"]],
+[48, "Counselor", "Was the paper rejected?", "Not only _ _ _ , _ _ _ were harsh.", ["was", "it", "rejected", "but", "the", "reviewers"], ["and", "too"]],
+[48, "Colleague", "Did the storm damage the roof?", "Not only _ _ _ _ _ , but it flooded the cellar.", ["did", "it", "damage", "the", "roof"], ["and", "too"]],
+[48, "Supervisor", "Was the course useful?", "Not only _ _ _ , _ _ _ my plans.", ["was", "it", "useful", "but", "it", "changed"], ["and", "too"]],
+[48, "Host", "Did they finish on time?", "Not only _ _ _ , _ _ _ early.", ["did", "they", "finish", "but", "they", "finished"], ["and", "too"]],
+[48, "Coworker", "Was the evidence weak?", "Not only _ _ _ , _ _ _ the abstract.", ["was", "it", "weak", "but", "it", "contradicted"], ["and", "too"]],
+[48, "Group member", "Did she learn the language?", "Not only _ _ _ _ , _ _ teaches it now.", ["did", "she", "learn", "it", "but", "she"], ["and", "too"]],
+[48, "Dorm RA", "Was the trip expensive?", "Not only _ _ _ , _ _ _ exhausting.", ["was", "it", "expensive", "but", "it", "was"], ["and", "too"]],
+[48, "Trainer", "Did the software crash?", "Not only _ _ _ , _ _ _ the file.", ["did", "it", "crash", "but", "it", "lost"], ["and", "too"]],
+[48, "Mentor", "Was the audience small?", "Not only _ _ _ , _ _ _ them left.", ["was", "it", "small", "but", "half", "of"], ["and", "too"]],
+[49, "Classmate", "Is the theory settled?", "It _ _ _ _ _ _ climate is warming.", ["is", "now", "widely", "accepted", "that", "the"], ["what", "this"]],
+[49, "Roommate", "Were people shocked?", "It _ _ _ _ _ _ resigned.", ["came", "as", "no", "surprise", "that", "she"], ["what", "this"]],
+[49, "Professor", "Is the timing important?", "It _ _ _ _ _ _ file early.", ["matters", "a", "great", "deal", "that", "we"], ["what", "this"]],
+[49, "Advisor", "Did anyone expect this?", "It _ _ _ _ _ _ data were flawed.", ["had", "long", "been", "suspected", "that", "the"], ["what", "this"]],
+[49, "Friend", "Is the rule clear?", "It _ _ _ _ _ _ is required.", ["remains", "unclear", "to", "everyone", "whether", "attendance"], ["what", "this"]],
+[49, "Coach", "Was the outcome obvious?", "It _ _ _ _ _ _ nobody agreed.", ["was", "apparent", "from", "the", "start", "that"], ["what", "this"]],
+[49, "Librarian", "Does the order matter?", "It _ _ _ _ _ _ first.", ["makes", "little", "difference", "whether", "you", "file"], ["what", "this"]],
+[49, "Teammate", "Is the claim defensible?", "It _ _ _ _ _ _ he verified it.", ["seems", "unlikely", "to", "most", "readers", "that"], ["what", "this"]],
+[49, "Neighbor", "Were they surprised?", "It _ _ _ _ _ _ nobody objected.", ["struck", "the", "committee", "as", "odd", "that"], ["what", "this"]],
+[49, "Tutor", "Is the funding certain?", "It _ _ _ _ _ _ the grant continues.", ["has", "yet", "to", "be", "decided", "whether"], ["what", "this"]],
+[49, "Lab partner", "Did the delay cause problems?", "It _ _ _ _ _ _ nothing was lost.", ["turned", "out", "in", "the", "end", "that"], ["what", "this"]],
+[49, "Counselor", "Is her account reliable?", "It _ _ _ _ _ _ she exaggerated.", ["is", "generally", "agreed", "among", "historians", "that"], ["what", "this"]],
+[49, "Colleague", "Does the method scale?", "It _ _ _ _ _ _ scales.", ["is", "far", "from", "obvious", "that", "it"], ["what", "this"]],
+[49, "Supervisor", "Was the decision popular?", "It _ _ _ _ _ _ staff complained.", ["surprised", "nobody", "in", "the", "department", "that"], ["what", "this"]],
+[49, "Host", "Is the deadline firm?", "It _ _ _ _ _ _ are possible.", ["appears", "from", "the", "notice", "that", "extensions"], ["what", "this"]],
+[49, "Coworker", "Did the study settle it?", "It _ _ _ _ _ _ effect is real.", ["remains", "an", "open", "question", "whether", "the"], ["what", "this"]],
+[49, "Group member", "Was the cost justified?", "It _ _ _ _ _ _ expense was necessary.", ["is", "hard", "to", "argue", "that", "the"], ["what", "this"]],
+[49, "Dorm RA", "Did they know in advance?", "It _ _ _ _ _ _ had resigned.", ["became", "clear", "only", "afterwards", "that", "she"], ["what", "this"]],
+[49, "Trainer", "Is the result reproducible?", "It _ _ _ _ _ _ can repeat it.", ["has", "never", "been", "shown", "that", "others"], ["what", "this"]],
+[49, "Mentor", "Was the reaction expected?", "It _ _ _ _ _ _ attendance halved.", ["was", "something", "of", "a", "shock", "that"], ["what", "this"]],
+[50, "Classmate", "How old is the manuscript?", "The text _ _ _ _ _ _ in the ninth century.", ["is", "said", "to", "have", "been", "written"], ["says", "has"]],
+[50, "Roommate", "Did the company lose money?", "The firm _ _ _ _ _ _ last year.", ["is", "believed", "to", "have", "lost", "millions"], ["says", "has"]],
+[50, "Professor", "Was the site occupied earlier?", "The valley _ _ _ _ _ _ much earlier.", ["is", "thought", "to", "have", "been", "settled"], ["says", "has"]],
+[50, "Advisor", "Is the painting genuine?", "It _ _ _ _ _ _ copied later.", ["is", "now", "known", "to", "have", "been"], ["says", "has"]],
+[50, "Friend", "Did she write the letters?", "She _ _ _ _ _ _ of them.", ["is", "reported", "to", "have", "destroyed", "most"], ["says", "has"]],
+[50, "Coach", "Was the treaty signed there?", "The agreement _ _ _ _ _ _ elsewhere.", ["is", "understood", "to", "have", "been", "drafted"], ["says", "has"]],
+[50, "Librarian", "How long did it stand?", "The tower _ _ _ _ _ _ two centuries.", ["is", "estimated", "to", "have", "stood", "for"], ["says", "has"]],
+[50, "Teammate", "Did the species survive?", "The bird _ _ _ _ _ _ long ago.", ["is", "presumed", "to", "have", "become", "extinct"], ["says", "has"]],
+[50, "Neighbor", "Was the fire accidental?", "The blaze _ _ _ _ _ _ deliberately.", ["is", "alleged", "to", "have", "been", "started"], ["says", "has"]],
+[50, "Tutor", "Is the recipe original?", "The dish _ _ _ _ _ _ the north.", ["is", "held", "to", "have", "originated", "in"], ["says", "has"]],
+[50, "Lab partner", "Did he study there?", "He _ _ _ _ _ _ a master.", ["is", "supposed", "to", "have", "trained", "under"], ["says", "has"]],
+[50, "Counselor", "Was the road Roman?", "The route _ _ _ _ _ _ older track.", ["is", "considered", "to", "have", "followed", "an"], ["says", "has"]],
+[50, "Colleague", "Did the population fall?", "Numbers _ _ _ _ _ _ a decade.", ["are", "thought", "to", "have", "halved", "within"], ["says", "has"]],
+[50, "Supervisor", "Was the letter forged?", "The document _ _ _ _ _ _ afterwards.", ["is", "suspected", "to", "have", "been", "altered"], ["says", "has"]],
+[50, "Host", "Did the glacier retreat?", "The ice _ _ _ _ _ _ for a century.", ["is", "known", "to", "have", "retreated", "steadily"], ["says", "has"]],
+[50, "Coworker", "Was the theory his?", "The idea _ _ _ _ _ _ a student.", ["is", "claimed", "to", "have", "originated", "with"], ["says", "has"]],
+[50, "Group member", "Did trade continue?", "Exchange _ _ _ _ _ _ the war.", ["is", "assumed", "to", "have", "persisted", "through"], ["says", "has"]],
+[50, "Dorm RA", "Was the temple older?", "The shrine _ _ _ _ _ _ city.", ["is", "reckoned", "to", "have", "predated", "the"], ["says", "has"]],
+[50, "Trainer", "Did the author revise it?", "The novel _ _ _ _ _ _ three times.", ["is", "said", "to", "have", "been", "rewritten"], ["says", "has"]],
+[50, "Mentor", "Was the population larger?", "The town _ _ _ _ _ _ that number.", ["is", "believed", "to", "have", "held", "twice"], ["says", "has"]],
+[51, "Classmate", "Did anyone tell you?", "No; we _ _ _ _ _ _ .", ["should", "have", "been", "informed", "much", "earlier"], ["was", "were"]],
+[51, "Roommate", "Was the form checked?", "It _ _ _ _ _ _ filing.", ["ought", "to", "have", "been", "verified", "before"], ["was", "were"]],
+[51, "Professor", "Did the alarm sound?", "It _ _ _ _ _ _ .", ["must", "have", "been", "switched", "off", "overnight"], ["was", "were"]],
+[51, "Advisor", "Was the sample kept cold?", "It _ _ _ _ _ _ .", ["should", "have", "been", "refrigerated", "on", "arrival"], ["was", "were"]],
+[51, "Friend", "Did they warn the staff?", "Everyone _ _ _ _ _ _ .", ["could", "have", "been", "warned", "by", "email"], ["was", "were"]],
+[51, "Coach", "Was the data backed up?", "It _ _ _ _ _ _ server.", ["might", "have", "been", "copied", "to", "the"], ["was", "were"]],
+[51, "Librarian", "Did anyone sign it?", "The form _ _ _ _ _ _ people.", ["should", "have", "been", "countersigned", "by", "two"], ["was", "were"]],
+[51, "Teammate", "Was the room prepared?", "It _ _ _ _ _ _ morning.", ["ought", "to", "have", "been", "cleaned", "that"], ["was", "were"]],
+[51, "Neighbor", "Did they test the wiring?", "It _ _ _ _ _ _ .", ["must", "have", "been", "inspected", "at", "installation"], ["was", "were"]],
+[51, "Tutor", "Was the patient told?", "She _ _ _ _ _ _ sooner.", ["should", "have", "been", "given", "the", "results"], ["was", "were"]],
+[51, "Lab partner", "Did the parcel get sent?", "It _ _ _ _ _ _ week.", ["may", "have", "been", "dispatched", "earlier", "this"], ["was", "were"]],
+[51, "Counselor", "Was the error caught?", "It _ _ _ _ _ _ .", ["could", "have", "been", "spotted", "during", "proofreading"], ["was", "were"]],
+[51, "Colleague", "Did anyone review it?", "The draft _ _ _ _ _ _ someone.", ["ought", "to", "have", "been", "read", "by"], ["was", "were"]],
+[51, "Supervisor", "Was the gate locked?", "It _ _ _ _ _ _ .", ["should", "have", "been", "secured", "after", "closing"], ["was", "were"]],
+[51, "Host", "Did they record the session?", "It _ _ _ _ _ _ .", ["might", "have", "been", "filmed", "without", "permission"], ["was", "were"]],
+[51, "Coworker", "Was the budget approved?", "It _ _ _ _ _ _ .", ["must", "have", "been", "signed", "off", "already"], ["was", "were"]],
+[51, "Group member", "Did the notice go up?", "It _ _ _ _ _ _ earlier.", ["should", "have", "been", "posted", "a", "week"], ["was", "were"]],
+[51, "Dorm RA", "Was the equipment returned?", "It _ _ _ _ _ _ in.", ["ought", "to", "have", "been", "logged", "back"], ["was", "were"]],
+[51, "Trainer", "Did anyone check the seal?", "It _ _ _ _ _ _ .", ["could", "have", "been", "broken", "in", "transit"], ["was", "were"]],
+[51, "Mentor", "Was the decision minuted?", "It _ _ _ _ _ _ minutes.", ["should", "have", "been", "recorded", "in", "the"], ["was", "were"]],
+[52, "Classmate", "Why did the committee change the rule?", "Nobody seems to know _ _ _ _ _ _ did.", ["why", "the", "committee", "decided", "what", "it"], ["did", "does"]],
+[52, "Roommate", "Where is the report?", "I can't remember _ _ _ _ _ _ it.", ["where", "she", "said", "she", "had", "filed"], ["did", "does"]],
+[52, "Professor", "When will they announce?", "No one is certain _ _ _ _ _ _ the list.", ["when", "the", "office", "expects", "to", "publish"], ["did", "does"]],
+[52, "Advisor", "Who approved the change?", "It's unclear _ _ _ _ _ _ revision.", ["who", "the", "department", "believes", "authorised", "the"], ["did", "does"]],
+[52, "Friend", "How much did it cost?", "Nobody told us _ _ _ _ _ _ spent.", ["how", "much", "the", "college", "had", "already"], ["did", "does"]],
+[52, "Coach", "Which version is current?", "I'm not sure _ _ _ _ _ _ final.", ["which", "draft", "the", "editor", "thinks", "is"], ["did", "does"]],
+[52, "Librarian", "Why was it delayed?", "We never learned _ _ _ _ _ _ as it did.", ["why", "the", "shipment", "took", "as", "long"], ["did", "does"]],
+[52, "Teammate", "Who is presenting?", "Ask him _ _ _ _ _ _ speak.", ["who", "the", "organisers", "have", "asked", "to"], ["did", "does"]],
+[52, "Neighbor", "When did she leave?", "Nobody recalls _ _ _ _ _ _ .", ["when", "it", "was", "that", "she", "resigned"], ["did", "does"]],
+[52, "Tutor", "Where did the funding go?", "Auditors are asking _ _ _ _ _ _ went.", ["where", "the", "money", "the", "grant", "provided"], ["did", "does"]],
+[52, "Lab partner", "How does it work?", "Explain _ _ _ _ _ _ to keep.", ["how", "the", "system", "decides", "which", "files"], ["did", "does"]],
+[52, "Counselor", "Why did they refuse?", "Nobody understands _ _ _ _ _ _ wanted.", ["why", "the", "board", "rejected", "what", "everyone"], ["did", "does"]],
+[52, "Colleague", "Which candidate won?", "I forget _ _ _ _ _ _ preferred.", ["which", "applicant", "the", "panel", "said", "it"], ["did", "does"]],
+[52, "Supervisor", "When is the deadline?", "Check _ _ _ _ _ _ are due.", ["when", "the", "registrar", "says", "the", "forms"], ["did", "does"]],
+[52, "Host", "Who wrote the guidance?", "It's uncertain _ _ _ _ _ _ wording.", ["who", "in", "the", "ministry", "drafted", "the"], ["did", "does"]],
+[52, "Coworker", "How long will it take?", "No one can say _ _ _ _ _ _ to take.", ["how", "long", "the", "repairs", "are", "likely"], ["did", "does"]],
+[52, "Group member", "Why is the figure wrong?", "We asked _ _ _ _ _ _ we reported.", ["why", "the", "total", "differed", "from", "what"], ["did", "does"]],
+[52, "Dorm RA", "Where should I send it?", "Find out _ _ _ _ _ _ sent.", ["where", "the", "office", "wants", "the", "copies"], ["did", "does"]],
+[52, "Trainer", "Which chapter is assessed?", "Nobody said _ _ _ _ _ _ test.", ["which", "section", "the", "examiner", "intends", "to"], ["did", "does"]],
+[52, "Mentor", "When did the policy change?", "Records show _ _ _ _ _ _ why.", ["when", "the", "rule", "was", "amended", "and"], ["did", "does"]],
+[53, "Classmate", "How many applied?", "Forty people applied, _ _ _ _ _ _ .", ["many", "of", "whom", "had", "no", "experience"], ["them", "they"]],
+[53, "Roommate", "Were the samples usable?", "We took twelve samples, _ _ _ _ _ _ .", ["most", "of", "which", "were", "later", "discarded"], ["them", "they"]],
+[53, "Professor", "Did the students attend?", "Thirty enrolled, _ _ _ _ _ _ .", ["several", "of", "whom", "dropped", "out", "early"], ["them", "they"]],
+[53, "Advisor", "How were the reviews?", "There were four reviews, _ _ _ _ _ _ .", ["none", "of", "which", "recommended", "outright", "rejection"], ["them", "they"]],
+[53, "Friend", "Who came to the talk?", "Sixty attended, _ _ _ _ _ _ .", ["half", "of", "whom", "were", "visiting", "staff"], ["them", "they"]],
+[53, "Coach", "Were the sources reliable?", "He cites nine sources, _ _ _ _ _ _ .", ["two", "of", "which", "no", "longer", "exist"], ["them", "they"]],
+[53, "Librarian", "Did the trials succeed?", "They ran six trials, _ _ _ _ _ _ .", ["all", "of", "which", "produced", "similar", "results"], ["them", "they"]],
+[53, "Teammate", "How many buildings survive?", "Eleven remain, _ _ _ _ _ _ .", ["some", "of", "which", "are", "badly", "damaged"], ["them", "they"]],
+[53, "Neighbor", "Who signed the letter?", "Twenty scholars signed, _ _ _ _ _ _ .", ["one", "of", "whom", "later", "withdrew", "support"], ["them", "they"]],
+[53, "Tutor", "Were the answers useful?", "We received many replies, _ _ _ _ _ _ .", ["few", "of", "which", "answered", "the", "question"], ["them", "they"]],
+[53, "Lab partner", "How many species were found?", "They recorded eight, _ _ _ _ _ _ .", ["three", "of", "which", "were", "entirely", "new"], ["them", "they"]],
+[53, "Counselor", "Did the committee agree?", "Nine members voted, _ _ _ _ _ _ .", ["most", "of", "whom", "supported", "the", "motion"], ["them", "they"]],
+[53, "Colleague", "Were the letters preserved?", "Hundreds were written, _ _ _ _ _ _ .", ["only", "a", "handful", "of", "which", "survive"], ["them", "they"]],
+[53, "Supervisor", "Who funded the work?", "Three bodies funded it, _ _ _ _ _ _ .", ["each", "of", "which", "set", "separate", "conditions"], ["them", "they"]],
+[53, "Host", "Did the machines fail?", "Four units shipped, _ _ _ _ _ _ .", ["two", "of", "which", "failed", "within", "days"], ["them", "they"]],
+[53, "Coworker", "How many attended the workshop?", "Twenty came, _ _ _ _ _ _ .", ["the", "majority", "of", "whom", "were", "postgraduates"], ["them", "they"]],
+[53, "Group member", "Were the maps accurate?", "He drew several maps, _ _ _ _ _ _ .", ["none", "of", "which", "matched", "the", "survey"], ["them", "they"]],
+[53, "Dorm RA", "Who contributed chapters?", "Ten authors contributed, _ _ _ _ _ _ .", ["five", "of", "whom", "had", "never", "published"], ["them", "they"]],
+[53, "Trainer", "Did the samples degrade?", "We stored sixteen, _ _ _ _ _ _ .", ["many", "of", "which", "degraded", "over", "winter"], ["them", "they"]],
+[53, "Mentor", "Were the questions answered?", "She took twelve questions, _ _ _ _ _ _ .", ["most", "of", "which", "she", "answered", "fully"], ["them", "they"]],
+[54, "Classmate", "I thought the lecture was excellent.", "So _ _ , _ _ _ the others.", ["did", "I", "and", "so", "did"], ["too", "also"]],
+[54, "Roommate", "I hadn't heard about the change.", "Neither _ _ , _ _ _ _ .", ["had", "we", "nor", "had", "the", "department"], ["too", "also"]],
+[54, "Professor", "I can't make the meeting.", "Neither _ _ , _ _ _ _ partner.", ["can", "I", "and", "nor", "can", "my"], ["too", "also"]],
+[54, "Advisor", "She finished early.", "So _ _ _ , _ _ did mine.", ["did", "her", "partner", "and", "so"], ["too", "also"]],
+[54, "Friend", "I don't agree with the method.", "Nor _ _ , _ _ _ _ supervisor.", ["do", "I", "and", "neither", "does", "my"], ["too", "also"]],
+[54, "Coach", "They were surprised by the result.", "So _ _ , _ _ _ _ reviewers.", ["was", "I", "and", "so", "were", "the"], ["too", "also"]],
+[54, "Librarian", "I've never used that software.", "Neither _ _ , _ _ _ _ .", ["have", "I", "nor", "has", "anyone", "here"], ["too", "also"]],
+[54, "Teammate", "He should have asked first.", "So _ _ , _ _ _ _ rest.", ["should", "she", "and", "so", "should", "the"], ["too", "also"]],
+[54, "Neighbor", "I won't be at the seminar.", "Neither _ _ , _ _ _ _ group.", ["will", "I", "and", "nor", "will", "my"], ["too", "also"]],
+[54, "Tutor", "The first draft was weak.", "So _ _ _ , _ _ _ the third.", ["was", "the", "second", "and", "so", "was"], ["too", "also"]],
+[54, "Lab partner", "I didn't notice the error.", "Nor _ _ _ , _ _ _ I.", ["did", "anyone", "else", "and", "neither", "did"], ["too", "also"]],
+[54, "Counselor", "She has already submitted.", "So _ _ , _ _ _ _ group.", ["have", "I", "and", "so", "has", "the"], ["too", "also"]],
+[54, "Colleague", "I couldn't follow the argument.", "Neither _ _ , _ _ _ _ .", ["could", "we", "nor", "could", "the", "chair"], ["too", "also"]],
+[54, "Supervisor", "They arrived on time.", "So _ _ _ , _ _ did we.", ["did", "the", "speakers", "and", "so"], ["too", "also"]],
+[54, "Host", "I'd rather not present first.", "Neither _ _ , _ _ _ _ .", ["would", "I", "and", "nor", "would", "she"], ["too", "also"]],
+[54, "Coworker", "The data looked odd to me.", "So _ _ _ _ , _ _ the reviewers.", ["they", "did", "to", "us", "and", "to"], ["too", "also"]],
+[54, "Group member", "He isn't coming tomorrow.", "Neither _ _ , _ _ _ _ .", ["is", "she", "nor", "are", "the", "others"], ["too", "also"]],
+[54, "Dorm RA", "I liked the second chapter best.", "So _ _ , _ _ _ _ tutor.", ["did", "I", "and", "so", "did", "my"], ["too", "also"]],
+[54, "Trainer", "We hadn't been told either.", "Nor _ _ , _ _ _ _ office.", ["had", "they", "and", "neither", "had", "the"], ["too", "also"]],
+[54, "Mentor", "I'm not convinced by the figures.", "Neither _ _ , _ _ _ _ editor.", ["am", "I", "and", "nor", "is", "the"], ["too", "also"]],
+[55, "Classmate", "When did you realise the error?", "Only when _ _ _ _ _ _ understand.", ["the", "results", "came", "back", "did", "we"], ["that", "so"]],
+[55, "Roommate", "When did she agree?", "Only after _ _ _ _ _ _ sign.", ["the", "contract", "was", "revised", "did", "she"], ["that", "so"]],
+[55, "Professor", "When did the funding arrive?", "Only in _ _ _ _ _ _ appear.", ["the", "second", "year", "did", "the", "money"], ["that", "so"]],
+[55, "Advisor", "When did they notice?", "Only then _ _ _ _ _ _ .", ["did", "anyone", "check", "the", "original", "readings"], ["that", "so"]],
+[55, "Friend", "When was the fault found?", "Only during _ _ _ _ _ _ appear.", ["the", "final", "test", "did", "the", "fault"], ["that", "so"]],
+[55, "Coach", "When did he apologise?", "Only after _ _ _ _ _ _ write.", ["a", "week", "had", "passed", "did", "he"], ["that", "so"]],
+[55, "Librarian", "When did the crowd settle?", "Only when _ _ _ _ _ _ stop.", ["the", "lights", "dimmed", "did", "the", "noise"], ["that", "so"]],
+[55, "Teammate", "When did she publish?", "Only much _ _ _ _ _ _ dataset.", ["later", "did", "she", "release", "the", "full"], ["that", "so"]],
+[55, "Neighbor", "When did the road reopen?", "Only after _ _ _ _ _ _ resume.", ["the", "inspection", "was", "complete", "did", "traffic"], ["that", "so"]],
+[55, "Tutor", "When did you understand it?", "Only on _ _ _ _ _ _ make sense.", ["the", "third", "reading", "did", "the", "argument"], ["that", "so"]],
+[55, "Lab partner", "When did they respond?", "Only when _ _ _ _ _ _ .", ["we", "phoned", "twice", "did", "anyone", "reply"], ["that", "so"]],
+[55, "Counselor", "When did the pattern emerge?", "Only after _ _ _ _ _ _ emerge.", ["months", "of", "sampling", "did", "a", "pattern"], ["that", "so"]],
+[55, "Colleague", "When was the error corrected?", "Only in _ _ _ _ _ _ fixed.", ["the", "reprint", "was", "the", "figure", "finally"], ["that", "so"]],
+[55, "Supervisor", "When did she take the lead?", "Only when _ _ _ _ _ _ forward.", ["the", "chair", "resigned", "did", "she", "step"], ["that", "so"]],
+[55, "Host", "When did it become clear?", "Only by _ _ _ _ _ _ it.", ["comparing", "both", "drafts", "did", "we", "see"], ["that", "so"]],
+[55, "Coworker", "When did the price drop?", "Only after _ _ _ _ _ _ .", ["supply", "recovered", "fully", "did", "prices", "fall"], ["that", "so"]],
+[55, "Group member", "When did the team improve?", "Only once _ _ _ _ _ _ improve.", ["the", "new", "coach", "arrived", "did", "results"], ["that", "so"]],
+[55, "Dorm RA", "When did you get the email?", "Only this _ _ _ _ _ _ .", ["morning", "did", "the", "notice", "finally", "arrive"], ["that", "so"]],
+[55, "Trainer", "When did they admit it?", "Only under _ _ _ _ _ _ .", ["questioning", "did", "the", "firm", "accept", "responsibility"], ["that", "so"]],
+[55, "Mentor", "When did the rain stop?", "Only towards _ _ _ _ _ _ .", ["dawn", "did", "the", "storm", "finally", "ease"], ["that", "so"]],
+[56, "Classmate", "Was the turnout good?", "Attendance _ _ _ _ _ _ anticipated.", ["was", "far", "higher", "than", "had", "been"], ["as", "that"]],
+[56, "Roommate", "Did the repair cost much?", "It _ _ _ _ _ _ budgeted.", ["cost", "rather", "more", "than", "we", "had"], ["as", "that"]],
+[56, "Professor", "Was the paper long?", "It _ _ _ _ _ _ wanted.", ["ran", "considerably", "longer", "than", "the", "editor"], ["as", "that"]],
+[56, "Advisor", "Did the trial take long?", "It _ _ _ _ _ _ expected.", ["took", "twice", "as", "long", "as", "anyone"], ["than", "so"]],
+[56, "Friend", "Was the effect large?", "The effect _ _ _ _ _ _ suggested.", ["proved", "smaller", "than", "earlier", "work", "had"], ["as", "that"]],
+[56, "Coach", "Did many attend?", "Fewer _ _ _ _ _ _ .", ["came", "than", "the", "organisers", "had", "hoped"], ["as", "that"]],
+[56, "Librarian", "Was the winter severe?", "It _ _ _ _ _ _ .", ["was", "harsher", "than", "any", "on", "record"], ["as", "that"]],
+[56, "Teammate", "Did the fund grow?", "It _ _ _ _ _ _ intended.", ["grew", "more", "slowly", "than", "the", "trustees"], ["as", "that"]],
+[56, "Neighbor", "Was the estimate accurate?", "The figure _ _ _ _ _ _ .", ["was", "lower", "than", "the", "survey", "implied"], ["as", "that"]],
+[56, "Tutor", "Did the talk overrun?", "It _ _ _ _ _ _ .", ["lasted", "longer", "than", "the", "schedule", "allowed"], ["as", "that"]],
+[56, "Lab partner", "Was the response good?", "Replies _ _ _ _ _ _ hope.", ["arrived", "faster", "than", "we", "had", "dared"], ["as", "that"]],
+[56, "Counselor", "Did the costs rise?", "They _ _ _ _ _ _ predicted.", ["rose", "more", "sharply", "than", "the", "forecast"], ["as", "that"]],
+[56, "Colleague", "Was the sample big enough?", "It _ _ _ _ _ _ .", ["was", "smaller", "than", "good", "practice", "requires"], ["as", "that"]],
+[56, "Supervisor", "Did the ice retreat?", "It _ _ _ _ _ _ decades.", ["retreated", "further", "than", "it", "had", "in"], ["as", "that"]],
+[56, "Host", "Was the book successful?", "It _ _ _ _ _ _ expected.", ["sold", "better", "than", "the", "publisher", "had"], ["as", "that"]],
+[56, "Coworker", "Did the delay hurt?", "It _ _ _ _ _ _ .", ["proved", "less", "damaging", "than", "everyone", "feared"], ["as", "that"]],
+[56, "Group member", "Was the result reproducible?", "It _ _ _ _ _ _ .", ["proved", "harder", "to", "repeat", "than", "reported"], ["as", "that"]],
+[56, "Dorm RA", "Did the crop fail?", "Yields _ _ _ _ _ _ .", ["fell", "more", "steeply", "than", "in", "1976"], ["as", "that"]],
+[56, "Trainer", "Was the journey quick?", "It _ _ _ _ _ _ .", ["took", "rather", "less", "time", "than", "advertised"], ["as", "that"]],
+[56, "Mentor", "Did the audience stay?", "More _ _ _ _ _ _ .", ["remained", "than", "the", "organisers", "had", "expected"], ["as", "that"]],
+[57, "Classmate", "What did the survey turn up?", "Among the findings _ _ _ _ _ _ moss.", ["was", "a", "previously", "unrecorded", "species", "of"], ["there", "it"]],
+[57, "Roommate", "What was in the archive?", "In the box _ _ _ _ _ _ .", ["were", "three", "letters", "never", "previously", "published"], ["there", "it"]],
+[57, "Professor", "What stood on the hill?", "On the ridge _ _ _ _ _ _ fort.", ["stood", "the", "remains", "of", "an", "older"], ["there", "it"]],
+[57, "Advisor", "What followed the talk?", "After the lecture _ _ _ _ _ _ .", ["came", "a", "long", "and", "difficult", "discussion"], ["there", "it"]],
+[57, "Friend", "What lay beneath?", "Beneath the floor _ _ _ _ _ _ .", ["lay", "a", "layer", "of", "compacted", "ash"], ["there", "it"]],
+[57, "Coach", "What was attached?", "To the report _ _ _ _ _ _ data.", ["were", "appended", "two", "pages", "of", "raw"], ["there", "it"]],
+[57, "Librarian", "What came next?", "With the funding _ _ _ _ _ _ .", ["came", "a", "set", "of", "strict", "conditions"], ["there", "it"]],
+[57, "Teammate", "What did they find inside?", "Inside the chamber _ _ _ _ _ _ plaster.", ["were", "found", "several", "fragments", "of", "painted"], ["there", "it"]],
+[57, "Neighbor", "What sits at the centre?", "At the heart _ _ _ _ _ _ assumption.", ["of", "the", "argument", "lies", "a", "single"], ["there", "it"]],
+[57, "Tutor", "What followed the storm?", "In its wake _ _ _ _ _ _ .", ["came", "weeks", "of", "unusually", "heavy", "flooding"], ["there", "it"]],
+[57, "Lab partner", "What was on the table?", "On the desk _ _ _ _ _ _ .", ["sat", "a", "pile", "of", "unopened", "envelopes"], ["there", "it"]],
+[57, "Counselor", "What did the vault hold?", "Within the vault _ _ _ _ _ _ .", ["were", "stored", "the", "college's", "oldest", "charters"], ["there", "it"]],
+[57, "Colleague", "What lies to the north?", "To the north _ _ _ _ _ _ range.", ["rise", "the", "peaks", "of", "the", "older"], ["there", "it"]],
+[57, "Supervisor", "What accompanied the letter?", "With the letter _ _ _ _ _ _ .", ["came", "a", "small", "package", "of", "photographs"], ["there", "it"]],
+[57, "Host", "What was in the report?", "Among the recommendations _ _ _ _ _ _ .", ["was", "a", "call", "for", "wider", "consultation"], ["there", "it"]],
+[57, "Coworker", "What did the excavation reveal?", "Under the paving _ _ _ _ _ _ hall.", ["lay", "the", "foundations", "of", "an", "earlier"], ["there", "it"]],
+[57, "Group member", "What followed the announcement?", "After the statement _ _ _ _ _ _ .", ["came", "a", "week", "of", "intense", "criticism"], ["there", "it"]],
+[57, "Dorm RA", "What hung on the wall?", "Above the fireplace _ _ _ _ _ _ .", ["hung", "a", "portrait", "of", "the", "founder"], ["there", "it"]],
+[57, "Trainer", "What stood in the square?", "In the square _ _ _ _ _ _ dead.", ["stood", "a", "monument", "to", "the", "town's"], ["there", "it"]],
+[57, "Mentor", "What did the file contain?", "Inside the folder _ _ _ _ _ _ .", ["were", "copies", "of", "every", "rejected", "proposal"], ["there", "it"]],
+[58, "Classmate", "Is she unusual?", "She is one of _ _ _ _ _ _ early.", ["the", "few", "students", "who", "have", "finished"], ["is", "was"]],
+[58, "Roommate", "Is this common?", "It is one of _ _ _ _ _ _ hard.", ["the", "many", "factors", "that", "make", "prediction"], ["is", "was"]],
+[58, "Professor", "Did others do it?", "He is one of _ _ _ _ _ _ it.", ["only", "three", "people", "who", "have", "climbed"], ["is", "was"]],
+[58, "Advisor", "Is the journal well known?", "It is one of _ _ _ _ _ _ print.", ["the", "few", "titles", "that", "remain", "in"], ["is", "was"]],
+[58, "Friend", "Is she experienced?", "She is one of _ _ _ _ _ _ .", ["the", "candidates", "who", "have", "worked", "abroad"], ["is", "was"]],
+[58, "Coach", "Is the species rare?", "It is one of _ _ _ _ _ _ .", ["the", "birds", "that", "nest", "on", "cliffs"], ["is", "was"]],
+[58, "Librarian", "Did anyone else object?", "He was one of _ _ _ _ _ _ .", ["the", "very", "few", "who", "raised", "objections"], ["is", "was"]],
+[58, "Teammate", "Is the building protected?", "It is one of _ _ _ _ _ _ .", ["the", "structures", "that", "have", "listed", "status"], ["is", "was"]],
+[58, "Neighbor", "Is she the only one?", "She is one of _ _ _ _ _ _ .", ["the", "two", "researchers", "who", "have", "access"], ["is", "was"]],
+[58, "Tutor", "Is the method standard?", "It is one of _ _ _ _ _ _ .", ["several", "approaches", "that", "produce", "similar", "results"], ["is", "was"]],
+[58, "Lab partner", "Is he new here?", "He is one of _ _ _ _ _ _ .", ["the", "staff", "who", "joined", "this", "autumn"], ["is", "was"]],
+[58, "Counselor", "Is the text unusual?", "It is one of _ _ _ _ _ _ .", ["the", "manuscripts", "that", "survive", "in", "full"], ["is", "was"]],
+[58, "Colleague", "Are there others?", "This is one of _ _ _ _ _ _ .", ["the", "samples", "that", "were", "never", "analysed"], ["is", "was"]],
+[58, "Supervisor", "Is she qualified?", "She is one of _ _ _ _ _ _ .", ["the", "few", "who", "hold", "both", "degrees"], ["is", "was"]],
+[58, "Host", "Is the route popular?", "It is one of _ _ _ _ _ _ winter.", ["the", "paths", "that", "remain", "open", "in"], ["is", "was"]],
+[58, "Coworker", "Did many apply?", "He is one of _ _ _ _ _ _ .", ["the", "applicants", "who", "were", "shortlisted", "twice"], ["is", "was"]],
+[58, "Group member", "Is the rule unusual?", "It is one of _ _ _ _ _ _ used.", ["the", "clauses", "that", "have", "never", "been"], ["is", "was"]],
+[58, "Dorm RA", "Is the college old?", "It is one of _ _ _ _ _ _ .", ["the", "institutions", "that", "predate", "the", "charter"], ["is", "was"]],
+[58, "Trainer", "Is she on the committee?", "She is one of _ _ _ _ _ _ .", ["the", "members", "who", "have", "served", "longest"], ["is", "was"]],
+[58, "Mentor", "Is the effect real?", "It is one of _ _ _ _ _ _ widely.", ["the", "findings", "that", "have", "been", "replicated"], ["is", "was"]],
+[59, "Classmate", "Will the trip go ahead?", "Yes, regardless _ _ _ _ _ _ not.", ["of", "whether", "the", "weather", "improves", "or"], ["that", "if"]],
+[59, "Roommate", "How long will it take?", "It varies depending _ _ _ _ _ _ .", ["on", "how", "many", "samples", "we", "process"], ["that", "if"]],
+[59, "Professor", "Is the fee fixed?", "It changes according _ _ _ _ _ _ .", ["to", "where", "the", "applicant", "is", "based"], ["that", "if"]],
+[59, "Advisor", "Will she accept?", "That depends _ _ _ _ _ _ her.", ["on", "what", "the", "department", "can", "offer"], ["that", "if"]],
+[59, "Friend", "Is the rule absolute?", "It applies irrespective _ _ _ _ _ _ here.", ["of", "how", "long", "you", "have", "studied"], ["that", "if"]],
+[59, "Coach", "Can I choose the topic?", "Within limits, depending _ _ _ _ _ _ term.", ["on", "which", "supervisors", "are", "free", "this"], ["that", "if"]],
+[59, "Librarian", "Is attendance required?", "Yes, regardless _ _ _ _ _ _ before.", ["of", "whether", "you", "have", "taken", "it"], ["that", "if"]],
+[59, "Teammate", "How is the grade calculated?", "It depends _ _ _ _ _ _ scores.", ["on", "how", "well", "the", "final", "essay"], ["that", "if"]],
+[59, "Neighbor", "Will the price change?", "Possibly, according _ _ _ _ _ _ quarter.", ["to", "what", "the", "suppliers", "charge", "next"], ["that", "if"]],
+[59, "Tutor", "Do I need the form?", "That depends _ _ _ _ _ _ abroad.", ["on", "whether", "you", "are", "applying", "from"], ["that", "if"]],
+[59, "Lab partner", "Is the deadline the same?", "It differs depending _ _ _ _ _ _ .", ["on", "which", "route", "you", "are", "taking"], ["that", "if"]],
+[59, "Counselor", "Can we reschedule?", "Only depending _ _ _ _ _ _ again.", ["on", "when", "the", "room", "becomes", "free"], ["that", "if"]],
+[59, "Colleague", "Is the result reliable?", "That turns _ _ _ _ _ _ selected.", ["on", "how", "the", "sample", "was", "originally"], ["that", "if"]],
+[59, "Supervisor", "Will they fund it?", "It hinges _ _ _ _ _ _ benefit.", ["on", "whether", "the", "pilot", "shows", "any"], ["that", "if"]],
+[59, "Host", "Is the policy uniform?", "No, it varies _ _ _ _ _ _ guidance.", ["by", "how", "each", "faculty", "interprets", "the"], ["that", "if"]],
+[59, "Coworker", "Should I apply now?", "That depends _ _ _ _ _ _ course.", ["on", "what", "you", "want", "from", "the"], ["that", "if"]],
+[59, "Group member", "Is the route fixed?", "It changes according _ _ _ _ _ _ up.", ["to", "where", "the", "ice", "has", "broken"], ["that", "if"]],
+[59, "Dorm RA", "Do the rules differ?", "Slightly, depending _ _ _ _ _ _ externally.", ["on", "whether", "the", "work", "is", "funded"], ["that", "if"]],
+[59, "Trainer", "Is the seminar assessed?", "That varies _ _ _ _ _ _ term.", ["with", "how", "the", "convenor", "designs", "the"], ["that", "if"]],
+[59, "Mentor", "Can I keep the data?", "It depends _ _ _ _ _ _ says.", ["on", "what", "the", "consent", "form", "actually"], ["that", "if"]]
 ];
 /* BANK:END */
 
@@ -1218,6 +1669,7 @@ function makeItem(row){
     extras: extras.slice(),
     bank: shuffle(answer.concat(extras)),
     target: pat.target,
+    hard: !!pat.h,
     why: pat.why.replace("{ans}", "<i>" + answer.join(" ") + "</i>")
   };
 }
@@ -1229,16 +1681,32 @@ const BY_PATTERN = (() => {
   BANK.forEach(r => { if (!g.has(r[0])) g.set(r[0], []); g.get(r[0]).push(r); });
   return [...g.values()];
 })();
+const TIER = {
+  standard: BY_PATTERN.filter(g => !PATTERNS[g[0][0]].h),
+  hard:     BY_PATTERN.filter(g =>  PATTERNS[g[0][0]].h)
+};
 
-function drawSet(){
-  const groups = shuffle(BY_PATTERN.slice());
+let MODE = "mixed";   // mixed | standard | hard
+
+/* one item per target, so a set never drills the same structure twice */
+function pick(groups, n){
   const rows = [];
-  for (const g of groups){
-    if (rows.length === SET_SIZE) break;
+  for (const g of shuffle(groups.slice())){
+    if (rows.length === n) break;
     rows.push(g[Math.floor(Math.random() * g.length)]);
   }
-  // fall back to filling from anywhere if there are fewer targets than the set size
-  while (rows.length < SET_SIZE && BANK.length) rows.push(BANK[Math.floor(Math.random() * BANK.length)]);
+  while (rows.length < n && groups.length){
+    const g = groups[Math.floor(Math.random() * groups.length)];
+    rows.push(g[Math.floor(Math.random() * g.length)]);
+  }
+  return rows;
+}
+
+function drawSet(){
+  const half = SET_SIZE >> 1;
+  const rows = MODE === "standard" ? pick(TIER.standard, SET_SIZE)
+             : MODE === "hard"     ? pick(TIER.hard, SET_SIZE)
+             : pick(TIER.standard, half).concat(pick(TIER.hard, SET_SIZE - half));
   return shuffle(rows).map(makeItem);
 }
 
@@ -1476,7 +1944,7 @@ function renderResults(){
     return `<div class="rep ${ok?"right":"wrong"}">
       <div class="rep-hd">
         <span class="n">${i+1}</span>
-        <span class="tgt">${it.target}</span>
+        <span class="tgt">${it.target}${it.hard ? ' <span class="tier">Hard</span>' : ''}</span>
         <span class="pill ${ok?"ok":"no"}">${ok?"1.0":"0.0"}</span>
       </div>
       <p class="ctx">${esc(it.who)}: &ldquo;${esc(it.says)}&rdquo;</p>
@@ -1631,6 +2099,16 @@ $("bReview").onclick = () => {
   S.sel = null; render();
 };
 $("bTime").onclick = () => { S.timeHidden = !S.timeHidden; renderChrome(); };
+document.querySelectorAll(".mode button").forEach(b => b.onclick = () => {
+  const m = b.dataset.mode;
+  if (m === MODE) return;
+  const started = ITEMS.some((_, i) => touched(i));
+  if (started && !confirm("Start a new set at this level? Your current answers will be lost.")) return;
+  MODE = m;
+  document.querySelectorAll(".mode button").forEach(x => x.classList.toggle("on", x.dataset.mode === m));
+  restart();
+  say(`${b.textContent} level. New set of ${SET_SIZE}.`);
+});
 $("bHelp").onclick = openHelp;
 
 function endTask(){
@@ -1706,15 +2184,17 @@ function closeHelp(){
 function boot(saved){
   if (saved && saved.items && saved.slots && saved.slots.length === saved.items.length){
     ITEMS = saved.items;
-    delete saved.items;
+    if (saved.mode) MODE = saved.mode;
+    delete saved.items; delete saved.mode;
     Object.assign(S, saved); S.sel = null;
   }
+  document.querySelectorAll(".mode button").forEach(x => x.classList.toggle("on", x.dataset.mode === MODE));
   render();
 }
 if (window.claude && window.claude.hot){
   window.claude.hot.snapshot(() => ({
     screen:S.screen, idx:S.idx, slots:S.slots, history:S.history,
-    seconds:S.seconds, timeHidden:S.timeHidden, timedOut:S.timedOut,
+    seconds:S.seconds, timeHidden:S.timeHidden, timedOut:S.timedOut, mode:MODE,
     items:ITEMS.map(it => ({who:it.who, says:it.says, bank:it.bank, answer:it.answer,
                             extras:it.extras, target:it.target, why:it.why,
                             parts:it.parts}))

@@ -63,21 +63,26 @@ def build():
             pi = len(patterns)
             patterns.append({"target": pat["target"], "why": pat["why"]})
             default_extras = pat.get("extras", [])
+            hard = bool(pat.get("hard"))
+            patterns[pi]["hard"] = hard
+            lo, hi = (5, 7) if hard else (4, 7)
+            blo, bhi = (6, 8) if hard else (4, 8)
 
             for n, entry in enumerate(pat["items"]):
                 ctx, sent = entry[0], entry[1]
                 extras = list(entry[2]) if len(entry) > 2 else list(default_extras)
-                # the real task only sometimes offers more words than blanks
-                if n % 4 == 3:
+                # the real task only sometimes offers more words than blanks;
+                # hard items always do
+                if n % 4 == 3 and not hard:
                     extras = []
 
                 frame, answer = parse(sent)
                 where = f"{fname} / {pat['target']} / item {n+1}"
 
-                if not (4 <= len(answer) <= 7):
-                    problems.append(f"{where}: {len(answer)} blanks (want 4-7)")
-                if not (4 <= len(answer) + len(extras) <= 8):
-                    problems.append(f"{where}: bank of {len(answer)+len(extras)} (want 4-8)")
+                if not (lo <= len(answer) <= hi):
+                    problems.append(f"{where}: {len(answer)} blanks (want {lo}-{hi})")
+                if not (blo <= len(answer) + len(extras) <= bhi):
+                    problems.append(f"{where}: bank of {len(answer)+len(extras)} (want {blo}-{bhi})")
                 if frame.split().count("_") != len(answer):
                     problems.append(f"{where}: {frame.split().count('_')} blank tokens for {len(answer)} answers")
                 if frame.split()[0] == "_":
@@ -108,7 +113,9 @@ def build():
 
 
 def emit(patterns, rows):
-    pj = ",\n".join(json.dumps(p, ensure_ascii=False) for p in patterns)
+    pj = ",\n".join(json.dumps(
+        {"target": p["target"], "why": p["why"], **({"h": 1} if p.get("hard") else {})},
+        ensure_ascii=False) for p in patterns)
     rj = ",\n".join(json.dumps(r, ensure_ascii=False) for r in rows)
     block = f"/* BANK:START */\nconst PATTERNS = [\n{pj}\n];\nconst BANK = [\n{rj}\n];\n/* BANK:END */"
     html = HTML.read_text()
@@ -129,6 +136,8 @@ if __name__ == "__main__":
     counts = {}
     for r in rows:
         counts[r[0]] = counts.get(r[0], 0) + 1
+    hard_rows = sum(c for i, c in counts.items() if patterns[i].get("hard"))
+    print(f"  {len(rows)-hard_rows} standard / {hard_rows} hard")
     thin = [patterns[i]["target"] for i, c in counts.items() if c < 15]
     if thin:
         print("thin targets:", thin)
