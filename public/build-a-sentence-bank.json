@@ -1,0 +1,11850 @@
+{
+ "patterns": [
+  {
+   "target": "Word order in an embedded question",
+   "why": "An embedded question keeps statement word order &mdash; {ans} &mdash; because the auxiliary of a direct question belongs only to a direct question."
+  },
+  {
+   "target": "Embedded yes/no question with <i>whether</i>",
+   "why": "A yes/no question embedded inside a statement is introduced by <i>whether</i> or <i>if</i> and keeps statement word order: {ans}."
+  },
+  {
+   "target": "Backshift in reported speech",
+   "why": "After a past reporting verb such as <i>said</i>, <i>will</i> backshifts to <i>would</i>: {ans}."
+  },
+  {
+   "target": "Infinitive complement",
+   "why": "This verb takes an infinitive rather than a gerund: {ans}."
+  },
+  {
+   "target": "Gerund complement",
+   "why": "This verb takes a gerund rather than an infinitive: {ans}."
+  },
+  {
+   "target": "Gerund after a preposition",
+   "why": "A preposition must be followed by a gerund, never an infinitive: {ans}."
+  },
+  {
+   "target": "Present perfect with <i>since</i> or <i>for</i>",
+   "why": "A situation that began in the past and still continues takes the present perfect: {ans}."
+  },
+  {
+   "target": "Past perfect for the earlier past event",
+   "why": "When one past event precedes another, the earlier one takes the past perfect: {ans}."
+  },
+  {
+   "target": "Present unreal conditional",
+   "why": "An unreal conditional uses a past form in the <i>if</i> clause and <i>would</i> or <i>could</i> plus a base verb in the other: {ans}."
+  },
+  {
+   "target": "Past unreal conditional",
+   "why": "A past unreal conditional pairs <i>had</i> plus a past participle with <i>would have</i> plus a past participle: {ans}."
+  },
+  {
+   "target": "Future real conditional",
+   "why": "A likely future condition takes a present form after <i>if</i> and <i>will</i> in the main clause: {ans}."
+  },
+  {
+   "target": "Passive voice",
+   "why": "The passive is a form of <i>be</i> plus a past participle: {ans}. <i>Been</i> appears only after <i>have</i> or <i>had</i>."
+  },
+  {
+   "target": "Passive with a modal",
+   "why": "After a modal the passive keeps <i>be</i> plus a past participle: {ans}."
+  },
+  {
+   "target": "Relative clause with <i>who</i>",
+   "why": "<i>Who</i> introduces a clause describing a person and acts as its subject, so no second subject pronoun follows: {ans}."
+  },
+  {
+   "target": "Possessive relative pronoun <i>whose</i>",
+   "why": "<i>Whose</i> shows possession and attaches directly to the noun it owns: {ans}. <i>Who</i> cannot be followed by a noun this way."
+  },
+  {
+   "target": "Reduced relative clause",
+   "why": "A relative clause can drop its pronoun and verb, leaving a participle that modifies the noun directly: {ans}."
+  },
+  {
+   "target": "Comparative with <i>than</i>",
+   "why": "A comparative form is completed by <i>than</i>, never by <i>as</i>: {ans}."
+  },
+  {
+   "target": "Equal comparison with <i>as … as</i>",
+   "why": "An equal comparison brackets the adjective or adverb between two instances of <i>as</i>: {ans}."
+  },
+  {
+   "target": "Superlative",
+   "why": "A superlative takes <i>the</i> and compares one thing against a whole group: {ans}."
+  },
+  {
+   "target": "Double comparative",
+   "why": "The <i>the … the …</i> pattern puts the comparative phrase first in each half and follows each with a clause: {ans}."
+  },
+  {
+   "target": "Separable phrasal verb with a pronoun object",
+   "why": "When the object of a separable phrasal verb is a pronoun it must come between the verb and the particle: {ans}."
+  },
+  {
+   "target": "Inversion after a negative adverbial",
+   "why": "When a negative or limiting adverbial opens a sentence, the subject and auxiliary invert: {ans}."
+  },
+  {
+   "target": "Result clause with <i>so</i> or <i>such</i>",
+   "why": "<i>So</i> goes with an adjective or adverb and <i>such</i> with a noun phrase; either is completed by a <i>that</i> clause: {ans}."
+  },
+  {
+   "target": "Degree with <i>too</i> and <i>enough</i>",
+   "why": "<i>Too</i> comes before an adjective and <i>enough</i> comes after it: {ans}."
+  },
+  {
+   "target": "Causative <i>have</i> or <i>get</i> something done",
+   "why": "A causative puts the object before the past participle, because someone else does the work: {ans}."
+  },
+  {
+   "target": "<i>Make</i> and <i>let</i> with a bare infinitive",
+   "why": "<i>Make</i> and <i>let</i> take an object followed by a bare infinitive, with no <i>to</i>: {ans}."
+  },
+  {
+   "target": "<i>Used to</i> and <i>be used to</i>",
+   "why": "<i>Used to</i> plus a base verb names a discontinued past habit, while <i>be used to</i> plus a gerund or noun means accustomed to something: {ans}."
+  },
+  {
+   "target": "<i>Wish</i> about the present",
+   "why": "A wish about the present takes a past form, and <i>were</i> for every subject: {ans}."
+  },
+  {
+   "target": "<i>Wish</i> about the past",
+   "why": "A regret about the past takes <i>wish</i> plus the past perfect: {ans}."
+  },
+  {
+   "target": "<i>Had better</i> and <i>would rather</i>",
+   "why": "Both <i>had better</i> and <i>would rather</i> are followed by a bare infinitive, with no <i>to</i>: {ans}."
+  },
+  {
+   "target": "Modal of deduction about the past",
+   "why": "A deduction about the past takes a modal plus <i>have</i> plus a past participle: {ans}."
+  },
+  {
+   "target": "Indirect polite question",
+   "why": "A question folded inside a polite request keeps statement word order after the question word: {ans}."
+  },
+  {
+   "target": "Quantifiers with count and noncount nouns",
+   "why": "Countable nouns take <i>few</i>, <i>many</i> and <i>number</i>; uncountable nouns take <i>little</i>, <i>much</i> and <i>amount</i>: {ans}."
+  },
+  {
+   "target": "Subject-verb agreement",
+   "why": "The verb agrees with the head of the subject, not with a noun that happens to sit next to it: {ans}."
+  },
+  {
+   "target": "Participial adverbial clause",
+   "why": "<i>Having</i> plus a past participle compresses a completed earlier action into a clause with no subject of its own: {ans}."
+  },
+  {
+   "target": "Correlative conjunctions",
+   "why": "Correlative pairs such as <i>not only … but also</i>, <i>both … and</i> and <i>either … or</i> must join two grammatically parallel elements: {ans}."
+  },
+  {
+   "target": "Frequency adverb placement",
+   "why": "A frequency adverb goes before a main verb, but after <i>be</i> and after the first auxiliary: {ans}."
+  },
+  {
+   "target": "Future perfect and future continuous",
+   "why": "<i>Will have</i> plus a past participle looks back from a future point; <i>will be</i> plus an <i>-ing</i> form describes something in progress then: {ans}."
+  },
+  {
+   "target": "Concessive clause",
+   "why": "<i>Although</i> and <i>even though</i> introduce a clause, while <i>despite</i> and <i>in spite of</i> introduce a noun phrase or gerund: {ans}."
+  },
+  {
+   "target": "Purpose clause",
+   "why": "Purpose is expressed by <i>so that</i> plus a clause or <i>in order to</i> plus a base verb: {ans}."
+  }
+ ],
+ "items": [
+  [
+   0,
+   "Classmate",
+   "Did the advisor say anything about the deadline?",
+   "She asked _ _ _ _ _ the application.",
+   [
+    "when",
+    "I",
+    "planned",
+    "to",
+    "submit"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Roommate",
+   "What did the professor want at the end of class?",
+   "He wanted to know _ _ _ _ _ topics.",
+   [
+    "why",
+    "my",
+    "group",
+    "had",
+    "changed"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Professor",
+   "Did the coach talk to you after practice?",
+   "Yes, he asked _ _ _ _ _ swimming competitively.",
+   [
+    "how",
+    "long",
+    "I",
+    "had",
+    "been"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Advisor",
+   "What did the librarian say?",
+   "She asked _ _ _ _ _ for the paper.",
+   [
+    "which",
+    "journals",
+    "I",
+    "still",
+    "needed"
+   ],
+   []
+  ],
+  [
+   0,
+   "Friend",
+   "Did your tutor mention the exam?",
+   "She asked _ _ _ _ _ be held.",
+   [
+    "where",
+    "the",
+    "review",
+    "session",
+    "would"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Coach",
+   "What did your roommate want?",
+   "He asked _ _ _ _ _ last week.",
+   [
+    "whose",
+    "notes",
+    "I",
+    "had",
+    "borrowed"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Librarian",
+   "Did anyone ask about the field trip?",
+   "A few people asked _ _ _ _ _ on Saturday.",
+   [
+    "what",
+    "time",
+    "the",
+    "bus",
+    "leaves"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Teammate",
+   "Did the counselor follow up with you?",
+   "She asked _ _ _ _ _ finished so far.",
+   [
+    "how",
+    "many",
+    "credits",
+    "I",
+    "had"
+   ],
+   []
+  ],
+  [
+   0,
+   "Neighbor",
+   "What did the professor say about your draft?",
+   "He asked _ _ _ _ _ a narrow topic.",
+   [
+    "why",
+    "I",
+    "had",
+    "chosen",
+    "such"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Tutor",
+   "Did your lab partner text you?",
+   "She asked _ _ _ _ _ second trial.",
+   [
+    "when",
+    "we",
+    "should",
+    "start",
+    "the"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Lab partner",
+   "What did the manager want to know?",
+   "He asked _ _ _ _ _ weekend shifts.",
+   [
+    "how",
+    "often",
+    "I",
+    "could",
+    "work"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Counselor",
+   "Did the host family ask about your plans?",
+   "They asked _ _ _ _ _ in the spring.",
+   [
+    "where",
+    "I",
+    "wanted",
+    "to",
+    "travel"
+   ],
+   []
+  ],
+  [
+   0,
+   "Colleague",
+   "Did anyone question the results?",
+   "One student asked _ _ _ _ _ measuring.",
+   [
+    "what",
+    "the",
+    "control",
+    "group",
+    "was"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Supervisor",
+   "What did your advisor ask about?",
+   "She asked _ _ _ _ _ for next term.",
+   [
+    "which",
+    "electives",
+    "I",
+    "was",
+    "considering"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Host",
+   "Did the trainer say anything?",
+   "He asked _ _ _ _ _ been getting.",
+   [
+    "how",
+    "much",
+    "sleep",
+    "I",
+    "had"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Coworker",
+   "What did the interviewer ask first?",
+   "She asked _ _ _ _ _ this program.",
+   [
+    "why",
+    "I",
+    "had",
+    "applied",
+    "to"
+   ],
+   []
+  ],
+  [
+   0,
+   "Group member",
+   "Did your neighbor come by?",
+   "He asked _ _ _ _ _ scheduled.",
+   [
+    "when",
+    "the",
+    "building",
+    "inspection",
+    "was"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Dorm RA",
+   "What did the RA announce?",
+   "She explained _ _ _ _ _ work.",
+   [
+    "how",
+    "the",
+    "new",
+    "laundry",
+    "cards"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Trainer",
+   "Did the professor respond to your email?",
+   "He asked _ _ _ _ _ trouble with.",
+   [
+    "what",
+    "chapter",
+    "I",
+    "was",
+    "having"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   0,
+   "Mentor",
+   "Did the office call you back?",
+   "They asked _ _ _ _ _ submitted.",
+   [
+    "which",
+    "form",
+    "I",
+    "had",
+    "already"
+   ],
+   []
+  ],
+  [
+   1,
+   "Classmate",
+   "Is the writing center open on Sundays?",
+   "I'm not sure _ _ _ _ _ on weekends.",
+   [
+    "whether",
+    "it",
+    "opens",
+    "before",
+    "noon"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Roommate",
+   "Will the lecture be recorded?",
+   "I asked _ _ _ _ _ posted online.",
+   [
+    "whether",
+    "the",
+    "session",
+    "would",
+    "be"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Professor",
+   "Can we bring laptops to the exam?",
+   "Nobody knows _ _ _ _ _ use them.",
+   [
+    "if",
+    "we",
+    "are",
+    "allowed",
+    "to"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Advisor",
+   "Did the package arrive?",
+   "I can't tell _ _ _ _ _ this morning.",
+   [
+    "whether",
+    "anyone",
+    "signed",
+    "for",
+    "it"
+   ],
+   []
+  ],
+  [
+   1,
+   "Friend",
+   "Is the shuttle running today?",
+   "Let me check _ _ _ _ _ north gate.",
+   [
+    "whether",
+    "it",
+    "stops",
+    "at",
+    "the"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Coach",
+   "Should I register now?",
+   "It depends on _ _ _ _ _ open seats.",
+   [
+    "whether",
+    "the",
+    "course",
+    "still",
+    "has"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Librarian",
+   "Has the grant been approved?",
+   "No one has said _ _ _ _ _ a decision.",
+   [
+    "whether",
+    "the",
+    "committee",
+    "has",
+    "made"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Teammate",
+   "Are you joining the trip?",
+   "I haven't decided _ _ _ _ _ extra week.",
+   [
+    "whether",
+    "I",
+    "can",
+    "afford",
+    "the"
+   ],
+   []
+  ],
+  [
+   1,
+   "Neighbor",
+   "Did she get the internship?",
+   "She didn't mention _ _ _ _ _ through.",
+   [
+    "whether",
+    "the",
+    "offer",
+    "had",
+    "come"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Tutor",
+   "Is the gym closed for repairs?",
+   "The sign doesn't say _ _ _ _ _ too.",
+   [
+    "whether",
+    "the",
+    "pool",
+    "is",
+    "closed"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Lab partner",
+   "Will the deadline move?",
+   "I wonder _ _ _ _ _ another week.",
+   [
+    "whether",
+    "they",
+    "will",
+    "extend",
+    "it"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Counselor",
+   "Can I take both seminars?",
+   "Ask the registrar _ _ _ _ _ this term.",
+   [
+    "whether",
+    "the",
+    "times",
+    "actually",
+    "overlap"
+   ],
+   []
+  ],
+  [
+   1,
+   "Colleague",
+   "Is parking free after six?",
+   "I'm not certain _ _ _ _ _ late.",
+   [
+    "whether",
+    "the",
+    "meters",
+    "run",
+    "that"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Supervisor",
+   "Did he finish the reading?",
+   "He wouldn't say _ _ _ _ _ it.",
+   [
+    "whether",
+    "he",
+    "had",
+    "even",
+    "started"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Host",
+   "Are the results posted?",
+   "I'll find out _ _ _ _ _ today.",
+   [
+    "whether",
+    "the",
+    "scores",
+    "went",
+    "up"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Coworker",
+   "Is this seat taken?",
+   "I don't know _ _ _ _ _ right now.",
+   [
+    "whether",
+    "anyone",
+    "is",
+    "sitting",
+    "here"
+   ],
+   []
+  ],
+  [
+   1,
+   "Group member",
+   "Will the tutor come tonight?",
+   "She hasn't confirmed _ _ _ _ _ at seven.",
+   [
+    "whether",
+    "she",
+    "can",
+    "make",
+    "it"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Dorm RA",
+   "Do I need a visa for the conference?",
+   "Check _ _ _ _ _ valid first.",
+   [
+    "whether",
+    "your",
+    "passport",
+    "is",
+    "still"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Trainer",
+   "Was the talk any good?",
+   "I can't say _ _ _ _ _ trip.",
+   [
+    "whether",
+    "it",
+    "was",
+    "worth",
+    "the"
+   ],
+   [
+    "do"
+   ]
+  ],
+  [
+   1,
+   "Mentor",
+   "Is the caf&eacute; hiring?",
+   "I'll ask _ _ _ _ _ mornings.",
+   [
+    "whether",
+    "they",
+    "need",
+    "anyone",
+    "for"
+   ],
+   []
+  ],
+  [
+   2,
+   "Classmate",
+   "What did the librarian tell you?",
+   "She said _ _ _ _ _ held until Friday.",
+   [
+    "that",
+    "the",
+    "book",
+    "would",
+    "be"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Roommate",
+   "What did your advisor say about the form?",
+   "He said _ _ _ _ _ days to process.",
+   [
+    "it",
+    "would",
+    "take",
+    "about",
+    "ten"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Professor",
+   "Did the office reply?",
+   "They said _ _ _ _ _ this afternoon.",
+   [
+    "someone",
+    "would",
+    "call",
+    "me",
+    "back"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Advisor",
+   "What did the professor announce?",
+   "She said _ _ _ _ _ chapters.",
+   [
+    "the",
+    "midterm",
+    "would",
+    "cover",
+    "three"
+   ],
+   []
+  ],
+  [
+   2,
+   "Friend",
+   "Did the coach say anything about Saturday?",
+   "He said _ _ _ _ _ earlier.",
+   [
+    "practice",
+    "would",
+    "start",
+    "an",
+    "hour"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Coach",
+   "What did the landlord tell you?",
+   "He said _ _ _ _ _ by Thursday.",
+   [
+    "the",
+    "heat",
+    "would",
+    "be",
+    "fixed"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Librarian",
+   "Did they explain the delay?",
+   "They said _ _ _ _ _ next week.",
+   [
+    "the",
+    "shipment",
+    "would",
+    "arrive",
+    "late"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Teammate",
+   "What did your tutor promise?",
+   "She said _ _ _ _ _ draft tonight.",
+   [
+    "she",
+    "would",
+    "look",
+    "at",
+    "my"
+   ],
+   []
+  ],
+  [
+   2,
+   "Neighbor",
+   "Did the TA mention the curve?",
+   "He said _ _ _ _ _ slightly.",
+   [
+    "the",
+    "grades",
+    "would",
+    "go",
+    "up"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Tutor",
+   "What did the doctor say?",
+   "She said _ _ _ _ _ few days.",
+   [
+    "the",
+    "results",
+    "would",
+    "take",
+    "a"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Lab partner",
+   "Did the airline update you?",
+   "They said _ _ _ _ _ gate twelve.",
+   [
+    "the",
+    "flight",
+    "would",
+    "board",
+    "at"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Counselor",
+   "What did the committee decide?",
+   "They said _ _ _ _ _ the end of term.",
+   [
+    "a",
+    "decision",
+    "would",
+    "come",
+    "by"
+   ],
+   []
+  ],
+  [
+   2,
+   "Colleague",
+   "Did she say when she is leaving?",
+   "She said _ _ _ _ _ June.",
+   [
+    "she",
+    "would",
+    "move",
+    "out",
+    "in"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Supervisor",
+   "What did the technician tell you?",
+   "He said _ _ _ _ _ new bulb.",
+   [
+    "the",
+    "projector",
+    "would",
+    "need",
+    "a"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Host",
+   "Did the bank explain the fee?",
+   "They said _ _ _ _ _ automatically.",
+   [
+    "the",
+    "charge",
+    "would",
+    "be",
+    "refunded"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Coworker",
+   "What did your group decide?",
+   "They said _ _ _ _ _ library at six.",
+   [
+    "we",
+    "would",
+    "meet",
+    "in",
+    "the"
+   ],
+   []
+  ],
+  [
+   2,
+   "Group member",
+   "Did the professor respond?",
+   "He said _ _ _ _ _ after class.",
+   [
+    "he",
+    "would",
+    "post",
+    "the",
+    "slides"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Dorm RA",
+   "What did the RA say about quiet hours?",
+   "She said _ _ _ _ _ on weeknights.",
+   [
+    "they",
+    "would",
+    "begin",
+    "at",
+    "ten"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Trainer",
+   "Did the store call?",
+   "They said _ _ _ _ _ on Monday.",
+   [
+    "the",
+    "part",
+    "would",
+    "be",
+    "in"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   2,
+   "Mentor",
+   "What did the office say about housing?",
+   "They said _ _ _ _ _ August.",
+   [
+    "assignments",
+    "would",
+    "go",
+    "out",
+    "in"
+   ],
+   []
+  ],
+  [
+   3,
+   "Classmate",
+   "I didn't see you at office hours yesterday.",
+   "I _ _ _ _ but my lab ran late.",
+   [
+    "meant",
+    "to",
+    "stop",
+    "by"
+   ],
+   [
+    "stopping"
+   ]
+  ],
+  [
+   3,
+   "Roommate",
+   "Are you coming to the study group?",
+   "I _ _ _ _ second session instead.",
+   [
+    "decided",
+    "to",
+    "join",
+    "the"
+   ],
+   [
+    "joining"
+   ]
+  ],
+  [
+   3,
+   "Professor",
+   "Did you sign up for the trip?",
+   "I _ _ _ _ van if nobody else could.",
+   [
+    "offered",
+    "to",
+    "drive",
+    "the"
+   ],
+   [
+    "driving"
+   ]
+  ],
+  [
+   3,
+   "Advisor",
+   "Why is your essay late?",
+   "I _ _ _ _ file to my email.",
+   [
+    "forgot",
+    "to",
+    "attach",
+    "the"
+   ],
+   []
+  ],
+  [
+   3,
+   "Friend",
+   "Will you take the advanced section?",
+   "I _ _ _ _ it next term.",
+   [
+    "hope",
+    "to",
+    "place",
+    "into"
+   ],
+   [
+    "placing"
+   ]
+  ],
+  [
+   3,
+   "Coach",
+   "Did he apologize?",
+   "He _ _ _ _ he was wrong.",
+   [
+    "refused",
+    "to",
+    "admit",
+    "that"
+   ],
+   [
+    "admitting"
+   ]
+  ],
+  [
+   3,
+   "Librarian",
+   "Are you still on the committee?",
+   "I _ _ _ _ one more year.",
+   [
+    "agreed",
+    "to",
+    "stay",
+    "for"
+   ],
+   [
+    "staying"
+   ]
+  ],
+  [
+   3,
+   "Teammate",
+   "How did the presentation go?",
+   "We _ _ _ _ two minutes left.",
+   [
+    "managed",
+    "to",
+    "finish",
+    "with"
+   ],
+   []
+  ],
+  [
+   3,
+   "Neighbor",
+   "Is she transferring?",
+   "She _ _ _ _ the fall.",
+   [
+    "plans",
+    "to",
+    "apply",
+    "in"
+   ],
+   [
+    "applying"
+   ]
+  ],
+  [
+   3,
+   "Tutor",
+   "Did you get the scholarship?",
+   "I _ _ _ _ March deadline.",
+   [
+    "failed",
+    "to",
+    "meet",
+    "the"
+   ],
+   [
+    "meeting"
+   ]
+  ],
+  [
+   3,
+   "Lab partner",
+   "Why didn't you call?",
+   "I _ _ _ _ twice last night.",
+   [
+    "tried",
+    "to",
+    "reach",
+    "you"
+   ],
+   [
+    "reaching"
+   ]
+  ],
+  [
+   3,
+   "Counselor",
+   "Are you going to the lecture?",
+   "I _ _ _ _ the rain stops.",
+   [
+    "intend",
+    "to",
+    "go",
+    "if"
+   ],
+   []
+  ],
+  [
+   3,
+   "Colleague",
+   "Did they fix the schedule?",
+   "They _ _ _ _ before registration.",
+   [
+    "promised",
+    "to",
+    "post",
+    "it"
+   ],
+   [
+    "posting"
+   ]
+  ],
+  [
+   3,
+   "Supervisor",
+   "Is he joining the lab?",
+   "He _ _ _ _ the imaging project.",
+   [
+    "wants",
+    "to",
+    "work",
+    "on"
+   ],
+   [
+    "working"
+   ]
+  ],
+  [
+   3,
+   "Host",
+   "Did you talk to the dean?",
+   "I _ _ _ _ on Thursday.",
+   [
+    "arranged",
+    "to",
+    "see",
+    "her"
+   ],
+   [
+    "seeing"
+   ]
+  ],
+  [
+   3,
+   "Coworker",
+   "Are you taking a gap year?",
+   "I _ _ _ _ two semesters.",
+   [
+    "chose",
+    "to",
+    "defer",
+    "for"
+   ],
+   []
+  ],
+  [
+   3,
+   "Group member",
+   "Why the change of topic?",
+   "I _ _ _ _ question considerably.",
+   [
+    "needed",
+    "to",
+    "narrow",
+    "the"
+   ],
+   [
+    "narrowing"
+   ]
+  ],
+  [
+   3,
+   "Dorm RA",
+   "Did she accept the offer?",
+   "She _ _ _ _ other program.",
+   [
+    "seems",
+    "to",
+    "prefer",
+    "the"
+   ],
+   [
+    "preferring"
+   ]
+  ],
+  [
+   3,
+   "Trainer",
+   "How is the group project going?",
+   "We _ _ _ _ by Sunday.",
+   [
+    "expect",
+    "to",
+    "submit",
+    "it"
+   ],
+   [
+    "submitting"
+   ]
+  ],
+  [
+   3,
+   "Mentor",
+   "Did you renew the book?",
+   "I _ _ _ _ on time.",
+   [
+    "forgot",
+    "to",
+    "return",
+    "it"
+   ],
+   []
+  ],
+  [
+   4,
+   "Classmate",
+   "Have you dropped the class?",
+   "I _ _ _ _ the first exam.",
+   [
+    "considered",
+    "dropping",
+    "it",
+    "after"
+   ],
+   [
+    "to drop"
+   ]
+  ],
+  [
+   4,
+   "Roommate",
+   "You still run every morning?",
+   "I _ _ _ _ until the weekend.",
+   [
+    "keep",
+    "putting",
+    "it",
+    "off"
+   ],
+   [
+    "to put"
+   ]
+  ],
+  [
+   4,
+   "Professor",
+   "Did you finish the reading?",
+   "I _ _ _ _ chapter last night.",
+   [
+    "finished",
+    "annotating",
+    "the",
+    "second"
+   ],
+   [
+    "to annotate"
+   ]
+  ],
+  [
+   4,
+   "Advisor",
+   "Why not take the early train?",
+   "I _ _ _ _ if I can.",
+   [
+    "avoid",
+    "traveling",
+    "before",
+    "seven"
+   ],
+   []
+  ],
+  [
+   4,
+   "Friend",
+   "Should we move the meeting?",
+   "I _ _ _ _ later.",
+   [
+    "suggest",
+    "starting",
+    "an",
+    "hour"
+   ],
+   [
+    "to start"
+   ]
+  ],
+  [
+   4,
+   "Coach",
+   "Do you mind the noise?",
+   "I _ _ _ _ music on.",
+   [
+    "don't",
+    "mind",
+    "working",
+    "with"
+   ],
+   [
+    "to work"
+   ]
+  ],
+  [
+   4,
+   "Librarian",
+   "Are you still tutoring?",
+   "I _ _ _ _ students.",
+   [
+    "enjoy",
+    "helping",
+    "the",
+    "first-year"
+   ],
+   [
+    "to help"
+   ]
+  ],
+  [
+   4,
+   "Teammate",
+   "Did she quit the team?",
+   "She _ _ _ _ the injury.",
+   [
+    "gave",
+    "up",
+    "competing",
+    "after"
+   ],
+   []
+  ],
+  [
+   4,
+   "Neighbor",
+   "Is the printer working?",
+   "It _ _ _ _ through.",
+   [
+    "stopped",
+    "feeding",
+    "paper",
+    "halfway"
+   ],
+   [
+    "to feed"
+   ]
+  ],
+  [
+   4,
+   "Tutor",
+   "Have you decided on a topic?",
+   "I _ _ _ _ until yesterday.",
+   [
+    "put",
+    "off",
+    "choosing",
+    "one"
+   ],
+   [
+    "to choose"
+   ]
+  ],
+  [
+   4,
+   "Lab partner",
+   "Why the late night?",
+   "I _ _ _ _ deadline.",
+   [
+    "couldn't",
+    "risk",
+    "missing",
+    "the"
+   ],
+   [
+    "to miss"
+   ]
+  ],
+  [
+   4,
+   "Counselor",
+   "Do you still take the bus?",
+   "I _ _ _ _ weather holds.",
+   [
+    "prefer",
+    "walking",
+    "when",
+    "the"
+   ],
+   []
+  ],
+  [
+   4,
+   "Colleague",
+   "Did he explain himself?",
+   "He _ _ _ _ at all.",
+   [
+    "denied",
+    "seeing",
+    "the",
+    "email"
+   ],
+   [
+    "to see"
+   ]
+  ],
+  [
+   4,
+   "Supervisor",
+   "Are you going to the recital?",
+   "I'm _ _ _ _ her play.",
+   [
+    "looking",
+    "forward",
+    "to",
+    "hearing"
+   ],
+   [
+    "hear"
+   ]
+  ],
+  [
+   4,
+   "Host",
+   "Is the essay done?",
+   "I _ _ _ _ this evening.",
+   [
+    "postponed",
+    "editing",
+    "it",
+    "until"
+   ],
+   [
+    "to edit"
+   ]
+  ],
+  [
+   4,
+   "Coworker",
+   "Did you try the new caf&eacute;?",
+   "I _ _ _ _ the rush.",
+   [
+    "recommend",
+    "getting",
+    "there",
+    "before"
+   ],
+   []
+  ],
+  [
+   4,
+   "Group member",
+   "Are you still in the choir?",
+   "I _ _ _ _ fall concert.",
+   [
+    "quit",
+    "attending",
+    "after",
+    "the"
+   ],
+   [
+    "to attend"
+   ]
+  ],
+  [
+   4,
+   "Dorm RA",
+   "Why did the demo fail?",
+   "We _ _ _ _ until too late.",
+   [
+    "delayed",
+    "testing",
+    "the",
+    "build"
+   ],
+   [
+    "to test"
+   ]
+  ],
+  [
+   4,
+   "Trainer",
+   "Do you read before bed?",
+   "I _ _ _ _ to my field.",
+   [
+    "practice",
+    "reading",
+    "something",
+    "unrelated"
+   ],
+   [
+    "to read"
+   ]
+  ],
+  [
+   4,
+   "Mentor",
+   "Did they cancel the trip?",
+   "They _ _ _ _ a month.",
+   [
+    "discussed",
+    "postponing",
+    "it",
+    "for"
+   ],
+   []
+  ],
+  [
+   5,
+   "Classmate",
+   "How did the firm grow so fast?",
+   "They _ _ _ _ _ training.",
+   [
+    "attribute",
+    "it",
+    "to",
+    "investing",
+    "in"
+   ],
+   [
+    "invest"
+   ]
+  ],
+  [
+   5,
+   "Roommate",
+   "Why are you so tired?",
+   "I'm _ _ _ _ _ five now.",
+   [
+    "used",
+    "to",
+    "getting",
+    "up",
+    "before"
+   ],
+   [
+    "get"
+   ]
+  ],
+  [
+   5,
+   "Professor",
+   "Did you thank her?",
+   "I thanked her _ _ _ _ twice.",
+   [
+    "for",
+    "reading",
+    "my",
+    "draft"
+   ],
+   [
+    "to read"
+   ]
+  ],
+  [
+   5,
+   "Advisor",
+   "How did you pass?",
+   "I passed _ _ _ _ set.",
+   [
+    "by",
+    "reviewing",
+    "every",
+    "problem"
+   ],
+   []
+  ],
+  [
+   5,
+   "Friend",
+   "Are you nervous about Friday?",
+   "I'm _ _ _ _ opening line.",
+   [
+    "worried",
+    "about",
+    "forgetting",
+    "my"
+   ],
+   [
+    "forget"
+   ]
+  ],
+  [
+   5,
+   "Coach",
+   "Why the new route?",
+   "I _ _ _ _ traffic builds.",
+   [
+    "insist",
+    "on",
+    "leaving",
+    "before"
+   ],
+   [
+    "leave"
+   ]
+  ],
+  [
+   5,
+   "Librarian",
+   "Did he apologize?",
+   "He apologized _ _ _ _ meeting.",
+   [
+    "for",
+    "missing",
+    "the",
+    "group"
+   ],
+   [
+    "to miss"
+   ]
+  ],
+  [
+   5,
+   "Teammate",
+   "Is she good at presentations?",
+   "She's _ _ _ _ ideas simply.",
+   [
+    "good",
+    "at",
+    "explaining",
+    "difficult"
+   ],
+   []
+  ],
+  [
+   5,
+   "Neighbor",
+   "How do you stay focused?",
+   "I _ _ _ _ work into blocks.",
+   [
+    "succeed",
+    "by",
+    "breaking",
+    "the"
+   ],
+   [
+    "to break"
+   ]
+  ],
+  [
+   5,
+   "Tutor",
+   "Why not ask for help?",
+   "I'm _ _ _ _ out myself.",
+   [
+    "capable",
+    "of",
+    "figuring",
+    "it"
+   ],
+   [
+    "figure"
+   ]
+  ],
+  [
+   5,
+   "Lab partner",
+   "Did they object?",
+   "They _ _ _ _ deadline again.",
+   [
+    "objected",
+    "to",
+    "moving",
+    "the"
+   ],
+   [
+    "move"
+   ]
+  ],
+  [
+   5,
+   "Counselor",
+   "Are you ready for the exam?",
+   "I'm _ _ _ _ same chapter.",
+   [
+    "tired",
+    "of",
+    "rereading",
+    "the"
+   ],
+   []
+  ],
+  [
+   5,
+   "Colleague",
+   "How did you find the internship?",
+   "I _ _ _ _ alumnus directly.",
+   [
+    "succeeded",
+    "in",
+    "reaching",
+    "an"
+   ],
+   [
+    "to reach"
+   ]
+  ],
+  [
+   5,
+   "Supervisor",
+   "Why skip the lecture?",
+   "There's no _ _ _ _ the reading.",
+   [
+    "point",
+    "in",
+    "going",
+    "without"
+   ],
+   [
+    "to go"
+   ]
+  ],
+  [
+   5,
+   "Host",
+   "Did you enjoy the seminar?",
+   "I _ _ _ _ again.",
+   [
+    "look",
+    "forward",
+    "to",
+    "attending"
+   ],
+   [
+    "attend"
+   ]
+  ],
+  [
+   5,
+   "Coworker",
+   "How is the new job?",
+   "I'm _ _ _ _ so many emails.",
+   [
+    "getting",
+    "used",
+    "to",
+    "answering"
+   ],
+   []
+  ],
+  [
+   5,
+   "Group member",
+   "Did she agree?",
+   "She _ _ _ _ whole proposal.",
+   [
+    "agreed",
+    "without",
+    "hearing",
+    "the"
+   ],
+   [
+    "to hear"
+   ]
+  ],
+  [
+   5,
+   "Dorm RA",
+   "Why the early start?",
+   "I _ _ _ _ noon.",
+   [
+    "believe",
+    "in",
+    "finishing",
+    "before"
+   ],
+   [
+    "to finish"
+   ]
+  ],
+  [
+   5,
+   "Trainer",
+   "Are you still worried?",
+   "I'm _ _ _ _ of time.",
+   [
+    "afraid",
+    "of",
+    "running",
+    "out"
+   ],
+   [
+    "run"
+   ]
+  ],
+  [
+   5,
+   "Mentor",
+   "How did you learn so fast?",
+   "I _ _ _ _ single day.",
+   [
+    "improved",
+    "by",
+    "practicing",
+    "every"
+   ],
+   []
+  ],
+  [
+   6,
+   "Classmate",
+   "How long have you been on the swim team?",
+   "I _ _ _ _ the team since my first year.",
+   [
+    "have",
+    "been",
+    "part",
+    "of"
+   ],
+   [
+    "am"
+   ]
+  ],
+  [
+   6,
+   "Roommate",
+   "Do you know this neighborhood?",
+   "I _ _ _ _ almost four years.",
+   [
+    "have",
+    "lived",
+    "here",
+    "for"
+   ],
+   [
+    "live"
+   ]
+  ],
+  [
+   6,
+   "Professor",
+   "Is he still your advisor?",
+   "He _ _ _ _ since last spring.",
+   [
+    "has",
+    "supervised",
+    "my",
+    "work"
+   ],
+   [
+    "supervises"
+   ]
+  ],
+  [
+   6,
+   "Advisor",
+   "How long has the lab been closed?",
+   "It _ _ _ _ the flood.",
+   [
+    "has",
+    "been",
+    "shut",
+    "since"
+   ],
+   []
+  ],
+  [
+   6,
+   "Friend",
+   "Do you still play?",
+   "I _ _ _ _ since August.",
+   [
+    "haven't",
+    "touched",
+    "the",
+    "piano"
+   ],
+   [
+    "didn't"
+   ]
+  ],
+  [
+   6,
+   "Coach",
+   "Is the position still open?",
+   "They _ _ _ _ two months.",
+   [
+    "have",
+    "been",
+    "interviewing",
+    "for"
+   ],
+   [
+    "are"
+   ]
+  ],
+  [
+   6,
+   "Librarian",
+   "How long have you known her?",
+   "We _ _ _ _ orientation week.",
+   [
+    "have",
+    "been",
+    "friends",
+    "since"
+   ],
+   [
+    "are"
+   ]
+  ],
+  [
+   6,
+   "Teammate",
+   "Are you new to the city?",
+   "I _ _ _ _ for a semester.",
+   [
+    "have",
+    "only",
+    "been",
+    "here"
+   ],
+   []
+  ],
+  [
+   6,
+   "Neighbor",
+   "Is the renovation finished?",
+   "The crew _ _ _ _ since June.",
+   [
+    "has",
+    "worked",
+    "on",
+    "it"
+   ],
+   [
+    "works"
+   ]
+  ],
+  [
+   6,
+   "Tutor",
+   "Do you still volunteer there?",
+   "I _ _ _ _ Saturday since March.",
+   [
+    "have",
+    "helped",
+    "out",
+    "every"
+   ],
+   [
+    "help"
+   ]
+  ],
+  [
+   6,
+   "Lab partner",
+   "How long has he taught here?",
+   "He _ _ _ _ for a decade.",
+   [
+    "has",
+    "been",
+    "teaching",
+    "here"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   6,
+   "Counselor",
+   "Is the caf&eacute; new?",
+   "It _ _ _ _ the start of term.",
+   [
+    "has",
+    "been",
+    "open",
+    "since"
+   ],
+   []
+  ],
+  [
+   6,
+   "Colleague",
+   "Do you still use that laptop?",
+   "I _ _ _ _ high school.",
+   [
+    "have",
+    "had",
+    "it",
+    "since"
+   ],
+   [
+    "having"
+   ]
+  ],
+  [
+   6,
+   "Supervisor",
+   "Are they still in the program?",
+   "They _ _ _ _ for three terms.",
+   [
+    "have",
+    "stayed",
+    "in",
+    "it"
+   ],
+   [
+    "stay"
+   ]
+  ],
+  [
+   6,
+   "Host",
+   "Is she still recovering?",
+   "She _ _ _ _ the surgery.",
+   [
+    "has",
+    "been",
+    "resting",
+    "since"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   6,
+   "Coworker",
+   "How long has the road been closed?",
+   "It _ _ _ _ several weeks.",
+   [
+    "has",
+    "been",
+    "blocked",
+    "for"
+   ],
+   []
+  ],
+  [
+   6,
+   "Group member",
+   "Do you follow that research?",
+   "I _ _ _ _ since undergrad.",
+   [
+    "have",
+    "read",
+    "her",
+    "papers"
+   ],
+   [
+    "reads"
+   ]
+  ],
+  [
+   6,
+   "Dorm RA",
+   "Is the club still active?",
+   "It _ _ _ _ since 2019.",
+   [
+    "has",
+    "met",
+    "every",
+    "month"
+   ],
+   [
+    "meets"
+   ]
+  ],
+  [
+   6,
+   "Trainer",
+   "Are you still on that project?",
+   "I _ _ _ _ since January.",
+   [
+    "have",
+    "worked",
+    "on",
+    "it"
+   ],
+   [
+    "work"
+   ]
+  ],
+  [
+   6,
+   "Mentor",
+   "Has the policy changed?",
+   "It _ _ _ _ for years.",
+   [
+    "has",
+    "stayed",
+    "the",
+    "same"
+   ],
+   []
+  ],
+  [
+   7,
+   "Classmate",
+   "Why didn't you get a seat?",
+   "The lecture _ _ _ _ I arrived.",
+   [
+    "had",
+    "already",
+    "started",
+    "when"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Roommate",
+   "Did you see the announcement?",
+   "They _ _ _ _ I woke up.",
+   [
+    "had",
+    "posted",
+    "it",
+    "before"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Professor",
+   "Why was the exam so easy?",
+   "I _ _ _ _ the night before.",
+   [
+    "had",
+    "reviewed",
+    "every",
+    "chapter"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Advisor",
+   "Did she make the train?",
+   "It _ _ _ _ time she got there.",
+   [
+    "had",
+    "left",
+    "by",
+    "the"
+   ],
+   []
+  ],
+  [
+   7,
+   "Friend",
+   "Was the room still free?",
+   "Someone _ _ _ _ hour earlier.",
+   [
+    "had",
+    "booked",
+    "it",
+    "an"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Coach",
+   "Why did the demo fail?",
+   "We _ _ _ _ the update.",
+   [
+    "had",
+    "forgotten",
+    "to",
+    "install"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Librarian",
+   "Did he know about the change?",
+   "Nobody _ _ _ _ the meeting.",
+   [
+    "had",
+    "told",
+    "him",
+    "before"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Teammate",
+   "Was the article useful?",
+   "I _ _ _ _ before the seminar.",
+   [
+    "had",
+    "read",
+    "it",
+    "long"
+   ],
+   []
+  ],
+  [
+   7,
+   "Neighbor",
+   "Why were you surprised?",
+   "She _ _ _ _ transfer to me.",
+   [
+    "had",
+    "never",
+    "mentioned",
+    "the"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Tutor",
+   "Did they finish on time?",
+   "They _ _ _ _ before the deadline.",
+   [
+    "had",
+    "completed",
+    "the",
+    "survey"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Lab partner",
+   "Was the food gone?",
+   "The other group _ _ _ _ it already.",
+   [
+    "had",
+    "eaten",
+    "most",
+    "of"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Counselor",
+   "Why did you change advisors?",
+   "Mine _ _ _ _ university.",
+   [
+    "had",
+    "moved",
+    "to",
+    "another"
+   ],
+   []
+  ],
+  [
+   7,
+   "Colleague",
+   "Did the package arrive?",
+   "It _ _ _ _ the wrong address.",
+   [
+    "had",
+    "been",
+    "delivered",
+    "to"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Supervisor",
+   "Were you prepared?",
+   "I _ _ _ _ four times.",
+   [
+    "had",
+    "practiced",
+    "the",
+    "talk"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Host",
+   "Why was the lab locked?",
+   "The technician _ _ _ _ five.",
+   [
+    "had",
+    "gone",
+    "home",
+    "before"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Coworker",
+   "Did you recognize her?",
+   "We _ _ _ _ a conference.",
+   [
+    "had",
+    "met",
+    "once",
+    "at"
+   ],
+   []
+  ],
+  [
+   7,
+   "Group member",
+   "Was the deadline extended?",
+   "They _ _ _ _ previous week.",
+   [
+    "had",
+    "announced",
+    "it",
+    "the"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Dorm RA",
+   "Why didn't you answer?",
+   "My phone _ _ _ _ afternoon.",
+   [
+    "had",
+    "died",
+    "during",
+    "the"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Trainer",
+   "Did she get the notes?",
+   "I _ _ _ _ class started.",
+   [
+    "had",
+    "sent",
+    "them",
+    "before"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   7,
+   "Mentor",
+   "Was the store open?",
+   "It _ _ _ _ earlier.",
+   [
+    "had",
+    "closed",
+    "twenty",
+    "minutes"
+   ],
+   []
+  ],
+  [
+   8,
+   "Classmate",
+   "Should I take the 8 a.m. section?",
+   "If I _ _ , I _ _ _ the afternoon one.",
+   [
+    "were",
+    "you",
+    "would",
+    "definitely",
+    "choose"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Roommate",
+   "Do you think I should email her?",
+   "If I _ _ _ _ , I _ wait a day.",
+   [
+    "were",
+    "in",
+    "your",
+    "position",
+    "would"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Professor",
+   "Would you switch majors?",
+   "If the program _ _ _ , I _ consider it.",
+   [
+    "were",
+    "less",
+    "rigid",
+    "would"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Advisor",
+   "Can I afford another course?",
+   "If tuition _ _ _ , you _ take two.",
+   [
+    "weren't",
+    "so",
+    "high",
+    "could"
+   ],
+   []
+  ],
+  [
+   8,
+   "Friend",
+   "Why not join the trip?",
+   "If I _ _ _ _ , I _ come along.",
+   [
+    "had",
+    "more",
+    "free",
+    "time",
+    "would"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Coach",
+   "Should we present first?",
+   "If we _ _ , the audience _ _ be tired.",
+   [
+    "went",
+    "last",
+    "would",
+    "already"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Librarian",
+   "Is she going to apply?",
+   "If she _ _ _ , she _ apply today.",
+   [
+    "felt",
+    "more",
+    "confident",
+    "would"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Teammate",
+   "Do you want the window seat?",
+   "If it _ _ , I _ _ the aisle.",
+   [
+    "were",
+    "colder",
+    "would",
+    "prefer"
+   ],
+   []
+  ],
+  [
+   8,
+   "Neighbor",
+   "Should I buy the textbook?",
+   "If I _ _ _ , I _ buy a copy.",
+   [
+    "needed",
+    "it",
+    "daily",
+    "would"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Tutor",
+   "Would you move off campus?",
+   "If rent _ _ , I _ _ tomorrow.",
+   [
+    "were",
+    "cheaper",
+    "would",
+    "leave"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Lab partner",
+   "Can we finish tonight?",
+   "If we _ _ , we _ _ it.",
+   [
+    "started",
+    "now",
+    "might",
+    "manage"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Counselor",
+   "Is the lab too far?",
+   "If there _ _ _ , nobody _ complain.",
+   [
+    "were",
+    "a",
+    "shuttle",
+    "would"
+   ],
+   []
+  ],
+  [
+   8,
+   "Colleague",
+   "Should I speak to the dean?",
+   "If I _ _ , I _ _ straight there.",
+   [
+    "were",
+    "worried",
+    "would",
+    "go"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Supervisor",
+   "Would you take the night shift?",
+   "If the pay _ _ _ , I _ consider it.",
+   [
+    "were",
+    "any",
+    "better",
+    "would"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Host",
+   "Do you think she would help?",
+   "If you _ _ , she _ _ agree.",
+   [
+    "asked",
+    "politely",
+    "would",
+    "probably"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Coworker",
+   "Is the course worth it?",
+   "If I _ _ _ , I _ take it again.",
+   [
+    "were",
+    "starting",
+    "over",
+    "would"
+   ],
+   []
+  ],
+  [
+   8,
+   "Group member",
+   "Should we invite the whole group?",
+   "If the room _ _ , we _ _ everyone.",
+   [
+    "were",
+    "bigger",
+    "could",
+    "invite"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Dorm RA",
+   "Would you learn another language?",
+   "If I _ _ _ _ , I would study Japanese.",
+   [
+    "had",
+    "a",
+    "free",
+    "term"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Trainer",
+   "Can I borrow your notes?",
+   "If they _ _ , I _ _ them gladly.",
+   [
+    "were",
+    "legible",
+    "would",
+    "share"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   8,
+   "Mentor",
+   "Should I retake the test?",
+   "If I _ _ _ _ , I would retake it.",
+   [
+    "were",
+    "in",
+    "your",
+    "place"
+   ],
+   []
+  ],
+  [
+   9,
+   "Classmate",
+   "Why did the bridge fail?",
+   "The damage _ _ _ _ earlier if anyone had checked.",
+   [
+    "would",
+    "have",
+    "been",
+    "detected"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Roommate",
+   "Did you know about the change?",
+   "I _ _ _ _ if someone had told me.",
+   [
+    "would",
+    "have",
+    "come",
+    "earlier"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Professor",
+   "Why didn't she apply?",
+   "She _ _ _ _ the deadline had been later.",
+   [
+    "would",
+    "have",
+    "applied",
+    "if"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Advisor",
+   "Was the trip a mistake?",
+   "If we _ _ _ _ , we would have stayed home.",
+   [
+    "had",
+    "checked",
+    "the",
+    "forecast"
+   ],
+   []
+  ],
+  [
+   9,
+   "Friend",
+   "Did you miss the bus?",
+   "I _ _ _ _ if I had left sooner.",
+   [
+    "would",
+    "have",
+    "caught",
+    "it"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Coach",
+   "Why was the data lost?",
+   "Nothing _ _ _ _ the backup had run.",
+   [
+    "would",
+    "have",
+    "disappeared",
+    "if"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Librarian",
+   "Did he fail the course?",
+   "He _ _ _ _ a little more revision.",
+   [
+    "would",
+    "have",
+    "passed",
+    "with"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Teammate",
+   "Was the meeting useful?",
+   "If they _ _ _ _ , it would have been shorter.",
+   [
+    "had",
+    "sent",
+    "an",
+    "agenda"
+   ],
+   []
+  ],
+  [
+   9,
+   "Neighbor",
+   "Why did the experiment fail?",
+   "It _ _ _ _ the sample had been fresh.",
+   [
+    "would",
+    "have",
+    "worked",
+    "if"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Tutor",
+   "Did you enjoy the concert?",
+   "I _ _ _ _ if the seats had been better.",
+   [
+    "would",
+    "have",
+    "stayed",
+    "longer"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Lab partner",
+   "Why weren't you told?",
+   "Someone _ _ _ _ if they had known.",
+   [
+    "would",
+    "have",
+    "mentioned",
+    "it"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Counselor",
+   "Was the flight delayed?",
+   "If the weather _ _ , we _ _ landed on time.",
+   [
+    "had",
+    "held",
+    "would",
+    "have"
+   ],
+   []
+  ],
+  [
+   9,
+   "Colleague",
+   "Did she take the job?",
+   "She _ _ _ _ the salary had been higher.",
+   [
+    "would",
+    "have",
+    "accepted",
+    "if"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Supervisor",
+   "Why was the room double-booked?",
+   "The clash _ _ _ _ with one shared calendar.",
+   [
+    "would",
+    "have",
+    "been",
+    "avoided"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Host",
+   "Did you finish the draft?",
+   "I _ _ _ _ if the library had stayed open.",
+   [
+    "would",
+    "have",
+    "finished",
+    "it"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Coworker",
+   "Was the class cancelled?",
+   "They _ _ _ _ if it had been cancelled.",
+   [
+    "would",
+    "have",
+    "emailed",
+    "everyone"
+   ],
+   []
+  ],
+  [
+   9,
+   "Group member",
+   "Why did the team lose?",
+   "We _ _ _ _ our captain had played.",
+   [
+    "would",
+    "have",
+    "won",
+    "if"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Dorm RA",
+   "Did anyone notice the error?",
+   "It _ _ _ _ during a second reading.",
+   [
+    "would",
+    "have",
+    "been",
+    "caught"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Trainer",
+   "Why is the report late?",
+   "If I _ _ _ _ in September, it would already be done.",
+   [
+    "had",
+    "started",
+    "the",
+    "work"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   9,
+   "Mentor",
+   "Did he get the message?",
+   "He _ _ _ _ his phone had worked.",
+   [
+    "would",
+    "have",
+    "replied",
+    "if"
+   ],
+   []
+  ],
+  [
+   10,
+   "Classmate",
+   "Are you going to the game?",
+   "If the rain _ , I _ _ _ with you.",
+   [
+    "stops",
+    "will",
+    "walk",
+    "over"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Roommate",
+   "Will you finish tonight?",
+   "If I _ _ _ , I _ be done by ten.",
+   [
+    "keep",
+    "this",
+    "pace",
+    "will"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Professor",
+   "Should I wait for you?",
+   "If the meeting _ _ , I _ _ you.",
+   [
+    "runs",
+    "long",
+    "will",
+    "text"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Advisor",
+   "Are you taking the exam early?",
+   "If they _ _ , I _ _ sit it on Monday.",
+   [
+    "allow",
+    "it",
+    "will",
+    "happily"
+   ],
+   []
+  ],
+  [
+   10,
+   "Friend",
+   "Will the shop still be open?",
+   "If we _ _ , we _ _ there in time.",
+   [
+    "leave",
+    "now",
+    "will",
+    "get"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Coach",
+   "Is the trip still on?",
+   "If enough people _ _ , the office _ _ confirm it.",
+   [
+    "sign",
+    "up",
+    "will",
+    "surely"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Librarian",
+   "Will you need a ride?",
+   "If my bike _ _ _ , I _ ask you.",
+   [
+    "is",
+    "still",
+    "broken",
+    "will"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Teammate",
+   "Are you applying this year?",
+   "If my scores _ _ , I _ _ apply again.",
+   [
+    "improve",
+    "enough",
+    "will",
+    "certainly"
+   ],
+   []
+  ],
+  [
+   10,
+   "Neighbor",
+   "Will she join the lab?",
+   "If the funding _ _ , she _ _ in June.",
+   [
+    "comes",
+    "through",
+    "will",
+    "start"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Tutor",
+   "Should we book the room?",
+   "If we _ _ _ , someone _ take it.",
+   [
+    "wait",
+    "any",
+    "longer",
+    "will"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Lab partner",
+   "Will the package arrive today?",
+   "If it _ _ _ , it _ arrive by six.",
+   [
+    "ships",
+    "this",
+    "morning",
+    "will"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Counselor",
+   "Are you coming to the review?",
+   "If I _ _ _ _ , I will come.",
+   [
+    "finish",
+    "the",
+    "problem",
+    "set"
+   ],
+   []
+  ],
+  [
+   10,
+   "Colleague",
+   "Will the price go up?",
+   "If demand _ _ , the fee _ _ again.",
+   [
+    "stays",
+    "high",
+    "will",
+    "rise"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Supervisor",
+   "Should I bring my laptop?",
+   "If the wifi _ , we _ _ _ it.",
+   [
+    "works",
+    "will",
+    "certainly",
+    "need"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Host",
+   "Will they extend the deadline?",
+   "If enough students _ _ , they _ _ extend it.",
+   [
+    "ask",
+    "again",
+    "will",
+    "probably"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Coworker",
+   "Are you going to the conference?",
+   "If my abstract _ _ , I _ _ fly out.",
+   [
+    "is",
+    "accepted",
+    "will",
+    "gladly"
+   ],
+   []
+  ],
+  [
+   10,
+   "Group member",
+   "Will the bus be crowded?",
+   "If we _ _ _ _ stop, we will sit together.",
+   [
+    "board",
+    "at",
+    "the",
+    "first"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Dorm RA",
+   "Should we split the cost?",
+   "If everyone _ _ , the total _ _ manageable.",
+   [
+    "contributes",
+    "something",
+    "will",
+    "be"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Trainer",
+   "Will you keep the apartment?",
+   "If the rent _ _ , I _ _ renew.",
+   [
+    "stays",
+    "flat",
+    "will",
+    "probably"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   10,
+   "Mentor",
+   "Are you free on Friday?",
+   "If nothing _ _ , I _ _ around all day.",
+   [
+    "changes",
+    "suddenly",
+    "will",
+    "be"
+   ],
+   []
+  ],
+  [
+   11,
+   "Classmate",
+   "Did someone already grade the midterms?",
+   "Yes, they _ _ _ _ this morning.",
+   [
+    "were",
+    "all",
+    "posted",
+    "online"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Roommate",
+   "Who cleaned the lab?",
+   "It _ _ _ _ night staff.",
+   [
+    "was",
+    "cleaned",
+    "by",
+    "the"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Professor",
+   "Did they cancel the seminar?",
+   "The seminar _ _ _ _ building.",
+   [
+    "was",
+    "moved",
+    "to",
+    "another"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Advisor",
+   "Is the bridge open?",
+   "It _ _ _ _ month.",
+   [
+    "is",
+    "being",
+    "repaired",
+    "this"
+   ],
+   []
+  ],
+  [
+   11,
+   "Friend",
+   "Who wrote this report?",
+   "It _ _ _ _ different people.",
+   [
+    "was",
+    "written",
+    "by",
+    "three"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Coach",
+   "Did the museum buy the painting?",
+   "The painting _ _ _ _ former student.",
+   [
+    "was",
+    "donated",
+    "by",
+    "a"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Librarian",
+   "Are the results ready?",
+   "They _ _ _ _ by the committee.",
+   [
+    "are",
+    "still",
+    "being",
+    "checked"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Teammate",
+   "Did they fix the heater?",
+   "It _ _ _ _ weekend.",
+   [
+    "was",
+    "replaced",
+    "over",
+    "the"
+   ],
+   []
+  ],
+  [
+   11,
+   "Neighbor",
+   "Who chose the topic?",
+   "It _ _ _ _ first meeting.",
+   [
+    "was",
+    "decided",
+    "at",
+    "the"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Tutor",
+   "Is the article published?",
+   "It _ _ _ _ printed yet.",
+   [
+    "was",
+    "accepted",
+    "but",
+    "not"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Lab partner",
+   "Did anyone survey the site?",
+   "The site _ _ _ _ road was built.",
+   [
+    "was",
+    "surveyed",
+    "before",
+    "the"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Counselor",
+   "Are the books catalogued?",
+   "Most _ _ _ _ 1990s.",
+   [
+    "were",
+    "catalogued",
+    "in",
+    "the"
+   ],
+   []
+  ],
+  [
+   11,
+   "Colleague",
+   "Who funds the program?",
+   "It _ _ _ _ private foundation.",
+   [
+    "is",
+    "funded",
+    "by",
+    "a"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Supervisor",
+   "Did they announce the winners?",
+   "The names _ _ _ _ the ceremony.",
+   [
+    "were",
+    "read",
+    "out",
+    "at"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Host",
+   "Is the data stored safely?",
+   "Everything _ _ _ _ night.",
+   [
+    "is",
+    "backed",
+    "up",
+    "every"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Coworker",
+   "Did someone move my desk?",
+   "It _ _ _ _ renovation.",
+   [
+    "was",
+    "shifted",
+    "during",
+    "the"
+   ],
+   []
+  ],
+  [
+   11,
+   "Group member",
+   "Who translated the manuscript?",
+   "It _ _ _ _ scholars.",
+   [
+    "was",
+    "translated",
+    "by",
+    "two"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Dorm RA",
+   "Are the samples ready?",
+   "They _ _ _ _ as they arrived.",
+   [
+    "were",
+    "frozen",
+    "as",
+    "soon"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Trainer",
+   "Did they repaint the hall?",
+   "It _ _ _ _ summer.",
+   [
+    "was",
+    "painted",
+    "over",
+    "the"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   11,
+   "Mentor",
+   "Is the film finished?",
+   "It _ _ _ _ now.",
+   [
+    "is",
+    "being",
+    "edited",
+    "right"
+   ],
+   []
+  ],
+  [
+   12,
+   "Classmate",
+   "What should we do with the extra copies?",
+   "They _ _ _ _ the front desk.",
+   [
+    "should",
+    "be",
+    "returned",
+    "to"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Roommate",
+   "Can the deadline move?",
+   "It _ _ _ _ by the department.",
+   [
+    "can",
+    "be",
+    "extended",
+    "only"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Professor",
+   "What about the broken chair?",
+   "It _ _ _ _ the inspection.",
+   [
+    "must",
+    "be",
+    "replaced",
+    "before"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Advisor",
+   "Where do the forms go?",
+   "They _ _ _ _ by an advisor.",
+   [
+    "have",
+    "to",
+    "be",
+    "signed"
+   ],
+   []
+  ],
+  [
+   12,
+   "Friend",
+   "Can we reuse the slides?",
+   "They _ _ _ _ written permission.",
+   [
+    "may",
+    "be",
+    "shared",
+    "with"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Coach",
+   "What happens to the samples?",
+   "They _ _ _ _ low temperature.",
+   [
+    "will",
+    "be",
+    "stored",
+    "at"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Librarian",
+   "Is the essay handwritten?",
+   "It _ _ _ _ double spaced.",
+   [
+    "should",
+    "be",
+    "typed",
+    "and"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Teammate",
+   "Who approves the budget?",
+   "It _ _ _ _ the committee.",
+   [
+    "must",
+    "be",
+    "approved",
+    "by"
+   ],
+   []
+  ],
+  [
+   12,
+   "Neighbor",
+   "Can I keep the equipment?",
+   "It _ _ _ _ back in.",
+   [
+    "has",
+    "to",
+    "be",
+    "logged"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Tutor",
+   "What about the old files?",
+   "They _ _ _ _ two years.",
+   [
+    "can",
+    "be",
+    "archived",
+    "after"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Lab partner",
+   "Should we email the draft?",
+   "It _ _ _ _ first.",
+   [
+    "ought",
+    "to",
+    "be",
+    "reviewed"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Counselor",
+   "Is the door always locked?",
+   "It _ _ _ _ six.",
+   [
+    "should",
+    "be",
+    "locked",
+    "after"
+   ],
+   []
+  ],
+  [
+   12,
+   "Colleague",
+   "What about the leftover materials?",
+   "They _ _ _ _ the workshop.",
+   [
+    "could",
+    "be",
+    "donated",
+    "to"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Supervisor",
+   "Can the test be retaken?",
+   "It _ _ _ _ per term.",
+   [
+    "may",
+    "be",
+    "repeated",
+    "once"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Host",
+   "Who cleans the glassware?",
+   "It _ _ _ _ after use.",
+   [
+    "must",
+    "be",
+    "rinsed",
+    "immediately"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Coworker",
+   "What about late submissions?",
+   "They _ _ _ _ automatically.",
+   [
+    "will",
+    "be",
+    "marked",
+    "down"
+   ],
+   []
+  ],
+  [
+   12,
+   "Group member",
+   "Can we film the lecture?",
+   "It _ _ _ _ consent.",
+   [
+    "cannot",
+    "be",
+    "recorded",
+    "without"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Dorm RA",
+   "Where should the poster go?",
+   "It _ _ _ _ the entrance.",
+   [
+    "should",
+    "be",
+    "mounted",
+    "near"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Trainer",
+   "Is the software updated?",
+   "It _ _ _ _ this week.",
+   [
+    "needs",
+    "to",
+    "be",
+    "patched"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   12,
+   "Mentor",
+   "What about the survey data?",
+   "It _ _ _ _ analysis.",
+   [
+    "must",
+    "be",
+    "anonymized",
+    "before"
+   ],
+   []
+  ],
+  [
+   13,
+   "Classmate",
+   "Which professor do you mean?",
+   "I mean the professor _ _ _ _ seminar.",
+   [
+    "who",
+    "teaches",
+    "the",
+    "morning"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Roommate",
+   "Who is presenting first?",
+   "The student _ _ _ _ goes first.",
+   [
+    "who",
+    "signed",
+    "up",
+    "earliest"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Professor",
+   "Who should I ask about housing?",
+   "Talk to the person _ _ _ _ .",
+   [
+    "who",
+    "handles",
+    "off-campus",
+    "listings"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Advisor",
+   "Who found the error?",
+   "It was a reviewer _ _ _ _ carefully.",
+   [
+    "who",
+    "checked",
+    "the",
+    "appendix"
+   ],
+   []
+  ],
+  [
+   13,
+   "Friend",
+   "Which classmate helped you?",
+   "It was the one _ _ _ _ window.",
+   [
+    "who",
+    "sits",
+    "near",
+    "the"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Coach",
+   "Who runs the writing center?",
+   "A graduate student _ _ _ _ runs it.",
+   [
+    "who",
+    "specializes",
+    "in",
+    "rhetoric"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Librarian",
+   "Who called about the room?",
+   "Someone _ _ _ _ left a message.",
+   [
+    "who",
+    "works",
+    "in",
+    "facilities"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Teammate",
+   "Which of the tutors is best?",
+   "The tutor _ _ _ _ helped me most.",
+   [
+    "who",
+    "explains",
+    "things",
+    "slowly"
+   ],
+   []
+  ],
+  [
+   13,
+   "Neighbor",
+   "Who organized the trip?",
+   "Two students _ _ _ _ planned it.",
+   [
+    "who",
+    "went",
+    "last",
+    "year"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Tutor",
+   "Who is the keynote speaker?",
+   "A researcher _ _ _ _ is speaking.",
+   [
+    "who",
+    "studies",
+    "coastal",
+    "erosion"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Lab partner",
+   "Who lent you the book?",
+   "It was a friend _ _ _ _ before me.",
+   [
+    "who",
+    "took",
+    "the",
+    "course"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Counselor",
+   "Who complained about the noise?",
+   "It was a neighbor _ _ _ _ above.",
+   [
+    "who",
+    "lives",
+    "one",
+    "floor"
+   ],
+   []
+  ],
+  [
+   13,
+   "Colleague",
+   "Which applicant did they choose?",
+   "They chose the one _ _ _ _ already.",
+   [
+    "who",
+    "had",
+    "field",
+    "experience"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Supervisor",
+   "Who fixed the projector?",
+   "A technician _ _ _ _ repaired it.",
+   [
+    "who",
+    "comes",
+    "every",
+    "week"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Host",
+   "Who wrote the recommendation?",
+   "It was a supervisor _ _ _ _ well.",
+   [
+    "who",
+    "knows",
+    "my",
+    "work"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Coworker",
+   "Which student won?",
+   "The student _ _ _ _ draft won.",
+   [
+    "who",
+    "submitted",
+    "the",
+    "earliest"
+   ],
+   []
+  ],
+  [
+   13,
+   "Group member",
+   "Who should lead the group?",
+   "Anyone _ _ _ _ would do.",
+   [
+    "who",
+    "has",
+    "presented",
+    "before"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Dorm RA",
+   "Who reported the leak?",
+   "A cleaner _ _ _ _ dawn reported it.",
+   [
+    "who",
+    "noticed",
+    "it",
+    "at"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Trainer",
+   "Who is covering the class?",
+   "A lecturer _ _ _ _ years ago is covering.",
+   [
+    "who",
+    "taught",
+    "it",
+    "two"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   13,
+   "Mentor",
+   "Who recommended this place?",
+   "A coworker _ _ _ _ it.",
+   [
+    "who",
+    "lives",
+    "nearby",
+    "suggested"
+   ],
+   []
+  ],
+  [
+   14,
+   "Classmate",
+   "Which professor are you talking about?",
+   "I mean the one _ _ _ _ _ last week.",
+   [
+    "whose",
+    "seminar",
+    "we",
+    "all",
+    "attended"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Roommate",
+   "Who is the student you mentioned?",
+   "It's the one _ _ _ _ prize.",
+   [
+    "whose",
+    "poster",
+    "won",
+    "the"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Professor",
+   "Which neighbor complained?",
+   "The family _ _ _ _ night complained.",
+   [
+    "whose",
+    "dog",
+    "barks",
+    "all"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Advisor",
+   "Who should I contact?",
+   "Contact the colleague _ _ _ _ the form.",
+   [
+    "whose",
+    "name",
+    "is",
+    "on"
+   ],
+   []
+  ],
+  [
+   14,
+   "Friend",
+   "Which building is closed?",
+   "It's the one _ _ _ _ in the storm.",
+   [
+    "whose",
+    "roof",
+    "was",
+    "damaged"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Coach",
+   "Who lost a notebook?",
+   "The student _ _ _ _ the cover.",
+   [
+    "whose",
+    "initials",
+    "are",
+    "inside"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Librarian",
+   "Which author do you mean?",
+   "I mean the one _ _ _ _ read.",
+   [
+    "whose",
+    "first",
+    "novel",
+    "we"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Teammate",
+   "Who is presenting next?",
+   "The pair _ _ _ _ is presenting.",
+   [
+    "whose",
+    "experiment",
+    "failed",
+    "twice"
+   ],
+   []
+  ],
+  [
+   14,
+   "Neighbor",
+   "Which car got towed?",
+   "It was the one _ _ _ _ last month.",
+   [
+    "whose",
+    "permit",
+    "had",
+    "expired"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Tutor",
+   "Who runs the fund?",
+   "A trustee _ _ _ _ college runs it.",
+   [
+    "whose",
+    "family",
+    "founded",
+    "the"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Lab partner",
+   "Which team forfeited?",
+   "The team _ _ _ _ forfeited.",
+   [
+    "whose",
+    "goalkeeper",
+    "was",
+    "injured"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Counselor",
+   "Who is the guest lecturer?",
+   "A scientist _ _ _ _ field is speaking.",
+   [
+    "whose",
+    "research",
+    "changed",
+    "the"
+   ],
+   []
+  ],
+  [
+   14,
+   "Colleague",
+   "Which apartment flooded?",
+   "It was the unit _ _ _ _ January.",
+   [
+    "whose",
+    "pipes",
+    "burst",
+    "in"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Supervisor",
+   "Who gave you the reference?",
+   "A mentor _ _ _ _ last summer did.",
+   [
+    "whose",
+    "lab",
+    "I",
+    "joined"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Host",
+   "Which article should I read?",
+   "Read the one _ _ _ _ .",
+   [
+    "whose",
+    "conclusion",
+    "everyone",
+    "disputes"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Coworker",
+   "Who owns the bike outside?",
+   "A resident _ _ _ _ courtyard owns it.",
+   [
+    "whose",
+    "apartment",
+    "faces",
+    "the"
+   ],
+   []
+  ],
+  [
+   14,
+   "Group member",
+   "Which company won the contract?",
+   "It was the firm _ _ _ _ lowest.",
+   [
+    "whose",
+    "bid",
+    "came",
+    "in"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Dorm RA",
+   "Who is your favorite composer?",
+   "Someone _ _ _ _ performs now.",
+   [
+    "whose",
+    "work",
+    "almost",
+    "nobody"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Trainer",
+   "Which candidate impressed you?",
+   "The one _ _ _ _ shortest impressed me.",
+   [
+    "whose",
+    "answers",
+    "were",
+    "the"
+   ],
+   [
+    "who"
+   ]
+  ],
+  [
+   14,
+   "Mentor",
+   "Who left the umbrella?",
+   "A visitor _ _ _ _ at reception left it.",
+   [
+    "whose",
+    "badge",
+    "is",
+    "still"
+   ],
+   []
+  ],
+  [
+   15,
+   "Classmate",
+   "Which edition should I cite?",
+   "Use the version _ _ _ _ press.",
+   [
+    "published",
+    "by",
+    "the",
+    "university"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Roommate",
+   "Which sample failed?",
+   "The one _ _ _ _ failed.",
+   [
+    "stored",
+    "at",
+    "room",
+    "temperature"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Professor",
+   "Which students got the email?",
+   "Everyone _ _ _ _ got it.",
+   [
+    "registered",
+    "for",
+    "the",
+    "seminar"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Advisor",
+   "Which file is current?",
+   "The one _ _ _ _ drive is current.",
+   [
+    "saved",
+    "on",
+    "the",
+    "shared"
+   ],
+   []
+  ],
+  [
+   15,
+   "Friend",
+   "Which road is closed?",
+   "The route _ _ _ _ is closed.",
+   [
+    "running",
+    "past",
+    "the",
+    "stadium"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Coach",
+   "Which candidates advanced?",
+   "Those _ _ _ _ panel advanced.",
+   [
+    "selected",
+    "by",
+    "the",
+    "first"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Librarian",
+   "Which books are on reserve?",
+   "The titles _ _ _ _ are on reserve.",
+   [
+    "listed",
+    "on",
+    "the",
+    "syllabus"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Teammate",
+   "Which data did you use?",
+   "I used the set _ _ _ _ survey.",
+   [
+    "collected",
+    "during",
+    "the",
+    "winter"
+   ],
+   []
+  ],
+  [
+   15,
+   "Neighbor",
+   "Which lamp is broken?",
+   "The one _ _ _ _ table is broken.",
+   [
+    "hanging",
+    "above",
+    "the",
+    "side"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Tutor",
+   "Which paper won?",
+   "The study _ _ _ _ won.",
+   [
+    "comparing",
+    "two",
+    "teaching",
+    "methods"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Lab partner",
+   "Which group is late?",
+   "The team _ _ _ _ campus is late.",
+   [
+    "travelling",
+    "from",
+    "the",
+    "north"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Counselor",
+   "Which chapter matters most?",
+   "The section _ _ _ _ matters most.",
+   [
+    "dealing",
+    "with",
+    "sampling",
+    "error"
+   ],
+   []
+  ],
+  [
+   15,
+   "Colleague",
+   "Which photos are usable?",
+   "Only the shots _ _ _ _ are usable.",
+   [
+    "taken",
+    "before",
+    "the",
+    "rain"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Supervisor",
+   "Which students need help?",
+   "Anyone _ _ _ _ problem set does.",
+   [
+    "struggling",
+    "with",
+    "the",
+    "second"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Host",
+   "Which building has the lab?",
+   "The one _ _ _ _ has it.",
+   [
+    "named",
+    "after",
+    "the",
+    "founder"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Coworker",
+   "Which version is final?",
+   "The draft _ _ _ _ meeting is final.",
+   [
+    "approved",
+    "at",
+    "the",
+    "last"
+   ],
+   []
+  ],
+  [
+   15,
+   "Group member",
+   "Which route do you take?",
+   "I take the path _ _ _ _ quad.",
+   [
+    "cutting",
+    "through",
+    "the",
+    "old"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Dorm RA",
+   "Which applicants were interviewed?",
+   "Those _ _ _ _ were interviewed.",
+   [
+    "nominated",
+    "by",
+    "their",
+    "departments"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Trainer",
+   "Which machine is down?",
+   "The printer _ _ _ _ is down.",
+   [
+    "located",
+    "near",
+    "the",
+    "stairs"
+   ],
+   [
+    "which"
+   ]
+  ],
+  [
+   15,
+   "Mentor",
+   "Which results surprised you?",
+   "The figures _ _ _ _ surprised me.",
+   [
+    "reported",
+    "in",
+    "the",
+    "appendix"
+   ],
+   []
+  ],
+  [
+   16,
+   "Classmate",
+   "How was the second exam?",
+   "It was _ _ _ _ first one.",
+   [
+    "much",
+    "harder",
+    "than",
+    "the"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Roommate",
+   "Is the new library better?",
+   "It's _ _ _ _ old reading room.",
+   [
+    "far",
+    "quieter",
+    "than",
+    "the"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Professor",
+   "How does the commute compare?",
+   "It's _ _ _ _ was last year.",
+   [
+    "considerably",
+    "longer",
+    "than",
+    "it"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Advisor",
+   "Which lab section should I take?",
+   "The morning one is _ _ _ _ afternoon.",
+   [
+    "less",
+    "crowded",
+    "than",
+    "the"
+   ],
+   []
+  ],
+  [
+   16,
+   "Friend",
+   "Is the textbook expensive?",
+   "It's _ _ _ _ the campus store.",
+   [
+    "cheaper",
+    "online",
+    "than",
+    "at"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Coach",
+   "How is the new coach?",
+   "She's _ _ _ _ previous one.",
+   [
+    "more",
+    "demanding",
+    "than",
+    "the"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Librarian",
+   "Did the second draft improve?",
+   "It's _ _ _ _ first attempt.",
+   [
+    "significantly",
+    "clearer",
+    "than",
+    "the"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Teammate",
+   "Is this route faster?",
+   "It's _ _ _ _ main road.",
+   [
+    "slightly",
+    "shorter",
+    "than",
+    "the"
+   ],
+   []
+  ],
+  [
+   16,
+   "Neighbor",
+   "How was the turnout?",
+   "It was _ _ _ _ expected.",
+   [
+    "smaller",
+    "than",
+    "anyone",
+    "had"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Tutor",
+   "Which dorm is better?",
+   "The north building is _ _ _ _ one.",
+   [
+    "warmer",
+    "than",
+    "the",
+    "south"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Lab partner",
+   "Is the seminar hard?",
+   "It's _ _ _ _ anticipated.",
+   [
+    "more",
+    "demanding",
+    "than",
+    "I"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Counselor",
+   "How does this year compare?",
+   "Enrollment is _ _ _ _ been in a decade.",
+   [
+    "higher",
+    "than",
+    "it",
+    "has"
+   ],
+   []
+  ],
+  [
+   16,
+   "Colleague",
+   "Is the film worth seeing?",
+   "The book is _ _ _ _ the film.",
+   [
+    "far",
+    "more",
+    "interesting",
+    "than"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Supervisor",
+   "How is the new software?",
+   "It's _ _ _ _ old version.",
+   [
+    "noticeably",
+    "slower",
+    "than",
+    "the"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Host",
+   "Which professor grades harder?",
+   "Dr. Ellis is _ _ _ _ the department.",
+   [
+    "stricter",
+    "than",
+    "most",
+    "of"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Coworker",
+   "Is the gym busy in the morning?",
+   "It's _ _ _ _ at noon.",
+   [
+    "busier",
+    "at",
+    "six",
+    "than"
+   ],
+   []
+  ],
+  [
+   16,
+   "Group member",
+   "How was the weather?",
+   "It was _ _ _ _ packed for.",
+   [
+    "colder",
+    "than",
+    "we",
+    "had"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Dorm RA",
+   "Is the seminar useful?",
+   "It's _ _ _ _ lecture course.",
+   [
+    "more",
+    "practical",
+    "than",
+    "the"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Trainer",
+   "Which apartment did you pick?",
+   "I took the one _ _ _ _ the others.",
+   [
+    "closer",
+    "to",
+    "campus",
+    "than"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   16,
+   "Mentor",
+   "How is the second edition?",
+   "It's _ _ _ _ original.",
+   [
+    "better",
+    "organized",
+    "than",
+    "the"
+   ],
+   []
+  ],
+  [
+   17,
+   "Classmate",
+   "How does this course compare with last term's?",
+   "It _ _ _ _ _ that one was.",
+   [
+    "isn't",
+    "nearly",
+    "as",
+    "demanding",
+    "as"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Roommate",
+   "Is the new hall bigger?",
+   "It's _ _ _ _ _ old one.",
+   [
+    "about",
+    "as",
+    "large",
+    "as",
+    "the"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Professor",
+   "Was the trip expensive?",
+   "It wasn't _ _ _ _ feared.",
+   [
+    "as",
+    "costly",
+    "as",
+    "I"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Advisor",
+   "Is she a strong candidate?",
+   "She's _ _ _ _ anyone else.",
+   [
+    "just",
+    "as",
+    "qualified",
+    "as"
+   ],
+   []
+  ],
+  [
+   17,
+   "Friend",
+   "How was the second lecture?",
+   "It wasn't _ _ _ _ the first.",
+   [
+    "quite",
+    "as",
+    "clear",
+    "as"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Coach",
+   "Is the walk far?",
+   "It's _ _ _ _ it looks.",
+   [
+    "not",
+    "as",
+    "far",
+    "as"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Librarian",
+   "How did the team do?",
+   "They played _ _ _ _ ever have.",
+   [
+    "as",
+    "well",
+    "as",
+    "they"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Teammate",
+   "Is the exam long?",
+   "It's _ _ _ _ _ midterm.",
+   [
+    "twice",
+    "as",
+    "long",
+    "as",
+    "the"
+   ],
+   []
+  ],
+  [
+   17,
+   "Neighbor",
+   "Was the talk technical?",
+   "It wasn't _ _ _ _ abstract suggested.",
+   [
+    "as",
+    "technical",
+    "as",
+    "the"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Tutor",
+   "How is the new roommate?",
+   "He's _ _ _ _ you are.",
+   [
+    "nearly",
+    "as",
+    "tidy",
+    "as"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Lab partner",
+   "Is the coffee good there?",
+   "It's _ _ _ _ as I like.",
+   [
+    "not",
+    "quite",
+    "as",
+    "strong"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Counselor",
+   "Did the storm cause damage?",
+   "It wasn't _ _ _ _ forecast warned.",
+   [
+    "as",
+    "severe",
+    "as",
+    "the"
+   ],
+   []
+  ],
+  [
+   17,
+   "Colleague",
+   "How does the salary compare?",
+   "It's _ _ _ _ _ other offer.",
+   [
+    "roughly",
+    "as",
+    "high",
+    "as",
+    "the"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Supervisor",
+   "Is the seminar full?",
+   "It's _ _ _ _ _ workshop.",
+   [
+    "almost",
+    "as",
+    "popular",
+    "as",
+    "the"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Host",
+   "Was the paper difficult?",
+   "It wasn't _ _ _ _ looked.",
+   [
+    "as",
+    "hard",
+    "as",
+    "it"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Coworker",
+   "How is her Spanish?",
+   "She speaks _ _ _ _ native.",
+   [
+    "as",
+    "fluently",
+    "as",
+    "a"
+   ],
+   []
+  ],
+  [
+   17,
+   "Group member",
+   "Is the older model fine?",
+   "It works _ _ _ _ the new one.",
+   [
+    "just",
+    "as",
+    "reliably",
+    "as"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Dorm RA",
+   "Did the second run improve?",
+   "It was _ _ _ _ before.",
+   [
+    "exactly",
+    "as",
+    "fast",
+    "as"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Trainer",
+   "Is the north route better?",
+   "It's _ _ _ _ _ coastal road.",
+   [
+    "not",
+    "as",
+    "scenic",
+    "as",
+    "the"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   17,
+   "Mentor",
+   "How was the audience?",
+   "It wasn't _ _ _ _ year's.",
+   [
+    "as",
+    "large",
+    "as",
+    "last"
+   ],
+   []
+  ],
+  [
+   18,
+   "Classmate",
+   "Which lecture did you like best?",
+   "The one on glaciers was _ _ _ _ the series.",
+   [
+    "the",
+    "most",
+    "engaging",
+    "of"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Roommate",
+   "Which route is quickest?",
+   "The river path is _ _ _ _ campus.",
+   [
+    "the",
+    "fastest",
+    "way",
+    "to"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Professor",
+   "Who did best on the exam?",
+   "She had _ _ _ _ the section.",
+   [
+    "the",
+    "highest",
+    "score",
+    "in"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Advisor",
+   "Which library is quietest?",
+   "The law library is _ _ _ _ campus.",
+   [
+    "the",
+    "quietest",
+    "place",
+    "on"
+   ],
+   []
+  ],
+  [
+   18,
+   "Friend",
+   "Which day is busiest?",
+   "Monday is _ _ _ _ the week.",
+   [
+    "the",
+    "busiest",
+    "day",
+    "of"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Coach",
+   "Which dorm is oldest?",
+   "Kent Hall is _ _ _ _ the quad.",
+   [
+    "the",
+    "oldest",
+    "building",
+    "on"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Librarian",
+   "What was the best part?",
+   "The fieldwork was _ _ _ _ rewarding part.",
+   [
+    "by",
+    "far",
+    "the",
+    "most"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Teammate",
+   "Which chapter is hardest?",
+   "Chapter nine is _ _ _ _ to follow.",
+   [
+    "the",
+    "most",
+    "difficult",
+    "one"
+   ],
+   []
+  ],
+  [
+   18,
+   "Neighbor",
+   "Which option is cheapest?",
+   "The bus is _ _ _ _ to travel.",
+   [
+    "the",
+    "least",
+    "expensive",
+    "way"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Tutor",
+   "Who has the most experience?",
+   "Our supervisor is _ _ _ _ here.",
+   [
+    "the",
+    "most",
+    "experienced",
+    "person"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Lab partner",
+   "Which season is best there?",
+   "Autumn is _ _ _ _ to visit.",
+   [
+    "the",
+    "most",
+    "pleasant",
+    "time"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Counselor",
+   "Which essay was strongest?",
+   "The third one was _ _ _ _ the three.",
+   [
+    "the",
+    "best",
+    "argued",
+    "of"
+   ],
+   []
+  ],
+  [
+   18,
+   "Colleague",
+   "Which lab is largest?",
+   "The imaging suite is _ _ _ _ the building.",
+   [
+    "the",
+    "biggest",
+    "facility",
+    "in"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Supervisor",
+   "Which class filled first?",
+   "The seminar was _ _ _ _ close.",
+   [
+    "the",
+    "first",
+    "course",
+    "to"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Host",
+   "What is the main obstacle?",
+   "Funding is _ _ _ _ face.",
+   [
+    "the",
+    "greatest",
+    "challenge",
+    "we"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Coworker",
+   "Which draft should I keep?",
+   "Keep the one with _ _ _ _ them all.",
+   [
+    "the",
+    "clearest",
+    "structure",
+    "of"
+   ],
+   []
+  ],
+  [
+   18,
+   "Group member",
+   "Who arrived earliest?",
+   "The volunteers were _ _ _ _ arrive.",
+   [
+    "the",
+    "first",
+    "people",
+    "to"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Dorm RA",
+   "Which result surprised you most?",
+   "The control group gave _ _ _ _ all.",
+   [
+    "the",
+    "strangest",
+    "data",
+    "of"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Trainer",
+   "Which month is wettest?",
+   "June is _ _ _ _ the year.",
+   [
+    "the",
+    "rainiest",
+    "month",
+    "of"
+   ],
+   [
+    "more"
+   ]
+  ],
+  [
+   18,
+   "Mentor",
+   "Which talk ran longest?",
+   "The closing lecture was _ _ _ _ the day.",
+   [
+    "the",
+    "longest",
+    "session",
+    "of"
+   ],
+   []
+  ],
+  [
+   19,
+   "Classmate",
+   "Do the two species look related?",
+   "The _ _ they _ _ , the _ the link becomes.",
+   [
+    "more",
+    "closely",
+    "are",
+    "compared",
+    "clearer"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Roommate",
+   "Does practice help?",
+   "The _ _ _ , the _ _ you feel.",
+   [
+    "more",
+    "you",
+    "rehearse",
+    "less",
+    "nervous"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Professor",
+   "Is the reading getting easier?",
+   "The _ _ _ , the _ _ it makes.",
+   [
+    "further",
+    "I",
+    "read",
+    "more",
+    "sense"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Advisor",
+   "Should we start early?",
+   "The _ _ _ , the _ our chances are.",
+   [
+    "earlier",
+    "we",
+    "begin",
+    "better"
+   ],
+   []
+  ],
+  [
+   19,
+   "Friend",
+   "Does the data improve?",
+   "The _ _ _ , the _ the error.",
+   [
+    "larger",
+    "the",
+    "sample",
+    "smaller"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Coach",
+   "Is the hill steep?",
+   "The _ _ _ , the _ _ air gets.",
+   [
+    "higher",
+    "you",
+    "climb",
+    "thinner",
+    "the"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Librarian",
+   "Does the course get harder?",
+   "The _ _ _ , the _ _ it becomes.",
+   [
+    "deeper",
+    "we",
+    "go",
+    "more",
+    "technical"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Teammate",
+   "Should I write more drafts?",
+   "The _ _ _ , the _ the argument.",
+   [
+    "more",
+    "you",
+    "revise",
+    "stronger"
+   ],
+   []
+  ],
+  [
+   19,
+   "Neighbor",
+   "Is the commute worse now?",
+   "The _ _ _ , the _ the traffic.",
+   [
+    "later",
+    "I",
+    "leave",
+    "heavier"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Tutor",
+   "Does the medication help?",
+   "The _ _ _ _ , the _ she sleeps.",
+   [
+    "longer",
+    "she",
+    "takes",
+    "it",
+    "better"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Lab partner",
+   "Are the seats better up front?",
+   "The _ _ _ , the _ it seems.",
+   [
+    "closer",
+    "you",
+    "sit",
+    "louder"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Counselor",
+   "Is the city quieter at night?",
+   "The _ _ _ , the _ the streets are.",
+   [
+    "later",
+    "it",
+    "gets",
+    "calmer"
+   ],
+   []
+  ],
+  [
+   19,
+   "Colleague",
+   "Does the recipe need time?",
+   "The _ _ _ _ , the _ the flavor.",
+   [
+    "slower",
+    "you",
+    "cook",
+    "it",
+    "richer"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Supervisor",
+   "Is the group getting bigger?",
+   "The _ _ _ , the _ scheduling becomes.",
+   [
+    "more",
+    "people",
+    "join",
+    "harder"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Host",
+   "Should I read the footnotes?",
+   "The _ _ _ _ , the _ you notice.",
+   [
+    "more",
+    "carefully",
+    "you",
+    "read",
+    "more"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Coworker",
+   "Is the lens better?",
+   "The _ _ _ , the _ the background.",
+   [
+    "wider",
+    "the",
+    "aperture",
+    "blurrier"
+   ],
+   []
+  ],
+  [
+   19,
+   "Group member",
+   "Does repetition help memory?",
+   "The _ _ _ _ yourself, the _ you remember.",
+   [
+    "more",
+    "often",
+    "you",
+    "test",
+    "longer"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Dorm RA",
+   "Is the market changing?",
+   "The _ _ _ , the _ buyers appear.",
+   [
+    "faster",
+    "prices",
+    "rise",
+    "fewer"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Trainer",
+   "Should we simplify the slides?",
+   "The _ _ _ _ , the _ the point.",
+   [
+    "fewer",
+    "words",
+    "you",
+    "use",
+    "clearer"
+   ],
+   [
+    "very"
+   ]
+  ],
+  [
+   19,
+   "Mentor",
+   "Is the trail harder in winter?",
+   "The _ _ _ , the _ the rocks are.",
+   [
+    "colder",
+    "it",
+    "gets",
+    "slipperier"
+   ],
+   []
+  ],
+  [
+   20,
+   "Classmate",
+   "I found your notes on the kitchen table.",
+   "Oh, could you _ _ _ _ the front desk?",
+   [
+    "drop",
+    "them",
+    "off",
+    "at"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   20,
+   "Roommate",
+   "Your library books are due.",
+   "I'll _ _ _ _ afternoon.",
+   [
+    "take",
+    "them",
+    "back",
+    "this"
+   ],
+   [
+    "again"
+   ]
+  ],
+  [
+   20,
+   "Professor",
+   "The heater is still on.",
+   "Could you _ _ _ _ you leave?",
+   [
+    "turn",
+    "it",
+    "off",
+    "before"
+   ],
+   [
+    "out"
+   ]
+  ],
+  [
+   20,
+   "Advisor",
+   "Here are the forms you wanted.",
+   "Thanks, I'll _ _ _ _ .",
+   [
+    "fill",
+    "them",
+    "in",
+    "tonight"
+   ],
+   []
+  ],
+  [
+   20,
+   "Friend",
+   "The music is too quiet.",
+   "I'll _ _ _ _ little.",
+   [
+    "turn",
+    "it",
+    "up",
+    "a"
+   ],
+   [
+    "on"
+   ]
+  ],
+  [
+   20,
+   "Coach",
+   "These boxes are blocking the door.",
+   "I'll _ _ _ _ the way.",
+   [
+    "move",
+    "them",
+    "out",
+    "of"
+   ],
+   [
+    "off"
+   ]
+  ],
+  [
+   20,
+   "Librarian",
+   "You left your jacket here.",
+   "I'll _ _ _ _ morning.",
+   [
+    "pick",
+    "it",
+    "up",
+    "tomorrow"
+   ],
+   [
+    "on"
+   ]
+  ],
+  [
+   20,
+   "Teammate",
+   "The draft has three typos.",
+   "Point _ _ _ _ fix them.",
+   [
+    "them",
+    "out",
+    "and",
+    "I'll"
+   ],
+   []
+  ],
+  [
+   20,
+   "Neighbor",
+   "Someone has to cancel the booking.",
+   "I'll _ _ _ _ evening.",
+   [
+    "call",
+    "it",
+    "off",
+    "this"
+   ],
+   [
+    "out"
+   ]
+  ],
+  [
+   20,
+   "Tutor",
+   "The lamp isn't working.",
+   "Try _ _ _ _ .",
+   [
+    "plugging",
+    "it",
+    "in",
+    "again"
+   ],
+   [
+    "on"
+   ]
+  ],
+  [
+   20,
+   "Lab partner",
+   "These files are duplicates.",
+   "Just _ _ _ _ you can.",
+   [
+    "throw",
+    "them",
+    "away",
+    "when"
+   ],
+   [
+    "off"
+   ]
+  ],
+  [
+   20,
+   "Counselor",
+   "The proposal needs shortening.",
+   "I'll _ _ _ _ a page.",
+   [
+    "cut",
+    "it",
+    "down",
+    "by"
+   ],
+   []
+  ],
+  [
+   20,
+   "Colleague",
+   "Your sister called twice.",
+   "I'll _ _ _ _ dinner.",
+   [
+    "ring",
+    "her",
+    "back",
+    "after"
+   ],
+   [
+    "again"
+   ]
+  ],
+  [
+   20,
+   "Supervisor",
+   "The chairs are still stacked.",
+   "Help me _ _ _ _ six.",
+   [
+    "set",
+    "them",
+    "up",
+    "before"
+   ],
+   [
+    "on"
+   ]
+  ],
+  [
+   20,
+   "Host",
+   "This word keeps appearing.",
+   "Look _ _ _ _ glossary.",
+   [
+    "it",
+    "up",
+    "in",
+    "the"
+   ],
+   [
+    "on"
+   ]
+  ],
+  [
+   20,
+   "Coworker",
+   "The application is half finished.",
+   "I'll _ _ _ _ Friday.",
+   [
+    "hand",
+    "it",
+    "in",
+    "on"
+   ],
+   []
+  ],
+  [
+   20,
+   "Group member",
+   "The printer jammed again.",
+   "Let me _ _ _ _ now.",
+   [
+    "sort",
+    "it",
+    "out",
+    "right"
+   ],
+   [
+    "off"
+   ]
+  ],
+  [
+   20,
+   "Dorm RA",
+   "You borrowed my charger.",
+   "I'll _ _ _ _ .",
+   [
+    "give",
+    "it",
+    "back",
+    "tomorrow"
+   ],
+   [
+    "again"
+   ]
+  ],
+  [
+   20,
+   "Trainer",
+   "The poster is crooked.",
+   "I'll _ _ _ _ properly.",
+   [
+    "put",
+    "it",
+    "up",
+    "again"
+   ],
+   [
+    "on"
+   ]
+  ],
+  [
+   20,
+   "Mentor",
+   "These names are wrong.",
+   "Cross _ _ _ _ the list.",
+   [
+    "them",
+    "out",
+    "and",
+    "rewrite"
+   ],
+   []
+  ],
+  [
+   21,
+   "Classmate",
+   "Has a documentary ever caused this much argument?",
+   "Rarely _ _ _ _ _ such debate.",
+   [
+    "has",
+    "a",
+    "single",
+    "film",
+    "generated"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Roommate",
+   "Did you expect the result?",
+   "Never _ _ _ _ _ like that.",
+   [
+    "have",
+    "I",
+    "seen",
+    "data",
+    "scatter"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Professor",
+   "Was the change announced?",
+   "Not once _ _ _ _ it.",
+   [
+    "did",
+    "the",
+    "department",
+    "mention"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Advisor",
+   "Did she hesitate?",
+   "At no point _ _ _ _ method.",
+   [
+    "did",
+    "she",
+    "question",
+    "the"
+   ],
+   []
+  ],
+  [
+   21,
+   "Friend",
+   "Is the office ever this quiet?",
+   "Seldom _ _ _ _ empty.",
+   [
+    "is",
+    "the",
+    "building",
+    "this"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Coach",
+   "Did they warn anyone?",
+   "Under no circumstances _ _ _ _ a badge.",
+   [
+    "should",
+    "you",
+    "enter",
+    "without"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Librarian",
+   "Was the talk well attended?",
+   "Rarely _ _ _ _ show up.",
+   [
+    "do",
+    "so",
+    "many",
+    "people"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Teammate",
+   "Did he pass easily?",
+   "Only after _ _ _ _ pass.",
+   [
+    "three",
+    "attempts",
+    "did",
+    "he"
+   ],
+   []
+  ],
+  [
+   21,
+   "Neighbor",
+   "Has the policy ever changed?",
+   "Never _ _ _ _ been revised.",
+   [
+    "before",
+    "had",
+    "the",
+    "rules"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Tutor",
+   "Did you notice the error?",
+   "Not until _ _ _ _ I notice.",
+   [
+    "the",
+    "second",
+    "reading",
+    "did"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Lab partner",
+   "Do they often cancel?",
+   "Seldom _ _ _ _ a seminar.",
+   [
+    "does",
+    "the",
+    "department",
+    "cancel"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Counselor",
+   "Was anyone prepared?",
+   "Hardly _ _ _ _ when it began.",
+   [
+    "had",
+    "we",
+    "sat",
+    "down"
+   ],
+   []
+  ],
+  [
+   21,
+   "Colleague",
+   "Did she complain?",
+   "At no time _ _ _ _ objection.",
+   [
+    "did",
+    "she",
+    "raise",
+    "an"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Supervisor",
+   "Is the lab ever free?",
+   "Rarely _ _ _ _ bench.",
+   [
+    "is",
+    "there",
+    "an",
+    "open"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Host",
+   "Did the team expect to win?",
+   "Little _ _ _ _ was coming.",
+   [
+    "did",
+    "they",
+    "know",
+    "what"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Coworker",
+   "Has the river flooded before?",
+   "Never _ _ _ _ it risen so high.",
+   [
+    "in",
+    "living",
+    "memory",
+    "has"
+   ],
+   []
+  ],
+  [
+   21,
+   "Group member",
+   "Did anyone object?",
+   "Nowhere _ _ _ _ an objection recorded.",
+   [
+    "in",
+    "the",
+    "minutes",
+    "is"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Dorm RA",
+   "Do they allow food inside?",
+   "On no account _ _ _ _ in.",
+   [
+    "may",
+    "visitors",
+    "bring",
+    "drinks"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Trainer",
+   "Was the decision quick?",
+   "Only later _ _ _ _ its reasoning.",
+   [
+    "did",
+    "the",
+    "committee",
+    "explain"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   21,
+   "Mentor",
+   "Did the storm ease?",
+   "Not until _ _ _ _ drop.",
+   [
+    "dawn",
+    "did",
+    "the",
+    "wind"
+   ],
+   []
+  ],
+  [
+   22,
+   "Classmate",
+   "Was the hall crowded?",
+   "It was _ _ _ _ stood at the back.",
+   [
+    "so",
+    "full",
+    "that",
+    "we"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Roommate",
+   "How was the exam?",
+   "It was _ _ _ _ that nobody finished.",
+   [
+    "such",
+    "a",
+    "long",
+    "paper"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Professor",
+   "Did you finish the novel?",
+   "It was _ _ _ _ gave up.",
+   [
+    "so",
+    "dense",
+    "that",
+    "I"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Advisor",
+   "Was the talk clear?",
+   "She spoke _ _ _ _ could follow.",
+   [
+    "so",
+    "quickly",
+    "that",
+    "few"
+   ],
+   []
+  ],
+  [
+   22,
+   "Friend",
+   "Is the lab cold?",
+   "It's _ _ _ _ wear coats inside.",
+   [
+    "so",
+    "cold",
+    "that",
+    "we"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Coach",
+   "How was the storm?",
+   "It was _ _ _ _ classes were cancelled.",
+   [
+    "such",
+    "a",
+    "shock",
+    "that"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Librarian",
+   "Did the plan work?",
+   "It was _ _ _ _ agreed immediately.",
+   [
+    "so",
+    "simple",
+    "that",
+    "everyone"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Teammate",
+   "Was the queue long?",
+   "There were _ _ _ _ we left.",
+   [
+    "so",
+    "many",
+    "people",
+    "that"
+   ],
+   []
+  ],
+  [
+   22,
+   "Neighbor",
+   "How is the new building?",
+   "It's _ _ _ _ I get lost.",
+   [
+    "such",
+    "a",
+    "maze",
+    "that"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Tutor",
+   "Did you like the film?",
+   "It was _ _ _ _ fell asleep.",
+   [
+    "so",
+    "slow",
+    "that",
+    "I"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Lab partner",
+   "Was the evidence strong?",
+   "It was _ _ _ _ argued.",
+   [
+    "so",
+    "convincing",
+    "that",
+    "nobody"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Counselor",
+   "How was the first week?",
+   "There was _ _ _ _ I panicked.",
+   [
+    "so",
+    "much",
+    "reading",
+    "that"
+   ],
+   []
+  ],
+  [
+   22,
+   "Colleague",
+   "Is the trail difficult?",
+   "It's _ _ _ _ that few attempt it.",
+   [
+    "such",
+    "a",
+    "steep",
+    "climb"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Supervisor",
+   "Did the machine work?",
+   "It made _ _ _ _ we switched it off.",
+   [
+    "so",
+    "much",
+    "noise",
+    "that"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Host",
+   "Was the room quiet?",
+   "It was _ _ _ _ cough carried.",
+   [
+    "so",
+    "silent",
+    "that",
+    "every"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Coworker",
+   "How was her accent?",
+   "It was _ _ _ _ never noticed.",
+   [
+    "so",
+    "faint",
+    "that",
+    "I"
+   ],
+   []
+  ],
+  [
+   22,
+   "Group member",
+   "Did the crowd enjoy it?",
+   "It was _ _ _ _ they added a date.",
+   [
+    "such",
+    "a",
+    "success",
+    "that"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Dorm RA",
+   "Is the deadline tight?",
+   "There's _ _ _ _ we may postpone.",
+   [
+    "so",
+    "little",
+    "time",
+    "that"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Trainer",
+   "Was the lecture dull?",
+   "It was _ _ _ _ the room left.",
+   [
+    "so",
+    "repetitive",
+    "that",
+    "half"
+   ],
+   [
+    "too"
+   ]
+  ],
+  [
+   22,
+   "Mentor",
+   "How did the trial go?",
+   "The results were _ _ _ _ follow-up was needed.",
+   [
+    "so",
+    "clear",
+    "that",
+    "no"
+   ],
+   []
+  ],
+  [
+   23,
+   "Classmate",
+   "Why are you returning the textbook?",
+   "It wasn't _ _ _ _ course.",
+   [
+    "detailed",
+    "enough",
+    "for",
+    "this"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Roommate",
+   "Can we fit everyone in?",
+   "The room isn't _ _ _ _ thirty.",
+   [
+    "big",
+    "enough",
+    "to",
+    "hold"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Professor",
+   "Why not walk?",
+   "It's _ _ _ _ before nine.",
+   [
+    "too",
+    "far",
+    "to",
+    "walk"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Advisor",
+   "Did you buy the laptop?",
+   "It was _ _ _ _ budget.",
+   [
+    "too",
+    "expensive",
+    "for",
+    "my"
+   ],
+   []
+  ],
+  [
+   23,
+   "Friend",
+   "Can he reach the shelf?",
+   "He isn't _ _ _ _ it.",
+   [
+    "tall",
+    "enough",
+    "to",
+    "reach"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Coach",
+   "Why did you leave early?",
+   "It was _ _ _ _ to concentrate.",
+   [
+    "too",
+    "loud",
+    "for",
+    "me"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Librarian",
+   "Is the soup ready?",
+   "It's _ _ _ _ eat.",
+   [
+    "still",
+    "too",
+    "hot",
+    "to"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Teammate",
+   "Did the plan work?",
+   "We didn't have _ _ _ _ it.",
+   [
+    "enough",
+    "time",
+    "to",
+    "test"
+   ],
+   []
+  ],
+  [
+   23,
+   "Neighbor",
+   "Can we finish today?",
+   "There aren't _ _ _ _ finish.",
+   [
+    "enough",
+    "hours",
+    "left",
+    "to"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Tutor",
+   "Why not take the early flight?",
+   "It leaves _ _ _ _ to manage.",
+   [
+    "too",
+    "early",
+    "for",
+    "me"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Lab partner",
+   "Is the essay long enough?",
+   "It isn't _ _ _ _ .",
+   [
+    "quite",
+    "long",
+    "enough",
+    "yet"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Counselor",
+   "Did she qualify?",
+   "She wasn't _ _ _ _ final heat.",
+   [
+    "fast",
+    "enough",
+    "in",
+    "the"
+   ],
+   []
+  ],
+  [
+   23,
+   "Colleague",
+   "Can I read it tonight?",
+   "It's _ _ _ _ one evening.",
+   [
+    "far",
+    "too",
+    "long",
+    "for"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Supervisor",
+   "Why is the sample unusable?",
+   "It wasn't _ _ _ _ properly.",
+   [
+    "large",
+    "enough",
+    "to",
+    "analyze"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Host",
+   "Should we hire another person?",
+   "One assistant isn't _ _ _ _ this size.",
+   [
+    "enough",
+    "for",
+    "a",
+    "project"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Coworker",
+   "Did you take the seminar?",
+   "It was _ _ _ _ first-year student.",
+   [
+    "too",
+    "advanced",
+    "for",
+    "a"
+   ],
+   []
+  ],
+  [
+   23,
+   "Group member",
+   "Is the bridge safe?",
+   "It isn't _ _ _ _ vehicles.",
+   [
+    "strong",
+    "enough",
+    "for",
+    "heavy"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Dorm RA",
+   "Why the extra chairs?",
+   "There weren't _ _ _ _ guests.",
+   [
+    "enough",
+    "seats",
+    "for",
+    "the"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Trainer",
+   "Can we swim here?",
+   "The water is _ _ _ _ in long.",
+   [
+    "too",
+    "cold",
+    "to",
+    "stay"
+   ],
+   [
+    "so"
+   ]
+  ],
+  [
+   23,
+   "Mentor",
+   "Did the argument convince you?",
+   "It wasn't _ _ _ _ my mind.",
+   [
+    "specific",
+    "enough",
+    "to",
+    "change"
+   ],
+   []
+  ],
+  [
+   24,
+   "Classmate",
+   "Your screen looks new.",
+   "I _ _ _ _ Tuesday.",
+   [
+    "had",
+    "it",
+    "replaced",
+    "last"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Roommate",
+   "Did you fix the bike yourself?",
+   "No, I _ _ _ _ the shop.",
+   [
+    "got",
+    "it",
+    "serviced",
+    "at"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Professor",
+   "Is the form ready?",
+   "I still need to _ _ _ _ my advisor.",
+   [
+    "have",
+    "it",
+    "signed",
+    "by"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Advisor",
+   "Your hair looks different.",
+   "I _ _ _ _ Saturday.",
+   [
+    "had",
+    "it",
+    "cut",
+    "on"
+   ],
+   []
+  ],
+  [
+   24,
+   "Friend",
+   "Did you print the poster?",
+   "I _ _ _ _ the library.",
+   [
+    "got",
+    "it",
+    "printed",
+    "in"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Coach",
+   "Is the essay proofread?",
+   "I _ _ _ _ it.",
+   [
+    "had",
+    "a",
+    "friend",
+    "check"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Librarian",
+   "What about the broken window?",
+   "We're _ _ _ _ week.",
+   [
+    "having",
+    "it",
+    "fixed",
+    "this"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Teammate",
+   "Did you develop the film?",
+   "I _ _ _ _ professionally.",
+   [
+    "had",
+    "the",
+    "negatives",
+    "scanned"
+   ],
+   []
+  ],
+  [
+   24,
+   "Neighbor",
+   "Is the suit ready?",
+   "I _ _ _ _ afternoon.",
+   [
+    "got",
+    "it",
+    "altered",
+    "yesterday"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Tutor",
+   "Did you write the translation?",
+   "I _ _ _ _ a specialist.",
+   [
+    "had",
+    "it",
+    "translated",
+    "by"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Lab partner",
+   "What about the leaking tap?",
+   "I'll _ _ _ _ the weekend.",
+   [
+    "get",
+    "it",
+    "repaired",
+    "before"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Counselor",
+   "Is your passport renewed?",
+   "I _ _ _ _ March.",
+   [
+    "had",
+    "it",
+    "renewed",
+    "in"
+   ],
+   []
+  ],
+  [
+   24,
+   "Colleague",
+   "Did you take the photos?",
+   "I _ _ _ _ a studio.",
+   [
+    "had",
+    "them",
+    "taken",
+    "at"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Supervisor",
+   "What about the car noise?",
+   "I'm _ _ _ _ Thursday.",
+   [
+    "getting",
+    "it",
+    "checked",
+    "on"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Host",
+   "Is the data cleaned?",
+   "We _ _ _ _ the lab.",
+   [
+    "had",
+    "it",
+    "processed",
+    "by"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Coworker",
+   "Did you make the shelves?",
+   "I _ _ _ _ measure.",
+   [
+    "got",
+    "them",
+    "built",
+    "to"
+   ],
+   []
+  ],
+  [
+   24,
+   "Group member",
+   "What about the old photographs?",
+   "I _ _ _ _ summer.",
+   [
+    "had",
+    "them",
+    "digitized",
+    "last"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Dorm RA",
+   "Is the contract final?",
+   "We need to _ _ _ _ .",
+   [
+    "have",
+    "it",
+    "reviewed",
+    "first"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Trainer",
+   "Did you clean the carpet?",
+   "I _ _ _ _ instead.",
+   [
+    "got",
+    "it",
+    "cleaned",
+    "professionally"
+   ],
+   [
+    "been"
+   ]
+  ],
+  [
+   24,
+   "Mentor",
+   "What about the garden?",
+   "We _ _ _ _ spring.",
+   [
+    "have",
+    "it",
+    "maintained",
+    "every"
+   ],
+   []
+  ],
+  [
+   25,
+   "Classmate",
+   "Did the professor allow extensions?",
+   "She _ _ _ _ in late.",
+   [
+    "let",
+    "us",
+    "hand",
+    "it"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Roommate",
+   "Why did you rewrite it?",
+   "My advisor _ _ _ _ from scratch.",
+   [
+    "made",
+    "me",
+    "start",
+    "again"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Professor",
+   "Did they let you in?",
+   "The guard _ _ _ _ the lobby.",
+   [
+    "let",
+    "me",
+    "wait",
+    "in"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Advisor",
+   "Why are you here so early?",
+   "My coach _ _ _ _ dawn.",
+   [
+    "makes",
+    "us",
+    "arrive",
+    "before"
+   ],
+   []
+  ],
+  [
+   25,
+   "Friend",
+   "Did she explain the change?",
+   "She _ _ _ _ together.",
+   [
+    "let",
+    "the",
+    "group",
+    "decide"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Coach",
+   "Why did you stay up?",
+   "The deadline _ _ _ _ the night.",
+   [
+    "made",
+    "me",
+    "work",
+    "through"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Librarian",
+   "Did they allow photographs?",
+   "They _ _ _ _ outside only.",
+   [
+    "let",
+    "visitors",
+    "take",
+    "pictures"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Teammate",
+   "Why did you cut the section?",
+   "The editor _ _ _ _ pages.",
+   [
+    "made",
+    "me",
+    "remove",
+    "two"
+   ],
+   []
+  ],
+  [
+   25,
+   "Neighbor",
+   "Did the landlord agree?",
+   "He _ _ _ _ kitchen.",
+   [
+    "let",
+    "us",
+    "paint",
+    "the"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Tutor",
+   "Why is everyone laughing?",
+   "Her story _ _ _ _ ten minutes.",
+   [
+    "made",
+    "us",
+    "laugh",
+    "for"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Lab partner",
+   "Did the office help?",
+   "They _ _ _ _ the deadline.",
+   [
+    "let",
+    "me",
+    "register",
+    "after"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Counselor",
+   "Why did you change labs?",
+   "My supervisor _ _ _ _ new project.",
+   [
+    "made",
+    "me",
+    "choose",
+    "a"
+   ],
+   []
+  ],
+  [
+   25,
+   "Colleague",
+   "Did they permit questions?",
+   "The chair _ _ _ _ two.",
+   [
+    "let",
+    "the",
+    "audience",
+    "ask"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Supervisor",
+   "Why were you late?",
+   "Security _ _ _ _ bags.",
+   [
+    "made",
+    "everyone",
+    "empty",
+    "their"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Host",
+   "Did she share the notes?",
+   "She _ _ _ _ whole set.",
+   [
+    "let",
+    "me",
+    "copy",
+    "the"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Coworker",
+   "Why did you apologize?",
+   "My conscience _ _ _ _ her.",
+   [
+    "made",
+    "me",
+    "write",
+    "to"
+   ],
+   []
+  ],
+  [
+   25,
+   "Group member",
+   "Did the tutor give feedback?",
+   "He _ _ _ _ comments first.",
+   [
+    "let",
+    "me",
+    "read",
+    "his"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Dorm RA",
+   "Why did you miss the bus?",
+   "The traffic _ _ _ _ minutes.",
+   [
+    "made",
+    "us",
+    "wait",
+    "twenty"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Trainer",
+   "Did they allow food?",
+   "They _ _ _ _ own lunch.",
+   [
+    "let",
+    "people",
+    "bring",
+    "their"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   25,
+   "Mentor",
+   "Why did you stop running?",
+   "The heat _ _ _ _ down.",
+   [
+    "made",
+    "me",
+    "slow",
+    "right"
+   ],
+   []
+  ],
+  [
+   26,
+   "Classmate",
+   "Do you still swim daily?",
+   "I _ _ _ _ morning.",
+   [
+    "used",
+    "to",
+    "swim",
+    "every"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Roommate",
+   "Is the early start hard?",
+   "I'm _ _ _ _ five now.",
+   [
+    "used",
+    "to",
+    "waking",
+    "before"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Professor",
+   "Did you live here before?",
+   "I _ _ _ _ room nearby.",
+   [
+    "used",
+    "to",
+    "rent",
+    "a"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Advisor",
+   "Does the noise bother you?",
+   "I've _ _ _ _ .",
+   [
+    "grown",
+    "used",
+    "to",
+    "it"
+   ],
+   []
+  ],
+  [
+   26,
+   "Friend",
+   "Do you still play chess?",
+   "I _ _ _ _ weekend.",
+   [
+    "used",
+    "to",
+    "play",
+    "every"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Coach",
+   "Is the workload manageable?",
+   "I'm _ _ _ _ pace.",
+   [
+    "getting",
+    "used",
+    "to",
+    "the"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Librarian",
+   "Did she teach here?",
+   "She _ _ _ _ this building.",
+   [
+    "used",
+    "to",
+    "lecture",
+    "in"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Teammate",
+   "Is the commute tiring?",
+   "I'm _ _ _ _ whole way.",
+   [
+    "used",
+    "to",
+    "standing",
+    "the"
+   ],
+   []
+  ],
+  [
+   26,
+   "Neighbor",
+   "Did the place serve breakfast?",
+   "It _ _ _ _ six.",
+   [
+    "used",
+    "to",
+    "open",
+    "at"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Tutor",
+   "Does the cold trouble you?",
+   "I'm _ _ _ _ like this.",
+   [
+    "not",
+    "used",
+    "to",
+    "winters"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Lab partner",
+   "Did you write by hand?",
+   "I _ _ _ _ on paper.",
+   [
+    "used",
+    "to",
+    "draft",
+    "everything"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Counselor",
+   "Is the software confusing?",
+   "I'm _ _ _ _ the layout.",
+   [
+    "still",
+    "not",
+    "used",
+    "to"
+   ],
+   []
+  ],
+  [
+   26,
+   "Colleague",
+   "Did they meet weekly?",
+   "The group _ _ _ _ Fridays.",
+   [
+    "used",
+    "to",
+    "gather",
+    "on"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Supervisor",
+   "Is public speaking easier now?",
+   "I'm _ _ _ _ rooms.",
+   [
+    "used",
+    "to",
+    "addressing",
+    "large"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Host",
+   "Did the library close early?",
+   "It _ _ _ _ nine.",
+   [
+    "used",
+    "to",
+    "shut",
+    "at"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Coworker",
+   "Does the altitude affect you?",
+   "I'm _ _ _ _ air.",
+   [
+    "not",
+    "used",
+    "to",
+    "thin"
+   ],
+   []
+  ],
+  [
+   26,
+   "Group member",
+   "Did you take the bus?",
+   "I _ _ _ _ .",
+   [
+    "used",
+    "to",
+    "cycle",
+    "instead"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Dorm RA",
+   "Is the accent hard to follow?",
+   "I'm _ _ _ _ slowly.",
+   [
+    "becoming",
+    "used",
+    "to",
+    "it"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Trainer",
+   "Did he coach the team?",
+   "He _ _ _ _ juniors.",
+   [
+    "used",
+    "to",
+    "train",
+    "the"
+   ],
+   [
+    "use"
+   ]
+  ],
+  [
+   26,
+   "Mentor",
+   "Does night work suit you?",
+   "I'm _ _ _ _ shifts.",
+   [
+    "quite",
+    "used",
+    "to",
+    "late"
+   ],
+   []
+  ],
+  [
+   27,
+   "Classmate",
+   "Can you come to the concert?",
+   "I _ _ _ _ free time.",
+   [
+    "wish",
+    "I",
+    "had",
+    "more"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Roommate",
+   "Do you like the apartment?",
+   "I _ _ _ _ to campus.",
+   [
+    "wish",
+    "it",
+    "were",
+    "closer"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Professor",
+   "Is the course going well?",
+   "I _ _ _ _ statistics better.",
+   [
+    "wish",
+    "I",
+    "understood",
+    "the"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Advisor",
+   "Are you enjoying the weather?",
+   "I _ _ _ _ raining.",
+   [
+    "wish",
+    "it",
+    "would",
+    "stop"
+   ],
+   []
+  ],
+  [
+   27,
+   "Friend",
+   "Do you speak Portuguese?",
+   "I _ _ _ _ fluently.",
+   [
+    "wish",
+    "I",
+    "spoke",
+    "it"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Coach",
+   "Is the group working well?",
+   "I _ _ _ _ often.",
+   [
+    "wish",
+    "we",
+    "met",
+    "more"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Librarian",
+   "Is your handwriting always like that?",
+   "I _ _ _ _ clearer.",
+   [
+    "wish",
+    "my",
+    "handwriting",
+    "were"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Teammate",
+   "Is the job stressful?",
+   "I _ _ _ _ shorter.",
+   [
+    "wish",
+    "the",
+    "hours",
+    "were"
+   ],
+   []
+  ],
+  [
+   27,
+   "Neighbor",
+   "Can you join us tonight?",
+   "I _ _ _ _ tired.",
+   [
+    "wish",
+    "I",
+    "weren't",
+    "so"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Tutor",
+   "Do you like the new system?",
+   "I _ _ _ _ reliably.",
+   [
+    "wish",
+    "it",
+    "worked",
+    "more"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Lab partner",
+   "Is the room warm enough?",
+   "I _ _ _ _ on earlier.",
+   [
+    "wish",
+    "the",
+    "heating",
+    "came"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Counselor",
+   "Do you know the answer?",
+   "I _ _ _ _ answer.",
+   [
+    "wish",
+    "I",
+    "knew",
+    "the"
+   ],
+   []
+  ],
+  [
+   27,
+   "Colleague",
+   "Are you ready for the talk?",
+   "I _ _ _ _ confident.",
+   [
+    "wish",
+    "I",
+    "felt",
+    "more"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Supervisor",
+   "Is the flat noisy?",
+   "I _ _ _ _ quieter.",
+   [
+    "wish",
+    "the",
+    "neighbors",
+    "were"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Host",
+   "Do you see her often?",
+   "I _ _ _ _ .",
+   [
+    "wish",
+    "she",
+    "lived",
+    "nearby"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Coworker",
+   "Is the deadline realistic?",
+   "I _ _ _ _ week.",
+   [
+    "wish",
+    "we",
+    "had",
+    "another"
+   ],
+   []
+  ],
+  [
+   27,
+   "Group member",
+   "Do you enjoy the commute?",
+   "I _ _ _ _ more often.",
+   [
+    "wish",
+    "the",
+    "train",
+    "ran"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Dorm RA",
+   "Are the seats comfortable?",
+   "I _ _ _ _ little.",
+   [
+    "wish",
+    "they",
+    "reclined",
+    "a"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Trainer",
+   "Is the food good?",
+   "I _ _ _ _ choice.",
+   [
+    "wish",
+    "there",
+    "were",
+    "more"
+   ],
+   [
+    "will"
+   ]
+  ],
+  [
+   27,
+   "Mentor",
+   "Do you get enough sleep?",
+   "I _ _ _ _ the night.",
+   [
+    "wish",
+    "I",
+    "slept",
+    "through"
+   ],
+   []
+  ],
+  [
+   28,
+   "Classmate",
+   "Did you take the elective?",
+   "I _ _ _ _ up for it.",
+   [
+    "wish",
+    "I",
+    "had",
+    "signed"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Roommate",
+   "Were you at the lecture?",
+   "I _ _ _ _ to it.",
+   [
+    "wish",
+    "I",
+    "had",
+    "gone"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Professor",
+   "Did you keep the receipt?",
+   "I _ _ _ _ it.",
+   [
+    "wish",
+    "I",
+    "had",
+    "kept"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Advisor",
+   "Did you apply last year?",
+   "I _ _ _ _ earlier.",
+   [
+    "wish",
+    "I",
+    "had",
+    "applied"
+   ],
+   []
+  ],
+  [
+   28,
+   "Friend",
+   "Was the trip worthwhile?",
+   "I _ _ _ _ longer.",
+   [
+    "wish",
+    "we",
+    "had",
+    "stayed"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Coach",
+   "Did you study abroad?",
+   "I _ _ _ _ the chance.",
+   [
+    "wish",
+    "I",
+    "had",
+    "taken"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Librarian",
+   "Did anyone warn you?",
+   "I _ _ _ _ the change.",
+   [
+    "wish",
+    "someone",
+    "had",
+    "mentioned"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Teammate",
+   "Did you back up the file?",
+   "I _ _ _ _ a copy.",
+   [
+    "wish",
+    "I",
+    "had",
+    "saved"
+   ],
+   []
+  ],
+  [
+   28,
+   "Neighbor",
+   "Were you nervous?",
+   "I _ _ _ _ more beforehand.",
+   [
+    "wish",
+    "I",
+    "had",
+    "practiced"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Tutor",
+   "Did you meet the author?",
+   "I _ _ _ _ her a question.",
+   [
+    "wish",
+    "I",
+    "had",
+    "asked"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Lab partner",
+   "Did you buy the tickets?",
+   "I _ _ _ _ them sooner.",
+   [
+    "wish",
+    "we",
+    "had",
+    "booked"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Counselor",
+   "Did he tell you?",
+   "I _ _ _ _ something earlier.",
+   [
+    "wish",
+    "he",
+    "had",
+    "said"
+   ],
+   []
+  ],
+  [
+   28,
+   "Colleague",
+   "Did you take the photos?",
+   "I _ _ _ _ my camera.",
+   [
+    "wish",
+    "I",
+    "had",
+    "brought"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Supervisor",
+   "Was the route difficult?",
+   "I _ _ _ _ the map.",
+   [
+    "wish",
+    "we",
+    "had",
+    "checked"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Host",
+   "Did you finish the reading?",
+   "I _ _ _ _ on Monday.",
+   [
+    "wish",
+    "I",
+    "had",
+    "started"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Coworker",
+   "Did she get your message?",
+   "I _ _ _ _ instead.",
+   [
+    "wish",
+    "I",
+    "had",
+    "called"
+   ],
+   []
+  ],
+  [
+   28,
+   "Group member",
+   "Was the seminar useful?",
+   "I _ _ _ _ all of them.",
+   [
+    "wish",
+    "I",
+    "had",
+    "attended"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Dorm RA",
+   "Did you keep in touch?",
+   "I _ _ _ _ more often.",
+   [
+    "wish",
+    "we",
+    "had",
+    "written"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Trainer",
+   "Did you see the exhibition?",
+   "I _ _ _ _ before it closed.",
+   [
+    "wish",
+    "I",
+    "had",
+    "visited"
+   ],
+   [
+    "would"
+   ]
+  ],
+  [
+   28,
+   "Mentor",
+   "Was the advice helpful?",
+   "I _ _ _ _ to it.",
+   [
+    "wish",
+    "I",
+    "had",
+    "listened"
+   ],
+   []
+  ],
+  [
+   29,
+   "Classmate",
+   "Should I hand it in now?",
+   "You _ _ _ _ today.",
+   [
+    "had",
+    "better",
+    "submit",
+    "it"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Roommate",
+   "Do you want to go out?",
+   "I _ _ _ _ tonight.",
+   [
+    "would",
+    "rather",
+    "stay",
+    "in"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Professor",
+   "Shall we take the car?",
+   "We _ _ _ _ this traffic.",
+   [
+    "had",
+    "better",
+    "walk",
+    "in"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Advisor",
+   "Coffee or tea?",
+   "I _ _ _ _ , thanks.",
+   [
+    "would",
+    "rather",
+    "have",
+    "tea"
+   ],
+   []
+  ],
+  [
+   29,
+   "Friend",
+   "Should I email the professor?",
+   "You _ _ _ _ directly.",
+   [
+    "had",
+    "better",
+    "ask",
+    "her"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Coach",
+   "Do you mind presenting first?",
+   "I _ _ _ _ if possible.",
+   [
+    "would",
+    "rather",
+    "go",
+    "last"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Librarian",
+   "Should we wait for them?",
+   "We _ _ _ _ them.",
+   [
+    "had",
+    "better",
+    "start",
+    "without"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Teammate",
+   "Want to watch a film?",
+   "I _ _ _ _ chapter.",
+   [
+    "would",
+    "rather",
+    "finish",
+    "this"
+   ],
+   []
+  ],
+  [
+   29,
+   "Neighbor",
+   "Should I book now?",
+   "You _ _ _ _ seat early.",
+   [
+    "had",
+    "better",
+    "reserve",
+    "a"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Tutor",
+   "Shall we meet at noon?",
+   "I _ _ _ _ lunch.",
+   [
+    "would",
+    "rather",
+    "meet",
+    "after"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Lab partner",
+   "Should I bring a coat?",
+   "You _ _ _ _ along.",
+   [
+    "had",
+    "better",
+    "take",
+    "one"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Counselor",
+   "Do you want to drive?",
+   "I _ _ _ _ train.",
+   [
+    "would",
+    "rather",
+    "take",
+    "the"
+   ],
+   []
+  ],
+  [
+   29,
+   "Colleague",
+   "Should we tell the group?",
+   "We _ _ _ _ tomorrow.",
+   [
+    "had",
+    "better",
+    "explain",
+    "it"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Supervisor",
+   "Want to join the trip?",
+   "I _ _ _ _ money.",
+   [
+    "would",
+    "rather",
+    "save",
+    "the"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Host",
+   "Should I revise tonight?",
+   "You _ _ _ _ .",
+   [
+    "had",
+    "better",
+    "sleep",
+    "instead"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Coworker",
+   "Shall I call her?",
+   "I _ _ _ _ her.",
+   [
+    "would",
+    "rather",
+    "you",
+    "called"
+   ],
+   []
+  ],
+  [
+   29,
+   "Group member",
+   "Should we cancel?",
+   "We _ _ _ _ cancel.",
+   [
+    "had",
+    "better",
+    "postpone",
+    "than"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Dorm RA",
+   "Do you want the aisle seat?",
+   "I _ _ _ _ the window.",
+   [
+    "would",
+    "rather",
+    "sit",
+    "by"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Trainer",
+   "Should I print the slides?",
+   "You _ _ _ _ backup.",
+   [
+    "had",
+    "better",
+    "bring",
+    "a"
+   ],
+   [
+    "to"
+   ]
+  ],
+  [
+   29,
+   "Mentor",
+   "Shall we eat now?",
+   "I _ _ _ _ while.",
+   [
+    "would",
+    "rather",
+    "wait",
+    "a"
+   ],
+   []
+  ],
+  [
+   30,
+   "Classmate",
+   "Why is the door open?",
+   "Someone _ _ _ _ lock it.",
+   [
+    "must",
+    "have",
+    "forgotten",
+    "to"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Roommate",
+   "She didn't reply.",
+   "She _ _ _ _ message.",
+   [
+    "can't",
+    "have",
+    "seen",
+    "the"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Professor",
+   "The lights are off.",
+   "They _ _ _ _ .",
+   [
+    "must",
+    "have",
+    "left",
+    "already"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Advisor",
+   "He looks exhausted.",
+   "He _ _ _ _ night.",
+   [
+    "might",
+    "have",
+    "worked",
+    "all"
+   ],
+   []
+  ],
+  [
+   30,
+   "Friend",
+   "The file is missing.",
+   "It _ _ _ _ by accident.",
+   [
+    "may",
+    "have",
+    "been",
+    "deleted"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Coach",
+   "She passed easily.",
+   "She _ _ _ _ weeks.",
+   [
+    "must",
+    "have",
+    "studied",
+    "for"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Librarian",
+   "The road is wet.",
+   "It _ _ _ _ .",
+   [
+    "must",
+    "have",
+    "rained",
+    "overnight"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Teammate",
+   "He never mentioned it.",
+   "He _ _ _ _ the change.",
+   [
+    "can't",
+    "have",
+    "known",
+    "about"
+   ],
+   []
+  ],
+  [
+   30,
+   "Neighbor",
+   "The window is broken.",
+   "A branch _ _ _ _ .",
+   [
+    "could",
+    "have",
+    "hit",
+    "it"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Tutor",
+   "They arrived very early.",
+   "They _ _ _ _ first train.",
+   [
+    "must",
+    "have",
+    "taken",
+    "the"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Lab partner",
+   "The report is incomplete.",
+   "She _ _ _ _ of time.",
+   [
+    "might",
+    "have",
+    "run",
+    "out"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Counselor",
+   "Nobody answered.",
+   "They _ _ _ _ .",
+   [
+    "may",
+    "have",
+    "gone",
+    "out"
+   ],
+   []
+  ],
+  [
+   30,
+   "Colleague",
+   "The results look odd.",
+   "The sensor _ _ _ _ .",
+   [
+    "must",
+    "have",
+    "malfunctioned",
+    "again"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Supervisor",
+   "He seemed surprised.",
+   "Nobody _ _ _ _ beforehand.",
+   [
+    "can",
+    "have",
+    "told",
+    "him"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Host",
+   "The plant died.",
+   "It _ _ _ _ light.",
+   [
+    "might",
+    "have",
+    "needed",
+    "more"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Coworker",
+   "She knew the answer instantly.",
+   "She _ _ _ _ chapter.",
+   [
+    "must",
+    "have",
+    "read",
+    "the"
+   ],
+   []
+  ],
+  [
+   30,
+   "Group member",
+   "The room was spotless.",
+   "Someone _ _ _ _ early.",
+   [
+    "must",
+    "have",
+    "cleaned",
+    "it"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Dorm RA",
+   "My keys are gone.",
+   "You _ _ _ _ outside.",
+   [
+    "could",
+    "have",
+    "dropped",
+    "them"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Trainer",
+   "The talk ended early.",
+   "The speaker _ _ _ _ .",
+   [
+    "may",
+    "have",
+    "fallen",
+    "ill"
+   ],
+   [
+    "did"
+   ]
+  ],
+  [
+   30,
+   "Mentor",
+   "They looked confused.",
+   "We _ _ _ _ clearly.",
+   [
+    "can't",
+    "have",
+    "explained",
+    "it"
+   ],
+   []
+  ],
+  [
+   31,
+   "Classmate",
+   "I'm looking for the registrar.",
+   "Could you tell me _ _ _ _ located?",
+   [
+    "where",
+    "the",
+    "office",
+    "is"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Roommate",
+   "The train times changed.",
+   "Do you know _ _ _ _ leaves?",
+   [
+    "when",
+    "the",
+    "next",
+    "one"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Professor",
+   "I can't find the form.",
+   "Could you show me _ _ _ _ ?",
+   [
+    "where",
+    "it",
+    "is",
+    "kept"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Advisor",
+   "The lecture moved rooms.",
+   "Do you know _ _ _ _ now?",
+   [
+    "which",
+    "room",
+    "they",
+    "use"
+   ],
+   []
+  ],
+  [
+   31,
+   "Friend",
+   "I need the reading list.",
+   "Can you tell me _ _ _ _ it?",
+   [
+    "where",
+    "I",
+    "can",
+    "find"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Coach",
+   "The fee went up.",
+   "Do you know _ _ _ _ now?",
+   [
+    "how",
+    "much",
+    "it",
+    "costs"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Librarian",
+   "She left a message.",
+   "Did she say _ _ _ _ back?",
+   [
+    "when",
+    "she",
+    "would",
+    "call"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Teammate",
+   "The library moved the journals.",
+   "Could you tell me _ _ _ _ on?",
+   [
+    "which",
+    "floor",
+    "they",
+    "are"
+   ],
+   []
+  ],
+  [
+   31,
+   "Neighbor",
+   "I missed the announcement.",
+   "Do you know _ _ _ _ ?",
+   [
+    "what",
+    "the",
+    "dean",
+    "said"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Tutor",
+   "The bus route changed.",
+   "Can you tell me _ _ _ _ ?",
+   [
+    "where",
+    "it",
+    "stops",
+    "now"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Lab partner",
+   "The deadline is unclear.",
+   "Do you know _ _ _ _ due?",
+   [
+    "when",
+    "the",
+    "essay",
+    "is"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Counselor",
+   "I need to reach the lab.",
+   "Could you tell me _ _ _ _ ?",
+   [
+    "how",
+    "I",
+    "get",
+    "there"
+   ],
+   []
+  ],
+  [
+   31,
+   "Colleague",
+   "The password expired.",
+   "Do you know _ _ _ _ ?",
+   [
+    "who",
+    "resets",
+    "these",
+    "accounts"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Supervisor",
+   "The seminar has a reading.",
+   "Can you tell me _ _ _ _ ?",
+   [
+    "which",
+    "chapter",
+    "we",
+    "need"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Host",
+   "The office hours shifted.",
+   "Do you know _ _ _ _ now?",
+   [
+    "what",
+    "time",
+    "she",
+    "starts"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Coworker",
+   "I lost the syllabus.",
+   "Could you tell me _ _ _ _ ?",
+   [
+    "where",
+    "it",
+    "was",
+    "posted"
+   ],
+   []
+  ],
+  [
+   31,
+   "Group member",
+   "The exam format changed.",
+   "Do you know _ _ _ _ is?",
+   [
+    "how",
+    "long",
+    "the",
+    "paper"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Dorm RA",
+   "There's a new printer.",
+   "Can you tell me _ _ _ _ ?",
+   [
+    "how",
+    "this",
+    "machine",
+    "works"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Trainer",
+   "The grant has a deadline.",
+   "Do you know _ _ _ _ year?",
+   [
+    "when",
+    "applications",
+    "close",
+    "this"
+   ],
+   [
+    "does"
+   ]
+  ],
+  [
+   31,
+   "Mentor",
+   "The hall was locked.",
+   "Could you tell me _ _ _ _ ?",
+   [
+    "who",
+    "has",
+    "the",
+    "key"
+   ],
+   []
+  ],
+  [
+   32,
+   "Classmate",
+   "How is the turnout?",
+   "There were _ _ _ _ the talk.",
+   [
+    "very",
+    "few",
+    "people",
+    "at"
+   ],
+   [
+    "little"
+   ]
+  ],
+  [
+   32,
+   "Roommate",
+   "Did you have time?",
+   "I had _ _ _ _ prepare.",
+   [
+    "very",
+    "little",
+    "time",
+    "to"
+   ],
+   [
+    "few"
+   ]
+  ],
+  [
+   32,
+   "Professor",
+   "Is there much interest?",
+   "A _ _ _ _ signed up.",
+   [
+    "large",
+    "number",
+    "of",
+    "students"
+   ],
+   [
+    "amount"
+   ]
+  ],
+  [
+   32,
+   "Advisor",
+   "How much data is there?",
+   "We collected _ _ _ _ information.",
+   [
+    "a",
+    "great",
+    "deal",
+    "of"
+   ],
+   []
+  ],
+  [
+   32,
+   "Friend",
+   "Are there many applicants?",
+   "There aren't _ _ _ _ year.",
+   [
+    "as",
+    "many",
+    "as",
+    "last"
+   ],
+   [
+    "much"
+   ]
+  ],
+  [
+   32,
+   "Coach",
+   "Do you need help?",
+   "I have _ _ _ _ week.",
+   [
+    "too",
+    "much",
+    "work",
+    "this"
+   ],
+   [
+    "many"
+   ]
+  ],
+  [
+   32,
+   "Librarian",
+   "How many chairs are left?",
+   "There are _ _ _ _ .",
+   [
+    "only",
+    "a",
+    "few",
+    "left"
+   ],
+   [
+    "little"
+   ]
+  ],
+  [
+   32,
+   "Teammate",
+   "Is there any milk?",
+   "There's _ _ _ _ .",
+   [
+    "hardly",
+    "any",
+    "milk",
+    "left"
+   ],
+   []
+  ],
+  [
+   32,
+   "Neighbor",
+   "Did many attend?",
+   "Only _ _ _ _ came.",
+   [
+    "a",
+    "handful",
+    "of",
+    "people"
+   ],
+   [
+    "much"
+   ]
+  ],
+  [
+   32,
+   "Tutor",
+   "How much noise was there?",
+   "There wasn't _ _ _ _ .",
+   [
+    "much",
+    "noise",
+    "at",
+    "all"
+   ],
+   [
+    "many"
+   ]
+  ],
+  [
+   32,
+   "Lab partner",
+   "Are there enough copies?",
+   "We have _ _ _ _ need.",
+   [
+    "fewer",
+    "copies",
+    "than",
+    "we"
+   ],
+   [
+    "less"
+   ]
+  ],
+  [
+   32,
+   "Counselor",
+   "Is the traffic bad?",
+   "There's _ _ _ _ .",
+   [
+    "less",
+    "traffic",
+    "than",
+    "usual"
+   ],
+   []
+  ],
+  [
+   32,
+   "Colleague",
+   "How many errors did you find?",
+   "I found _ _ _ _ the text.",
+   [
+    "several",
+    "small",
+    "errors",
+    "in"
+   ],
+   [
+    "much"
+   ]
+  ],
+  [
+   32,
+   "Supervisor",
+   "Do you get much sunlight?",
+   "The room gets _ _ _ _ .",
+   [
+    "plenty",
+    "of",
+    "natural",
+    "light"
+   ],
+   [
+    "many"
+   ]
+  ],
+  [
+   32,
+   "Host",
+   "Are there many options?",
+   "There are _ _ _ _ .",
+   [
+    "a",
+    "number",
+    "of",
+    "alternatives"
+   ],
+   [
+    "amount"
+   ]
+  ],
+  [
+   32,
+   "Coworker",
+   "How much did it cost?",
+   "It took _ _ _ _ money.",
+   [
+    "a",
+    "considerable",
+    "amount",
+    "of"
+   ],
+   []
+  ],
+  [
+   32,
+   "Group member",
+   "Did anyone object?",
+   "In the end, _ _ _ _ .",
+   [
+    "very",
+    "few",
+    "members",
+    "objected"
+   ],
+   [
+    "little"
+   ]
+  ],
+  [
+   32,
+   "Dorm RA",
+   "Is there much evidence?",
+   "There is _ _ _ _ it.",
+   [
+    "little",
+    "direct",
+    "evidence",
+    "for"
+   ],
+   [
+    "few"
+   ]
+  ],
+  [
+   32,
+   "Trainer",
+   "How many drafts did you write?",
+   "I wrote _ _ _ _ .",
+   [
+    "quite",
+    "a",
+    "few",
+    "drafts"
+   ],
+   [
+    "little"
+   ]
+  ],
+  [
+   32,
+   "Mentor",
+   "Do we have enough chairs?",
+   "We need _ _ _ _ .",
+   [
+    "a",
+    "few",
+    "more",
+    "chairs"
+   ],
+   []
+  ],
+  [
+   33,
+   "Classmate",
+   "Were the results clear?",
+   "The results of the experiment _ _ _ _ than expected.",
+   [
+    "were",
+    "far",
+    "more",
+    "conclusive"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   33,
+   "Roommate",
+   "Is anyone waiting?",
+   "There _ _ _ _ the queue.",
+   [
+    "are",
+    "three",
+    "people",
+    "in"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   33,
+   "Professor",
+   "Did everyone submit?",
+   "Each of the students _ _ _ _ draft.",
+   [
+    "has",
+    "handed",
+    "in",
+    "a"
+   ],
+   [
+    "have"
+   ]
+  ],
+  [
+   33,
+   "Advisor",
+   "Are the books here?",
+   "One of the volumes _ _ _ _ the shelf.",
+   [
+    "is",
+    "still",
+    "missing",
+    "from"
+   ],
+   []
+  ],
+  [
+   33,
+   "Friend",
+   "Is the committee meeting?",
+   "The committee _ _ _ _ Monday.",
+   [
+    "meets",
+    "on",
+    "the",
+    "first"
+   ],
+   [
+    "meet"
+   ]
+  ],
+  [
+   33,
+   "Coach",
+   "Are there any updates?",
+   "There _ _ _ _ the schedule.",
+   [
+    "is",
+    "one",
+    "change",
+    "to"
+   ],
+   [
+    "are"
+   ]
+  ],
+  [
+   33,
+   "Librarian",
+   "Did the data support it?",
+   "Neither of the samples _ _ _ _ contamination.",
+   [
+    "shows",
+    "any",
+    "sign",
+    "of"
+   ],
+   [
+    "show"
+   ]
+  ],
+  [
+   33,
+   "Teammate",
+   "Is the equipment ready?",
+   "All of the equipment _ _ _ _ .",
+   [
+    "has",
+    "been",
+    "tested",
+    "already"
+   ],
+   []
+  ],
+  [
+   33,
+   "Neighbor",
+   "Are the students prepared?",
+   "Every one of them _ _ _ _ .",
+   [
+    "knows",
+    "the",
+    "material",
+    "well"
+   ],
+   [
+    "know"
+   ]
+  ],
+  [
+   33,
+   "Tutor",
+   "Is the news good?",
+   "The news _ _ _ _ feared.",
+   [
+    "was",
+    "better",
+    "than",
+    "we"
+   ],
+   [
+    "were"
+   ]
+  ],
+  [
+   33,
+   "Lab partner",
+   "Are the statistics reliable?",
+   "The statistics in this chapter _ _ _ _ me.",
+   [
+    "seem",
+    "unusually",
+    "precise",
+    "to"
+   ],
+   [
+    "seems"
+   ]
+  ],
+  [
+   33,
+   "Counselor",
+   "Did anyone notice?",
+   "Nobody in the seminars _ _ _ _ .",
+   [
+    "was",
+    "paying",
+    "close",
+    "attention"
+   ],
+   []
+  ],
+  [
+   33,
+   "Colleague",
+   "Are the rooms booked?",
+   "A number of rooms _ _ _ _ .",
+   [
+    "have",
+    "already",
+    "been",
+    "reserved"
+   ],
+   [
+    "has"
+   ]
+  ],
+  [
+   33,
+   "Supervisor",
+   "Is the research finished?",
+   "The research on both sites _ _ _ _ .",
+   [
+    "is",
+    "nearly",
+    "complete",
+    "now"
+   ],
+   [
+    "are"
+   ]
+  ],
+  [
+   33,
+   "Host",
+   "Are the twins here?",
+   "Neither twin _ _ _ _ .",
+   [
+    "has",
+    "arrived",
+    "on",
+    "time"
+   ],
+   [
+    "have"
+   ]
+  ],
+  [
+   33,
+   "Coworker",
+   "Is there enough furniture?",
+   "There _ _ _ _ upstairs.",
+   [
+    "are",
+    "not",
+    "enough",
+    "desks"
+   ],
+   []
+  ],
+  [
+   33,
+   "Group member",
+   "Did the group agree?",
+   "The majority of members _ _ _ _ the change.",
+   [
+    "were",
+    "in",
+    "favor",
+    "of"
+   ],
+   [
+    "was"
+   ]
+  ],
+  [
+   33,
+   "Dorm RA",
+   "Is physics difficult?",
+   "Physics _ _ _ _ I take.",
+   [
+    "is",
+    "the",
+    "hardest",
+    "subject"
+   ],
+   [
+    "are"
+   ]
+  ],
+  [
+   33,
+   "Trainer",
+   "Are the criteria clear?",
+   "The criteria for selection _ _ _ _ website.",
+   [
+    "are",
+    "published",
+    "on",
+    "the"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   33,
+   "Mentor",
+   "Did everything arrive?",
+   "Each of the packages _ _ _ _ .",
+   [
+    "was",
+    "delivered",
+    "on",
+    "time"
+   ],
+   []
+  ],
+  [
+   34,
+   "Classmate",
+   "Why did you leave early?",
+   "I went home, _ _ _ _ early.",
+   [
+    "having",
+    "finished",
+    "the",
+    "experiment"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Roommate",
+   "How did she know the answer?",
+   "She answered quickly, _ _ _ _ twice.",
+   [
+    "having",
+    "read",
+    "the",
+    "chapter"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Professor",
+   "Why was he calm?",
+   "He stayed calm, _ _ _ _ all week.",
+   [
+    "having",
+    "rehearsed",
+    "the",
+    "talk"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Advisor",
+   "Why did they cancel?",
+   "They cancelled the trip, _ _ _ _ first.",
+   [
+    "having",
+    "checked",
+    "the",
+    "forecast"
+   ],
+   []
+  ],
+  [
+   34,
+   "Friend",
+   "How did you finish so fast?",
+   "I finished early, _ _ _ _ before.",
+   [
+    "having",
+    "started",
+    "the",
+    "night"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Coach",
+   "Why did she decline?",
+   "She declined the offer, _ _ _ _ already.",
+   [
+    "having",
+    "accepted",
+    "another",
+    "one"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Librarian",
+   "Why were you confident?",
+   "I felt ready, _ _ _ _ daily.",
+   [
+    "having",
+    "practiced",
+    "the",
+    "routine"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Teammate",
+   "How did he spot the error?",
+   "He noticed it at once, _ _ _ _ mistake before.",
+   [
+    "having",
+    "seen",
+    "the",
+    "same"
+   ],
+   []
+  ],
+  [
+   34,
+   "Neighbor",
+   "Why did they delay?",
+   "They waited a week, _ _ _ _ .",
+   [
+    "having",
+    "received",
+    "no",
+    "reply"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Tutor",
+   "Why is the room empty?",
+   "Everyone left, _ _ _ _ .",
+   [
+    "having",
+    "heard",
+    "the",
+    "announcement"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Lab partner",
+   "How did you get the job?",
+   "I was hired quickly, _ _ _ _ .",
+   [
+    "having",
+    "worked",
+    "there",
+    "before"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Counselor",
+   "Why did she rewrite it?",
+   "She revised the draft, _ _ _ _ carefully.",
+   [
+    "having",
+    "reread",
+    "the",
+    "feedback"
+   ],
+   []
+  ],
+  [
+   34,
+   "Colleague",
+   "Why were you late?",
+   "I arrived late, _ _ _ _ bus.",
+   [
+    "having",
+    "missed",
+    "the",
+    "first"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Supervisor",
+   "How did they prepare?",
+   "They packed lightly, _ _ _ _ before.",
+   [
+    "having",
+    "travelled",
+    "that",
+    "route"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Host",
+   "Why did he refuse?",
+   "He turned it down, _ _ _ _ to someone else.",
+   [
+    "having",
+    "promised",
+    "the",
+    "slot"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Coworker",
+   "Why is the lab closed?",
+   "It shut early, _ _ _ _ runs.",
+   [
+    "having",
+    "completed",
+    "the",
+    "week's"
+   ],
+   []
+  ],
+  [
+   34,
+   "Group member",
+   "How did you know the way?",
+   "I walked straight there, _ _ _ _ beforehand.",
+   [
+    "having",
+    "studied",
+    "the",
+    "map"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Dorm RA",
+   "Why did she apply again?",
+   "She reapplied this year, _ _ _ _ .",
+   [
+    "having",
+    "strengthened",
+    "her",
+    "portfolio"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Trainer",
+   "Why was the talk short?",
+   "He finished early, _ _ _ _ quickly.",
+   [
+    "having",
+    "covered",
+    "every",
+    "point"
+   ],
+   [
+    "because"
+   ]
+  ],
+  [
+   34,
+   "Mentor",
+   "How did they win?",
+   "They won comfortably, _ _ _ _ .",
+   [
+    "having",
+    "trained",
+    "all",
+    "summer"
+   ],
+   []
+  ],
+  [
+   35,
+   "Classmate",
+   "What is the policy meant to do?",
+   "It is intended _ _ _ _ emissions but also to lower costs.",
+   [
+    "not",
+    "only",
+    "to",
+    "reduce"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   35,
+   "Roommate",
+   "Which option did they choose?",
+   "They decided _ _ _ _ or to cancel.",
+   [
+    "either",
+    "to",
+    "postpone",
+    "it"
+   ],
+   [
+    "both"
+   ]
+  ],
+  [
+   35,
+   "Professor",
+   "What did the study show?",
+   "It examined _ _ _ _ the effects.",
+   [
+    "both",
+    "the",
+    "causes",
+    "and"
+   ],
+   [
+    "either"
+   ]
+  ],
+  [
+   35,
+   "Advisor",
+   "Is she a writer or a teacher?",
+   "She is _ _ _ _ a lecturer.",
+   [
+    "both",
+    "a",
+    "novelist",
+    "and"
+   ],
+   []
+  ],
+  [
+   35,
+   "Friend",
+   "How do they fund it?",
+   "Support comes _ _ _ _ but also from grants.",
+   [
+    "not",
+    "only",
+    "from",
+    "alumni"
+   ],
+   [
+    "also"
+   ]
+  ],
+  [
+   35,
+   "Coach",
+   "What are the requirements?",
+   "You must _ _ _ _ or sit the exam.",
+   [
+    "either",
+    "submit",
+    "a",
+    "portfolio"
+   ],
+   [
+    "neither"
+   ]
+  ],
+  [
+   35,
+   "Librarian",
+   "Did anyone agree?",
+   "In the end, _ _ _ _ the treasurer agreed.",
+   [
+    "neither",
+    "the",
+    "chair",
+    "nor"
+   ],
+   [
+    "either"
+   ]
+  ],
+  [
+   35,
+   "Teammate",
+   "What does the course cover?",
+   "It teaches _ _ _ _ equally.",
+   [
+    "both",
+    "theory",
+    "and",
+    "practice"
+   ],
+   []
+  ],
+  [
+   35,
+   "Neighbor",
+   "Why did you choose it?",
+   "The program is _ _ _ _ also flexible.",
+   [
+    "not",
+    "only",
+    "affordable",
+    "but"
+   ],
+   [
+    "also"
+   ]
+  ],
+  [
+   35,
+   "Tutor",
+   "How will you travel?",
+   "I will go _ _ _ _ by coach.",
+   [
+    "either",
+    "by",
+    "train",
+    "or"
+   ],
+   [
+    "both"
+   ]
+  ],
+  [
+   35,
+   "Lab partner",
+   "What impressed the panel?",
+   "They praised _ _ _ _ her teaching.",
+   [
+    "both",
+    "her",
+    "research",
+    "and"
+   ],
+   [
+    "either"
+   ]
+  ],
+  [
+   35,
+   "Counselor",
+   "Is the role technical?",
+   "It requires _ _ _ _ also writing.",
+   [
+    "not",
+    "only",
+    "coding",
+    "but"
+   ],
+   []
+  ],
+  [
+   35,
+   "Colleague",
+   "Did they publish it?",
+   "The paper appeared _ _ _ _ online.",
+   [
+    "neither",
+    "in",
+    "print",
+    "nor"
+   ],
+   [
+    "either"
+   ]
+  ],
+  [
+   35,
+   "Supervisor",
+   "What should I bring?",
+   "Bring _ _ _ _ a notebook.",
+   [
+    "either",
+    "your",
+    "laptop",
+    "or"
+   ],
+   [
+    "both"
+   ]
+  ],
+  [
+   35,
+   "Host",
+   "Why is the site important?",
+   "It is valued _ _ _ _ and for its size.",
+   [
+    "both",
+    "for",
+    "its",
+    "age"
+   ],
+   [
+    "either"
+   ]
+  ],
+  [
+   35,
+   "Coworker",
+   "What did the review say?",
+   "It found the design _ _ _ _ also practical.",
+   [
+    "not",
+    "only",
+    "elegant",
+    "but"
+   ],
+   []
+  ],
+  [
+   35,
+   "Group member",
+   "How is the grant judged?",
+   "Panels weigh _ _ _ _ .",
+   [
+    "both",
+    "originality",
+    "and",
+    "feasibility"
+   ],
+   [
+    "either"
+   ]
+  ],
+  [
+   35,
+   "Dorm RA",
+   "Can I pay later?",
+   "You may pay _ _ _ _ registration.",
+   [
+    "either",
+    "now",
+    "or",
+    "at"
+   ],
+   [
+    "both"
+   ]
+  ],
+  [
+   35,
+   "Trainer",
+   "What does the job involve?",
+   "It involves _ _ _ _ also analysis.",
+   [
+    "not",
+    "only",
+    "fieldwork",
+    "but"
+   ],
+   [
+    "as"
+   ]
+  ],
+  [
+   35,
+   "Mentor",
+   "Were they satisfied?",
+   "The result pleased _ _ _ _ the staff.",
+   [
+    "neither",
+    "the",
+    "students",
+    "nor"
+   ],
+   []
+  ],
+  [
+   36,
+   "Classmate",
+   "Do you go to the gym?",
+   "I _ _ _ _ .",
+   [
+    "usually",
+    "go",
+    "before",
+    "breakfast"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Roommate",
+   "Is she late often?",
+   "She is _ _ _ _ seminars.",
+   [
+    "hardly",
+    "ever",
+    "late",
+    "for"
+   ],
+   [
+    "always"
+   ]
+  ],
+  [
+   36,
+   "Professor",
+   "Do they meet weekly?",
+   "They _ _ _ _ Fridays.",
+   [
+    "have",
+    "always",
+    "met",
+    "on"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Advisor",
+   "Do you drink coffee?",
+   "I _ _ _ _ noon.",
+   [
+    "rarely",
+    "drink",
+    "it",
+    "after"
+   ],
+   []
+  ],
+  [
+   36,
+   "Friend",
+   "Is the office open Saturdays?",
+   "It is _ _ _ _ weekend.",
+   [
+    "never",
+    "open",
+    "at",
+    "the"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Coach",
+   "Do you check email at night?",
+   "I _ _ _ _ bed.",
+   [
+    "sometimes",
+    "check",
+    "it",
+    "before"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Librarian",
+   "Has he missed a class?",
+   "He _ _ _ _ single session.",
+   [
+    "has",
+    "never",
+    "missed",
+    "a"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Teammate",
+   "Do you take notes?",
+   "I _ _ _ _ hand.",
+   [
+    "always",
+    "take",
+    "notes",
+    "by"
+   ],
+   []
+  ],
+  [
+   36,
+   "Neighbor",
+   "Is the bus punctual?",
+   "It is _ _ _ _ winter.",
+   [
+    "seldom",
+    "on",
+    "time",
+    "in"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Tutor",
+   "Do they update the site?",
+   "They _ _ _ _ Mondays.",
+   [
+    "occasionally",
+    "update",
+    "it",
+    "on"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Lab partner",
+   "Have you been there?",
+   "I _ _ _ _ it.",
+   [
+    "have",
+    "often",
+    "walked",
+    "past"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Counselor",
+   "Do you work weekends?",
+   "I _ _ _ _ weekdays.",
+   [
+    "normally",
+    "work",
+    "only",
+    "on"
+   ],
+   []
+  ],
+  [
+   36,
+   "Colleague",
+   "Is he usually this quiet?",
+   "He is _ _ _ _ class.",
+   [
+    "generally",
+    "quite",
+    "talkative",
+    "in"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Supervisor",
+   "Do you eat in the hall?",
+   "I _ _ _ _ now.",
+   [
+    "hardly",
+    "ever",
+    "eat",
+    "there"
+   ],
+   [
+    "always"
+   ]
+  ],
+  [
+   36,
+   "Host",
+   "Has the policy changed?",
+   "It _ _ _ _ since then.",
+   [
+    "has",
+    "rarely",
+    "been",
+    "revised"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Coworker",
+   "Do you cycle to campus?",
+   "I _ _ _ _ dry.",
+   [
+    "frequently",
+    "cycle",
+    "when",
+    "it's"
+   ],
+   []
+  ],
+  [
+   36,
+   "Group member",
+   "Is the lab crowded?",
+   "It is _ _ _ _ ten.",
+   [
+    "almost",
+    "always",
+    "full",
+    "by"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Dorm RA",
+   "Do they publish quickly?",
+   "They _ _ _ _ months.",
+   [
+    "usually",
+    "publish",
+    "within",
+    "six"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Trainer",
+   "Have you tried it?",
+   "I _ _ _ _ method.",
+   [
+    "have",
+    "never",
+    "tried",
+    "that"
+   ],
+   [
+    "ever"
+   ]
+  ],
+  [
+   36,
+   "Mentor",
+   "Do you read the news?",
+   "I _ _ _ _ the train.",
+   [
+    "regularly",
+    "read",
+    "it",
+    "on"
+   ],
+   []
+  ],
+  [
+   37,
+   "Classmate",
+   "Will the project be done by June?",
+   "We _ _ _ _ analysis by then.",
+   [
+    "will",
+    "have",
+    "finished",
+    "the"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Roommate",
+   "What are you doing at noon?",
+   "I _ _ _ _ exam then.",
+   [
+    "will",
+    "be",
+    "sitting",
+    "the"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Professor",
+   "Will she have graduated?",
+   "She _ _ _ _ degree by spring.",
+   [
+    "will",
+    "have",
+    "completed",
+    "her"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Advisor",
+   "Where will you be tomorrow?",
+   "I _ _ _ _ the archive.",
+   [
+    "will",
+    "be",
+    "working",
+    "in"
+   ],
+   []
+  ],
+  [
+   37,
+   "Friend",
+   "How long will it take?",
+   "By Friday we _ _ _ _ test.",
+   [
+    "will",
+    "have",
+    "run",
+    "every"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Coach",
+   "Will they still be here?",
+   "They _ _ _ _ the entrance.",
+   [
+    "will",
+    "be",
+    "waiting",
+    "at"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Librarian",
+   "Will the book be out?",
+   "It _ _ _ _ by autumn.",
+   [
+    "will",
+    "have",
+    "been",
+    "published"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Teammate",
+   "What about next week?",
+   "I _ _ _ _ three days.",
+   [
+    "will",
+    "be",
+    "travelling",
+    "for"
+   ],
+   []
+  ],
+  [
+   37,
+   "Neighbor",
+   "Will you have read it?",
+   "I _ _ _ _ before class.",
+   [
+    "will",
+    "have",
+    "finished",
+    "it"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Tutor",
+   "Will the work continue?",
+   "The crew _ _ _ _ March.",
+   [
+    "will",
+    "be",
+    "drilling",
+    "until"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Lab partner",
+   "Will the funding run out?",
+   "It _ _ _ _ next term.",
+   [
+    "will",
+    "have",
+    "ended",
+    "by"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Counselor",
+   "What will you be doing then?",
+   "I _ _ _ _ the main hall.",
+   [
+    "will",
+    "be",
+    "presenting",
+    "in"
+   ],
+   []
+  ],
+  [
+   37,
+   "Colleague",
+   "Will they have moved?",
+   "They _ _ _ _ office by then.",
+   [
+    "will",
+    "have",
+    "relocated",
+    "the"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Supervisor",
+   "Will the shop be open?",
+   "It _ _ _ _ we arrive.",
+   [
+    "will",
+    "be",
+    "closing",
+    "as"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Host",
+   "Will you finish in time?",
+   "I _ _ _ _ by Thursday.",
+   [
+    "will",
+    "have",
+    "submitted",
+    "everything"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Coworker",
+   "Where will the team be?",
+   "They _ _ _ _ the north field.",
+   [
+    "will",
+    "be",
+    "training",
+    "at"
+   ],
+   []
+  ],
+  [
+   37,
+   "Group member",
+   "Will the data be ready?",
+   "We _ _ _ _ all by Monday.",
+   [
+    "will",
+    "have",
+    "processed",
+    "it"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Dorm RA",
+   "What happens at three?",
+   "The panel _ _ _ _ then.",
+   [
+    "will",
+    "be",
+    "interviewing",
+    "candidates"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Trainer",
+   "Will she have heard?",
+   "She _ _ _ _ letter by now.",
+   [
+    "will",
+    "have",
+    "received",
+    "the"
+   ],
+   [
+    "is"
+   ]
+  ],
+  [
+   37,
+   "Mentor",
+   "Will it still be raining?",
+   "It _ _ _ _ the time we leave.",
+   [
+    "will",
+    "be",
+    "pouring",
+    "by"
+   ],
+   []
+  ],
+  [
+   38,
+   "Classmate",
+   "Was the vaccine effective?",
+   "It worked well, _ _ _ _ problem.",
+   [
+    "although",
+    "distribution",
+    "remained",
+    "a"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Roommate",
+   "Did the plan succeed?",
+   "It succeeded, _ _ _ _ was cut.",
+   [
+    "even",
+    "though",
+    "the",
+    "budget"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Professor",
+   "Is the flat good?",
+   "I like it, _ _ _ _ small.",
+   [
+    "although",
+    "the",
+    "kitchen",
+    "is"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Advisor",
+   "Was the trip worthwhile?",
+   "It was, _ _ _ _ .",
+   [
+    "despite",
+    "the",
+    "poor",
+    "weather"
+   ],
+   []
+  ],
+  [
+   38,
+   "Friend",
+   "Did she enjoy the course?",
+   "She did, _ _ _ _ demanding.",
+   [
+    "even",
+    "though",
+    "it",
+    "was"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Coach",
+   "Is the evidence strong?",
+   "It is persuasive, _ _ _ _ small.",
+   [
+    "although",
+    "the",
+    "sample",
+    "is"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Librarian",
+   "Did they finish on time?",
+   "They did, _ _ _ _ delays.",
+   [
+    "in",
+    "spite",
+    "of",
+    "the"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Teammate",
+   "Was the talk clear?",
+   "It was, _ _ _ _ technical.",
+   [
+    "although",
+    "the",
+    "topic",
+    "was"
+   ],
+   []
+  ],
+  [
+   38,
+   "Neighbor",
+   "Do you recommend it?",
+   "I do, _ _ _ _ is high.",
+   [
+    "even",
+    "though",
+    "the",
+    "price"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Tutor",
+   "Did the team play well?",
+   "They played well, _ _ _ _ .",
+   [
+    "despite",
+    "losing",
+    "two",
+    "players"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Lab partner",
+   "Is the software useful?",
+   "It helps, _ _ _ _ .",
+   [
+    "although",
+    "it",
+    "crashes",
+    "occasionally"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Counselor",
+   "Was the museum busy?",
+   "It was quiet, _ _ _ _ free.",
+   [
+    "even",
+    "though",
+    "entry",
+    "was"
+   ],
+   []
+  ],
+  [
+   38,
+   "Colleague",
+   "Did he pass?",
+   "He passed, _ _ _ _ classes.",
+   [
+    "although",
+    "he",
+    "missed",
+    "several"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Supervisor",
+   "Is the job secure?",
+   "It seems stable, _ _ _ _ .",
+   [
+    "despite",
+    "the",
+    "recent",
+    "cuts"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Host",
+   "Did you like the ending?",
+   "I did, _ _ _ _ rushed.",
+   [
+    "even",
+    "though",
+    "it",
+    "felt"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Coworker",
+   "Was the hike hard?",
+   "It was manageable, _ _ _ _ hurt.",
+   [
+    "although",
+    "the",
+    "last",
+    "hour"
+   ],
+   []
+  ],
+  [
+   38,
+   "Group member",
+   "Is the data usable?",
+   "It is, _ _ _ _ gaps.",
+   [
+    "in",
+    "spite",
+    "of",
+    "some"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Dorm RA",
+   "Did they accept the offer?",
+   "They accepted, _ _ _ _ poor.",
+   [
+    "although",
+    "the",
+    "terms",
+    "were"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Trainer",
+   "Was the room comfortable?",
+   "It was fine, _ _ _ _ the road.",
+   [
+    "even",
+    "though",
+    "it",
+    "faced"
+   ],
+   [
+    "but"
+   ]
+  ],
+  [
+   38,
+   "Mentor",
+   "Did the repair work?",
+   "It held, _ _ _ _ .",
+   [
+    "despite",
+    "the",
+    "heavy",
+    "use"
+   ],
+   []
+  ],
+  [
+   39,
+   "Classmate",
+   "Why did you email her?",
+   "I wrote _ _ _ _ have time to reply.",
+   [
+    "so",
+    "that",
+    "she",
+    "would"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Roommate",
+   "Why the early start?",
+   "We left early _ _ _ _ the traffic.",
+   [
+    "in",
+    "order",
+    "to",
+    "avoid"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Professor",
+   "Why did you record it?",
+   "I recorded it _ _ _ _ review it later.",
+   [
+    "so",
+    "that",
+    "I",
+    "could"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Advisor",
+   "Why take the slower route?",
+   "I go that way _ _ _ _ the river.",
+   [
+    "in",
+    "order",
+    "to",
+    "see"
+   ],
+   []
+  ],
+  [
+   39,
+   "Friend",
+   "Why label the samples?",
+   "We label them _ _ _ _ mixed up.",
+   [
+    "so",
+    "that",
+    "nothing",
+    "gets"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Coach",
+   "Why did you print two?",
+   "I printed spares _ _ _ _ a backup.",
+   [
+    "in",
+    "order",
+    "to",
+    "have"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Librarian",
+   "Why the extra practice?",
+   "She practices daily _ _ _ _ improves.",
+   [
+    "so",
+    "that",
+    "her",
+    "timing"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Teammate",
+   "Why call ahead?",
+   "Call first _ _ _ _ prepare the room.",
+   [
+    "so",
+    "that",
+    "they",
+    "can"
+   ],
+   []
+  ],
+  [
+   39,
+   "Neighbor",
+   "Why did they lower the price?",
+   "They cut it _ _ _ _ more students.",
+   [
+    "in",
+    "order",
+    "to",
+    "attract"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Tutor",
+   "Why write it down?",
+   "Note it _ _ _ _ forget.",
+   [
+    "so",
+    "that",
+    "you",
+    "don't"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Lab partner",
+   "Why the second reading?",
+   "I reread it _ _ _ _ the errors.",
+   [
+    "in",
+    "order",
+    "to",
+    "catch"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Counselor",
+   "Why arrive at eight?",
+   "Come early _ _ _ _ set up.",
+   [
+    "so",
+    "that",
+    "we",
+    "can"
+   ],
+   []
+  ],
+  [
+   39,
+   "Colleague",
+   "Why did you keep the draft?",
+   "I saved it _ _ _ _ versions.",
+   [
+    "in",
+    "order",
+    "to",
+    "compare"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Supervisor",
+   "Why the shorter slides?",
+   "I trimmed them _ _ _ _ fits.",
+   [
+    "so",
+    "that",
+    "the",
+    "talk"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Host",
+   "Why book in advance?",
+   "Book now _ _ _ _ a place.",
+   [
+    "in",
+    "order",
+    "to",
+    "secure"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Coworker",
+   "Why did she stay late?",
+   "She stayed _ _ _ _ could finish.",
+   [
+    "so",
+    "that",
+    "the",
+    "team"
+   ],
+   []
+  ],
+  [
+   39,
+   "Group member",
+   "Why the second sensor?",
+   "We added one _ _ _ _ the readings.",
+   [
+    "in",
+    "order",
+    "to",
+    "check"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Dorm RA",
+   "Why email the group?",
+   "I messaged everyone _ _ _ _ it.",
+   [
+    "so",
+    "that",
+    "nobody",
+    "misses"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Trainer",
+   "Why leave a margin?",
+   "Leave space _ _ _ _ comments.",
+   [
+    "in",
+    "order",
+    "to",
+    "add"
+   ],
+   [
+    "for"
+   ]
+  ],
+  [
+   39,
+   "Mentor",
+   "Why the rehearsal?",
+   "We rehearse _ _ _ _ feels natural.",
+   [
+    "so",
+    "that",
+    "the",
+    "timing"
+   ],
+   []
+  ]
+ ]
+}

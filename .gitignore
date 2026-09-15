@@ -12,3 +12,7 @@ tsconfig.tsbuildinfo
 # Prisma
 /prisma/migrations/dev.db*
 /prisma/*.db
+
+# Python
+__pycache__/
+*.pyc
