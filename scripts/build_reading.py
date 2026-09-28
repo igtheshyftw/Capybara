@@ -63,11 +63,27 @@ def check_question(q, where, problems, haystack=None):
             problems.append(f"{where}: highlight {q['highlight']!r} not found in passage")
 
 
+def load():
+    """merge every content_*.py in scripts/reading"""
+    bag = type("Bag", (), {"COMPLETE_THE_WORDS": [], "DAILY_LIFE": [], "ACADEMIC": []})()
+    for f in sorted(SRC.glob("content_*.py")):
+        spec = importlib.util.spec_from_file_location(f.stem, f)
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        for name in ("COMPLETE_THE_WORDS", "DAILY_LIFE", "ACADEMIC"):
+            getattr(bag, name).extend(getattr(m, name, []))
+    return bag
+
+
 def build():
-    spec = importlib.util.spec_from_file_location("content_01", SRC / "content_01.py")
-    m = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(m)
+    m = load()
     problems, out = [], {"ctw": [], "daily": [], "academic": []}
+    ids = set()
+    for group in (m.COMPLETE_THE_WORDS, m.DAILY_LIFE, m.ACADEMIC):
+        for it in group:
+            if it["id"] in ids:
+                problems.append(f"duplicate id {it['id']!r}")
+            ids.add(it["id"])
 
     for item in m.COMPLETE_THE_WORDS:
         where = f"ctw/{item['id']}"
@@ -86,7 +102,11 @@ def build():
 
     for item in m.DAILY_LIFE:
         where = f"daily/{item['id']}"
-        body = " ".join(item["body"])
+        body = " ".join(item.get("body", []))
+        for r in item.get("rows", []):
+            body += " " + " ".join(r)
+        for lbl, val in item.get("meta", []):
+            body += " " + val
         if not 15 <= words(body) <= 150:
             problems.append(f"{where}: {words(body)} words, want 15-150")
         if not 2 <= len(item["questions"]) <= 3:
@@ -102,8 +122,8 @@ def build():
             problems.append(f"{where}: {words(passage)} words, want 150-220")
         if len(item["paragraphs"]) != 4:
             problems.append(f"{where}: {len(item['paragraphs'])} paragraphs, want 4")
-        if len(item["questions"]) != 5:
-            problems.append(f"{where}: {len(item['questions'])} questions, want 5")
+        if not 5 <= len(item["questions"]) <= 8:
+            problems.append(f"{where}: {len(item['questions'])} questions, want 5-8")
         for i, q in enumerate(item["questions"]):
             check_question(q, f"{where} q{i+1}", problems, passage)
         out["academic"].append(item)
