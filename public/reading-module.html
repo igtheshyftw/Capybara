@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Module</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* ============================================================
+   A working replica of one 20-question module of the 2026 TOEFL
+   reading section: Complete the Words (Q1-10), Read in Daily
+   Life (Q11-15), Read an Academic Passage (Q16-20).
+   Palette taken from the live test chrome: deep teal on white.
+   ============================================================ */
+:root{
+  --teal:#0e5a5e;
+  --teal-2:#12706f;
+  --teal-ink:#0b4a4d;
+  --rule:#c9d2d3;
+  --rule-2:#9fadaf;
+  --ink:#16201f;
+  --ink-2:#4a5654;
+  --ink-3:#6f7b7a;
+  --paper:#ffffff;
+  --paper-2:#f4f7f7;
+  --box:#d9dcdc;
+  --mark:#0e6b6e;
+  --ok:#1c6b46;
+  --ok-soft:#e4f1ea;
+  --no:#96271f;
+  --no-soft:#f8e5e3;
+  --sans:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --teal:#0b3f42; --teal-2:#0d5254; --teal-ink:#072e30;
+    --rule:#2c3a3b; --rule-2:#4a5c5d;
+    --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#8493931;
+    --ink-3:#849392;
+    --paper:#141b1b; --paper-2:#1a2323; --box:#2f3a3a;
+    --mark:#1c8c90; --ok:#6cc39a; --ok-soft:#16302a;
+    --no:#e78e86; --no-soft:#331f1e;
+  }
+}
+:root[data-theme="dark"]{
+  --teal:#0b3f42; --teal-2:#0d5254; --teal-ink:#072e30;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --box:#2f3a3a;
+  --mark:#1c8c90; --ok:#6cc39a; --ok-soft:#16302a;
+  --no:#e78e86; --no-soft:#331f1e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+button,input{font:inherit;color:inherit}
+
+/* ---------- chrome ---------- */
+.bar{
+  background:var(--teal);color:#fff;display:flex;align-items:center;gap:10px;
+  padding:9px 18px;flex-wrap:wrap;
+}
+.brand{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-right:auto}
+.brand span{opacity:.75;font-size:13px;vertical-align:2px}
+.pill{
+  appearance:none;cursor:pointer;background:var(--teal-2);color:#fff;
+  border:1px solid rgba(255,255,255,.35);border-radius:22px;
+  padding:7px 16px;font-size:14px;font-weight:700;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.pill:hover{background:#178285}
+.pill[disabled]{opacity:.45;cursor:default}
+.pill.primary{background:#fff;color:var(--teal-ink);border-color:#fff}
+.pill.primary:hover{background:#eef5f5}
+.subbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:8px 18px;border-bottom:1px solid var(--rule);background:var(--paper);
+}
+.subbar .where{font-weight:700;color:var(--teal-ink);margin-right:auto;font-size:15px}
+.subbar .where i{font-style:normal;color:var(--rule-2);margin:0 8px}
+.clock{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.clock.low{color:var(--no)}
+.eye{
+  appearance:none;background:none;border:0;cursor:pointer;color:var(--teal-2);
+  font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px;
+}
+:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px}
+.bar :focus-visible{outline-color:#fff}
+
+/* ---------- shared layout ---------- */
+main{padding:22px 18px 90px}
+.prompt{text-align:center;font-size:26px;font-weight:700;margin:14px 0 26px}
+.ptitle{text-align:center;font-size:26px;font-weight:700;margin:10px 0 24px}
+.two{display:grid;grid-template-columns:minmax(0,46%) minmax(0,54%);gap:36px;max-width:1180px;margin:0 auto}
+.qcol .stem{font-weight:700;font-size:17px;margin:0 0 18px;max-width:52ch}
+.opts{display:flex;flex-direction:column;gap:14px;max-width:56ch}
+.opt{
+  display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;
+  cursor:pointer;padding:3px 0;
+}
+.opt .dot{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--rule-2);
+  margin-top:2px;display:grid;place-items:center;background:var(--paper);
+}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt input:checked + .dot::after{
+  content:"";width:10px;height:10px;border-radius:50%;background:var(--teal-2);
+}
+.opt:hover .dot{border-color:var(--teal-2)}
+.opt .txt{padding-top:1px}
+
+/* ---------- Complete the Words ---------- */
+.ctw{max-width:980px;margin:120px auto 0;font-size:18px;line-height:2.3}
+.cw{white-space:nowrap}
+.cw .slot{position:relative;display:inline-block}
+.cw input{
+  background:var(--box);border:0;border-radius:2px;padding:1px 3px;
+  font-size:18px;line-height:1.3;text-align:left;
+}
+.cw input:focus{outline:2px solid var(--teal-2);outline-offset:0}
+.cw .dash{
+  position:absolute;left:0;right:0;bottom:-6px;text-align:center;
+  font-family:var(--mono);font-size:15px;line-height:1;color:var(--ink);
+  letter-spacing:.5px;pointer-events:none;user-select:none;
+}
+
+/* ---------- daily life ---------- */
+.doc{
+  border:2px solid var(--rule-2);border-radius:3px;background:var(--paper);
+  max-width:100%;
+}
+.doc .subj{display:flex;gap:10px;align-items:center;padding:10px;border-bottom:1px solid var(--rule)}
+.doc .subj b{border:1px solid var(--ink-2);padding:2px 8px;font-size:14px;white-space:nowrap}
+.doc .subj span{border:1px solid var(--ink-2);padding:2px 8px;font-size:15px;flex:1;min-width:0}
+.doc .body{padding:14px 16px;max-height:420px;overflow-y:auto}
+.doc .body p{margin:0 0 12px;font-size:15.5px;line-height:1.55}
+.doc .body p:last-child{margin-bottom:0}
+.doc.notice .hd{
+  padding:12px 16px;border-bottom:1px solid var(--rule);font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--teal-ink);
+}
+
+/* ---------- academic passage ---------- */
+.pass{
+  max-height:560px;overflow-y:auto;padding-right:20px;
+  border-right:2px solid var(--rule);
+  scrollbar-color:var(--rule-2) var(--paper-2);scrollbar-width:auto;
+}
+.pass p{margin:0 0 18px;font-size:16.5px;line-height:1.6}
+.pass mark{background:var(--mark);color:#fff;padding:1px 3px;border-radius:2px}
+.pass::-webkit-scrollbar{width:15px}
+.pass::-webkit-scrollbar-track{background:var(--paper-2)}
+.pass::-webkit-scrollbar-thumb{background:var(--rule-2);border-radius:8px;border:3px solid var(--paper-2)}
+
+/* ---------- review + report ---------- */
+.panel{max-width:900px;margin:0 auto}
+.panel h1{font-size:27px;margin:0 0 6px}
+.panel .lede{color:var(--ink-2);margin:0 0 22px;max-width:62ch}
+.tableWrap{border:1px solid var(--rule);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px;background:var(--paper)}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule)}
+th{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);background:var(--paper-2)}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--paper-2)}
+td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:2px;padding:2px 8px}
+.tag.done{background:#e1eeee;color:var(--teal-ink)}
+.tag.none{background:var(--paper-2);color:var(--ink-3)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.no{background:var(--no-soft);color:var(--no)}
+.score{display:flex;gap:30px;flex-wrap:wrap;align-items:baseline;border:1px solid var(--rule);border-left:5px solid var(--teal-2);padding:20px 24px;margin-bottom:24px}
+.score .big{font-family:var(--mono);font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.score .cap{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.rep{border:1px solid var(--rule);border-left:5px solid var(--rule-2);padding:15px 20px;margin-bottom:12px}
+.rep.right{border-left-color:var(--ok)}
+.rep.wrong{border-left-color:var(--no)}
+.rep-hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.rep-hd .n{font-family:var(--mono);font-size:13px;color:var(--ink-3)}
+.rep-hd .ty{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-2);font-weight:700;margin-right:auto}
+.rep p{margin:4px 0;font-size:15px}
+.rep .yours{color:var(--no)}
+.rep .right-ans{color:var(--ok)}
+
+/* ---------- foot + help ---------- */
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--rule);padding:9px 18px}
+.foot-in{max-width:1180px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.status{font-size:14px;color:var(--ink-2)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot-b{width:24px;height:24px;border:1px solid var(--rule);background:var(--paper-2);font-family:var(--mono);font-size:11px;color:var(--ink-3);cursor:pointer;border-radius:2px;padding:0}
+.dot-b[data-done="1"]{background:var(--teal-2);border-color:var(--teal-2);color:#fff}
+.dot-b[data-cur="1"]{outline:2px solid var(--ink);outline-offset:1px}
+.scrim{position:fixed;inset:0;background:rgba(10,30,30,.6);display:grid;place-items:center;padding:20px;z-index:60}
+.modal{background:var(--paper);border-radius:4px;max-width:620px;width:100%;max-height:86vh;overflow:auto}
+.modal header{background:var(--teal);color:#fff;padding:12px 20px;font-weight:700}
+.modal .body{padding:20px}
+.modal h3{margin:16px 0 6px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.modal h3:first-child{margin-top:0}
+.modal p,.modal li{font-size:15px;color:var(--ink-2);margin:0 0 8px}
+.modal footer{padding:0 20px 20px;display:flex;justify-content:flex-end}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:820px){
+  .two{grid-template-columns:1fr;gap:24px}
+  .pass{max-height:300px;border-right:0;border-bottom:2px solid var(--rule);padding-right:0;padding-bottom:12px}
+  .ctw{margin-top:24px;line-height:2.4}
+  .prompt,.ptitle{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand">toefl ibt<span>&reg;</span></div>
+  <button class="pill" id="bHelp">Help <b aria-hidden="true">?</b></button>
+  <button class="pill" id="bReview">Review <b aria-hidden="true">&#9782;</b></button>
+  <button class="pill" id="bBack"><b aria-hidden="true">&lsaquo;</b> Back</button>
+  <button class="pill primary" id="bNext">Next <b aria-hidden="true">&rsaquo;</b></button>
+</div>
+<div class="subbar">
+  <div class="where"><b>Reading</b><i>|</i><span id="where">Questions 1&ndash;10 of 20</span></div>
+  <span class="clock" id="clock">13:00</span>
+  <button class="eye" id="bTime"><b aria-hidden="true">&#128065;</b> Hide Time</button>
+</div>
+
+<main id="main"></main>
+<div class="foot" id="foot"></div>
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+/* CONTENT:START */
+const CONTENT = {
+ "ctw": [
+  {
+   "id": "reefs",
+   "segs": [
+    {
+     "t": "text",
+     "v": "Coral reefs occupy less than one percent of the ocean floor, yet they shelter a quarter of all marine species. These "
+    },
+    {
+     "t": "blank",
+     "stem": "ecosys",
+     "n": 4
+    },
+    {
+     "t": "text",
+     "v": " depend on a "
+    },
+    {
+     "t": "blank",
+     "stem": "partn",
+     "n": 6
+    },
+    {
+     "t": "text",
+     "v": " between coral animals and tiny "
+    },
+    {
+     "t": "blank",
+     "stem": "al",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": " that live inside their "
+    },
+    {
+     "t": "blank",
+     "stem": "tiss",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": ". When water "
+    },
+    {
+     "t": "blank",
+     "stem": "temper",
+     "n": 6
+    },
+    {
+     "t": "text",
+     "v": " rise, the corals expel their algae and turn "
+    },
+    {
+     "t": "blank",
+     "stem": "wh",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": ", a condition "
+    },
+    {
+     "t": "blank",
+     "stem": "know",
+     "n": 1
+    },
+    {
+     "t": "text",
+     "v": " as bleaching. Repeated bleaching "
+    },
+    {
+     "t": "blank",
+     "stem": "even",
+     "n": 2
+    },
+    {
+     "t": "text",
+     "v": " weaken the reef "
+    },
+    {
+     "t": "blank",
+     "stem": "struc",
+     "n": 4
+    },
+    {
+     "t": "text",
+     "v": " and reduce the "
+    },
+    {
+     "t": "blank",
+     "stem": "fo",
+     "n": 2
+    },
+    {
+     "t": "text",
+     "v": " available to fish. Scientists now monitor reef health from satellites, hoping that early warning will give local communities time to act."
+    }
+   ],
+   "answers": [
+    "tems",
+    "ership",
+    "gae",
+    "ues",
+    "atures",
+    "ite",
+    "n",
+    "ts",
+    "ture",
+    "od"
+   ]
+  },
+  {
+   "id": "press",
+   "segs": [
+    {
+     "t": "text",
+     "v": "The printing press reached Europe in the middle of the fifteenth century. Within fifty years, "
+    },
+    {
+     "t": "blank",
+     "stem": "work",
+     "n": 5
+    },
+    {
+     "t": "text",
+     "v": " in more than two hundred cities were "
+    },
+    {
+     "t": "blank",
+     "stem": "produ",
+     "n": 4
+    },
+    {
+     "t": "text",
+     "v": " books in large "
+    },
+    {
+     "t": "blank",
+     "stem": "numb",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": ". Texts that once took a "
+    },
+    {
+     "t": "blank",
+     "stem": "scr",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": " a year to copy could be "
+    },
+    {
+     "t": "blank",
+     "stem": "prin",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": " in a single "
+    },
+    {
+     "t": "blank",
+     "stem": "after",
+     "n": 4
+    },
+    {
+     "t": "text",
+     "v": ". Prices fell, "
+    },
+    {
+     "t": "blank",
+     "stem": "litera",
+     "n": 2
+    },
+    {
+     "t": "text",
+     "v": " spread beyond the clergy, and ideas moved "
+    },
+    {
+     "t": "blank",
+     "stem": "acr",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": " borders faster than any "
+    },
+    {
+     "t": "blank",
+     "stem": "author",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": " could "
+    },
+    {
+     "t": "blank",
+     "stem": "cont",
+     "n": 3
+    },
+    {
+     "t": "text",
+     "v": " them. The consequences reached far beyond publishing, reshaping religion, science, and politics across the continent."
+    }
+   ],
+   "answers": [
+    "shops",
+    "cing",
+    "ers",
+    "ibe",
+    "ted",
+    "noon",
+    "cy",
+    "oss",
+    "ity",
+    "rol"
+   ]
+  }
+ ],
+ "daily": [
+  {
+   "id": "studyroom",
+   "kind": "email",
+   "subject": "Study Room Booking",
+   "body": [
+    "Hi Priya,",
+    "Your booking for Study Room 4 on Thursday has been moved to Study Room 7. Room 4's whiteboard is being replaced and the work will not finish until Friday. The new room is on the same floor, just past the printers.",
+    "Best,",
+    "Marcus",
+    "Library Services"
+   ],
+   "questions": [
+    {
+     "type": "main idea",
+     "stem": "What is the main purpose of the email?",
+     "options": [
+      "To cancel Priya's study room booking",
+      "To inform Priya that her room has changed",
+      "To explain why a whiteboard is being replaced",
+      "To ask Priya to move to a different floor"
+     ],
+     "key": 1
+    },
+    {
+     "type": "detail",
+     "stem": "Why was the original room unavailable?",
+     "options": [
+      "A printer was being installed",
+      "The booking system had failed",
+      "Equipment in the room was being replaced",
+      "Another group had reserved it"
+     ],
+     "key": 2
+    }
+   ]
+  },
+  {
+   "id": "laundry",
+   "kind": "notice",
+   "subject": "Notice to all residents: laundry room upgrade",
+   "body": [
+    "The laundry room in Building C will be closed for equipment replacement from Monday 3 November to Friday 7 November.",
+    "During the closure, residents may use the laundry room in Building A at no additional charge. Building A is open from 7:00 A.M. to 11:00 P.M. Please note that Building A has eight machines rather than twelve, so waiting times may be longer than usual, particularly in the evening.",
+    "The new machines in Building C will accept card payment as well as coins. Instructions will be posted on the wall beside the door, and staff will be available during the first week to answer questions.",
+    "Any items left in Building C after Friday 31 October will be moved to the storage room beside the main office. Residents can collect them by showing identification at reception."
+   ],
+   "questions": [
+    {
+     "type": "detail",
+     "stem": "What should residents do during the closure?",
+     "options": [
+      "Wash their clothes at a commercial laundry",
+      "Use the laundry room in another building",
+      "Wait until the new machines are installed",
+      "Collect their items from reception"
+     ],
+     "key": 1
+    },
+    {
+     "type": "negative detail",
+     "stem": "All of the following are stated about the Building A laundry room EXCEPT",
+     "options": [
+      "it is open until 11:00 P.M.",
+      "it can be used at no extra cost",
+      "it has fewer machines than Building C",
+      "it accepts card payment"
+     ],
+     "key": 3
+    },
+    {
+     "type": "inference",
+     "stem": "What is suggested about evenings during the closure?",
+     "options": [
+      "Building A will close earlier than usual",
+      "Residents may have to wait to use a machine",
+      "Most residents do their laundry in the morning",
+      "Staff will not be available in the evening"
+     ],
+     "key": 1
+    }
+   ]
+  }
+ ],
+ "academic": [
+  {
+   "id": "ice",
+   "title": "Reading the Ice",
+   "pattern": "Old view -> new view",
+   "paragraphs": [
+    "For most of the twentieth century, geologists treated the world's glaciers as slow, almost static features of the landscape. Measurements taken at a handful of sites suggested that ice moved a few metres a year, and that any change in a glacier's length unfolded over centuries rather than decades.",
+    "Satellite observation overturned that picture. Beginning in the 1990s, radar instruments in orbit could measure the surface of an ice sheet to within a few centimetres, and repeated passes revealed that some outlet glaciers were accelerating sharply. One Greenland glacier doubled its speed in under five years.",
+    "The revised view holds that meltwater is the key variable. Water that collects on the surface in summer drains through cracks to the base of the ice, where it acts as a lubricant between the glacier and the bedrock beneath it. The more meltwater reaches the base, the faster the ice slides toward the sea.",
+    "This reinterpretation matters because it changes the timescale of sea-level projections. If glaciers respond to warming within years rather than centuries, coastal planning must work with a much shorter horizon than earlier models assumed."
+   ],
+   "questions": [
+    {
+     "type": "vocabulary",
+     "stem": "The word \"overturned\" in the passage is closest in meaning to",
+     "highlight": "overturned",
+     "options": [
+      "reversed",
+      "confirmed",
+      "delayed",
+      "complicated"
+     ],
+     "key": 0
+    },
+    {
+     "type": "detail",
+     "stem": "According to the passage, what did radar instruments make possible?",
+     "options": [
+      "Measuring the surface of an ice sheet very precisely",
+      "Predicting the date of a glacier's collapse",
+      "Drilling to the base of an ice sheet",
+      "Mapping the bedrock beneath the ice"
+     ],
+     "key": 0
+    },
+    {
+     "type": "reference",
+     "stem": "The word \"it\" in the phrase \"the bedrock beneath it\" refers to",
+     "highlight": "the bedrock beneath it",
+     "options": [
+      "the glacier",
+      "the meltwater",
+      "the surface",
+      "the sea"
+     ],
+     "key": 0
+    },
+    {
+     "type": "paragraph relationship",
+     "stem": "What is the relationship between paragraphs 1 and 2?",
+     "options": [
+      "Paragraph 2 presents evidence that contradicts the view described in paragraph 1.",
+      "Paragraph 2 explains why the measurements in paragraph 1 were taken.",
+      "Paragraph 2 gives further support for the view described in paragraph 1.",
+      "Paragraph 2 describes an exception to a rule stated in paragraph 1."
+     ],
+     "key": 0
+    },
+    {
+     "type": "inference",
+     "stem": "It can be inferred from the passage that earlier sea-level models",
+     "options": [
+      "assumed glaciers change more slowly than they do",
+      "ignored the effect of meltwater entirely",
+      "were based only on satellite measurements",
+      "proved that coastal planning was unnecessary"
+     ],
+     "key": 0
+    }
+   ]
+  }
+ ]
+};
+/* CONTENT:END */
+
+const TOTAL = 20, SECONDS = 13 * 60;
+const $ = id => document.getElementById(id);
+const main = $("main"), foot = $("foot"), live = $("live");
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const say = m => { live.textContent = m; };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+/* ---------- assemble one module: 10 + 5 + 5 ---------- */
+function buildModule(){
+  const ctw = pick(CONTENT.ctw);
+  const daily = [], dq = [];
+  for (const t of CONTENT.daily){
+    daily.push(t);
+    t.questions.forEach((q, i) => dq.push({text: t, q, n: i}));
+    if (dq.length >= 5) break;
+  }
+  const ac = pick(CONTENT.academic);
+  return {ctw, daily, dq: dq.slice(0, 5), ac, aq: ac.questions.slice(0, 5)};
+}
+
+let M = buildModule();
+const S = {
+  screen:"test", qi:1,
+  typed: M.ctw.answers.map(() => ""),
+  chosen: {},                 // question number 11-20 -> option index
+  seconds: SECONDS, timeHidden:false, ended:false
+};
+
+const isCTW = n => n <= 10;
+const dailyAt = n => M.dq[n - 11];
+const acadAt  = n => M.aq[n - 16];
+const answered = n => isCTW(n) ? S.typed[n - 1].trim() !== "" : S.chosen[n] !== undefined;
+
+/* ---------- render ---------- */
+function render(){
+  if (S.screen === "review") renderReview();
+  else if (S.screen === "report") renderReport();
+  else if (isCTW(S.qi)) renderCTW();
+  else if (S.qi <= 15) renderDaily();
+  else renderAcademic();
+  renderChrome();
+  renderFoot();
+}
+
+function renderChrome(){
+  const scored = S.screen === "report";
+  $("where").textContent =
+    S.screen === "review" ? "Review" :
+    scored ? "Score report" :
+    isCTW(S.qi) ? "Questions 1–10 of 20" : `Question ${S.qi} of ${TOTAL}`;
+  $("bBack").disabled = S.screen !== "test" || S.qi <= 1;
+  $("bReview").disabled = scored;
+  $("bNext").innerHTML = scored ? "New module <b aria-hidden=\"true\">&rsaquo;</b>"
+    : S.screen === "review" ? "End Section <b aria-hidden=\"true\">&rsaquo;</b>"
+    : "Next <b aria-hidden=\"true\">&rsaquo;</b>";
+  const c = $("clock");
+  c.style.display = scored ? "none" : "";
+  $("bTime").style.display = scored ? "none" : "";
+  c.textContent = S.timeHidden ? "––:––" : fmt(S.seconds);
+  c.className = "clock" + (!S.timeHidden && S.seconds <= 60 ? " low" : "");
+  $("bTime").lastChild.textContent = S.timeHidden ? " Show Time" : " Hide Time";
+}
+function fmt(s){
+  s = Math.max(0, s);
+  return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+}
+
+function renderCTW(){
+  let b = -1;
+  const body = M.ctw.segs.map(seg => {
+    if (seg.t === "text") return esc(seg.v);
+    b++;
+    const i = b, n = seg.n;
+    return `<span class="cw">${esc(seg.stem)}<span class="slot">` +
+      `<input id="cw${i}" data-i="${i}" maxlength="${n}" size="${n}" autocomplete="off" ` +
+      `spellcheck="false" style="width:calc(${n}ch + 10px)" value="${esc(S.typed[i])}" ` +
+      `aria-label="Missing letters for word ${i+1}, ${n} letters">` +
+      `<span class="dash">${"_".repeat(n)}</span></span></span>`;
+  }).join("");
+  main.innerHTML = `<p class="prompt">Fill in the missing letters in the paragraph.</p>
+    <div class="ctw">${body}</div>`;
+  main.querySelectorAll(".cw input").forEach(el => {
+    el.addEventListener("input", e => {
+      S.typed[+e.target.dataset.i] = e.target.value.replace(/[^A-Za-z']/g, "");
+      e.target.value = S.typed[+e.target.dataset.i];
+      renderFoot();
+    });
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter"){ e.preventDefault(); const nx = main.querySelector(`#cw${+e.target.dataset.i + 1}`); if (nx) nx.focus(); }
+    });
+  });
+}
+
+function optionsHTML(n, q){
+  return `<div class="opts" role="radiogroup">` + q.options.map((o, i) =>
+    `<label class="opt"><input type="radio" name="q${n}" value="${i}"${S.chosen[n] === i ? " checked" : ""}>` +
+    `<span class="dot"></span><span class="txt">${esc(o)}</span></label>`).join("") + `</div>`;
+}
+
+function wireOptions(n){
+  main.querySelectorAll(`input[name="q${n}"]`).forEach(el =>
+    el.addEventListener("change", () => { S.chosen[n] = +el.value; renderFoot(); say("Answer selected."); }));
+}
+
+function renderDaily(){
+  const {text, q} = dailyAt(S.qi);
+  const doc = text.kind === "email"
+    ? `<div class="doc"><div class="subj"><b>Subject:</b><span>${esc(text.subject)}</span></div>
+         <div class="body">${text.body.map(p => `<p>${esc(p)}</p>`).join("")}</div></div>`
+    : `<div class="doc notice"><div class="hd">${esc(text.subject)}</div>
+         <div class="body">${text.body.map(p => `<p>${esc(p)}</p>`).join("")}</div></div>`;
+  main.innerHTML = `<p class="prompt">${text.kind === "email" ? "Read an email." : "Read a notice."}</p>
+    <div class="two"><div>${doc}</div>
+      <div class="qcol"><p class="stem">${esc(q.stem)}</p>${optionsHTML(S.qi, q)}</div></div>`;
+  wireOptions(S.qi);
+}
+
+function renderAcademic(){
+  const q = acadAt(S.qi);
+  const paras = M.ac.paragraphs.map(p => {
+    let h = esc(p);
+    if (q.highlight){
+      const needle = esc(q.highlight);
+      const at = h.indexOf(needle);
+      if (at >= 0) h = h.slice(0, at) + `<mark>${needle}</mark>` + h.slice(at + needle.length);
+    }
+    return `<p>${h}</p>`;
+  }).join("");
+  main.innerHTML = `<p class="ptitle">${esc(M.ac.title)}</p>
+    <div class="two"><div class="pass">${paras}</div>
+      <div class="qcol"><p class="stem">${esc(q.stem)}</p>${optionsHTML(S.qi, q)}</div></div>`;
+  wireOptions(S.qi);
+}
+
+function renderFoot(){
+  if (S.screen === "report"){ foot.style.display = "none"; return; }
+  foot.style.display = "";
+  let done = 0;
+  for (let n = 1; n <= TOTAL; n++) if (answered(n)) done++;
+  const dots = Array.from({length: TOTAL}, (_, i) => {
+    const n = i + 1;
+    return `<button class="dot-b" data-go="${n}" data-done="${answered(n)?1:0}" ` +
+      `data-cur="${S.screen==='test' && (isCTW(S.qi) ? isCTW(n) : n===S.qi) ? 1 : 0}" ` +
+      `aria-label="Question ${n}">${n}</button>`;
+  }).join("");
+  foot.innerHTML = `<div class="foot-in"><span class="status"><b>${done}</b> of ${TOTAL} answered</span>
+    <div class="dots">${dots}</div></div>`;
+  foot.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+    S.qi = +b.dataset.go; S.screen = "test"; render(); window.scrollTo(0,0);
+  });
+}
+
+function renderReview(){
+  const rows = Array.from({length: TOTAL}, (_, i) => {
+    const n = i + 1;
+    const task = isCTW(n) ? "Complete the Words" : n <= 15 ? "Read in Daily Life" : "Read an Academic Passage";
+    return `<tr data-go="${n}"><td class="n">${n}</td><td>${task}</td>
+      <td>${answered(n) ? '<span class="tag done">Answered</span>' : '<span class="tag none">Not answered</span>'}</td></tr>`;
+  }).join("");
+  main.innerHTML = `<div class="panel"><h1>Review your answers</h1>
+    <p class="lede">Select a question to return to it. Ending the section scores your answers and you will not be able to change them.</p>
+    <div class="tableWrap"><table><thead><tr><th>No.</th><th>Task</th><th>Status</th></tr></thead>
+    <tbody>${rows}</tbody></table></div></div>`;
+  main.querySelectorAll("[data-go]").forEach(tr => tr.onclick = () => {
+    S.qi = +tr.dataset.go; S.screen = "test"; render(); window.scrollTo(0,0);
+  });
+}
+
+function renderReport(){
+  let right = 0;
+  const cards = [];
+  M.ctw.answers.forEach((a, i) => {
+    const got = S.typed[i].trim().toLowerCase(), ok = got === a.toLowerCase();
+    if (ok) right++;
+    const stem = M.ctw.segs.filter(s => s.t === "blank")[i].stem;
+    cards.push(`<div class="rep ${ok?"right":"wrong"}"><div class="rep-hd"><span class="n">${i+1}</span>
+      <span class="ty">Complete the Words</span><span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p>${ok ? "" : `<span class="yours">You typed: ${got ? esc(got) : "(blank)"}</span> &middot; `}
+      <span class="right-ans">${esc(stem)}<b>${esc(a)}</b></span></p></div>`);
+  });
+  const mc = [];
+  for (let n = 11; n <= 15; n++) mc.push([n, dailyAt(n).q, "Read in Daily Life"]);
+  for (let n = 16; n <= 20; n++) mc.push([n, acadAt(n), "Read an Academic Passage"]);
+  mc.forEach(([n, q, task]) => {
+    const got = S.chosen[n], ok = got === q.key;
+    if (ok) right++;
+    cards.push(`<div class="rep ${ok?"right":"wrong"}"><div class="rep-hd"><span class="n">${n}</span>
+      <span class="ty">${task} &middot; ${esc(q.type)}</span>
+      <span class="tag ${ok?"ok":"no"}">${ok?"Correct":"Incorrect"}</span></div>
+      <p>${esc(q.stem)}</p>
+      ${got === undefined ? '<p class="yours">No answer</p>' :
+        ok ? `<p class="right-ans">${esc(q.options[got])}</p>` :
+        `<p class="yours">You chose: ${esc(q.options[got])}</p>
+         <p class="right-ans">Correct: ${esc(q.options[q.key])}</p>`}</div>`);
+  });
+  main.innerHTML = `<div class="panel"><h1>Score report</h1>
+    <p class="lede">${S.timedOut ? "Time expired and the module was submitted automatically. " : ""}
+    Every item is scored right or wrong. Complete the Words requires exact spelling.</p>
+    <div class="score">
+      <div><div class="big">${right}/${TOTAL}</div><div class="cap">Items correct</div></div>
+      <div><div class="big">${Math.round(right/TOTAL*100)}%</div><div class="cap">Accuracy</div></div>
+      <div><div class="big">${fmt(SECONDS - S.seconds)}</div><div class="cap">Time used</div></div>
+    </div>${cards.join("")}</div>`;
+}
+
+/* ---------- navigation ---------- */
+$("bBack").onclick = () => {
+  if (S.screen !== "test") return;
+  S.qi = isCTW(S.qi) ? 1 : (S.qi === 11 ? 10 : S.qi - 1);
+  render(); window.scrollTo(0,0);
+};
+$("bNext").onclick = () => {
+  if (S.screen === "report"){ restart(); return; }
+  if (S.screen === "review"){ endSection(); return; }
+  if (isCTW(S.qi)) S.qi = 11;
+  else if (S.qi < TOTAL) S.qi++;
+  else { S.screen = "review"; }
+  render(); window.scrollTo(0,0);
+};
+$("bReview").onclick = () => {
+  if (S.screen === "report") return;
+  S.screen = S.screen === "review" ? "test" : "review";
+  render(); window.scrollTo(0,0);
+};
+$("bTime").onclick = () => { S.timeHidden = !S.timeHidden; renderChrome(); };
+$("bHelp").onclick = openHelp;
+
+function endSection(){
+  let left = 0;
+  for (let n = 1; n <= TOTAL; n++) if (!answered(n)) left++;
+  if (!confirm(left ? `${left} item${left>1?"s are":" is"} unanswered. End the section and score it?`
+                    : "End the section and score it?")) return;
+  clearInterval(tick);
+  S.screen = "report"; render(); window.scrollTo(0,0);
+}
+function restart(){
+  M = buildModule();
+  S.screen = "test"; S.qi = 1; S.seconds = SECONDS; S.timedOut = false;
+  S.typed = M.ctw.answers.map(() => "");
+  S.chosen = {};
+  tick = setInterval(onTick, 1000);
+  render(); window.scrollTo(0,0);
+}
+let tick = setInterval(onTick, 1000);
+function onTick(){
+  if (S.screen === "report") return;
+  if (--S.seconds <= 0){
+    S.seconds = 0; clearInterval(tick);
+    S.timedOut = true; S.screen = "report"; render(); window.scrollTo(0,0); return;
+  }
+  renderChrome();
+}
+
+function openHelp(){
+  const d = document.createElement("div");
+  d.className = "scrim";
+  d.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Help">
+    <header>Help &mdash; Reading</header><div class="body">
+    <h3>The module</h3>
+    <p>Twenty items in thirteen minutes: ten Complete the Words on one screen, five questions on everyday texts, and five on one academic passage.</p>
+    <h3>Complete the Words</h3>
+    <p>Type the missing letters of each word. The dashes under each box show exactly how many letters are missing. Spelling must be exact; there is no partial credit and no penalty for a wrong answer. <b>Enter</b> moves to the next box.</p>
+    <h3>The reading questions</h3>
+    <p>One question per screen, with the text shown beside it. Some questions highlight a word or phrase in the text.</p>
+    <h3>Moving through</h3>
+    <p><b>Next</b> and <b>Back</b> move between questions, <b>Review</b> lists what is unanswered, and <b>Hide Time</b> conceals the clock without stopping it.</p>
+    </div><footer><button class="pill primary" id="bCloseHelp">Return</button></footer></div>`;
+  document.body.appendChild(d);
+  d.addEventListener("click", e => { if (e.target === d) d.remove(); });
+  $("bCloseHelp").onclick = () => { d.remove(); $("bHelp").focus(); };
+  $("bCloseHelp").focus();
+}
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){ const d = document.querySelector(".scrim"); if (d) d.remove(); }
+});
+
+render();
+</script>
+</body>
+</html>
