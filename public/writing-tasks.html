@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing Tasks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* ============================================================
+   Write an Email and Write for an Academic Discussion: the two
+   written tasks of the 2026 TOEFL writing section, each on its
+   own countdown. Free writing cannot be machine scored, so the
+   report pairs mechanical checks with a band-5 model and a
+   rubric you rate yourself against.
+   ============================================================ */
+:root{
+  --teal:#0e5a5e; --teal-2:#12706f; --teal-ink:#0b4a4d;
+  --rule:#c9d2d3; --rule-2:#9fadaf;
+  --ink:#16201f; --ink-2:#4a5654; --ink-3:#6f7b7a;
+  --paper:#fff; --paper-2:#f4f7f7; --box:#eef2f2;
+  --ok:#1c6b46; --ok-soft:#e4f1ea; --no:#96271f; --no-soft:#f8e5e3; --warn:#8a5a10;
+  --sans:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --teal:#0b3f42; --teal-2:#0d5254; --teal-ink:#072e30;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --box:#1f2a2a;
+  --ok:#6cc39a; --ok-soft:#16302a; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
+}}
+:root[data-theme="dark"]{
+  --teal:#0b3f42; --teal-2:#0d5254; --teal-ink:#072e30;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --box:#1f2a2a;
+  --ok:#6cc39a; --ok-soft:#16302a; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+button,input,textarea,select{font:inherit;color:inherit}
+
+.bar{background:var(--teal);color:#fff;display:flex;align-items:center;gap:10px;padding:9px 18px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;margin-right:auto}
+.brand span{opacity:.75;font-size:13px;vertical-align:2px}
+.pill{appearance:none;cursor:pointer;background:var(--teal-2);color:#fff;border:1px solid rgba(255,255,255,.35);
+  border-radius:22px;padding:7px 16px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:7px}
+.pill:hover{background:#178285}
+.pill[disabled]{opacity:.45;cursor:default}
+.pill.primary{background:#fff;color:var(--teal-ink);border-color:#fff}
+.pill.primary:hover{background:#eef5f5}
+.subbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 18px;border-bottom:1px solid var(--rule)}
+.subbar .where{font-weight:700;color:var(--teal-ink);margin-right:auto;font-size:15px}
+.subbar .where i{font-style:normal;color:var(--rule-2);margin:0 8px}
+.clock{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums}
+.clock.low{color:var(--no)}
+.eye{appearance:none;background:none;border:0;cursor:pointer;color:var(--teal-2);font-weight:700;
+  font-size:14px;display:inline-flex;align-items:center;gap:6px}
+:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px}
+.bar :focus-visible{outline-color:#fff}
+
+main{padding:20px 18px 40px}
+.two{display:grid;grid-template-columns:minmax(0,40%) minmax(0,60%);gap:30px;max-width:1240px;margin:0 auto}
+.lead p{margin:0 0 12px;font-size:15.5px}
+.lead .do{font-weight:700}
+.lead ul{margin:0 0 12px;padding-left:22px}
+.lead li{margin:0 0 8px;font-size:15.5px}
+.lead .note{color:var(--ink-2)}
+
+.respond h2{font-size:16px;margin:0 0 10px}
+.headers{font-size:15.5px;margin:0 0 12px;line-height:1.6}
+.tools{display:flex;align-items:center;gap:8px;background:var(--paper-2);border:1px solid var(--rule);
+  border-bottom:0;border-radius:4px 4px 0 0;padding:8px 10px;flex-wrap:wrap}
+.tb{appearance:none;cursor:pointer;background:var(--box);border:1px solid var(--rule);border-radius:4px;
+  padding:6px 16px;font-size:14px;color:var(--ink-2)}
+.tb:hover{border-color:var(--teal-2);color:var(--teal-2)}
+.tb.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.tb[disabled]{opacity:.45;cursor:default}
+.wc{margin-left:auto;display:flex;align-items:center;gap:10px}
+.wc b{font-family:var(--mono);font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+textarea{width:100%;min-height:330px;border:1px solid var(--rule);border-radius:0 0 4px 4px;
+  padding:14px;resize:vertical;line-height:1.6;background:var(--paper)}
+textarea:focus{outline:2px solid var(--teal-2);outline-offset:-2px}
+
+.who{display:flex;flex-direction:column;align-items:center;margin:18px 0 10px}
+.who .nm{font-size:14.5px;margin-top:6px}
+.post{display:grid;grid-template-columns:76px 1fr;gap:16px;margin-bottom:20px;align-items:start}
+.post .av{display:flex;flex-direction:column;align-items:center}
+.post .av .nm{font-size:13.5px;margin-top:5px;text-align:center}
+.post p{margin:0;font-size:15.5px;line-height:1.55}
+
+.panel{max-width:920px;margin:0 auto}
+.panel h1{font-size:27px;margin:0 0 6px}
+.panel .lede{color:var(--ink-2);margin:0 0 22px;max-width:64ch}
+.card{border:1px solid var(--rule);border-left:5px solid var(--teal-2);padding:18px 22px;margin-bottom:22px}
+.card h2{font-size:18px;margin:0 0 4px}
+.card .sub{color:var(--ink-3);font-size:13.5px;margin:0 0 16px}
+.slab{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:18px 0 6px}
+.resp{white-space:pre-wrap;background:var(--paper-2);border:1px solid var(--rule);padding:14px;
+  font-size:15px;line-height:1.6;border-radius:3px}
+.resp.empty{color:var(--ink-3);font-style:italic}
+.checks{list-style:none;margin:0;padding:0}
+.checks li{display:grid;grid-template-columns:24px 120px 1fr;gap:10px;padding:6px 0;
+  border-bottom:1px solid var(--rule);font-size:14.5px;align-items:baseline}
+.checks li:last-child{border-bottom:0}
+.checks .m{font-weight:700}
+.checks .yes .m{color:var(--ok)}
+.checks .no .m{color:var(--no)}
+.checks .lbl{font-weight:700;color:var(--ink-2)}
+.rubric{border-collapse:collapse;width:100%;font-size:14.5px;margin-top:6px}
+.rubric th,.rubric td{border-bottom:1px solid var(--rule);padding:8px 6px;text-align:left}
+.rubric th{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.rubric td.crit{font-weight:700}
+.rubric .scale{display:flex;gap:4px}
+.rubric .scale label{cursor:pointer;display:inline-block}
+.rubric .scale input{position:absolute;opacity:0;pointer-events:none}
+.rubric .scale input:checked + span{background:var(--teal-2);border-color:var(--teal-2);color:#fff}
+.rubric .scale span{display:inline-block;border:1px solid var(--rule);border-radius:4px;padding:3px 9px;font-size:13.5px}
+.selfscore{margin-top:12px;font-size:15px}
+.selfscore b{font-family:var(--mono);font-size:19px}
+.legend{font-size:13.5px;color:var(--ink-2);margin:10px 0 0}
+.legend b{color:var(--ink)}
+.scrim{position:fixed;inset:0;background:rgba(10,30,30,.6);display:grid;place-items:center;padding:20px;z-index:60}
+.modal{background:var(--paper);border-radius:4px;max-width:620px;width:100%;max-height:86vh;overflow:auto}
+.modal header{background:var(--teal);color:#fff;padding:12px 20px;font-weight:700}
+.modal .body{padding:20px}
+.modal h3{margin:16px 0 6px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.modal h3:first-child{margin-top:0}
+.modal p,.modal li{font-size:15px;color:var(--ink-2);margin:0 0 8px}
+.modal footer{padding:0 20px 20px;display:flex;justify-content:flex-end}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:860px){
+  .two{grid-template-columns:1fr;gap:20px}
+  textarea{min-height:240px}
+  .checks li{grid-template-columns:22px 1fr;row-gap:2px}
+  .checks .lbl{grid-column:2}
+  .checks .d{grid-column:2}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand">toefl ibt<span>&reg;</span></div>
+  <button class="pill" id="bHelp">Help <b aria-hidden="true">?</b></button>
+  <button class="pill" id="bBack"><b aria-hidden="true">&lsaquo;</b> Back</button>
+  <button class="pill primary" id="bNext">Next <b aria-hidden="true">&rsaquo;</b></button>
+</div>
+<div class="subbar">
+  <div class="where"><b>Writing</b><i>|</i><span id="where">Question 1 of 2</span></div>
+  <span class="clock" id="clock">07:00</span>
+  <button class="eye" id="bTime"><b aria-hidden="true">&#128065;</b> Hide Time</button>
+</div>
+
+<main id="main"></main>
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+/* CONTENT:START */
+const CONTENT = {
+ "emails": [
+  {
+   "id": "coursefit",
+   "to": "Dr. Reyes",
+   "subject": "Question about ANTH 210",
+   "scenario": "You are choosing modules for next term and you are interested in ANTH 210, which is taught by Dr. Reyes. The course description mentions fieldwork, but it does not say how much previous experience students need. You want to know whether the course would suit you before you register.",
+   "bullets": [
+    [
+     "purpose",
+     "Explain why the course interests you."
+    ],
+    [
+     "request",
+     "Ask what preparation or background the course expects."
+    ],
+    [
+     "thanks",
+     "Thank Dr. Reyes for taking the time to respond."
+    ]
+   ],
+   "topic": [
+    "course",
+    "fieldwork",
+    "module",
+    "register",
+    "term"
+   ],
+   "model": "Dear Dr. Reyes,\n\nI am writing about ANTH 210, which I am hoping to take next term. I became interested in the subject after a first-year module on kinship, and the fieldwork component attracts me most, since I would like to base my dissertation on community research.\n\nBefore I register, could you tell me what background the course assumes? In particular, I would like to know whether students are expected to have any previous fieldwork experience, and whether there is reading I should do over the break.\n\nThank you very much for taking the time to reply.\n\nBest regards,\nMaya Lindqvist"
+  },
+  {
+   "id": "heater",
+   "to": "Building Office",
+   "subject": "Heating not working in Flat 4B",
+   "scenario": "The heating in your flat has not worked for three days and the weather has turned cold. You have already reported it once through the online form but have had no reply. You are at home most mornings this week.",
+   "bullets": [
+    [
+     "purpose",
+     "Describe the problem and say when it started."
+    ],
+    [
+     "request",
+     "Ask for someone to come and repair it."
+    ],
+    [
+     "details",
+     "Say when you are available to let an engineer in."
+    ]
+   ],
+   "topic": [
+    "heating",
+    "flat",
+    "cold",
+    "repair",
+    "engineer"
+   ],
+   "model": "Dear Building Office,\n\nI am writing about the heating in Flat 4B, which stopped working on Monday evening. The radiators are completely cold, although the hot water still runs normally. I reported the fault through the online form on Tuesday but have not yet had a reply.\n\nCould an engineer be sent this week? The temperature has dropped sharply and the flat is now difficult to work in.\n\nI am at home every morning until one o'clock, and I can also be there on Friday afternoon if that is easier. Please let me know what time to expect someone.\n\nThank you for your help.\n\nYours sincerely,\nTomas Beltran"
+  },
+  {
+   "id": "dinner",
+   "to": "Professor Okafor",
+   "subject": "Department dinner on 14 March",
+   "scenario": "You have been invited to your department's annual dinner, but you will be away at a family event that weekend. You would like to decline politely and you would also like to stay involved with the department's social events.",
+   "bullets": [
+    [
+     "thanks",
+     "Thank Professor Okafor for the invitation."
+    ],
+    [
+     "purpose",
+     "Explain why you cannot attend."
+    ],
+    [
+     "request",
+     "Ask to be told about future events."
+    ]
+   ],
+   "topic": [
+    "dinner",
+    "invitation",
+    "attend",
+    "event",
+    "department"
+   ],
+   "model": "Dear Professor Okafor,\n\nThank you very much for inviting me to the department dinner on 14 March. I was glad to be included, and I had been looking forward to meeting the new research students.\n\nUnfortunately I will not be able to come, because my sister is getting married that weekend and I will be away from the city from the Thursday until the following Monday, so there is no way for me to return in time.\n\nI would be grateful if you could keep me on the list for future events, as I would very much like to attend the next one.\n\nWith best wishes,\nNadia Haddad"
+  },
+  {
+   "id": "loan",
+   "to": "Library Loans Desk",
+   "subject": "Request to extend a loan",
+   "scenario": "A book you borrowed is due back on Friday, but you still need it to finish an essay that is due the following Wednesday. The library website says extensions are possible but must be requested in writing.",
+   "bullets": [
+    [
+     "purpose",
+     "Explain why you still need the book."
+    ],
+    [
+     "request",
+     "Ask for the loan to be extended."
+    ],
+    [
+     "details",
+     "Say how long you need it for."
+    ]
+   ],
+   "topic": [
+    "book",
+    "loan",
+    "essay",
+    "extend",
+    "library"
+   ],
+   "model": "Dear Loans Desk,\n\nI am writing to ask whether the loan on Patterns of Settlement, which is due back this Friday, could be extended. I am using it for an essay on rural land use that must be submitted next Wednesday, and two of the chapters are central to my argument.\n\nCould the book be renewed until Thursday 20 November? That would give me time to finish the essay and return it the following morning.\n\nIf the title has been requested by someone else, I understand that an extension may not be possible, and I would be happy to return it on time.\n\nThank you for considering this.\n\nYours faithfully,\nEun-ji Park"
+  },
+  {
+   "id": "club",
+   "to": "Sofia Marchetti",
+   "subject": "Joining the photography society",
+   "scenario": "You saw a poster for the university photography society and you would like to join. The poster gives the president's email address but does not say when the society meets or whether beginners are welcome.",
+   "bullets": [
+    [
+     "purpose",
+     "Explain why you want to join."
+    ],
+    [
+     "request",
+     "Ask when and where the society meets."
+    ],
+    [
+     "details",
+     "Mention any experience or equipment you have."
+    ]
+   ],
+   "topic": [
+    "photography",
+    "society",
+    "join",
+    "meet",
+    "camera"
+   ],
+   "model": "Dear Sofia,\n\nI saw the photography society's poster in the library this morning and I would very much like to join. I have been taking photographs since school, mostly of buildings, and I would like to learn from people who work in other styles.\n\nCould you tell me when and where the society meets, and whether there is a membership fee? I would also like to know whether complete beginners come along, since one of my flatmates is interested too.\n\nI own a digital camera and a tripod, and I am happy to bring them to meetings if that is useful.\n\nThank you, and I hope to hear from you soon.\n\nBest wishes,\nArun Chatterjee"
+  },
+  {
+   "id": "shift",
+   "to": "Mr. Danso",
+   "subject": "Request to change a shift",
+   "scenario": "You work part-time in a campus shop. You are scheduled to work on Thursday afternoon, but an examination has been moved to that time. You would like to change the shift and you are free at several other times.",
+   "bullets": [
+    [
+     "purpose",
+     "Explain why you cannot work the shift."
+    ],
+    [
+     "request",
+     "Ask whether the shift can be changed."
+    ],
+    [
+     "details",
+     "Say when else you could work."
+    ]
+   ],
+   "topic": [
+    "shift",
+    "work",
+    "examination",
+    "Thursday",
+    "swap"
+   ],
+   "model": "Dear Mr. Danso,\n\nI am writing about my shift on Thursday 12 May, from two until six. My statistics examination has been rescheduled to that afternoon, so I will not be able to work.\n\nWould it be possible to move the shift to another day that week? I could work all day on Wednesday, or on Friday after eleven, and I am also free on the Saturday morning if the shop needs cover then.\n\nI am sorry for the short notice; the change to the timetable was only announced yesterday. I am happy to swap with anyone who would prefer the Thursday.\n\nThank you for your understanding.\n\nBest regards,\nLeila Amrani"
+  },
+  {
+   "id": "conference",
+   "to": "Conference Registration",
+   "subject": "Dietary requirements",
+   "scenario": "You have registered for a two-day academic conference. The registration form did not ask about food, and the programme says lunch is provided on both days. You cannot eat dairy products.",
+   "bullets": [
+    [
+     "purpose",
+     "Explain your dietary requirement."
+    ],
+    [
+     "request",
+     "Ask whether suitable food can be arranged."
+    ],
+    [
+     "thanks",
+     "Thank the organisers for their help."
+    ]
+   ],
+   "topic": [
+    "conference",
+    "lunch",
+    "dietary",
+    "food",
+    "registration"
+   ],
+   "model": "Dear Registration Team,\n\nI registered last week for the Coastal Systems conference on 8 and 9 June, and I am writing about the lunches provided on both days. I am unable to eat dairy products of any kind, including butter and cheese, and the registration form did not include a question about food.\n\nCould a dairy-free option be arranged for me? If that is difficult, I would be glad simply to know in advance what will be served so that I can bring something suitable.\n\nMy registration reference is CS-2214.\n\nThank you very much for your help with this.\n\nYours sincerely,\nHenrik Solberg"
+  },
+  {
+   "id": "groupmeet",
+   "to": "Bianca Ferreira",
+   "subject": "Meeting about the group report",
+   "scenario": "You are working with three classmates on a group report that is due in two weeks. Nobody has arranged a meeting yet and you would like to organise one. You are writing to one member of the group who is coordinating.",
+   "bullets": [
+    [
+     "purpose",
+     "Suggest a time and place to meet."
+    ],
+    [
+     "request",
+     "Ask whether the others are free then."
+    ],
+    [
+     "details",
+     "Say what everyone should bring or prepare."
+    ]
+   ],
+   "topic": [
+    "meeting",
+    "report",
+    "group",
+    "deadline",
+    "prepare"
+   ],
+   "model": "Hi Bianca,\n\nSince the report is due on the 24th and we have not met yet, I thought I would suggest a time. Would Wednesday at four in the library group room work? I have booked it provisionally for an hour, and it is easy to cancel.\n\nCould you check with Marco and Tade whether that suits them? If Wednesday is difficult, I am also free on Thursday morning before eleven.\n\nIt would help if everyone came with a rough outline of their own section, even if it is only notes. That way we can see where the gaps and the overlaps are before we start writing.\n\nThanks, and see you soon.\n\nAmara"
+  }
+ ],
+ "discussions": [
+  {
+   "id": "attendance",
+   "professor": "Dr. Whitfield",
+   "course": "education policy",
+   "question": "This week we are looking at how universities structure their teaching. Some institutions require students to attend lectures and record attendance formally. Others argue that adults should decide for themselves how to use their time, particularly when recordings are available. Should attendance be compulsory?",
+   "students": [
+    [
+     "Priya",
+     "I think attendance should be required. Students who skip lectures often fall behind without noticing, and by the time the exam arrives it is too late to recover. A rule protects people from their own short-term decisions."
+    ],
+    [
+     "Mateo",
+     "I disagree. Treating adults like schoolchildren damages the relationship between staff and students. If a lecture is worth attending, people will come; if it is not, compulsory attendance only hides the problem."
+    ]
+   ],
+   "model": "I lean towards Mateo's position, though for a different reason. Compulsory attendance measures the wrong thing. A student sitting in the back row answering messages is recorded as present, while one who watches the recording twice and comes to office hours is recorded as absent. The rule rewards physical presence rather than engagement.\n\nPriya is right that some students drift, but attendance registers are a blunt way to catch that. A weekly problem set, marked but lightly weighted, would identify a struggling student far earlier and would tell the lecturer what specifically was not understood. My own department moved to that system two years ago, and the number of students failing the January examination fell noticeably."
+  },
+  {
+   "id": "transport",
+   "professor": "Dr. Alvarez",
+   "course": "urban economics",
+   "question": "Many cities now subsidise public transport heavily, and a few have made it free at the point of use. Supporters say this reduces congestion and emissions. Critics say the money would achieve more if it were spent on the quality of the service. Which approach would you favour?",
+   "students": [
+    [
+     "Johanna",
+     "Free transport is the clearest way to change behaviour. Price is the first thing people consider, and removing it entirely makes the bus the obvious choice for short journeys that would otherwise be driven."
+    ],
+    [
+     "Kwame",
+     "I would spend the money on frequency instead. People do not avoid buses because of the fare; they avoid them because the wait is unpredictable. A free service that comes twice an hour still loses to a car."
+    ]
+   ],
+   "model": "Kwame's argument matches what I have seen in my own city. Fares here were cut by half three years ago and ridership barely moved, because the evening service still ends at nine. People who finish work late simply cannot rely on it at any price.\n\nThat said, I would not dismiss Johanna's point entirely. Price matters a great deal for people on low incomes, for whom a daily fare is a real constraint. The strongest policy is probably targeted rather than universal: free travel for students and low-income residents, with the remaining money spent on running buses later and more often. That combines the fairness Johanna wants with the reliability Kwame is asking for."
+  },
+  {
+   "id": "climateaction",
+   "professor": "Dr. Ibarra",
+   "course": "environmental studies",
+   "question": "We often hear that individuals should change their habits to address climate change, and equally often that only government regulation can achieve change at the necessary scale. Some argue that emphasising personal responsibility distracts from policy. Where would you put the emphasis?",
+   "students": [
+    [
+     "Theo",
+     "Policy has to come first. A single household changing its diet is insignificant beside a single power station, and focusing on individual guilt lets the largest emitters avoid scrutiny."
+    ],
+    [
+     "Sanne",
+     "Individual choices are not separate from policy. Governments follow public opinion, and public opinion is shaped by what people already do. Habits build the constituency that makes regulation possible."
+    ]
+   ],
+   "model": "Sanne identifies something that Theo's argument misses: the two are not alternatives on a menu. Regulation does not appear from nowhere. For example, the countries that introduced strict building standards were generally those where insulation and efficient heating had already become normal, so the rules confirmed a practice rather than imposing one.\n\nI would still agree with Theo that the scale is unequal, and that campaigns urging people to feel guilty about small purchases are a poor use of attention. But the useful individual action is political rather than domestic. Voting, joining a local campaign or pressing an employer to change its energy contract does more than adjusting a recycling routine, and it leads directly to the policy Theo wants."
+  },
+  {
+   "id": "coding",
+   "professor": "Dr. Lindqvist",
+   "course": "curriculum design",
+   "question": "Several countries now teach programming to every school student, on the grounds that it is a basic literacy. Others argue that limited curriculum time is better spent on reading, mathematics and reasoning, which transfer more widely. Should programming be compulsory for all students?",
+   "students": [
+    [
+     "Rafael",
+     "Yes. Software shapes almost every job now, and a student who cannot read code is dependent on people who can. It is the modern equivalent of not being able to read a contract."
+    ],
+    [
+     "Yuki",
+     "I am not convinced. Most students will never write software professionally, and the hours would come out of something else. Teaching how algorithms affect people matters more than teaching syntax."
+    ]
+   ],
+   "model": "Yuki draws the distinction I think the debate needs, but I would push it further. The argument for compulsory programming usually smuggles in two different claims: that students should understand computation, and that they should be able to produce working code. Only the first is genuinely general.\n\nA student who understands that a ranking system encodes somebody's choices, and that those choices can be wrong, is equipped to question a decision made about them by an algorithm. That does not require writing a loop. Rafael's comparison with reading a contract actually supports this, since reading a contract and drafting one are different skills, and we require only the first. I would teach computational reasoning to everyone and programming as an option."
+  },
+  {
+   "id": "carfree",
+   "professor": "Dr. Baumann",
+   "course": "urban planning",
+   "question": "A number of European cities have closed their central districts to private cars. Residents and retailers often oppose these schemes before they begin and support them afterwards. Are car-free centres a reasonable policy, and what should planners do about the opposition?",
+   "students": [
+    [
+     "Camille",
+     "They work, and the pattern of opposition before and support after is the strongest evidence we have. Planners should proceed and let the result answer the objections."
+    ],
+    [
+     "Dmitri",
+     "That reasoning worries me. The people who suffer most are those who cannot easily change how they travel, and they are not the ones surveyed afterwards, because some of them have already left."
+    ]
+   ],
+   "model": "Dmitri raises the more serious objection, and in my view Camille's evidence does not answer it. A survey taken two years after a scheme opens samples the people who remained. If a delivery driver or a carer moved their work elsewhere because access became impractical, their dissatisfaction is invisible in the data that is used to declare the policy a success.\n\nThat is an argument for designing the exceptions carefully rather than for abandoning the policy. Cities that issue permits for residents with limited mobility, tradespeople and deliveries within set hours tend to face much less resistance, because the scheme distinguishes between traffic that has an alternative and traffic that does not. Camille is right about the direction; Dmitri is right about who pays for it."
+  },
+  {
+   "id": "groupwork",
+   "professor": "Dr. Nakamura",
+   "course": "learning and instruction",
+   "question": "Group assessment is common in university courses, and opinions about it are strong. Supporters point to collaboration as a skill employers want. Critics say it rewards and punishes students for other people's work. Should courses assess group projects?",
+   "students": [
+    [
+     "Olu",
+     "Group work should stay. Almost no professional work is done alone, and learning to divide a task, manage disagreement and hold others to a deadline is genuinely difficult."
+    ],
+    [
+     "Hana",
+     "The skill is worth teaching, but grading it is unfair. One unreliable member can lower a mark that is supposed to measure what I personally know and can do."
+    ]
+   ],
+   "model": "Both positions seem to me to be about different things, and separating them resolves most of the disagreement. Olu is describing what group work teaches; Hana is describing what a grade is supposed to report. A course can keep the first without letting it distort the second.\n\nThe design I would prefer assesses the process rather than the artefact. Each student submits a short individual account of their contribution and of how the group handled a disagreement, and that is what is marked. The shared report still has to be produced, so the collaborative work Olu values still happens, but Hana's grade no longer depends on whether a stranger submitted their section on time. My last course used this, in practice, and the complaints stopped almost entirely."
+  },
+  {
+   "id": "remotework",
+   "professor": "Dr. Achebe",
+   "course": "organisational behaviour",
+   "question": "Since the pandemic, many organisations have kept some form of remote working. Managers frequently claim that collaboration and training suffer, while employees point to concentration and commuting time. What is your view on where knowledge work should happen?",
+   "students": [
+    [
+     "Ingrid",
+     "Remote work suits experienced staff and harms new ones. I learned my job by overhearing colleagues solve problems, and that does not happen on a scheduled call."
+    ],
+    [
+     "Felipe",
+     "Offices were never as collaborative as managers remember. Most of my day there was spent in meetings that could have been messages, interrupted constantly."
+    ]
+   ],
+   "model": "Ingrid's point about learning by overhearing is the one I find hardest to dismiss, and I do not think Felipe's reply addresses it. He is describing the cost of the office to somebody who already knows the job. She is describing its value to somebody who does not. Both can be true at once.\n\nWhat follows, therefore, is that the policy should differ by experience rather than by role. A team where three people joined this year has a different need from one where everybody has five years behind them. Organisations that set a single company-wide number of office days are answering a question nobody asked. I would give teams the decision and require only that new staff have someone experienced present on the days they attend."
+  },
+  {
+   "id": "sugartax",
+   "professor": "Dr. Mensah",
+   "course": "public health policy",
+   "question": "Taxes on sugary drinks have now been introduced in dozens of countries. Evaluations generally show that manufacturers reformulate their products and that purchases fall. Critics argue that such taxes fall hardest on the people with the least money. Do you support them?",
+   "students": [
+    [
+     "Aoife",
+     "I support them. The reformulation effect alone justifies the policy, since it lowers sugar intake for everyone without requiring any individual to change what they buy."
+    ],
+    [
+     "Viktor",
+     "Any flat tax on a product takes a larger share of a small income. Telling people that the policy is for their own good does not change who actually pays it."
+    ]
+   ],
+   "model": "Aoife's point about reformulation is the strongest argument in this debate and it largely answers Viktor. If manufacturers cut sugar to stay below a threshold, the benefit reaches people who never change their purchase and therefore never pay the tax at all. The revenue is almost a side effect.\n\nViktor is right that the burden is uneven where reformulation does not happen, which is why the design matters so much. A tax with a clear threshold and a long lead time gives producers a reason to change the recipe; a flat levy on every drink simply raises prices. I would also want the revenue spent visibly on something in the same communities, since a tax that disappears into general funds is much harder to defend."
+  },
+  {
+   "id": "artefacts",
+   "professor": "Dr. Rosenberg",
+   "course": "museum studies",
+   "question": "Museums in Europe and North America hold large collections acquired during colonial periods. Requests for return have increased, and institutions respond very differently. Some argue that universal museums serve a global public; others that objects belong with the communities that made them. What is your position?",
+   "students": [
+    [
+     "Lucia",
+     "Objects should go back when a community asks for them. The argument that a large museum serves everyone is easier to make when you live near one."
+    ],
+    [
+     "Emeka",
+     "I agree in principle, but conservation and access are real issues. A return that puts an object somewhere it cannot be cared for helps nobody."
+    ]
+   ],
+   "model": "Emeka's caution is reasonable but it has been used badly for a long time, and I think Lucia is right to be impatient with it. Conservation capacity is not a fixed property of a country; it is the result of funding decisions. When a holding museum cites it as a reason to refuse, it is often pointing at a gap it could help close.\n\nThe practical route is probably to separate ownership from location. Transferring title first acknowledges the claim, and the object can then be lent back for an agreed period while facilities are built. Several recent agreements have worked this way. It gives Lucia the principle and Emeka the safeguard without making one wait for the other."
+  },
+  {
+   "id": "shortvideo",
+   "professor": "Dr. Farrow",
+   "course": "media psychology",
+   "question": "Short-form video now occupies a large share of young people's screen time, and commentary about its effect on concentration is widespread. The research is less settled than the commentary suggests. How convinced are you that this format is changing how people attend to information?",
+   "students": [
+    [
+     "Marisol",
+     "I am convinced. Every generation of teachers I have spoken to reports that sustained reading has become harder to assign, and that change tracks the arrival of these platforms."
+    ],
+    [
+     "Noah",
+     "Teacher reports are not evidence of cause. The same complaint was made about television and about novels before that. Correlation over one decade proves very little."
+    ]
+   ],
+   "model": "Noah is right about the history, and the pattern he describes should make us cautious, but I do not think it settles the question. The earlier panics concerned what people consumed. This one concerns the interval at which attention is rewarded, which is a different mechanism and one that can be measured.\n\nWhat would persuade me is longitudinal work that follows the same individuals and controls for sleep, since short video is used heavily at night and sleep loss alone degrades sustained attention. Until that exists, Marisol's teachers are reporting something real but cannot tell us what caused it. I would treat the effect as plausible and unproven, which is an uncomfortable position but the honest one."
+  }
+ ],
+ "cues": {
+  "purpose": [
+   "because",
+   "since",
+   "interested",
+   "reason",
+   "i am writing",
+   "i would like to",
+   "writing about",
+   "writing to",
+   "hoping"
+  ],
+  "request": [
+   "could",
+   "would it be possible",
+   "please",
+   "may i",
+   "i would like to know",
+   "whether",
+   "can you",
+   "would you"
+  ],
+  "details": [],
+  "thanks": [
+   "thank",
+   "thanks",
+   "grateful",
+   "appreciate"
+  ]
+ }
+};
+/* CONTENT:END */
+
+const LIMIT = {email: 7 * 60, discussion: 10 * 60};
+const $ = id => document.getElementById(id);
+const main = $("main"), live = $("live");
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const wc = t => (t.trim().match(/\S+/g) || []).length;
+const fmt = s => { s = Math.max(0, s);
+  return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; };
+
+const OPINION = /\b(i think|i believe|in my view|i would|i agree|i disagree|my view|i lean|i am convinced|i find|seems to me|to my mind)\b/i;
+const SUPPORT = /\b(because|since|for example|for instance|in practice|one reason|this is why|which is why|so that|therefore|as a result|the result|given that|after all|evidence|research|studies|study|data|found that|shows that|suggests|my own)\b/i;
+const GREETING = /^\s*(dear|hi|hello|good morning|good afternoon)\b/i;
+const SIGNOFF = /\b(sincerely|regards|best wishes|best,|yours|thanks,|thank you,)/i;
+
+let TASKS = [
+  {kind:"email", p: pick(CONTENT.emails)},
+  {kind:"discussion", p: pick(CONTENT.discussions)}
+];
+const S = {
+  qi: 0, screen: "test",
+  ed: TASKS.map(t => ({text:"", hist:[""], at:0, clip:"", sel:[0,0]})),
+  seconds: LIMIT[TASKS[0].kind], timeHidden:false, countHidden:false,
+  locked: [false, false], self: [{}, {}]
+};
+
+/* deterministic initials avatar; no photographs of real people */
+function avatar(name, size){
+  const core = name.replace(/^(Dr|Prof|Professor|Mr|Ms|Mrs)\.?\s+/i, "");
+  const ini = core.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  let h = 0; for (const c of name) h = (h * 31 + c.charCodeAt(0)) % 360;
+  return `<svg viewBox="0 0 80 80" width="${size}" height="${size}" role="img" aria-label="${esc(name)}">
+    <circle cx="40" cy="40" r="40" fill="hsl(${h} 38% 46%)"></circle>
+    <text x="40" y="41" text-anchor="middle" dominant-baseline="central" fill="#fff"
+      font-family="Lato, sans-serif" font-size="30" font-weight="700">${ini}</text></svg>`;
+}
+
+function toolbarHTML(){
+  return `<div class="tools">
+    <button class="tb primary" data-act="cut">Cut</button>
+    <button class="tb" data-act="paste">Paste</button>
+    <button class="tb" data-act="undo">Undo</button>
+    <button class="tb" data-act="redo">Redo</button>
+    <span class="wc"><button class="eye" id="bCount"><b aria-hidden="true">&#128065;</b>
+      ${S.countHidden ? "Show Word Count" : "Hide Word Count"}</button>
+      <b id="wcv">${S.countHidden ? "–" : wc(S.ed[S.qi].text)}</b></span>
+  </div>`;
+}
+
+function render(){
+  if (S.screen === "report") return renderReport();
+  const t = TASKS[S.qi];
+  main.innerHTML = t.kind === "email" ? emailHTML(t.p) : discussionHTML(t.p);
+  wireEditor();
+  renderChrome();
+}
+
+function renderChrome(){
+  const scored = S.screen === "report";
+  $("where").textContent = scored ? "Score report" : `Question ${S.qi + 1} of 2`;
+  $("bBack").disabled = true;
+  $("bNext").innerHTML = scored ? "New set <b aria-hidden=\"true\">&rsaquo;</b>"
+    : "Next <b aria-hidden=\"true\">&rsaquo;</b>";
+  const c = $("clock");
+  c.style.display = scored ? "none" : "";
+  $("bTime").style.display = scored ? "none" : "";
+  c.textContent = S.timeHidden ? "––:––" : fmt(S.seconds);
+  c.className = "clock" + (!S.timeHidden && S.seconds <= 60 ? " low" : "");
+  $("bTime").lastChild.textContent = S.timeHidden ? " Show Time" : " Hide Time";
+}
+
+function emailHTML(p){
+  return `<div class="two">
+    <div class="lead">
+      <p>${esc(p.scenario)}</p>
+      <p class="do">Write an email to ${esc(p.to)}. In your email, do the following:</p>
+      <ul>${p.bullets.map(([fn, txt]) => `<li>${esc(txt)}</li>`).join("")}</ul>
+      <p class="note">Write as much as you can and in complete sentences.</p>
+    </div>
+    <div class="respond">
+      <h2>Your Response:</h2>
+      <p class="headers">To: ${esc(p.to)}<br>Subject: ${esc(p.subject)}</p>
+      ${toolbarHTML()}
+      <textarea id="ta" spellcheck="false" aria-label="Your email">${esc(S.ed[S.qi].text)}</textarea>
+    </div></div>`;
+}
+
+function discussionHTML(p){
+  return `<div class="two">
+    <div class="lead">
+      <p>Your professor is teaching a class on ${esc(p.course)}. Write a post responding to the
+        professor's question.</p>
+      <p class="do">In your response, you should do the following.</p>
+      <ul><li>Express and support your opinion.</li>
+          <li>Make a contribution to the discussion in your own words.</li></ul>
+      <p class="note">An effective response will contain at least 100 words.</p>
+      <div class="who">${avatar(p.professor, 104)}<span class="nm">${esc(p.professor)}</span></div>
+      <p>${esc(p.question)}</p>
+    </div>
+    <div class="respond">
+      ${p.students.map(([n, txt]) => `<div class="post">
+        <div class="av">${avatar(n, 62)}<span class="nm">${esc(n)}</span></div>
+        <p>${esc(txt)}</p></div>`).join("")}
+      ${toolbarHTML()}
+      <textarea id="ta" spellcheck="false" aria-label="Your post">${esc(S.ed[S.qi].text)}</textarea>
+    </div></div>`;
+}
+
+/* ---------- editor: internal clipboard and undo stack, as the real toolbar works ---------- */
+let pushTimer = null;
+function wireEditor(){
+  const ta = $("ta"), ed = S.ed[S.qi];
+  const sync = () => {
+    $("wcv").textContent = S.countHidden ? "–" : wc(ed.text);
+  };
+  ta.addEventListener("input", () => {
+    ed.text = ta.value;
+    sync();
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(() => pushHistory(ed), 450);
+  });
+  ta.addEventListener("select", () => { ed.sel = [ta.selectionStart, ta.selectionEnd]; });
+  ta.addEventListener("keyup", () => { ed.sel = [ta.selectionStart, ta.selectionEnd]; });
+  ta.addEventListener("click", () => { ed.sel = [ta.selectionStart, ta.selectionEnd]; });
+
+  main.querySelectorAll("[data-act]").forEach(b => b.onclick = () => {
+    const a = b.dataset.act;
+    if (a === "cut"){
+      const [s, e] = [ta.selectionStart, ta.selectionEnd];
+      if (s === e) return say("Select some text first.");
+      pushHistory(ed);
+      ed.clip = ta.value.slice(s, e);
+      ta.value = ta.value.slice(0, s) + ta.value.slice(e);
+      ed.text = ta.value; pushHistory(ed);
+      ta.focus(); ta.setSelectionRange(s, s);
+    } else if (a === "paste"){
+      if (!ed.clip) return say("Nothing has been cut yet.");
+      const s = ta.selectionStart, e = ta.selectionEnd;
+      pushHistory(ed);
+      ta.value = ta.value.slice(0, s) + ed.clip + ta.value.slice(e);
+      ed.text = ta.value; pushHistory(ed);
+      ta.focus(); ta.setSelectionRange(s + ed.clip.length, s + ed.clip.length);
+    } else if (a === "undo"){
+      if (ed.at <= 0) return say("Nothing to undo.");
+      ed.at--; ta.value = ed.hist[ed.at]; ed.text = ta.value; ta.focus();
+    } else if (a === "redo"){
+      if (ed.at >= ed.hist.length - 1) return say("Nothing to redo.");
+      ed.at++; ta.value = ed.hist[ed.at]; ed.text = ta.value; ta.focus();
+    }
+    sync();
+  });
+  $("bCount").onclick = () => {
+    S.countHidden = !S.countHidden;
+    $("bCount").lastChild.textContent = S.countHidden ? " Show Word Count" : " Hide Word Count";
+    sync();
+  };
+  sync();
+}
+function pushHistory(ed){
+  if (ed.hist[ed.at] === ed.text) return;
+  ed.hist = ed.hist.slice(0, ed.at + 1);
+  ed.hist.push(ed.text);
+  ed.at = ed.hist.length - 1;
+}
+const say = m => { live.textContent = m; };
+
+/* ---------- checks ---------- */
+function checks(task, text){
+  const p = task.p, low = text.toLowerCase(), n = wc(text);
+  const paras = text.trim() ? text.trim().split(/\n\s*\n/).length : 0;
+  const out = [];
+  if (task.kind === "email"){
+    out.push(["Length", n >= 80 && n <= 160, `${n} words &mdash; aim for 80 to 140`]);
+    out.push(["Greeting", GREETING.test(text), "opens with a greeting such as <i>Dear&nbsp;&hellip;</i>"]);
+    out.push(["Sign-off", SIGNOFF.test(text), "ends with a closing and your name"]);
+    out.push(["Paragraphs", paras >= 2, `${paras} paragraph${paras === 1 ? "" : "s"} &mdash; two or more reads better`]);
+    p.bullets.forEach(([fn, label], i) => {
+      const ok = fn === "details"
+        ? p.topic.filter(t => low.includes(t.toLowerCase())).length >= 2
+        : (CONTENT.cues[fn] || []).some(c => low.includes(c));
+      out.push([`Bullet ${i + 1}`, ok, esc(label)]);
+    });
+  } else {
+    out.push(["Length", n >= 100, `${n} words &mdash; at least 100 is expected`]);
+    out.push(["Position", OPINION.test(text), "states an opinion in your own voice"]);
+    out.push(["Engagement", p.students.some(([nm]) => low.includes(nm.toLowerCase())),
+              "refers to a classmate by name"]);
+    out.push(["Support", SUPPORT.test(text), "gives a reason or an example"]);
+    out.push(["Own words", n > 0 && !p.students.some(([, t]) =>
+              low.includes(t.toLowerCase().slice(0, 40))), "does not copy a classmate's wording"]);
+  }
+  return out;
+}
+
+const RUBRIC = {
+  email: ["Content coverage", "Organisation", "Language use", "Tone and register"],
+  discussion: ["Contribution", "Elaboration", "Language control"]
+};
+
+function renderReport(){
+  const cards = TASKS.map((task, i) => {
+    const text = S.ed[i].text, n = wc(text);
+    const rows = checks(task, text);
+    const passed = rows.filter(r => r[1]).length;
+    return `<div class="card">
+      <h2>Question ${i + 1} &mdash; ${task.kind === "email" ? "Write an Email" : "Write for an Academic Discussion"}</h2>
+      <p class="sub">${n} words &middot; ${passed} of ${rows.length} checks met</p>
+      <div class="slab">Your response</div>
+      <div class="resp${text.trim() ? "" : " empty"}">${text.trim() ? esc(text) : "No response written."}</div>
+      <div class="slab">Checks</div>
+      <ul class="checks">${rows.map(([lbl, ok, d]) =>
+        `<li class="${ok ? "yes" : "no"}"><span class="m">${ok ? "✓" : "✗"}</span>
+         <span class="lbl">${lbl}</span><span class="d">${d}</span></li>`).join("")}</ul>
+      <div class="slab">Band 5 model response</div>
+      <div class="resp">${esc(task.p.model)}</div>
+      <div class="slab">Rate your own response</div>
+      <table class="rubric"><thead><tr><th>Criterion</th><th>0 &ndash; 5</th></tr></thead><tbody>
+        ${RUBRIC[task.kind].map((crit, c) => `<tr><td class="crit">${crit}</td><td>
+          <div class="scale">${[0,1,2,3,4,5].map(v =>
+            `<label><input type="radio" name="r${i}_${c}" value="${v}"${S.self[i][c] === v ? " checked" : ""}><span>${v}</span></label>`
+          ).join("")}</div></td></tr>`).join("")}
+      </tbody></table>
+      <p class="selfscore">Your self-rating: <b id="avg${i}">&ndash;</b> / 5</p>
+      <p class="legend"><b>5</b> fully successful: well-elaborated support, effective variety,
+        precise word choice, almost no errors. <b>3</b> adequate organisation and tone, but shallow
+        development and visible errors. <b>1</b> little relevant content or largely unclear language.</p>
+    </div>`;
+  }).join("");
+
+  main.innerHTML = `<div class="panel">
+    <h1>Score report</h1>
+    <p class="lede">${S.timedOut ? "Time expired on at least one task. " : ""}
+      These two tasks are rated 0 to 5 by a human or automated scorer, which this page cannot
+      reproduce. What it can check is mechanical; the rest is for you to judge against the model
+      and the rubric.</p>
+    ${cards}</div>`;
+
+  TASKS.forEach((task, i) => {
+    const upd = () => {
+      const vals = RUBRIC[task.kind].map((_, c) => S.self[i][c]).filter(v => v !== undefined);
+      $("avg" + i).textContent = vals.length === RUBRIC[task.kind].length
+        ? (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1) : "–";
+    };
+    RUBRIC[task.kind].forEach((_, c) =>
+      main.querySelectorAll(`input[name="r${i}_${c}"]`).forEach(el =>
+        el.addEventListener("change", () => { S.self[i][c] = +el.value; upd(); })));
+    upd();
+  });
+  renderChrome();
+}
+
+/* ---------- navigation and timing ---------- */
+$("bNext").onclick = () => {
+  if (S.screen === "report") return restart();
+  if (S.qi === 0){
+    if (!confirm("Move on to the next task? You will not be able to return to this one.")) return;
+    S.qi = 1; S.seconds = LIMIT[TASKS[1].kind]; render(); window.scrollTo(0, 0);
+  } else {
+    if (!confirm("End the section and see the report?")) return;
+    finish();
+  }
+};
+$("bTime").onclick = () => { S.timeHidden = !S.timeHidden; renderChrome(); };
+$("bHelp").onclick = openHelp;
+
+function finish(){ clearInterval(tick); S.screen = "report"; render(); window.scrollTo(0, 0); }
+function restart(){
+  TASKS = [{kind:"email", p: pick(CONTENT.emails)},
+           {kind:"discussion", p: pick(CONTENT.discussions)}];
+  S.qi = 0; S.screen = "test"; S.timedOut = false;
+  S.ed = TASKS.map(() => ({text:"", hist:[""], at:0, clip:"", sel:[0,0]}));
+  S.self = [{}, {}];
+  S.seconds = LIMIT[TASKS[0].kind];
+  tick = setInterval(onTick, 1000);
+  render(); window.scrollTo(0, 0);
+}
+let tick = setInterval(onTick, 1000);
+function onTick(){
+  if (S.screen === "report") return;
+  if (--S.seconds <= 0){
+    S.timedOut = true;
+    if (S.qi === 0){ S.qi = 1; S.seconds = LIMIT[TASKS[1].kind]; render(); }
+    else finish();
+    return;
+  }
+  renderChrome();
+}
+
+function openHelp(){
+  const d = document.createElement("div");
+  d.className = "scrim";
+  d.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Help">
+    <header>Help &mdash; Writing</header><div class="body">
+    <h3>The two tasks</h3>
+    <p><b>Write an Email</b> gives you a situation and three things your email must do. Seven
+      minutes. The recipient and the subject line are supplied for you.</p>
+    <p><b>Write for an Academic Discussion</b> gives you a professor's question and two classmates'
+      posts. Ten minutes, and an effective response runs to at least 100 words.</p>
+    <h3>The toolbar</h3>
+    <p><b>Cut</b> removes the selected text and holds it; <b>Paste</b> puts it back at the cursor.
+      This clipboard belongs to the test, not to your computer. <b>Undo</b> and <b>Redo</b> step
+      through your edits.</p>
+    <h3>Scoring</h3>
+    <p>Both tasks are rated 0 to 5 by a scorer. This page checks only what a machine can check and
+      then shows you a band-5 model and the rubric, so you can judge the rest yourself.</p>
+    <h3>Moving on</h3>
+    <p>Each task has its own countdown, and you cannot return to a task once you leave it. If the
+      clock runs out the page moves on for you.</p>
+    </div><footer><button class="pill primary" id="bCloseHelp">Return</button></footer></div>`;
+  document.body.appendChild(d);
+  d.addEventListener("click", e => { if (e.target === d) d.remove(); });
+  $("bCloseHelp").onclick = () => { d.remove(); $("bHelp").focus(); };
+  $("bCloseHelp").focus();
+}
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){ const d = document.querySelector(".scrim"); if (d) d.remove(); }
+});
+
+render();
+</script>
+</body>
+</html>
