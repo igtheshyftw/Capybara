@@ -3,350 +3,270 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build a Sentence</title>
+<title>Writing Section</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* ============================================================
-   Build a Sentence — a working replica of Task 1 of the
-   writing section on the 2026 TOEFL iBT: a short conversation,
-   a reply with blanks in it, and a bank of words and phrases
-   that may contain more options than there are blanks.
-   Palette: test-delivery steel.
+   The whole 2026 TOEFL writing section in one run:
+   Build a Sentence (10 items, 6:50), Write an Email (7:00) and
+   Write for an Academic Discussion (10:00). Chrome taken from
+   the live test: deep teal on white.
    ============================================================ */
 :root{
-  --ground:#d7dde4;
-  --paper:#ffffff;
-  --paper-2:#f3f6f9;
-  --well:#e8ecf1;
-  --chrome-a:#3a587a;
-  --chrome-b:#23374e;
-  --chrome-ink:#eef3f8;
-  --chrome-ink-2:#b9c9da;
-  --ink:#141c26;
-  --ink-2:#4a5867;
-  --ink-3:#6e7c8b;
-  --rule:#c2cad3;
-  --rule-strong:#8a97a6;
-  --tile:#eef2f7;
-  --tile-edge:#98a5b3;
-  --tile-hi:#ffffff;
-  --accent:#1d5fa8;
-  --accent-soft:#d8e7f7;
-  --ok:#1c6b46;
-  --ok-soft:#e2f0e9;
-  --no:#96271f;
-  --no-soft:#f7e4e2;
-  --warn:#8a5a10;
-  --shadow-tile:0 1px 0 rgba(20,28,38,.18);
-  --shadow-lift:0 10px 24px -8px rgba(20,28,38,.45);
-  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
-  --serif:"IBM Plex Serif",ui-serif,Georgia,"Times New Roman",serif;
-  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Consolas,monospace;
+  --teal:#0e5a5e; --teal-2:#12706f; --teal-ink:#0b4a4d;
+  --rule:#c9d2d3; --rule-2:#9fadaf;
+  --ink:#16201f; --ink-2:#4a5654; --ink-3:#6f7b7a;
+  --paper:#fff; --paper-2:#f4f7f7; --box:#eef2f2; --well:#e7ecec;
+  --tile:#f6f9f9; --tile-edge:#9fadaf;
+  --ok:#1c6b46; --ok-soft:#e4f1ea; --no:#96271f; --no-soft:#f8e5e3; --warn:#8a5a10;
+  --sans:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --shadow:0 10px 24px -8px rgba(10,40,40,.45);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ground:#0f151c; --paper:#18212b; --paper-2:#1e2934; --well:#141d26;
-    --chrome-a:#22364b; --chrome-b:#16222f; --chrome-ink:#dde8f2; --chrome-ink-2:#8fa4b8;
-    --ink:#e7eef5; --ink-2:#aebccb; --ink-3:#8b9aa9;
-    --rule:#36444f; --rule-strong:#5e7083;
-    --tile:#27333f; --tile-edge:#546575; --tile-hi:#32404e;
-    --accent:#74aae8; --accent-soft:#20344a;
-    --ok:#6cc39a; --ok-soft:#173029; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
-    --shadow-tile:0 1px 0 rgba(0,0,0,.5);
-    --shadow-lift:0 10px 24px -8px rgba(0,0,0,.7);
-  }
-}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --teal:#0b3f42; --teal-2:#0d5254; --teal-ink:#072e30;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --box:#1f2a2a; --well:#101717;
+  --tile:#243030; --tile-edge:#546262;
+  --ok:#6cc39a; --ok-soft:#16302a; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
+}}
 :root[data-theme="dark"]{
-  --ground:#0f151c; --paper:#18212b; --paper-2:#1e2934; --well:#141d26;
-  --chrome-a:#22364b; --chrome-b:#16222f; --chrome-ink:#dde8f2; --chrome-ink-2:#8fa4b8;
-  --ink:#e7eef5; --ink-2:#aebccb; --ink-3:#8b9aa9;
-  --rule:#36444f; --rule-strong:#5e7083;
-  --tile:#27333f; --tile-edge:#546575; --tile-hi:#32404e;
-  --accent:#74aae8; --accent-soft:#20344a;
-  --ok:#6cc39a; --ok-soft:#173029; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
-  --shadow-tile:0 1px 0 rgba(0,0,0,.5);
-  --shadow-lift:0 10px 24px -8px rgba(0,0,0,.7);
+  --teal:#0b3f42; --teal-2:#0d5254; --teal-ink:#072e30;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --box:#1f2a2a; --well:#101717;
+  --tile:#243030; --tile-edge:#546262;
+  --ok:#6cc39a; --ok-soft:#16302a; --no:#e78e86; --no-soft:#331f1e; --warn:#d7a955;
 }
-
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--ground);color:var(--ink);
-  font-family:var(--sans);font-size:15px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
-button{font:inherit;color:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+button,input,textarea{font:inherit;color:inherit}
 
-/* ---------- command bar ---------- */
-.bar{
-  position:sticky;top:0;z-index:40;
-  background:linear-gradient(180deg,var(--chrome-a),var(--chrome-b));
-  color:var(--chrome-ink);
-  border-bottom:1px solid rgba(0,0,0,.45);
-  box-shadow:0 1px 0 rgba(255,255,255,.12) inset;
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 16px;
-}
-.brand{display:flex;align-items:baseline;gap:8px;margin-right:auto;min-width:0}
-.brand b{font-weight:600;letter-spacing:.01em;font-size:15px}
-.brand .sec{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--chrome-ink-2)}
-.meters{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.meter{
-  font-family:var(--mono);font-variant-numeric:tabular-nums;
-  font-size:12.5px;letter-spacing:.02em;
-  background:rgba(0,0,0,.26);border:1px solid rgba(255,255,255,.14);
-  border-radius:3px;padding:5px 9px;color:var(--chrome-ink);
-}
-.meter.low{color:#ffd9d2;border-color:rgba(255,150,140,.6);background:rgba(120,20,10,.45)}
-.meter.hidden-time{color:var(--chrome-ink-2)}
-.btns{display:flex;gap:6px;flex-wrap:wrap}
-.cbtn{
-  appearance:none;cursor:pointer;
-  background:linear-gradient(180deg,#f6f8fa,#d8dee6);
-  color:#1b2735;border:1px solid #7d8b99;border-radius:3px;
-  padding:5px 13px;font-size:13px;font-weight:500;
-  box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 1px 1px rgba(0,0,0,.28);
-}
-.cbtn:hover{background:linear-gradient(180deg,#ffffff,#e4e9ef)}
-.cbtn:active{box-shadow:0 1px 2px rgba(0,0,0,.35) inset;transform:translateY(1px)}
-.cbtn[disabled]{opacity:.42;cursor:default;box-shadow:none;transform:none}
-.cbtn.primary{
-  background:linear-gradient(180deg,#4b7fba,#28568c);color:#fff;border-color:#1c3f68;
-  box-shadow:0 1px 0 rgba(255,255,255,.3) inset,0 1px 1px rgba(0,0,0,.3);
-}
-.cbtn.primary:hover{background:linear-gradient(180deg,#5a8cc6,#2e6099)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.bar :focus-visible{outline-color:#ffffff}
+/* ---------- chrome ---------- */
+.bar{background:var(--teal);color:#fff;display:flex;align-items:center;gap:10px;padding:9px 18px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;margin-right:auto}
+.brand span{opacity:.75;font-size:13px;vertical-align:2px}
+.pill{appearance:none;cursor:pointer;background:var(--teal-2);color:#fff;border:1px solid rgba(255,255,255,.35);
+  border-radius:22px;padding:7px 16px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:7px}
+.pill:hover{background:#178285}
+.pill[disabled]{opacity:.45;cursor:default}
+.pill.primary{background:#fff;color:var(--teal-ink);border-color:#fff}
+.pill.primary:hover{background:#eef5f5}
+.subbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 18px;border-bottom:1px solid var(--rule)}
+.subbar .where{font-weight:700;color:var(--teal-ink);margin-right:auto;font-size:15px}
+.subbar .where i{font-style:normal;color:var(--rule-2);margin:0 8px}
+.clock{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums}
+.clock.low{color:var(--no)}
+.eye{appearance:none;background:none;border:0;cursor:pointer;color:var(--teal-2);font-weight:700;
+  font-size:14px;display:inline-flex;align-items:center;gap:6px}
+:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px}
+.bar :focus-visible{outline-color:#fff}
 
-/* ---------- directions strip ---------- */
-.strip{background:var(--paper-2);border-bottom:1px solid var(--rule);padding:10px 16px}
-.strip-in{max-width:860px;margin:0 auto;display:flex;gap:12px;align-items:flex-start}
-.strip .dirlabel{
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:600;padding-top:2px;white-space:nowrap;
-}
-.strip p{margin:0;color:var(--ink-2);font-size:13.5px;max-width:66ch}
-.strip-in{align-items:flex-start}
-.mode{display:flex;align-items:center;gap:0;margin-left:auto;flex:none}
-.mode-lab{
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:600;margin-right:8px;
-}
-.mode button{
-  appearance:none;cursor:pointer;background:var(--paper);
-  border:1px solid var(--rule);border-right-width:0;
-  color:var(--ink-2);font-size:12px;padding:4px 11px;
-}
-.mode button:first-of-type{border-radius:3px 0 0 3px}
-.mode button:last-of-type{border-right-width:1px;border-radius:0 3px 3px 0}
-.mode button:hover{color:var(--accent)}
-.mode button.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.mode button.on + button{border-left-color:var(--accent)}
-@media (max-width:720px){
-  .strip-in{flex-wrap:wrap}
-  .mode{margin-left:0;margin-top:10px}
-}
+.strip{background:var(--paper-2);border-bottom:1px solid var(--rule);padding:10px 18px}
+.strip-in{max-width:1100px;margin:0 auto;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.strip .lab{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);font-weight:700;padding-top:3px;white-space:nowrap}
+.strip p{margin:0;color:var(--ink-2);font-size:13.5px;max-width:64ch}
+.mode{display:flex;align-items:center;margin-left:auto}
+.mode .lab{margin-right:8px}
+.mode button{appearance:none;cursor:pointer;background:var(--paper);border:1px solid var(--rule);
+  border-right-width:0;color:var(--ink-2);font-size:12.5px;padding:4px 12px}
+.mode button:first-of-type{border-radius:4px 0 0 4px}
+.mode button:last-of-type{border-right-width:1px;border-radius:0 4px 4px 0}
+.mode button.on{background:var(--teal-2);border-color:var(--teal-2);color:#fff}
+.mode button.on + button{border-left-color:var(--teal-2)}
 
-/* ---------- test page ---------- */
-main{padding:22px 16px 120px}
-.page{
-  max-width:860px;margin:0 auto;background:var(--paper);
-  border:1px solid var(--rule);border-radius:2px;
-  box-shadow:0 1px 3px rgba(20,28,38,.08);
-}
-.qhead{
-  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  padding:14px 26px;border-bottom:1px solid var(--rule);flex-wrap:wrap;
-}
-.qnum{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase}
-.qhint{font-size:12.5px;color:var(--ink-3)}
+main{padding:22px 18px 100px}
 
-/* ---------- the conversation ---------- */
-.convo{padding:22px 26px 6px}
-.turn{display:flex;gap:14px;margin-bottom:18px}
-.who{
-  flex:0 0 78px;text-align:right;
-  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
-  color:var(--ink-3);padding-top:6px;
-}
-.turn.you .who{color:var(--accent)}
-.said{
-  margin:0;font-family:var(--serif);font-size:17px;line-height:1.55;
-  color:var(--ink-2);flex:1;min-width:0;
-}
-.rline{
-  margin:0;flex:1;min-width:0;
-  font-family:var(--serif);font-size:17px;line-height:2.5;color:var(--ink);
-}
+/* ---------- Build a Sentence ---------- */
+.page{max-width:900px;margin:0 auto}
+.qhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:8px}
+.qnum{font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.qhint{font-size:13px;color:var(--ink-3)}
+.turn{display:flex;gap:16px;margin:20px 0}
+.turn .who{flex:0 0 74px;text-align:right;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:700;color:var(--ink-3);padding-top:5px}
+.turn.you .who{color:var(--teal-2)}
+.said{margin:0;flex:1;font-size:17px;color:var(--ink-2)}
+.rline{margin:0;flex:1;min-width:0;font-size:17px;line-height:2.5}
 .fixed{white-space:pre-wrap}
-.slot{
-  display:inline-block;vertical-align:baseline;
-  min-width:96px;min-height:34px;
-  border-bottom:2px solid var(--rule-strong);
-  padding:0 4px;margin:0 2px;text-align:center;
-  position:relative;cursor:pointer;
-  transition:background .12s ease,border-color .12s ease;
-}
-.slot[data-empty="1"]::after{
-  content:attr(data-ord);
-  font-family:var(--mono);font-size:11px;color:var(--ink-3);opacity:.45;
-  line-height:34px;
-}
+.slot{display:inline-block;vertical-align:baseline;min-width:92px;min-height:34px;
+  border-bottom:2px solid var(--rule-2);padding:0 4px;margin:0 3px;text-align:center;position:relative;
+  cursor:pointer;transition:background .12s ease,border-color .12s ease}
 .slot.hug{margin-right:0}
-.slot.over,.slot.armed{background:var(--accent-soft);border-bottom-color:var(--accent)}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-
-/* ---------- tiles ---------- */
-.tile{
-  font-family:var(--serif);font-size:16px;line-height:1.2;
-  background:linear-gradient(180deg,var(--tile-hi),var(--tile));
-  border:1px solid var(--tile-edge);border-radius:3px;
-  padding:5px 11px;margin:0;
-  box-shadow:var(--shadow-tile);
-  cursor:grab;user-select:none;touch-action:none;
-  text-align:center;color:var(--ink);display:inline-block;max-width:100%;
-}
-.tile:hover{border-color:var(--accent)}
-.tile.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow-tile)}
+.slot[data-empty="1"]::after{content:attr(data-ord);font-family:var(--mono);font-size:11px;
+  color:var(--ink-3);opacity:.45;line-height:34px}
+.slot.over,.slot.armed{background:var(--box);border-bottom-color:var(--teal-2)}
+.tile{font-size:15.5px;line-height:1.2;background:var(--tile);border:1px solid var(--tile-edge);
+  border-radius:4px;padding:5px 11px;cursor:grab;user-select:none;touch-action:none;
+  display:inline-block;max-width:100%;box-shadow:0 1px 0 rgba(10,40,40,.12)}
+.tile:hover{border-color:var(--teal-2)}
+.tile.sel{border-color:var(--teal-2);background:var(--box);box-shadow:0 0 0 2px var(--box)}
 .tile.lifting{opacity:.3}
-.tile.ghost{
-  position:fixed;z-index:90;pointer-events:none;cursor:grabbing;
-  box-shadow:var(--shadow-lift);transform:rotate(-.6deg);border-color:var(--accent);
-}
-.slot .tile{display:block;width:100%;padding:4px 6px;font-size:15.5px}
+.tile.ghost{position:fixed;z-index:90;pointer-events:none;cursor:grabbing;box-shadow:var(--shadow);border-color:var(--teal-2)}
+.slot .tile{display:block;width:100%;padding:4px 6px;font-size:15px}
+.bank-hd{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  border-top:1px solid var(--rule);padding-top:12px;margin-top:6px}
+.bank-hd h2{margin:0;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.tbtn{appearance:none;cursor:pointer;background:transparent;border:1px solid var(--rule);border-radius:4px;
+  color:var(--ink-2);padding:3px 11px;font-size:12.5px;margin-left:6px}
+.tbtn:hover{border-color:var(--teal-2);color:var(--teal-2)}
+.tbtn[disabled]{opacity:.4;cursor:default}
+.bank{margin:12px 0 0;padding:14px;background:var(--well);border:1px solid var(--rule);border-radius:4px;
+  display:flex;flex-wrap:wrap;gap:10px;min-height:72px;align-items:flex-start;transition:background .12s ease}
+.bank.over{background:var(--box);border-color:var(--teal-2)}
+.bank .empty{color:var(--ink-3);font-size:13.5px;font-style:italic;padding:6px 2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* ---------- bank ---------- */
-.bank-hd{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  border-top:1px solid var(--rule);padding:12px 26px 0;flex-wrap:wrap;
-}
-.bank-hd h2{
-  margin:0;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);font-weight:600;
-}
-.tools{display:flex;gap:6px}
-.tbtn{
-  appearance:none;cursor:pointer;background:transparent;
-  border:1px solid var(--rule);border-radius:3px;color:var(--ink-2);
-  padding:3px 10px;font-size:12px;
-}
-.tbtn:hover{border-color:var(--accent);color:var(--accent)}
-.tbtn[disabled]{opacity:.4;cursor:default;border-color:var(--rule);color:var(--ink-3)}
-.bank{
-  margin:10px 26px 24px;padding:14px;
-  background:var(--well);border:1px solid var(--rule);border-radius:3px;
-  display:flex;flex-wrap:wrap;gap:10px;min-height:72px;align-items:flex-start;
-  transition:background .12s ease;
-}
-.bank.over{background:var(--accent-soft);border-color:var(--accent)}
-.bank .empty{color:var(--ink-3);font-size:13px;font-style:italic;padding:6px 2px}
+/* ---------- written tasks ---------- */
+.two{display:grid;grid-template-columns:minmax(0,40%) minmax(0,60%);gap:30px;max-width:1240px;margin:0 auto}
+.lead p{margin:0 0 12px;font-size:15.5px}
+.lead .do{font-weight:700}
+.lead ul{margin:0 0 12px;padding-left:22px}
+.lead li{margin:0 0 8px;font-size:15.5px}
+.lead .note{color:var(--ink-2)}
+.respond h2{font-size:16px;margin:0 0 10px}
+.headers{font-size:15.5px;margin:0 0 12px;line-height:1.6}
+.tools{display:flex;align-items:center;gap:8px;background:var(--paper-2);border:1px solid var(--rule);
+  border-bottom:0;border-radius:4px 4px 0 0;padding:8px 10px;flex-wrap:wrap}
+.tb{appearance:none;cursor:pointer;background:var(--box);border:1px solid var(--rule);border-radius:4px;
+  padding:6px 16px;font-size:14px;color:var(--ink-2)}
+.tb:hover{border-color:var(--teal-2);color:var(--teal-2)}
+.tb.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.wcw{margin-left:auto;display:flex;align-items:center;gap:10px}
+.wcw b{font-family:var(--mono);font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+textarea{width:100%;min-height:320px;border:1px solid var(--rule);border-radius:0 0 4px 4px;padding:14px;
+  resize:vertical;line-height:1.6;background:var(--paper)}
+textarea:focus{outline:2px solid var(--teal-2);outline-offset:-2px}
+.prof{display:flex;flex-direction:column;align-items:center;margin:18px 0 10px}
+.prof .nm{font-size:14.5px;margin-top:6px}
+.post{display:grid;grid-template-columns:76px 1fr;gap:16px;margin-bottom:20px;align-items:start}
+.post .av{display:flex;flex-direction:column;align-items:center}
+.post .av .nm{font-size:13.5px;margin-top:5px;text-align:center}
+.post p{margin:0;font-size:15.5px;line-height:1.55}
 
-/* ---------- footer ---------- */
-.foot{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--rule);padding:9px 16px}
-.foot-in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
-.status{font-size:13px;color:var(--ink-2)}
-.status b{color:var(--ink);font-weight:600}
-.dots{display:flex;gap:4px;flex-wrap:wrap}
-.dot{
-  width:22px;height:22px;border-radius:2px;border:1px solid var(--rule);
-  background:var(--paper-2);font-family:var(--mono);font-size:10.5px;
-  color:var(--ink-3);cursor:pointer;display:grid;place-items:center;padding:0;
-}
-.dot[data-done="1"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.dot[data-cur="1"]{outline:2px solid var(--ink);outline-offset:1px}
-
-/* ---------- review + report ---------- */
-.panel{max-width:860px;margin:0 auto}
-.panel h1{font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 6px;text-wrap:balance}
-.panel .lede{margin:0 0 20px;color:var(--ink-2);max-width:64ch}
-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:14px}
-.tableWrap{overflow-x:auto;border:1px solid var(--rule)}
-th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule)}
-th{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:var(--paper-2);font-weight:600}
-tbody tr{cursor:pointer}
-tbody tr:hover{background:var(--accent-soft)}
+/* ---------- review, report ---------- */
+.panel{max-width:920px;margin:0 auto}
+.panel h1{font-size:27px;margin:0 0 6px}
+.panel h2.sec{font-size:19px;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--teal-2)}
+.panel .lede{color:var(--ink-2);margin:0 0 22px;max-width:64ch}
+.tableWrap{border:1px solid var(--rule);overflow-x:auto}
+table.rev{width:100%;border-collapse:collapse;font-size:15px;background:var(--paper)}
+table.rev th,table.rev td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule)}
+table.rev th{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);background:var(--paper-2)}
+table.rev tbody tr{cursor:pointer}
+table.rev tbody tr:hover{background:var(--paper-2)}
 td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
-.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;padding:2px 7px}
-.pill.done{background:var(--accent-soft);color:var(--accent)}
-.pill.part{background:var(--no-soft);color:var(--warn)}
-.pill.none{background:var(--well);color:var(--ink-3)}
-.pill.ok{background:var(--ok-soft);color:var(--ok)}
-.pill.no{background:var(--no-soft);color:var(--no)}
-.score{
-  display:flex;gap:24px;align-items:baseline;flex-wrap:wrap;
-  background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--accent);
-  padding:18px 22px;margin-bottom:22px;
-}
-.score .big{font-family:var(--mono);font-size:38px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
-.score .cap{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.rep{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--rule-strong);padding:16px 20px;margin-bottom:12px}
-.rep.right{border-left-color:var(--ok)}
-.rep.wrong{border-left-color:var(--no)}
-.rep-hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
-.rep-hd .n{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
-.rep-hd .tgt{font-size:13px;font-weight:600;color:var(--ink);margin-right:auto}
-.tier{
-  font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
-  color:var(--warn);border:1px solid var(--warn);border-radius:2px;
-  padding:1px 5px;margin-left:4px;vertical-align:1px;
-}
-.ctx{font-family:var(--serif);font-size:14.5px;color:var(--ink-3);font-style:italic;margin:0 0 10px}
-.sent{font-family:var(--serif);font-size:16px;line-height:1.6;margin:0 0 4px;color:var(--ink)}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:2px 8px}
+.tag.done{background:var(--box);color:var(--teal-ink)}
+.tag.none{background:var(--paper-2);color:var(--ink-3)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.no{background:var(--no-soft);color:var(--no)}
+.tag.hard{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+.score{display:flex;gap:30px;flex-wrap:wrap;align-items:baseline;border:1px solid var(--rule);
+  border-left:5px solid var(--teal-2);padding:20px 24px;margin-bottom:24px}
+.score .big{font-family:var(--mono);font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.score .cap{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.card{border:1px solid var(--rule);border-left:5px solid var(--rule-2);padding:16px 20px;margin-bottom:12px}
+.card.right{border-left-color:var(--ok)}
+.card.wrong{border-left-color:var(--no)}
+.card.task{border-left-color:var(--teal-2);padding:18px 22px;margin-bottom:22px}
+.card h3{font-size:18px;margin:0 0 4px}
+.card .sub{color:var(--ink-3);font-size:13.5px;margin:0 0 16px}
+.rep-hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.rep-hd .n{font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
+.rep-hd .ty{font-size:13px;font-weight:700;margin-right:auto}
+.slab{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:16px 0 6px}
+.sent{font-size:16px;line-height:1.6;margin:0 0 4px}
 .sent.bad{color:var(--no)}
-.slab{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin:12px 0 2px}
-.why{margin:10px 0 0;font-size:14px;color:var(--ink-2);max-width:70ch}
-.why i{font-family:var(--serif);font-style:italic;color:var(--ink)}
+.why{margin:10px 0 0;font-size:14.5px;color:var(--ink-2);max-width:70ch}
+.why i{font-style:italic;color:var(--ink)}
+.resp{white-space:pre-wrap;background:var(--paper-2);border:1px solid var(--rule);padding:14px;
+  font-size:15px;line-height:1.6;border-radius:3px}
+.resp.empty{color:var(--ink-3);font-style:italic}
+.checks{list-style:none;margin:0;padding:0}
+.checks li{display:grid;grid-template-columns:24px 120px 1fr;gap:10px;padding:6px 0;
+  border-bottom:1px solid var(--rule);font-size:14.5px;align-items:baseline}
+.checks li:last-child{border-bottom:0}
+.checks .m{font-weight:700}
+.checks .yes .m{color:var(--ok)}
+.checks .no .m{color:var(--no)}
+.checks .lbl{font-weight:700;color:var(--ink-2)}
+.rubric{border-collapse:collapse;width:100%;font-size:14.5px;margin-top:6px}
+.rubric th,.rubric td{border-bottom:1px solid var(--rule);padding:8px 6px;text-align:left}
+.rubric th{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.rubric td.crit{font-weight:700}
+.rubric .scale{display:flex;gap:4px}
+.rubric .scale label{cursor:pointer;display:inline-block}
+.rubric .scale input{position:absolute;opacity:0;pointer-events:none}
+.rubric .scale span{display:inline-block;border:1px solid var(--rule);border-radius:4px;padding:3px 9px;font-size:13.5px}
+.rubric .scale input:checked + span{background:var(--teal-2);border-color:var(--teal-2);color:#fff}
+.selfscore{margin-top:12px;font-size:15px}
+.selfscore b{font-family:var(--mono);font-size:19px}
+.legend{font-size:13.5px;color:var(--ink-2);margin:10px 0 0}
+.legend b{color:var(--ink)}
 
-/* ---------- help ---------- */
-.scrim{position:fixed;inset:0;z-index:60;background:rgba(14,22,32,.62);display:grid;place-items:center;padding:20px}
-.modal{background:var(--paper);border:1px solid var(--rule);border-radius:3px;max-width:620px;width:100%;max-height:86vh;overflow:auto;box-shadow:var(--shadow-lift)}
-.modal header{background:linear-gradient(180deg,var(--chrome-a),var(--chrome-b));color:var(--chrome-ink);padding:11px 20px;font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--rule);padding:9px 18px}
+.foot-in{max-width:1100px;margin:0 auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.status{font-size:14px;color:var(--ink-2)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot-b{width:24px;height:24px;border:1px solid var(--rule);background:var(--paper-2);font-family:var(--mono);
+  font-size:11px;color:var(--ink-3);cursor:pointer;border-radius:3px;padding:0}
+.dot-b[data-done="1"]{background:var(--teal-2);border-color:var(--teal-2);color:#fff}
+.dot-b[data-cur="1"]{outline:2px solid var(--ink);outline-offset:1px}
+.steps{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink-3)}
+.steps .st{padding:2px 10px;border:1px solid var(--rule);border-radius:12px}
+.steps .st.on{background:var(--teal-2);border-color:var(--teal-2);color:#fff;font-weight:700}
+.steps .st.done{color:var(--teal-ink);border-color:var(--teal-2)}
+
+.scrim{position:fixed;inset:0;background:rgba(10,30,30,.6);display:grid;place-items:center;padding:20px;z-index:60}
+.modal{background:var(--paper);border-radius:4px;max-width:640px;width:100%;max-height:86vh;overflow:auto}
+.modal header{background:var(--teal);color:#fff;padding:12px 20px;font-weight:700}
 .modal .body{padding:20px}
-.modal h3{margin:18px 0 6px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.modal h3{margin:16px 0 6px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 .modal h3:first-child{margin-top:0}
-.modal p,.modal li{font-size:14px;color:var(--ink-2);margin:0 0 8px}
-.modal ul{margin:0 0 8px;padding-left:20px}
-.modal kbd{font-family:var(--mono);font-size:11.5px;background:var(--well);border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;padding:1px 5px;color:var(--ink)}
-.modal footer{padding:0 20px 20px;display:flex;justify-content:flex-end;gap:8px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-
-@media (max-width:560px){
-  .brand .sec{display:none}
-  .qhead,.bank-hd{padding-left:16px;padding-right:16px}
-  .convo{padding:18px 16px 4px}
-  .bank{margin-left:16px;margin-right:16px}
+.modal p,.modal li{font-size:15px;color:var(--ink-2);margin:0 0 8px}
+.modal kbd{font-family:var(--mono);font-size:11.5px;background:var(--box);border:1px solid var(--rule);
+  border-bottom-width:2px;border-radius:3px;padding:1px 5px;color:var(--ink)}
+.modal footer{padding:0 20px 20px;display:flex;justify-content:flex-end}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:860px){
+  .two{grid-template-columns:1fr;gap:20px}
+  textarea{min-height:240px}
   .turn{flex-direction:column;gap:2px}
-  .who{flex:none;text-align:left;padding-top:0}
-  .slot{min-width:80px}
+  .turn .who{flex:none;text-align:left;padding-top:0}
+  .checks li{grid-template-columns:22px 1fr;row-gap:2px}
+  .checks .lbl,.checks .d{grid-column:2}
+  .strip-in{flex-wrap:wrap}
+  .mode{margin-left:0;margin-top:8px}
 }
 </style>
 </head>
 <body>
 
 <div class="bar">
-  <div class="brand">
-    <b>Build a Sentence</b>
-    <span class="sec">Writing &middot; Task 1 of 3</span>
-  </div>
-  <div class="meters">
-    <span class="meter" id="clock">06:50</span>
-    <span class="meter" id="counter">Question 1 of 10</span>
-  </div>
-  <div class="btns">
-    <button class="cbtn" id="bTime">Hide Time</button>
-    <button class="cbtn" id="bHelp">Help</button>
-    <button class="cbtn" id="bReview">Review</button>
-    <button class="cbtn" id="bBack">Back</button>
-    <button class="cbtn primary" id="bNext">Next</button>
-  </div>
+  <div class="brand">toefl ibt<span>&reg;</span></div>
+  <button class="pill" id="bHelp">Help <b aria-hidden="true">?</b></button>
+  <button class="pill" id="bReview">Review <b aria-hidden="true">&#9782;</b></button>
+  <button class="pill" id="bBack"><b aria-hidden="true">&lsaquo;</b> Back</button>
+  <button class="pill primary" id="bNext">Next <b aria-hidden="true">&rsaquo;</b></button>
 </div>
-
+<div class="subbar">
+  <div class="where"><b>Writing</b><i>|</i><span id="where">Question 1 of 10</span></div>
+  <span class="clock" id="clock">06:50</span>
+  <button class="eye" id="bTime"><b aria-hidden="true">&#128065;</b> Hide Time</button>
+</div>
 <div class="strip" id="strip">
   <div class="strip-in">
-    <span class="dirlabel">Directions</span>
-    <p>You will move words and phrases into the blanks so that they form a grammatical sentence that fits the conversation. For some questions there are more words than blanks; move only the words you need. Each sentence is scored correct or incorrect &mdash; there is no partial credit.</p>
+    <span class="lab">Directions</span>
+    <p>Move the words and phrases into the blanks so that they form a grammatical sentence that fits
+      the conversation. For some questions there are more words than blanks; move only the words you
+      need. Each sentence is scored correct or incorrect.</p>
     <div class="mode" role="group" aria-label="Question difficulty">
-      <span class="mode-lab">Level</span>
+      <span class="lab">Level</span>
       <button type="button" data-mode="mixed" class="on">Mixed</button>
       <button type="button" data-mode="standard">Standard</button>
       <button type="button" data-mode="hard">Hard</button>
@@ -359,15 +279,7 @@ td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
 <div class="sr" id="live" aria-live="polite"></div>
 
 <script>
-/* ============================================================
-   Question bank. PATTERNS holds one entry per grammar target;
-   BANK holds the items, each encoded compactly as
-     [patternIndex, speaker, contextLine, frame, answer, extras]
-   where `frame` marks each blank with a lone underscore.
-   Generated by scripts/build_bank.py — do not hand-edit the
-   region between the BANK markers.
-   ============================================================ */
-/* BANK:START */
+/* CONTENT:START */
 const PATTERNS = [
 {"target": "Word order in an embedded question", "why": "An embedded question keeps statement word order &mdash; {ans} &mdash; because the auxiliary of a direct question belongs only to a direct question."},
 {"target": "Embedded yes/no question with <i>whether</i>", "why": "A yes/no question embedded inside a statement is introduced by <i>whether</i> or <i>if</i> and keeps statement word order: {ans}."},
@@ -1422,25 +1334,27 @@ const BANK = [
 [49, "Trainer", "Is the seminar assessed?", "That varies with _ _ _ _ .", ["how", "the convenor", "designs the", "term"], ["that"], 0],
 [49, "Mentor", "Can I keep the data?", "_ _ _ _ consent _ _ .", ["it", "depends", "on what", "the", "form actually", "says"], [], 1]
 ];
-/* BANK:END */
+const WRITING = {"emails": [{"id": "coursefit", "to": "Dr. Reyes", "subject": "Question about ANTH 210", "scenario": "You are choosing modules for next term and you are interested in ANTH 210, which is taught by Dr. Reyes. The course description mentions fieldwork, but it does not say how much previous experience students need. You want to know whether the course would suit you before you register.", "bullets": [["purpose", "Explain why the course interests you."], ["request", "Ask what preparation or background the course expects."], ["thanks", "Thank Dr. Reyes for taking the time to respond."]], "topic": ["course", "fieldwork", "module", "register", "term"], "model": "Dear Dr. Reyes,\n\nI am writing about ANTH 210, which I am hoping to take next term. I became interested in the subject after a first-year module on kinship, and the fieldwork component attracts me most, since I would like to base my dissertation on community research.\n\nBefore I register, could you tell me what background the course assumes? In particular, I would like to know whether students are expected to have any previous fieldwork experience, and whether there is reading I should do over the break.\n\nThank you very much for taking the time to reply.\n\nBest regards,\nMaya Lindqvist"}, {"id": "heater", "to": "Building Office", "subject": "Heating not working in Flat 4B", "scenario": "The heating in your flat has not worked for three days and the weather has turned cold. You have already reported it once through the online form but have had no reply. You are at home most mornings this week.", "bullets": [["purpose", "Describe the problem and say when it started."], ["request", "Ask for someone to come and repair it."], ["details", "Say when you are available to let an engineer in."]], "topic": ["heating", "flat", "cold", "repair", "engineer"], "model": "Dear Building Office,\n\nI am writing about the heating in Flat 4B, which stopped working on Monday evening. The radiators are completely cold, although the hot water still runs normally. I reported the fault through the online form on Tuesday but have not yet had a reply.\n\nCould an engineer be sent this week? The temperature has dropped sharply and the flat is now difficult to work in.\n\nI am at home every morning until one o'clock, and I can also be there on Friday afternoon if that is easier. Please let me know what time to expect someone.\n\nThank you for your help.\n\nYours sincerely,\nTomas Beltran"}, {"id": "dinner", "to": "Professor Okafor", "subject": "Department dinner on 14 March", "scenario": "You have been invited to your department's annual dinner, but you will be away at a family event that weekend. You would like to decline politely and you would also like to stay involved with the department's social events.", "bullets": [["thanks", "Thank Professor Okafor for the invitation."], ["purpose", "Explain why you cannot attend."], ["request", "Ask to be told about future events."]], "topic": ["dinner", "invitation", "attend", "event", "department"], "model": "Dear Professor Okafor,\n\nThank you very much for inviting me to the department dinner on 14 March. I was glad to be included, and I had been looking forward to meeting the new research students.\n\nUnfortunately I will not be able to come, because my sister is getting married that weekend and I will be away from the city from the Thursday until the following Monday, so there is no way for me to return in time.\n\nI would be grateful if you could keep me on the list for future events, as I would very much like to attend the next one.\n\nWith best wishes,\nNadia Haddad"}, {"id": "loan", "to": "Library Loans Desk", "subject": "Request to extend a loan", "scenario": "A book you borrowed is due back on Friday, but you still need it to finish an essay that is due the following Wednesday. The library website says extensions are possible but must be requested in writing.", "bullets": [["purpose", "Explain why you still need the book."], ["request", "Ask for the loan to be extended."], ["details", "Say how long you need it for."]], "topic": ["book", "loan", "essay", "extend", "library"], "model": "Dear Loans Desk,\n\nI am writing to ask whether the loan on Patterns of Settlement, which is due back this Friday, could be extended. I am using it for an essay on rural land use that must be submitted next Wednesday, and two of the chapters are central to my argument.\n\nCould the book be renewed until Thursday 20 November? That would give me time to finish the essay and return it the following morning.\n\nIf the title has been requested by someone else, I understand that an extension may not be possible, and I would be happy to return it on time.\n\nThank you for considering this.\n\nYours faithfully,\nEun-ji Park"}, {"id": "club", "to": "Sofia Marchetti", "subject": "Joining the photography society", "scenario": "You saw a poster for the university photography society and you would like to join. The poster gives the president's email address but does not say when the society meets or whether beginners are welcome.", "bullets": [["purpose", "Explain why you want to join."], ["request", "Ask when and where the society meets."], ["details", "Mention any experience or equipment you have."]], "topic": ["photography", "society", "join", "meet", "camera"], "model": "Dear Sofia,\n\nI saw the photography society's poster in the library this morning and I would very much like to join. I have been taking photographs since school, mostly of buildings, and I would like to learn from people who work in other styles.\n\nCould you tell me when and where the society meets, and whether there is a membership fee? I would also like to know whether complete beginners come along, since one of my flatmates is interested too.\n\nI own a digital camera and a tripod, and I am happy to bring them to meetings if that is useful.\n\nThank you, and I hope to hear from you soon.\n\nBest wishes,\nArun Chatterjee"}, {"id": "shift", "to": "Mr. Danso", "subject": "Request to change a shift", "scenario": "You work part-time in a campus shop. You are scheduled to work on Thursday afternoon, but an examination has been moved to that time. You would like to change the shift and you are free at several other times.", "bullets": [["purpose", "Explain why you cannot work the shift."], ["request", "Ask whether the shift can be changed."], ["details", "Say when else you could work."]], "topic": ["shift", "work", "examination", "Thursday", "swap"], "model": "Dear Mr. Danso,\n\nI am writing about my shift on Thursday 12 May, from two until six. My statistics examination has been rescheduled to that afternoon, so I will not be able to work.\n\nWould it be possible to move the shift to another day that week? I could work all day on Wednesday, or on Friday after eleven, and I am also free on the Saturday morning if the shop needs cover then.\n\nI am sorry for the short notice; the change to the timetable was only announced yesterday. I am happy to swap with anyone who would prefer the Thursday.\n\nThank you for your understanding.\n\nBest regards,\nLeila Amrani"}, {"id": "conference", "to": "Conference Registration", "subject": "Dietary requirements", "scenario": "You have registered for a two-day academic conference. The registration form did not ask about food, and the programme says lunch is provided on both days. You cannot eat dairy products.", "bullets": [["purpose", "Explain your dietary requirement."], ["request", "Ask whether suitable food can be arranged."], ["thanks", "Thank the organisers for their help."]], "topic": ["conference", "lunch", "dietary", "food", "registration"], "model": "Dear Registration Team,\n\nI registered last week for the Coastal Systems conference on 8 and 9 June, and I am writing about the lunches provided on both days. I am unable to eat dairy products of any kind, including butter and cheese, and the registration form did not include a question about food.\n\nCould a dairy-free option be arranged for me? If that is difficult, I would be glad simply to know in advance what will be served so that I can bring something suitable.\n\nMy registration reference is CS-2214.\n\nThank you very much for your help with this.\n\nYours sincerely,\nHenrik Solberg"}, {"id": "groupmeet", "to": "Bianca Ferreira", "subject": "Meeting about the group report", "scenario": "You are working with three classmates on a group report that is due in two weeks. Nobody has arranged a meeting yet and you would like to organise one. You are writing to one member of the group who is coordinating.", "bullets": [["purpose", "Suggest a time and place to meet."], ["request", "Ask whether the others are free then."], ["details", "Say what everyone should bring or prepare."]], "topic": ["meeting", "report", "group", "deadline", "prepare"], "model": "Hi Bianca,\n\nSince the report is due on the 24th and we have not met yet, I thought I would suggest a time. Would Wednesday at four in the library group room work? I have booked it provisionally for an hour, and it is easy to cancel.\n\nCould you check with Marco and Tade whether that suits them? If Wednesday is difficult, I am also free on Thursday morning before eleven.\n\nIt would help if everyone came with a rough outline of their own section, even if it is only notes. That way we can see where the gaps and the overlaps are before we start writing.\n\nThanks, and see you soon.\n\nAmara"}], "discussions": [{"id": "attendance", "professor": "Dr. Whitfield", "course": "education policy", "question": "This week we are looking at how universities structure their teaching. Some institutions require students to attend lectures and record attendance formally. Others argue that adults should decide for themselves how to use their time, particularly when recordings are available. Should attendance be compulsory?", "students": [["Priya", "I think attendance should be required. Students who skip lectures often fall behind without noticing, and by the time the exam arrives it is too late to recover. A rule protects people from their own short-term decisions."], ["Mateo", "I disagree. Treating adults like schoolchildren damages the relationship between staff and students. If a lecture is worth attending, people will come; if it is not, compulsory attendance only hides the problem."]], "model": "I lean towards Mateo's position, though for a different reason. Compulsory attendance measures the wrong thing. A student sitting in the back row answering messages is recorded as present, while one who watches the recording twice and comes to office hours is recorded as absent. The rule rewards physical presence rather than engagement.\n\nPriya is right that some students drift, but attendance registers are a blunt way to catch that. A weekly problem set, marked but lightly weighted, would identify a struggling student far earlier and would tell the lecturer what specifically was not understood. My own department moved to that system two years ago, and the number of students failing the January examination fell noticeably."}, {"id": "transport", "professor": "Dr. Alvarez", "course": "urban economics", "question": "Many cities now subsidise public transport heavily, and a few have made it free at the point of use. Supporters say this reduces congestion and emissions. Critics say the money would achieve more if it were spent on the quality of the service. Which approach would you favour?", "students": [["Johanna", "Free transport is the clearest way to change behaviour. Price is the first thing people consider, and removing it entirely makes the bus the obvious choice for short journeys that would otherwise be driven."], ["Kwame", "I would spend the money on frequency instead. People do not avoid buses because of the fare; they avoid them because the wait is unpredictable. A free service that comes twice an hour still loses to a car."]], "model": "Kwame's argument matches what I have seen in my own city. Fares here were cut by half three years ago and ridership barely moved, because the evening service still ends at nine. People who finish work late simply cannot rely on it at any price.\n\nThat said, I would not dismiss Johanna's point entirely. Price matters a great deal for people on low incomes, for whom a daily fare is a real constraint. The strongest policy is probably targeted rather than universal: free travel for students and low-income residents, with the remaining money spent on running buses later and more often. That combines the fairness Johanna wants with the reliability Kwame is asking for."}, {"id": "climateaction", "professor": "Dr. Ibarra", "course": "environmental studies", "question": "We often hear that individuals should change their habits to address climate change, and equally often that only government regulation can achieve change at the necessary scale. Some argue that emphasising personal responsibility distracts from policy. Where would you put the emphasis?", "students": [["Theo", "Policy has to come first. A single household changing its diet is insignificant beside a single power station, and focusing on individual guilt lets the largest emitters avoid scrutiny."], ["Sanne", "Individual choices are not separate from policy. Governments follow public opinion, and public opinion is shaped by what people already do. Habits build the constituency that makes regulation possible."]], "model": "Sanne identifies something that Theo's argument misses: the two are not alternatives on a menu. Regulation does not appear from nowhere. For example, the countries that introduced strict building standards were generally those where insulation and efficient heating had already become normal, so the rules confirmed a practice rather than imposing one.\n\nI would still agree with Theo that the scale is unequal, and that campaigns urging people to feel guilty about small purchases are a poor use of attention. But the useful individual action is political rather than domestic. Voting, joining a local campaign or pressing an employer to change its energy contract does more than adjusting a recycling routine, and it leads directly to the policy Theo wants."}, {"id": "coding", "professor": "Dr. Lindqvist", "course": "curriculum design", "question": "Several countries now teach programming to every school student, on the grounds that it is a basic literacy. Others argue that limited curriculum time is better spent on reading, mathematics and reasoning, which transfer more widely. Should programming be compulsory for all students?", "students": [["Rafael", "Yes. Software shapes almost every job now, and a student who cannot read code is dependent on people who can. It is the modern equivalent of not being able to read a contract."], ["Yuki", "I am not convinced. Most students will never write software professionally, and the hours would come out of something else. Teaching how algorithms affect people matters more than teaching syntax."]], "model": "Yuki draws the distinction I think the debate needs, but I would push it further. The argument for compulsory programming usually smuggles in two different claims: that students should understand computation, and that they should be able to produce working code. Only the first is genuinely general.\n\nA student who understands that a ranking system encodes somebody's choices, and that those choices can be wrong, is equipped to question a decision made about them by an algorithm. That does not require writing a loop. Rafael's comparison with reading a contract actually supports this, since reading a contract and drafting one are different skills, and we require only the first. I would teach computational reasoning to everyone and programming as an option."}, {"id": "carfree", "professor": "Dr. Baumann", "course": "urban planning", "question": "A number of European cities have closed their central districts to private cars. Residents and retailers often oppose these schemes before they begin and support them afterwards. Are car-free centres a reasonable policy, and what should planners do about the opposition?", "students": [["Camille", "They work, and the pattern of opposition before and support after is the strongest evidence we have. Planners should proceed and let the result answer the objections."], ["Dmitri", "That reasoning worries me. The people who suffer most are those who cannot easily change how they travel, and they are not the ones surveyed afterwards, because some of them have already left."]], "model": "Dmitri raises the more serious objection, and in my view Camille's evidence does not answer it. A survey taken two years after a scheme opens samples the people who remained. If a delivery driver or a carer moved their work elsewhere because access became impractical, their dissatisfaction is invisible in the data that is used to declare the policy a success.\n\nThat is an argument for designing the exceptions carefully rather than for abandoning the policy. Cities that issue permits for residents with limited mobility, tradespeople and deliveries within set hours tend to face much less resistance, because the scheme distinguishes between traffic that has an alternative and traffic that does not. Camille is right about the direction; Dmitri is right about who pays for it."}, {"id": "groupwork", "professor": "Dr. Nakamura", "course": "learning and instruction", "question": "Group assessment is common in university courses, and opinions about it are strong. Supporters point to collaboration as a skill employers want. Critics say it rewards and punishes students for other people's work. Should courses assess group projects?", "students": [["Olu", "Group work should stay. Almost no professional work is done alone, and learning to divide a task, manage disagreement and hold others to a deadline is genuinely difficult."], ["Hana", "The skill is worth teaching, but grading it is unfair. One unreliable member can lower a mark that is supposed to measure what I personally know and can do."]], "model": "Both positions seem to me to be about different things, and separating them resolves most of the disagreement. Olu is describing what group work teaches; Hana is describing what a grade is supposed to report. A course can keep the first without letting it distort the second.\n\nThe design I would prefer assesses the process rather than the artefact. Each student submits a short individual account of their contribution and of how the group handled a disagreement, and that is what is marked. The shared report still has to be produced, so the collaborative work Olu values still happens, but Hana's grade no longer depends on whether a stranger submitted their section on time. My last course used this, in practice, and the complaints stopped almost entirely."}, {"id": "remotework", "professor": "Dr. Achebe", "course": "organisational behaviour", "question": "Since the pandemic, many organisations have kept some form of remote working. Managers frequently claim that collaboration and training suffer, while employees point to concentration and commuting time. What is your view on where knowledge work should happen?", "students": [["Ingrid", "Remote work suits experienced staff and harms new ones. I learned my job by overhearing colleagues solve problems, and that does not happen on a scheduled call."], ["Felipe", "Offices were never as collaborative as managers remember. Most of my day there was spent in meetings that could have been messages, interrupted constantly."]], "model": "Ingrid's point about learning by overhearing is the one I find hardest to dismiss, and I do not think Felipe's reply addresses it. He is describing the cost of the office to somebody who already knows the job. She is describing its value to somebody who does not. Both can be true at once.\n\nWhat follows, therefore, is that the policy should differ by experience rather than by role. A team where three people joined this year has a different need from one where everybody has five years behind them. Organisations that set a single company-wide number of office days are answering a question nobody asked. I would give teams the decision and require only that new staff have someone experienced present on the days they attend."}, {"id": "sugartax", "professor": "Dr. Mensah", "course": "public health policy", "question": "Taxes on sugary drinks have now been introduced in dozens of countries. Evaluations generally show that manufacturers reformulate their products and that purchases fall. Critics argue that such taxes fall hardest on the people with the least money. Do you support them?", "students": [["Aoife", "I support them. The reformulation effect alone justifies the policy, since it lowers sugar intake for everyone without requiring any individual to change what they buy."], ["Viktor", "Any flat tax on a product takes a larger share of a small income. Telling people that the policy is for their own good does not change who actually pays it."]], "model": "Aoife's point about reformulation is the strongest argument in this debate and it largely answers Viktor. If manufacturers cut sugar to stay below a threshold, the benefit reaches people who never change their purchase and therefore never pay the tax at all. The revenue is almost a side effect.\n\nViktor is right that the burden is uneven where reformulation does not happen, which is why the design matters so much. A tax with a clear threshold and a long lead time gives producers a reason to change the recipe; a flat levy on every drink simply raises prices. I would also want the revenue spent visibly on something in the same communities, since a tax that disappears into general funds is much harder to defend."}, {"id": "artefacts", "professor": "Dr. Rosenberg", "course": "museum studies", "question": "Museums in Europe and North America hold large collections acquired during colonial periods. Requests for return have increased, and institutions respond very differently. Some argue that universal museums serve a global public; others that objects belong with the communities that made them. What is your position?", "students": [["Lucia", "Objects should go back when a community asks for them. The argument that a large museum serves everyone is easier to make when you live near one."], ["Emeka", "I agree in principle, but conservation and access are real issues. A return that puts an object somewhere it cannot be cared for helps nobody."]], "model": "Emeka's caution is reasonable but it has been used badly for a long time, and I think Lucia is right to be impatient with it. Conservation capacity is not a fixed property of a country; it is the result of funding decisions. When a holding museum cites it as a reason to refuse, it is often pointing at a gap it could help close.\n\nThe practical route is probably to separate ownership from location. Transferring title first acknowledges the claim, and the object can then be lent back for an agreed period while facilities are built. Several recent agreements have worked this way. It gives Lucia the principle and Emeka the safeguard without making one wait for the other."}, {"id": "shortvideo", "professor": "Dr. Farrow", "course": "media psychology", "question": "Short-form video now occupies a large share of young people's screen time, and commentary about its effect on concentration is widespread. The research is less settled than the commentary suggests. How convinced are you that this format is changing how people attend to information?", "students": [["Marisol", "I am convinced. Every generation of teachers I have spoken to reports that sustained reading has become harder to assign, and that change tracks the arrival of these platforms."], ["Noah", "Teacher reports are not evidence of cause. The same complaint was made about television and about novels before that. Correlation over one decade proves very little."]], "model": "Noah is right about the history, and the pattern he describes should make us cautious, but I do not think it settles the question. The earlier panics concerned what people consumed. This one concerns the interval at which attention is rewarded, which is a different mechanism and one that can be measured.\n\nWhat would persuade me is longitudinal work that follows the same individuals and controls for sleep, since short video is used heavily at night and sleep loss alone degrades sustained attention. Until that exists, Marisol's teachers are reporting something real but cannot tell us what caused it. I would treat the effect as plausible and unproven, which is an uncomfortable position but the honest one."}], "cues": {"purpose": ["because", "since", "interested", "reason", "i am writing", "i would like to", "writing about", "writing to", "hoping"], "request": ["could", "would it be possible", "please", "may i", "i would like to know", "whether", "can you", "would you"], "details": [], "thanks": ["thank", "thanks", "grateful", "appreciate"]}};
+/* CONTENT:END */
 
 const SET_SIZE = 10;
+const LIMIT = [6 * 60 + 50, 7 * 60, 10 * 60];   // sentences, email, discussion
+const $ = id => document.getElementById(id);
+const main = $("main"), foot = $("foot"), live = $("live");
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const say = m => { live.textContent = m; };
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const wc = t => (t.trim().match(/\S+/g) || []).length;
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const fmt = s => { s = Math.max(0, s);
+  return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`; };
 
-/* a frame string becomes fixed runs and blanks */
-function parseFrame(str){
-  const parts = []; let run = [];
-  for (const tok of str.split(/\s+/)){
-    if (tok === "_"){
-      if (run.length){ parts.push({t:"f", v:run.join(" ")}); run = []; }
-      parts.push({t:"s"});
-    } else run.push(tok);
-  }
-  if (run.length) parts.push({t:"f", v:run.join(" ")});
-  let k = -1;
-  for (const p of parts) if (p.t === "s") p.i = ++k;
-  return parts;
-}
+const OPINION = /\b(i think|i believe|in my view|i would|i agree|i disagree|my view|i lean|i am convinced|i find|seems to me|to my mind)\b/i;
+const SUPPORT = /\b(because|since|for example|for instance|in practice|one reason|this is why|which is why|so that|therefore|as a result|the result|given that|after all|evidence|research|studies|study|data|found that|shows that|suggests|my own)\b/i;
+const GREETING = /^\s*(dear|hi|hello|good morning|good afternoon)\b/i;
+const SIGNOFF = /\b(sincerely|regards|best wishes|best,|yours|thanks,|thank you,)/i;
 
+/* ---------- sentence bank ---------- */
 function shuffle(a){
   for (let i = a.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -1448,364 +1362,211 @@ function shuffle(a){
   }
   return a;
 }
-
+function parseFrame(str){
+  const parts = []; let run = [];
+  for (const tok of str.split(/\s+/)){
+    if (tok === "_"){ if (run.length){ parts.push({t:"f", v:run.join(" ")}); run = []; } parts.push({t:"s"}); }
+    else run.push(tok);
+  }
+  if (run.length) parts.push({t:"f", v:run.join(" ")});
+  let k = -1;
+  for (const p of parts) if (p.t === "s") p.i = ++k;
+  return parts;
+}
 function cite(sentence){ return "<i>" + sentence.replace(/\.$/, "") + "</i>"; }
 function makeItem(row){
   const [p, who, says, frame, answer, extras, hard] = row;
-  const pat = PATTERNS[p];
-  const parts = parseFrame(frame);
+  const pat = PATTERNS[p], parts = parseFrame(frame);
   const sentence = cap(parts.map(q => q.t === "f" ? q.v : answer[q.i]).join(" "))
-    .replace(/\s+([,.;:?!])/g, "$1");
-  return {
-    pat, who, says, parts,
-    answer: answer.slice(),
-    extras: extras.slice(),
-    bank: shuffle(answer.concat(extras)),
-    target: pat.target,
-    hard: !!hard,
-    why: pat.why.replace(/\{ans\}(\.)?/, (_m, dot) => cite(sentence) + (/[?!]<\/i>$/.test(cite(sentence)) ? "" : (dot || "")))
-  };
+    .replace(/\s+([,.?!;:])/g, "$1");
+  return {pat, who, says, parts, answer: answer.slice(), extras: extras.slice(),
+    bank: shuffle(answer.concat(extras)), target: pat.target, hard: !!hard,
+    why: pat.why.replace(/\{ans\}(\.)?/, (_m, dot) => cite(sentence) + (/[?!]<\/i>$/.test(cite(sentence)) ? "" : (dot || "")))};
 }
-
-/* the bank shows the opening chunk lowercased, exactly as the real task does;
-   the page capitalises it once it is dropped into the first blank */
-function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
-
-/* difficulty is a property of the chunking, so a target appears in both
-   tiers; group by target within each tier */
 function byTarget(rows){
   const g = new Map();
   rows.forEach(r => { if (!g.has(r[0])) g.set(r[0], []); g.get(r[0]).push(r); });
   return [...g.values()];
 }
-const TIER = {
-  standard: byTarget(BANK.filter(r => !r[6])),
-  hard:     byTarget(BANK.filter(r =>  r[6]))
-};
-
-let MODE = "mixed";   // mixed | standard | hard
-
-/* one item per target, so a set never drills the same structure twice */
-function pick(groups, n){
+const TIER = {standard: byTarget(BANK.filter(r => !r[6])), hard: byTarget(BANK.filter(r => r[6]))};
+let MODE = "mixed";
+function pickGroups(groups, n){
   const rows = [];
-  for (const g of shuffle(groups.slice())){
-    if (rows.length === n) break;
-    rows.push(g[Math.floor(Math.random() * g.length)]);
-  }
-  while (rows.length < n && groups.length){
-    const g = groups[Math.floor(Math.random() * groups.length)];
-    rows.push(g[Math.floor(Math.random() * g.length)]);
-  }
+  for (const g of shuffle(groups.slice())){ if (rows.length === n) break; rows.push(pick(g)); }
+  while (rows.length < n && groups.length) rows.push(pick(pick(groups)));
   return rows;
 }
-
 function drawSet(){
   const half = SET_SIZE >> 1;
-  const rows = MODE === "standard" ? pick(TIER.standard, SET_SIZE)
-             : MODE === "hard"     ? pick(TIER.hard, SET_SIZE)
-             : pick(TIER.standard, half).concat(pick(TIER.hard, SET_SIZE - half));
+  const rows = MODE === "standard" ? pickGroups(TIER.standard, SET_SIZE)
+             : MODE === "hard"     ? pickGroups(TIER.hard, SET_SIZE)
+             : pickGroups(TIER.standard, half).concat(pickGroups(TIER.hard, SET_SIZE - half));
   return shuffle(rows).map(makeItem);
 }
 
+/* ---------- state ---------- */
 let ITEMS = drawSet();
-
-const TOTAL_SECONDS = 6 * 60 + 50;   // the real Build a Sentence allowance
-
-const nBlanks = it => it.parts.filter(p => p.t === "s").length;
-
+let EMAIL = pick(WRITING.emails), DISC = pick(WRITING.discussions);
+const blankEditor = () => ({text:"", hist:[""], at:0, clip:""});
 const S = {
-  screen:"test",
-  idx:0,
-  slots: ITEMS.map(it => Array(nBlanks(it)).fill(null)),
-  bankOrder: ITEMS.map(it => it.bank.map((_,i) => i)),
-  history: ITEMS.map(()=>[]),
-  seconds: TOTAL_SECONDS,
-  timeHidden:false,
-  sel:null,
-  timedOut:false
+  stage: 0, qi: 1, screen: "test",
+  slots: ITEMS.map(it => it.answer.map(() => null)),
+  bankOrder: ITEMS.map(it => it.bank.map((_, i) => i)),
+  history: ITEMS.map(() => []), sel: null,
+  ed: [blankEditor(), blankEditor()], self: [{}, {}],
+  seconds: LIMIT[0], timeHidden: false, countHidden: false, timedOut: false
 };
-
-const $ = id => document.getElementById(id);
-const main = $("main"), foot = $("foot"), live = $("live");
-const say = m => { live.textContent = m; };
-const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-
-const item = () => ITEMS[S.idx];
-const slots = () => S.slots[S.idx];
-const bankList = () => S.bankOrder[S.idx].filter(o => !slots().includes(o));
-const filled = () => slots().filter(v => v !== null).length;
+const item = () => ITEMS[S.qi - 1];
+const slots = () => S.slots[S.qi - 1];
+const bankList = () => S.bankOrder[S.qi - 1].filter(o => !slots().includes(o));
 const complete = i => S.slots[i].every(v => v !== null);
 const touched = i => S.slots[i].some(v => v !== null);
-/* all-or-nothing, compared by the word itself so repeated
-   options such as the two "as" in item 6 are interchangeable */
-const isRight = i =>
-  complete(i) && S.slots[i].every((o,p) => ITEMS[i].bank[o] === ITEMS[i].answer[p]);
+const isRight = i => complete(i) && S.slots[i].every((o, p) => ITEMS[i].bank[o] === ITEMS[i].answer[p]);
 
-function builtSentence(i){
-  const it = ITEMS[i];
-  return cap(it.parts.map(p => {
-    if (p.t === "f") return p.v;
-    const o = S.slots[i][p.i];
-    return o === null ? "_____" : it.bank[o];
-  }).join(" ")).replace(/\s+([,.?!;:])/g, "$1");
+/* ---------- render ---------- */
+function render(opts){
+  opts = opts || {};
+  if (S.screen === "report") renderReport();
+  else if (S.screen === "review") renderReview();
+  else if (S.stage === 0) renderSentence();
+  else if (S.stage === 1) renderEmail();
+  else renderDiscussion();
+  renderChrome(); renderFoot();
+  if (opts.focus){ const el = document.querySelector(opts.focus); if (el) el.focus(); }
 }
-function modelSentence(i){
-  const it = ITEMS[i];
-  return cap(it.parts.map(p => p.t === "f" ? p.v : it.answer[p.i]).join(" ")).replace(/\s+([,.?!;:])/g, "$1");
+function renderChrome(){
+  const scored = S.screen === "report";
+  $("strip").style.display = (!scored && S.screen === "test" && S.stage === 0) ? "" : "none";
+  $("where").textContent = scored ? "Score report" : S.screen === "review" ? "Review"
+    : S.stage === 0 ? `Question ${S.qi} of ${SET_SIZE}` : `Question ${S.stage} of 2`;
+  $("bBack").disabled = !(S.screen === "test" && S.stage === 0 && S.qi > 1);
+  $("bReview").disabled = scored || S.stage !== 0;
+  $("bReview").style.display = (scored || S.stage !== 0) ? "none" : "";
+  $("bNext").innerHTML = scored ? "New set <b aria-hidden=\"true\">&rsaquo;</b>"
+    : S.screen === "review" ? "Continue <b aria-hidden=\"true\">&rsaquo;</b>"
+    : S.stage === 2 ? "End Section <b aria-hidden=\"true\">&rsaquo;</b>"
+    : "Next <b aria-hidden=\"true\">&rsaquo;</b>";
+  const c = $("clock");
+  c.style.display = scored ? "none" : "";
+  $("bTime").style.display = scored ? "none" : "";
+  c.textContent = S.timeHidden ? "––:––" : fmt(S.seconds);
+  c.className = "clock" + (!S.timeHidden && S.seconds <= 60 ? " low" : "");
+  $("bTime").lastChild.textContent = S.timeHidden ? " Show Time" : " Hide Time";
+}
+function renderFoot(){
+  if (S.screen === "report"){ foot.style.display = "none"; return; }
+  foot.style.display = "";
+  const steps = ["Build a Sentence", "Write an Email", "Academic Discussion"].map((n, i) =>
+    `<span class="st ${i === S.stage ? "on" : i < S.stage ? "done" : ""}">${n}</span>`).join("");
+  let left = "";
+  if (S.stage === 0){
+    const done = ITEMS.filter((_, i) => complete(i)).length;
+    const dots = ITEMS.map((_, i) => `<button class="dot-b" data-go="${i + 1}" data-done="${complete(i)?1:0}" ` +
+      `data-cur="${S.screen === "test" && S.qi === i + 1 ? 1 : 0}" aria-label="Question ${i+1}">${i+1}</button>`).join("");
+    left = `<span class="status"><b>${done}</b> of ${SET_SIZE} built</span><div class="dots">${dots}</div>`;
+  } else {
+    left = `<span class="status">${wc(S.ed[S.stage - 1].text)} words written</span>`;
+  }
+  foot.innerHTML = `<div class="foot-in">${left}<div class="steps">${steps}</div></div>`;
+  foot.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+    S.qi = +b.dataset.go; S.screen = "test"; S.sel = null; render(); window.scrollTo(0, 0);
+  });
 }
 
-/* ---------- mutations ---------- */
-function snapshot(){ S.history[S.idx].push(slots().slice()); }
+/* ---------- Build a Sentence ---------- */
+function tileHTML(o, where, pos){
+  const it = item(), opens = it.parts[0].t === "s";
+  const text = (where === "slot" && pos === 0 && opens) ? cap(it.bank[o]) : it.bank[o];
+  const sel = S.sel === o ? " sel" : "";
+  const label = where === "slot" ? `${text}, in blank ${pos + 1}. Press Enter to pick up.`
+                                 : `${text}, word bank. Press Enter to pick up.`;
+  return `<button type="button" class="tile${sel}" data-c="${o}" data-where="${where}"` +
+    (pos !== undefined ? ` data-pos="${pos}"` : "") + ` aria-label="${esc(label)}">${esc(text)}</button>`;
+}
+function renderSentence(){
+  const it = item(), sl = slots(), bank = bankList(), parts = it.parts;
+  const opensPunct = q => q && q.t === "f" && /^[,.?!;:]/.test(q.v);
+  const reply = parts.map((p, idx) => {
+    const sep = (idx === 0 || opensPunct(p)) ? "" : " ";
+    if (p.t === "f") return `${sep}<span class="fixed">${esc(p.v.replace(/\s+([,.?!;:])/g, "$1"))}</span>`;
+    const o = sl[p.i], armed = S.sel !== null && o === null ? " armed" : "";
+    const hug = opensPunct(parts[idx + 1]) ? " hug" : "";
+    return `${sep}<span class="slot${armed}${hug}" data-i="${p.i}" data-empty="${o===null?1:0}" ` +
+      `data-ord="${p.i+1}" tabindex="0" role="button" aria-label="Blank ${p.i+1}` +
+      `${o===null?", empty":", contains "+esc(it.bank[o])}">${o === null ? "" : tileHTML(o, "slot", p.i)}</span>`;
+  }).join("");
+  main.innerHTML = `<div class="page">
+    <div class="qhead"><span class="qnum">Question ${S.qi} of ${SET_SIZE}</span>
+      <span class="qhint">${sl.length} blanks &middot; ${it.bank.length} words</span></div>
+    <div class="turn"><span class="who">${esc(it.who)}</span>
+      <p class="said">&ldquo;${esc(it.says)}&rdquo;</p></div>
+    <div class="turn you"><span class="who">You</span><p class="rline" id="line">${reply}</p></div>
+    <div class="bank-hd"><h2>Word bank</h2><div>
+      <button class="tbtn" id="bUndo"${S.history[S.qi-1].length ? "" : " disabled"}>Undo</button>
+      <button class="tbtn" id="bClear"${touched(S.qi-1) ? "" : " disabled"}>Clear</button></div></div>
+    <div class="bank" id="bank" role="group" aria-label="Words not yet placed">${
+      bank.length ? bank.map(o => tileHTML(o, "bank")).join("")
+                  : `<span class="empty">Every word has been placed.</span>`}</div></div>`;
+  $("bUndo").onclick = undo; $("bClear").onclick = clearAll;
+  wireDnD();
+}
+function snapshot(){ S.history[S.qi-1].push(slots().slice()); }
 function undo(){
-  const h = S.history[S.idx];
+  const h = S.history[S.qi-1];
   if (!h.length) return;
-  S.slots[S.idx] = h.pop();
-  S.sel = null; render(); say("Undone.");
+  S.slots[S.qi-1] = h.pop(); S.sel = null; render(); say("Undone.");
 }
 function clearAll(){
-  if (!touched(S.idx)) return;
-  snapshot();
-  S.slots[S.idx] = Array(nBlanks(item())).fill(null);
-  S.sel = null; render(); say("All blanks cleared.");
+  if (!touched(S.qi-1)) return;
+  snapshot(); S.slots[S.qi-1] = item().answer.map(() => null); S.sel = null; render(); say("Cleared.");
 }
-function place(opt, pos){
+function place(o, pos){
   const sl = slots();
-  if (sl[pos] === opt){ S.sel = null; render(); return; }
+  if (sl[pos] === o){ S.sel = null; render(); return; }
   snapshot();
-  const from = sl.indexOf(opt);
-  const displaced = sl[pos];
+  const from = sl.indexOf(o), displaced = sl[pos];
   if (from !== -1) sl[from] = null;
-  sl[pos] = opt;
+  sl[pos] = o;
   if (displaced !== null && from !== -1) sl[from] = displaced;
   S.sel = null;
   render({focus:`.slot[data-i="${pos}"] .tile`});
-  say(`${item().bank[opt]} placed in blank ${pos + 1}.`);
+  say(`${item().bank[o]} placed in blank ${pos + 1}.`);
 }
-function toBank(opt){
-  const sl = slots();
-  const from = sl.indexOf(opt);
+function toBank(o){
+  const sl = slots(), from = sl.indexOf(o);
   if (from === -1){ S.sel = null; render(); return; }
-  snapshot();
-  sl[from] = null;
-  S.sel = null;
-  render({focus:`.bank .tile[data-c="${opt}"]`});
-  say(`${item().bank[opt]} returned to the word bank.`);
+  snapshot(); sl[from] = null; S.sel = null;
+  render({focus:`.bank .tile[data-c="${o}"]`});
+  say(`${item().bank[o]} returned to the word bank.`);
 }
-
-/* ============================================================
-   Rendering
-   ============================================================ */
-function render(opts){
-  opts = opts || {};
-  if (S.screen === "test") renderTest();
-  else if (S.screen === "review") renderReview();
-  else renderResults();
-  renderChrome();
-  if (opts.focus){ const el = document.querySelector(opts.focus); if (el) el.focus(); }
-}
-
-function renderChrome(){
-  const onTest = S.screen === "test";
-  const scored = S.screen === "results";
-  $("strip").style.display = onTest ? "" : "none";
-  $("counter").textContent = onTest
-    ? `Question ${S.idx + 1} of ${ITEMS.length}`
-    : (S.screen === "review" ? "Review" : "Score report");
-  $("bBack").disabled = !onTest || S.idx === 0;
-  $("bReview").disabled = scored;
-  $("bNext").textContent = scored ? "New set of 10"
-    : (S.screen === "review" ? "End Task"
-    : (S.idx === ITEMS.length - 1 ? "Review" : "Next"));
-  $("bTime").style.display = scored ? "none" : "";
-  const c = $("clock");
-  c.style.display = scored ? "none" : "";
-  c.textContent = S.timeHidden ? "Time ──:──" : fmt(S.seconds);
-  c.className = "meter" + (S.timeHidden ? " hidden-time" : (S.seconds <= 60 ? " low" : ""));
-  $("bTime").textContent = S.timeHidden ? "Show Time" : "Hide Time";
-}
-
-function fmt(s){
-  const m = Math.floor(Math.max(0,s) / 60), r = Math.max(0,s) % 60;
-  return `${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}`;
-}
-
-function tileHTML(o, where, pos){
-  const it = item();
-  const opens = it.parts[0].t === "s";
-  const text = (where === "slot" && pos === 0 && opens) ? cap(it.bank[o]) : it.bank[o];
-  const sel = S.sel === o ? " sel" : "";
-  const label = where === "slot"
-    ? `${text}, in blank ${pos + 1}. Press Enter to pick up.`
-    : `${text}, word bank. Press Enter to pick up.`;
-  return `<button type="button" class="tile${sel}" data-c="${o}" data-where="${where}"${
-    pos !== undefined ? ` data-pos="${pos}"` : ""
-  } aria-label="${esc(label)}">${esc(text)}</button>`;
-}
-
-function renderTest(){
-  const it = item(), sl = slots(), bank = bankList();
-  const n = nBlanks(it);
-  const parts = it.parts;
-  const opensPunct = q => q && q.t === "f" && /^[,.?!;:]/.test(q.v);
-  const reply = parts.map((p, idx) => {
-    // no space before a piece that opens with punctuation, so "you , I" reads "you, I"
-    const hugs = opensPunct(p);
-    const sep = (idx === 0 || hugs) ? "" : " ";
-    if (p.t === "f") return `${sep}<span class="fixed">${esc(p.v.replace(/\s+([,.?!;:])/g, "$1"))}</span>`;
-    const o = sl[p.i];
-    const armed = S.sel !== null && o === null ? " armed" : "";
-    const hug = opensPunct(parts[idx+1]) ? " hug" : "";
-    return `${sep}<span class="slot${armed}${hug}" data-i="${p.i}" data-empty="${o===null?1:0}" data-ord="${p.i+1}" tabindex="0" role="button" aria-label="Blank ${p.i+1} of ${n}${o===null?", empty":", contains "+esc(it.bank[o])}">${
-      o === null ? "" : tileHTML(o, "slot", p.i)
-    }</span>`;
-  }).join("");
-
-  main.innerHTML = `
-    <div class="page">
-      <div class="qhead">
-        <span class="qnum">Question ${S.idx + 1} of ${ITEMS.length}</span>
-        <span class="qhint">${n} blanks &middot; ${it.bank.length} words</span>
-      </div>
-      <div class="convo">
-        <div class="turn">
-          <span class="who">${esc(it.who)}</span>
-          <p class="said">&ldquo;${esc(it.says)}&rdquo;</p>
-        </div>
-        <div class="turn you">
-          <span class="who">You</span>
-          <p class="rline" id="line">${reply}</p>
-        </div>
-      </div>
-      <div class="bank-hd">
-        <h2>Word bank</h2>
-        <div class="tools">
-          <button class="tbtn" id="bUndo" ${S.history[S.idx].length ? "" : "disabled"}>Undo</button>
-          <button class="tbtn" id="bClear" ${touched(S.idx) ? "" : "disabled"}>Clear</button>
-        </div>
-      </div>
-      <div class="bank" id="bank" role="group" aria-label="Words not yet placed">${
-        bank.length ? bank.map(o => tileHTML(o, "bank")).join("")
-                    : `<span class="empty">Every word has been placed.</span>`
-      }</div>
-    </div>`;
-
-  $("bUndo").onclick = undo;
-  $("bClear").onclick = clearAll;
-  wireDnD();
-  renderFoot();
-}
-
-function renderFoot(){
-  if (S.screen === "results"){ foot.innerHTML = ""; foot.style.display = "none"; return; }
-  foot.style.display = "";
-  const dots = ITEMS.map((_,i) =>
-    `<button class="dot" data-go="${i}" data-done="${complete(i)?1:0}" data-cur="${i===S.idx&&S.screen==='test'?1:0}" aria-label="Go to question ${i+1}">${i+1}</button>`
-  ).join("");
-  const done = ITEMS.filter((_,i)=>complete(i)).length;
-  foot.innerHTML = `<div class="foot-in">
-    <span class="status"><b>${done}</b> of ${ITEMS.length} sentences built${
-      S.screen === "test" ? ` &middot; ${filled()} of ${slots().length} blanks filled here` : ""
-    }</span>
-    <div class="dots">${dots}</div>
-  </div>`;
-  foot.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
-    S.idx = +b.dataset.go; S.screen = "test"; S.sel = null; render();
-  });
-}
-
-function renderReview(){
-  const rows = ITEMS.map((it,i) => {
-    const st = complete(i) ? `<span class="pill done">Answered</span>`
-      : touched(i) ? `<span class="pill part">Incomplete</span>`
-      : `<span class="pill none">Not answered</span>`;
-    return `<tr data-go="${i}"><td class="n">${i+1}</td><td>${st}</td><td>${
-      S.slots[i].filter(v=>v!==null).length} of ${nBlanks(it)} blanks filled</td></tr>`;
-  }).join("");
-  main.innerHTML = `<div class="panel">
-    <h1>Review your answers</h1>
-    <p class="lede">Select a question to return to it. When you end the task your sentences are scored and you will not be able to change them.</p>
-    <div class="tableWrap"><table>
-      <thead><tr><th>No.</th><th>Status</th><th>Progress</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>
-  </div>`;
-  main.querySelectorAll("[data-go]").forEach(tr => tr.onclick = () => {
-    S.idx = +tr.dataset.go; S.screen = "test"; render();
-  });
-  renderFoot();
-}
-
-function renderResults(){
-  const right = ITEMS.filter((_,i)=>isRight(i)).length;
-  const cards = ITEMS.map((it,i) => {
-    const ok = isRight(i), any = touched(i);
-    return `<div class="rep ${ok?"right":"wrong"}">
-      <div class="rep-hd">
-        <span class="n">${i+1}</span>
-        <span class="tgt">${it.target}${it.hard ? ' <span class="tier">Hard</span>' : ''}</span>
-        <span class="pill ${ok?"ok":"no"}">${ok?"1.0":"0.0"}</span>
-      </div>
-      <p class="ctx">${esc(it.who)}: &ldquo;${esc(it.says)}&rdquo;</p>
-      ${any ? `<div class="slab">Your sentence</div><p class="sent${ok?"":" bad"}">${esc(builtSentence(i))}</p>` 
-            : `<p class="sent bad">You did not build this sentence.</p>`}
-      ${ok ? "" : `<div class="slab">Correct sentence</div><p class="sent">${esc(modelSentence(i))}</p>`}
-      <p class="why">${it.why}${
-        it.extras.length ? ` Not used: <i>${it.extras.map(esc).join("</i>, <i>")}</i>.` : ""
-      }</p>
-    </div>`;
-  }).join("");
-  main.innerHTML = `<div class="panel">
-    <h1>Score report</h1>
-    <p class="lede">${S.timedOut ? "Time expired and the task was submitted automatically. " : ""}Each sentence is scored 1.0 or 0.0 with no partial credit: every word must be in the correct blank.</p>
-    <div class="score">
-      <div><div class="big">${right}/${ITEMS.length}</div><div class="cap">Sentences correct</div></div>
-      <div><div class="big">${(right).toFixed(1)}</div><div class="cap">Raw points</div></div>
-      <div><div class="big">${fmt(TOTAL_SECONDS - S.seconds)}</div><div class="cap">Time used</div></div>
-    </div>
-    ${cards}
-  </div>`;
-  renderFoot();
-}
-
-/* ============================================================
-   Drag, click-to-place, keyboard
-   ============================================================ */
 let drag = null;
-
 function wireDnD(){
   const line = $("line"), bank = $("bank");
-
   document.querySelectorAll(".tile").forEach(t => {
     t.addEventListener("pointerdown", onPointerDown);
     t.addEventListener("click", e => {
       e.stopPropagation();
       if (drag && drag.moved) return;
       const o = +t.dataset.c;
-      if (S.sel === o){ S.sel = null; render(); say("Selection cancelled."); return; }
+      if (S.sel === o){ S.sel = null; render(); return; }
       if (S.sel !== null){
         const target = t.dataset.where === "slot" ? +t.dataset.pos : null;
-        if (target !== null){ place(S.sel, target); return; }
-        toBank(S.sel); return;
+        if (target !== null) place(S.sel, target); else toBank(S.sel);
+        return;
       }
-      S.sel = o;
-      render({focus:`.tile[data-c="${o}"]`});
+      S.sel = o; render({focus:`.tile[data-c="${o}"]`});
       say(`${item().bank[o]} selected. Choose a blank.`);
     });
     t.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " "){ e.preventDefault(); t.click(); }
     });
   });
-
   line.querySelectorAll(".slot").forEach(s => {
     const act = () => {
       const pos = +s.dataset.i;
       if (S.sel !== null){ place(S.sel, pos); return; }
       const occ = slots()[pos];
-      if (occ !== null){
-        S.sel = occ;
-        render({focus:`.slot[data-i="${pos}"] .tile`});
-        say(`${item().bank[occ]} picked up. Choose another blank, or press Backspace to return it.`);
-      }
+      if (occ !== null){ S.sel = occ; render({focus:`.slot[data-i="${pos}"] .tile`}); }
     };
     s.addEventListener("click", act);
     s.addEventListener("keydown", e => {
@@ -1817,40 +1578,33 @@ function wireDnD(){
       }
     });
   });
-
   bank.addEventListener("click", () => {
     if (S.sel !== null && slots().includes(S.sel)) toBank(S.sel);
     else if (S.sel !== null){ S.sel = null; render(); }
   });
 }
-
 function onPointerDown(e){
   if (e.button !== undefined && e.button !== 0) return;
   const el = e.currentTarget;
-  drag = { opt:+el.dataset.c, el, moved:false, x0:e.clientX, y0:e.clientY, ghost:null, dx:0, dy:0, over:null };
+  drag = {opt:+el.dataset.c, el, moved:false, x0:e.clientX, y0:e.clientY, ghost:null, dx:0, dy:0, over:null};
   window.addEventListener("pointermove", onPointerMove);
   window.addEventListener("pointerup", onPointerUp, {once:true});
   window.addEventListener("pointercancel", onPointerUp, {once:true});
 }
-
 function onPointerMove(e){
   if (!drag) return;
   if (!drag.moved){
     if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 5) return;
     drag.moved = true;
     const r = drag.el.getBoundingClientRect();
-    drag.dx = drag.x0 - r.left;
-    drag.dy = drag.y0 - r.top;
+    drag.dx = drag.x0 - r.left; drag.dy = drag.y0 - r.top;
     const g = drag.el.cloneNode(true);
-    g.className = "tile ghost";
-    g.style.width = r.width + "px";
-    document.body.appendChild(g);
-    drag.ghost = g;
-    drag.el.classList.add("lifting");
-    document.body.style.cursor = "grabbing";
+    g.className = "tile ghost"; g.style.width = r.width + "px";
+    document.body.appendChild(g); drag.ghost = g;
+    drag.el.classList.add("lifting"); document.body.style.cursor = "grabbing";
   }
   drag.ghost.style.left = (e.clientX - drag.dx) + "px";
-  drag.ghost.style.top  = (e.clientY - drag.dy) + "px";
+  drag.ghost.style.top = (e.clientY - drag.dy) + "px";
   const under = document.elementFromPoint(e.clientX, e.clientY);
   const zone = under && under.closest(".slot, .bank");
   if (zone !== drag.over){
@@ -1859,7 +1613,6 @@ function onPointerMove(e){
     drag.over = zone;
   }
 }
-
 function onPointerUp(){
   window.removeEventListener("pointermove", onPointerMove);
   if (!drag) return;
@@ -1874,131 +1627,323 @@ function onPointerUp(){
   else place(d.opt, +d.over.dataset.i);
 }
 
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape"){
-    if (document.querySelector(".scrim")){ closeHelp(); return; }
-    if (S.sel !== null){ S.sel = null; render(); say("Selection cancelled."); }
+/* ---------- written tasks ---------- */
+function avatar(name, size){
+  const core = name.replace(/^(Dr|Prof|Professor|Mr|Ms|Mrs)\.?\s+/i, "");
+  const ini = core.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  let h = 0; for (const c of name) h = (h * 31 + c.charCodeAt(0)) % 360;
+  return `<svg viewBox="0 0 80 80" width="${size}" height="${size}" role="img" aria-label="${esc(name)}">
+    <circle cx="40" cy="40" r="40" fill="hsl(${h} 38% 46%)"></circle>
+    <text x="40" y="41" text-anchor="middle" dominant-baseline="central" fill="#fff"
+      font-family="Lato, sans-serif" font-size="30" font-weight="700">${ini}</text></svg>`;
+}
+function toolbarHTML(){
+  const ed = S.ed[S.stage - 1];
+  return `<div class="tools">
+    <button class="tb primary" data-act="cut">Cut</button>
+    <button class="tb" data-act="paste">Paste</button>
+    <button class="tb" data-act="undo">Undo</button>
+    <button class="tb" data-act="redo">Redo</button>
+    <span class="wcw"><button class="eye" id="bCount"><b aria-hidden="true">&#128065;</b>
+      ${S.countHidden ? "Show Word Count" : "Hide Word Count"}</button>
+      <b id="wcv">${S.countHidden ? "–" : wc(ed.text)}</b></span></div>`;
+}
+function renderEmail(){
+  const p = EMAIL;
+  main.innerHTML = `<div class="two">
+    <div class="lead"><p>${esc(p.scenario)}</p>
+      <p class="do">Write an email to ${esc(p.to)}. In your email, do the following:</p>
+      <ul>${p.bullets.map(([, t]) => `<li>${esc(t)}</li>`).join("")}</ul>
+      <p class="note">Write as much as you can and in complete sentences.</p></div>
+    <div class="respond"><h2>Your Response:</h2>
+      <p class="headers">To: ${esc(p.to)}<br>Subject: ${esc(p.subject)}</p>
+      ${toolbarHTML()}
+      <textarea id="ta" spellcheck="false" aria-label="Your email">${esc(S.ed[0].text)}</textarea>
+    </div></div>`;
+  wireEditor();
+}
+function renderDiscussion(){
+  const p = DISC;
+  main.innerHTML = `<div class="two">
+    <div class="lead">
+      <p>Your professor is teaching a class on ${esc(p.course)}. Write a post responding to the
+        professor's question.</p>
+      <p class="do">In your response, you should do the following.</p>
+      <ul><li>Express and support your opinion.</li>
+          <li>Make a contribution to the discussion in your own words.</li></ul>
+      <p class="note">An effective response will contain at least 100 words.</p>
+      <div class="prof">${avatar(p.professor, 104)}<span class="nm">${esc(p.professor)}</span></div>
+      <p>${esc(p.question)}</p></div>
+    <div class="respond">
+      ${p.students.map(([n, t]) => `<div class="post"><div class="av">${avatar(n, 62)}
+        <span class="nm">${esc(n)}</span></div><p>${esc(t)}</p></div>`).join("")}
+      ${toolbarHTML()}
+      <textarea id="ta" spellcheck="false" aria-label="Your post">${esc(S.ed[1].text)}</textarea>
+    </div></div>`;
+  wireEditor();
+}
+let pushTimer = null;
+function wireEditor(){
+  const ta = $("ta"), ed = S.ed[S.stage - 1];
+  const sync = () => { $("wcv").textContent = S.countHidden ? "–" : wc(ed.text); renderFoot(); };
+  ta.addEventListener("input", () => {
+    ed.text = ta.value; sync();
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(() => pushHistory(ed), 450);
+  });
+  main.querySelectorAll("[data-act]").forEach(b => b.onclick = () => {
+    const a = b.dataset.act;
+    if (a === "cut"){
+      const s = ta.selectionStart, e = ta.selectionEnd;
+      if (s === e) return say("Select some text first.");
+      pushHistory(ed); ed.clip = ta.value.slice(s, e);
+      ta.value = ta.value.slice(0, s) + ta.value.slice(e);
+      ed.text = ta.value; pushHistory(ed);
+      ta.focus(); ta.setSelectionRange(s, s);
+    } else if (a === "paste"){
+      if (!ed.clip) return say("Nothing has been cut yet.");
+      const s = ta.selectionStart, e = ta.selectionEnd;
+      pushHistory(ed);
+      ta.value = ta.value.slice(0, s) + ed.clip + ta.value.slice(e);
+      ed.text = ta.value; pushHistory(ed);
+      ta.focus(); ta.setSelectionRange(s + ed.clip.length, s + ed.clip.length);
+    } else if (a === "undo"){
+      if (ed.at <= 0) return say("Nothing to undo.");
+      ed.at--; ta.value = ed.hist[ed.at]; ed.text = ta.value; ta.focus();
+    } else if (a === "redo"){
+      if (ed.at >= ed.hist.length - 1) return say("Nothing to redo.");
+      ed.at++; ta.value = ed.hist[ed.at]; ed.text = ta.value; ta.focus();
+    }
+    sync();
+  });
+  $("bCount").onclick = () => {
+    S.countHidden = !S.countHidden;
+    $("bCount").lastChild.textContent = S.countHidden ? " Show Word Count" : " Hide Word Count";
+    sync();
+  };
+  sync();
+}
+function pushHistory(ed){
+  if (ed.hist[ed.at] === ed.text) return;
+  ed.hist = ed.hist.slice(0, ed.at + 1); ed.hist.push(ed.text); ed.at = ed.hist.length - 1;
+}
+function checks(kind, p, text){
+  const low = text.toLowerCase(), n = wc(text);
+  const paras = text.trim() ? text.trim().split(/\n\s*\n/).length : 0;
+  const out = [];
+  if (kind === "email"){
+    out.push(["Length", n >= 80 && n <= 160, `${n} words &mdash; aim for 80 to 140`]);
+    out.push(["Greeting", GREETING.test(text), "opens with a greeting"]);
+    out.push(["Sign-off", SIGNOFF.test(text), "ends with a closing and your name"]);
+    out.push(["Paragraphs", paras >= 2, `${paras} paragraph${paras === 1 ? "" : "s"}`]);
+    p.bullets.forEach(([fn, label], i) => {
+      const ok = fn === "details"
+        ? p.topic.filter(t => low.includes(t.toLowerCase())).length >= 2
+        : (WRITING.cues[fn] || []).some(c => low.includes(c));
+      out.push([`Bullet ${i + 1}`, ok, esc(label)]);
+    });
+  } else {
+    out.push(["Length", n >= 100, `${n} words &mdash; at least 100 is expected`]);
+    out.push(["Position", OPINION.test(text), "states an opinion in your own voice"]);
+    out.push(["Engagement", p.students.some(([nm]) => low.includes(nm.toLowerCase())), "names a classmate"]);
+    out.push(["Support", SUPPORT.test(text), "gives a reason or an example"]);
+    out.push(["Own words", n > 0 && !p.students.some(([, t]) =>
+      low.includes(t.toLowerCase().slice(0, 40))), "does not copy a classmate's wording"]);
   }
-});
+  return out;
+}
+const RUBRIC = {email: ["Content coverage", "Organisation", "Language use", "Tone and register"],
+                discussion: ["Contribution", "Elaboration", "Language control"]};
 
-/* ============================================================
-   Navigation, timer, help
-   ============================================================ */
-$("bBack").onclick = () => { if (S.screen === "test" && S.idx > 0){ S.idx--; S.sel = null; render(); } };
+/* ---------- review and report ---------- */
+function renderReview(){
+  const rows = ITEMS.map((_, i) => `<tr data-go="${i + 1}"><td class="n">${i + 1}</td>
+    <td>${complete(i) ? '<span class="tag done">Answered</span>'
+        : touched(i) ? '<span class="tag none">Incomplete</span>'
+        : '<span class="tag none">Not answered</span>'}</td>
+    <td>${S.slots[i].filter(v => v !== null).length} of ${S.slots[i].length} blanks filled</td></tr>`).join("");
+  main.innerHTML = `<div class="panel"><h1>Review your sentences</h1>
+    <p class="lede">Select a question to return to it. Continuing moves you on to the email task, and
+      you will not be able to come back.</p>
+    <div class="tableWrap"><table class="rev"><thead><tr><th>No.</th><th>Status</th><th>Progress</th></tr></thead>
+    <tbody>${rows}</tbody></table></div></div>`;
+  main.querySelectorAll("[data-go]").forEach(tr => tr.onclick = () => {
+    S.qi = +tr.dataset.go; S.screen = "test"; render(); window.scrollTo(0, 0);
+  });
+}
+function taskCard(idx, kind, p, title){
+  const text = S.ed[idx].text, n = wc(text), rows = checks(kind, p, text);
+  const passed = rows.filter(r => r[1]).length;
+  return `<div class="card task"><h3>${title}</h3>
+    <p class="sub">${n} words &middot; ${passed} of ${rows.length} checks met</p>
+    <div class="slab">Your response</div>
+    <div class="resp${text.trim() ? "" : " empty"}">${text.trim() ? esc(text) : "No response written."}</div>
+    <div class="slab">Checks</div>
+    <ul class="checks">${rows.map(([l, ok, d]) => `<li class="${ok ? "yes" : "no"}">
+      <span class="m">${ok ? "✓" : "✗"}</span><span class="lbl">${l}</span><span class="d">${d}</span></li>`).join("")}</ul>
+    <div class="slab">Band 5 model response</div><div class="resp">${esc(p.model)}</div>
+    <div class="slab">Rate your own response</div>
+    <table class="rubric"><thead><tr><th>Criterion</th><th>0 &ndash; 5</th></tr></thead><tbody>
+    ${RUBRIC[kind].map((crit, c) => `<tr><td class="crit">${crit}</td><td><div class="scale">
+      ${[0,1,2,3,4,5].map(v => `<label><input type="radio" name="r${idx}_${c}" value="${v}"` +
+        `${S.self[idx][c] === v ? " checked" : ""}><span>${v}</span></label>`).join("")}
+    </div></td></tr>`).join("")}</tbody></table>
+    <p class="selfscore">Your self-rating: <b id="avg${idx}">&ndash;</b> / 5</p>
+    <p class="legend"><b>5</b> fully successful: well-elaborated support, effective variety, precise
+      word choice, almost no errors. <b>3</b> adequate organisation and tone, shallow development,
+      visible errors. <b>1</b> little relevant content or largely unclear language.</p></div>`;
+}
+function renderReport(){
+  const right = ITEMS.filter((_, i) => isRight(i)).length;
+  const cards = ITEMS.map((it, i) => {
+    const ok = isRight(i), any = touched(i);
+    const built = cap(it.parts.map(p => p.t === "f" ? p.v
+      : (S.slots[i][p.i] === null ? "_____" : it.bank[S.slots[i][p.i]])).join(" "))
+      .replace(/\s+([,.?!;:])/g, "$1");
+    const model = cap(it.parts.map(p => p.t === "f" ? p.v : it.answer[p.i]).join(" "))
+      .replace(/\s+([,.?!;:])/g, "$1");
+    return `<div class="card ${ok ? "right" : "wrong"}"><div class="rep-hd"><span class="n">${i + 1}</span>
+      <span class="ty">${it.target}${it.hard ? ' <span class="tag hard">Hard</span>' : ""}</span>
+      <span class="tag ${ok ? "ok" : "no"}">${ok ? "1.0" : "0.0"}</span></div>
+      <p class="why" style="margin:0 0 8px"><i>${esc(it.who)}: &ldquo;${esc(it.says)}&rdquo;</i></p>
+      ${any ? `<div class="slab">Your sentence</div><p class="sent${ok ? "" : " bad"}">${esc(built)}</p>`
+            : `<p class="sent bad">You did not build this sentence.</p>`}
+      ${ok ? "" : `<div class="slab">Correct sentence</div><p class="sent">${esc(model)}</p>`}
+      <p class="why">${it.why}${it.extras.length
+        ? ` Not used: <i>${it.extras.map(esc).join("</i>, <i>")}</i>.` : ""}</p></div>`;
+  }).join("");
+
+  main.innerHTML = `<div class="panel"><h1>Score report</h1>
+    <p class="lede">${S.timedOut ? "Time expired on at least one task. " : ""}
+      Build a Sentence is scored right or wrong per item. The two written tasks are rated 0 to 5 by a
+      scorer, which this page cannot reproduce, so it checks what a machine can and leaves the rest
+      to you, against the model and the rubric.</p>
+    <div class="score">
+      <div><div class="big">${right}/${SET_SIZE}</div><div class="cap">Sentences correct</div></div>
+      <div><div class="big">${wc(S.ed[0].text)}</div><div class="cap">Email words</div></div>
+      <div><div class="big">${wc(S.ed[1].text)}</div><div class="cap">Discussion words</div></div>
+    </div>
+    <h2 class="sec">Build a Sentence</h2>${cards}
+    <h2 class="sec">Write an Email</h2>${taskCard(0, "email", EMAIL, "Question 1 of 2")}
+    <h2 class="sec">Write for an Academic Discussion</h2>${taskCard(1, "discussion", DISC, "Question 2 of 2")}</div>`;
+
+  [["email", 0], ["discussion", 1]].forEach(([kind, idx]) => {
+    const upd = () => {
+      const vals = RUBRIC[kind].map((_, c) => S.self[idx][c]).filter(v => v !== undefined);
+      $("avg" + idx).textContent = vals.length === RUBRIC[kind].length
+        ? (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1) : "–";
+    };
+    RUBRIC[kind].forEach((_, c) => main.querySelectorAll(`input[name="r${idx}_${c}"]`).forEach(el =>
+      el.addEventListener("change", () => { S.self[idx][c] = +el.value; upd(); })));
+    upd();
+  });
+}
+
+/* ---------- navigation and timing ---------- */
+$("bBack").onclick = () => {
+  if (S.screen === "test" && S.stage === 0 && S.qi > 1){ S.qi--; S.sel = null; render(); window.scrollTo(0, 0); }
+};
 $("bNext").onclick = () => {
-  if (S.screen === "results"){ restart(); return; }
-  if (S.screen === "review"){ endTask(); return; }
-  if (S.idx === ITEMS.length - 1){ S.screen = "review"; S.sel = null; render(); return; }
-  S.idx++; S.sel = null; render();
+  if (S.screen === "report") return restart();
+  if (S.screen === "review"){
+    if (!confirm("Move on to the email task? You will not be able to return to the sentences.")) return;
+    advance(1); return;
+  }
+  if (S.stage === 0){
+    if (S.qi < SET_SIZE){ S.qi++; S.sel = null; render(); window.scrollTo(0, 0); }
+    else { S.screen = "review"; render(); window.scrollTo(0, 0); }
+    return;
+  }
+  if (S.stage === 1){
+    if (!confirm("Move on to the discussion task? You will not be able to return to the email.")) return;
+    advance(2); return;
+  }
+  if (!confirm("End the section and see the report?")) return;
+  finish();
 };
 $("bReview").onclick = () => {
-  if (S.screen === "results") return;
+  if (S.screen === "report" || S.stage !== 0) return;
   S.screen = S.screen === "review" ? "test" : "review";
-  S.sel = null; render();
+  render(); window.scrollTo(0, 0);
 };
 $("bTime").onclick = () => { S.timeHidden = !S.timeHidden; renderChrome(); };
+$("bHelp").onclick = openHelp;
 document.querySelectorAll(".mode button").forEach(b => b.onclick = () => {
   const m = b.dataset.mode;
-  if (m === MODE) return;
-  const started = ITEMS.some((_, i) => touched(i));
-  if (started && !confirm("Start a new set at this level? Your current answers will be lost.")) return;
+  if (m === MODE || S.stage !== 0) return;
+  if (ITEMS.some((_, i) => touched(i)) &&
+      !confirm("Start a new set of sentences at this level? Your current answers will be lost.")) return;
   MODE = m;
   document.querySelectorAll(".mode button").forEach(x => x.classList.toggle("on", x.dataset.mode === m));
-  restart();
-  say(`${b.textContent} level. New set of ${SET_SIZE}.`);
+  newSentences(); render(); window.scrollTo(0, 0);
 });
-$("bHelp").onclick = openHelp;
-
-function endTask(){
-  const left = ITEMS.filter((_,i)=>!complete(i)).length;
-  const msg = left
-    ? `${left} sentence${left>1?"s are":" is"} not finished. End the task and score your answers?`
-    : "End the task and score your answers?";
-  if (!confirm(msg)) return;
-  clearInterval(tick);
-  S.screen = "results"; S.sel = null; render(); window.scrollTo(0,0);
-}
-function restart(){
+function newSentences(){
   ITEMS = drawSet();
-  S.screen = "test"; S.idx = 0; S.sel = null; S.timedOut = false;
-  S.slots = ITEMS.map(it => Array(nBlanks(it)).fill(null));
-  S.bankOrder = ITEMS.map(it => it.bank.map((_,i) => i));
-  S.history = ITEMS.map(()=>[]);
-  S.seconds = TOTAL_SECONDS;
-  tick = setInterval(onTick, 1000);
-  render(); window.scrollTo(0,0);
+  S.slots = ITEMS.map(it => it.answer.map(() => null));
+  S.bankOrder = ITEMS.map(it => it.bank.map((_, i) => i));
+  S.history = ITEMS.map(() => []);
+  S.qi = 1; S.sel = null; S.screen = "test";
 }
-
+function advance(stage){
+  S.stage = stage; S.screen = "test"; S.seconds = LIMIT[stage];
+  render(); window.scrollTo(0, 0);
+}
+function finish(){ clearInterval(tick); S.screen = "report"; render(); window.scrollTo(0, 0); }
+function restart(){
+  MODE = MODE || "mixed";
+  newSentences();
+  EMAIL = pick(WRITING.emails); DISC = pick(WRITING.discussions);
+  S.stage = 0; S.screen = "test"; S.timedOut = false;
+  S.ed = [blankEditor(), blankEditor()]; S.self = [{}, {}];
+  S.seconds = LIMIT[0];
+  tick = setInterval(onTick, 1000);
+  render(); window.scrollTo(0, 0);
+}
 let tick = setInterval(onTick, 1000);
 function onTick(){
-  if (S.screen === "results") return;
-  S.seconds--;
-  if (S.seconds <= 0){
-    S.seconds = 0; clearInterval(tick);
-    S.timedOut = true; S.screen = "results";
-    render(); window.scrollTo(0,0); return;
+  if (S.screen === "report") return;
+  if (--S.seconds <= 0){
+    S.timedOut = true;
+    if (S.stage < 2) advance(S.stage + 1); else finish();
+    return;
   }
   renderChrome();
 }
-
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){
+    const d = document.querySelector(".scrim");
+    if (d){ d.remove(); return; }
+    if (S.sel !== null){ S.sel = null; render(); }
+  }
+});
 function openHelp(){
   const d = document.createElement("div");
   d.className = "scrim";
   d.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Help">
-    <header><span>Help &mdash; Build a Sentence</span></header>
-    <div class="body">
-      <h3>What the question asks</h3>
-      <p>Someone speaks to you. Fill the blanks in your reply so that it is grammatical and fits what was said. Some questions give you more words than blanks &mdash; move only the words you need, and leave the rest in the bank.</p>
-      <h3>With a mouse or on a touchscreen</h3>
-      <ul>
-        <li>Drag a word onto a blank.</li>
-        <li>Drag a word already in a blank to another blank to trade their places, or back to the bank to remove it.</li>
-        <li>Or select a word, then select a blank.</li>
-      </ul>
-      <h3>With the keyboard</h3>
-      <ul>
-        <li><kbd>Tab</kbd> moves between blanks and words.</li>
-        <li><kbd>Enter</kbd> picks up a word, then <kbd>Enter</kbd> on a blank places it.</li>
-        <li><kbd>Backspace</kbd> on a blank returns that word.</li>
-        <li><kbd>Esc</kbd> cancels a selection.</li>
-      </ul>
-      <h3>Scoring and timing</h3>
-      <p>Ten questions in six minutes and fifty seconds, about 41 seconds each. The ten are drawn at random from a bank of ${BANK.length} questions, so no two sittings are the same. A sentence earns 1.0 only when every word is in the right blank; one word out of place scores 0.0. The task is scored when you end it or when the clock runs out.</p>
-    </div>
-    <footer><button class="cbtn primary" id="bCloseHelp">Return to Question</button></footer>
-  </div>`;
+    <header>Help &mdash; Writing</header><div class="body">
+    <h3>The section</h3>
+    <p>Three tasks in about twenty-four minutes: ten Build a Sentence items in 6:50, then an email
+      in 7:00, then a discussion post in 10:00. Each task has its own clock, and you cannot return
+      to a task once you leave it.</p>
+    <h3>Build a Sentence</h3>
+    <p>Drag a word onto a blank, or select a word and then select a blank. Drag a placed word to
+      another blank to trade them, or back to the bank to remove it. <kbd>Enter</kbd> picks up and
+      places, <kbd>Backspace</kbd> on a blank returns a word, <kbd>Esc</kbd> cancels.</p>
+    <h3>The written tasks</h3>
+    <p><b>Cut</b> holds the selected text and <b>Paste</b> puts it back; that clipboard belongs to
+      the test, not to your computer. The recipient and subject line of the email are supplied.</p>
+    <h3>Scoring</h3>
+    <p>Sentences are scored right or wrong with no partial credit. The email and the discussion are
+      rated 0 to 5 by a scorer; this page runs the checks a machine can run and shows you a band-5
+      model and the rubric for the rest.</p>
+    </div><footer><button class="pill primary" id="bCloseHelp">Return</button></footer></div>`;
   document.body.appendChild(d);
-  d.addEventListener("click", e => { if (e.target === d) closeHelp(); });
-  $("bCloseHelp").onclick = closeHelp;
+  d.addEventListener("click", e => { if (e.target === d) d.remove(); });
+  $("bCloseHelp").onclick = () => { d.remove(); $("bHelp").focus(); };
   $("bCloseHelp").focus();
 }
-function closeHelp(){
-  const d = document.querySelector(".scrim");
-  if (d) d.remove();
-  $("bHelp").focus();
-}
 
-/* carry state across a republish when the host supports it */
-function boot(saved){
-  if (saved && saved.items && saved.slots && saved.slots.length === saved.items.length){
-    ITEMS = saved.items;
-    if (saved.mode) MODE = saved.mode;
-    delete saved.items; delete saved.mode;
-    Object.assign(S, saved); S.sel = null;
-  }
-  document.querySelectorAll(".mode button").forEach(x => x.classList.toggle("on", x.dataset.mode === MODE));
-  render();
-}
-if (window.claude && window.claude.hot){
-  window.claude.hot.snapshot(() => ({
-    screen:S.screen, idx:S.idx, slots:S.slots, history:S.history,
-    seconds:S.seconds, timeHidden:S.timeHidden, timedOut:S.timedOut, mode:MODE,
-    items:ITEMS.map(it => ({who:it.who, says:it.says, bank:it.bank, answer:it.answer,
-                            extras:it.extras, target:it.target, why:it.why,
-                            parts:it.parts}))
-  }));
-  window.claude.hot.ready ? window.claude.hot.ready(boot) : boot(window.claude.hot.data);
-} else { boot(null); }
+render();
 </script>
 </body>
 </html>
