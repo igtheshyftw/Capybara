@@ -138,6 +138,57 @@ textarea:focus{outline:2px solid var(--teal-2);outline-offset:-2px}
   .checks .lbl{grid-column:2}
   .checks .d{grid-column:2}
 }
+/* ---------- printable report: questions, the student's answers, the key ---------- */
+#printable{display:none}
+.printbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 24px;
+  padding:14px 16px;border:1px solid var(--rule);border-radius:4px;background:var(--paper-2)}
+.printbar label{font-size:14.5px;color:var(--ink-2);display:flex;align-items:center;gap:9px}
+.printbar input{border:1px solid var(--rule);border-radius:4px;padding:7px 10px;min-width:200px;
+  background:var(--paper);color:var(--ink)}
+.printbar .hint{font-size:13.5px;color:var(--ink-3);flex:1 1 200px;min-width:0}
+.prevbar{position:fixed;top:0;left:0;right:0;z-index:91;display:none;gap:12px;align-items:center;
+  flex-wrap:wrap;padding:10px 16px;background:var(--teal);color:#fff}
+.prevbar .tip{font-size:13px;opacity:.85;flex:1 1 220px;min-width:0}
+body.preview{overflow:hidden}
+body.preview .prevbar{display:flex}
+body.preview #printable{display:block;position:fixed;inset:0;z-index:90;overflow:auto;
+  background:#fff;padding:70px 20px 60px}
+body.preview #printable .pdoc{max-width:690px;margin:0 auto}
+.pdoc{color:#000;background:#fff;font-family:var(--sans);font-size:11pt;line-height:1.45}
+.pdoc .pmast{font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:#444;
+  border-bottom:1.5pt solid #000;padding-bottom:4pt;margin-bottom:11pt}
+.pdoc h1{font-size:16pt;margin:0 0 5pt}
+.pdoc .pmeta{font-size:10pt;color:#333;margin:0 0 4pt}
+.pdoc .pmeta b{color:#000}
+.pdoc h2{font-size:12.5pt;margin:17pt 0 7pt;border-bottom:.75pt solid #888;padding-bottom:3pt;
+  break-after:avoid;page-break-after:avoid}
+.pdoc .psrc{border:.75pt solid #888;padding:9pt 11pt;margin:0 0 11pt;
+  break-inside:avoid;page-break-inside:avoid}
+.pdoc .psrc p{margin:0 0 6pt}
+.pdoc .psrc p:last-child{margin-bottom:0}
+.pdoc .psrc .pttl{font-weight:700}
+.pdoc .pitem{break-inside:avoid;page-break-inside:avoid;margin:0 0 11pt;padding-left:24pt;position:relative}
+.pdoc .pitem .pnum{position:absolute;left:0;top:0;font-weight:700}
+.pdoc .pstem{margin:0 0 4pt}
+.pdoc ol.popts{margin:0;padding-left:18pt}
+.pdoc ol.popts li{margin:0 0 1pt}
+.pdoc ul{margin:0 0 6pt;padding-left:18pt}
+.pdoc .pans{margin:4pt 0 0;font-size:10pt}
+.pdoc .presp{white-space:pre-wrap;border:.75pt solid #888;padding:9pt 11pt;margin:4pt 0 0;
+  break-inside:avoid;page-break-inside:avoid}
+.pdoc .pnote{font-size:10pt;color:#333;margin:4pt 0 0}
+.pdoc .pchecks{list-style:none;margin:4pt 0 0;padding:0;font-size:10pt}
+.pdoc .pchecks li{margin:0 0 1pt}
+.pdoc table{border-collapse:collapse;margin:0 0 6pt;font-size:10pt}
+.pdoc th,.pdoc td{border:.5pt solid #888;padding:3pt 6pt;text-align:left}
+.pdoc .pfoot{margin-top:20pt;border-top:.75pt solid #888;padding-top:7pt;font-size:9pt;color:#444}
+@media print{
+  body.preview,body.printing{overflow:visible;background:#fff}
+  body.preview > *:not(#printable),body.printing > *:not(#printable){display:none !important}
+  body.preview #printable,body.printing #printable{display:block;position:static;padding:0;overflow:visible}
+  body.preview #printable .pdoc{max-width:none}
+  @page{margin:15mm 13mm}
+}
 </style>
 </head>
 <body>
@@ -156,6 +207,14 @@ textarea:focus{outline:2px solid var(--teal-2);outline-offset:-2px}
 
 <main id="main"></main>
 <div class="sr" id="live" aria-live="polite"></div>
+
+<div class="prevbar">
+  <button class="pill primary" id="bPrintNow">Print</button>
+  <button class="pill" id="bClosePrev">Close</button>
+  <span class="tip">If no print dialog opened, press Ctrl&#8209;P (&#8984;&#8209;P on a Mac). Choose
+    &ldquo;Save as PDF&rdquo; as the destination to keep a copy.</span>
+</div>
+<div id="printable" aria-hidden="true"></div>
 
 <script>
 /* CONTENT:START */
@@ -3131,7 +3190,7 @@ function renderReport(){
       These two tasks are rated 0 to 5 by a human or automated scorer, which this page cannot
       reproduce. What it can check is mechanical; the rest is for you to judge against the model
       and the rubric.</p>
-    ${cards}</div>`;
+    ${printBarHTML()}${cards}</div>`;
 
   TASKS.forEach((task, i) => {
     const upd = () => {
@@ -3144,6 +3203,7 @@ function renderReport(){
         el.addEventListener("change", () => { S.self[i][c] = +el.value; upd(); })));
     upd();
   });
+  wirePrint();
   renderChrome();
 }
 
@@ -3215,6 +3275,94 @@ document.addEventListener("keydown", e => {
 });
 
 render();
+/* ---------- print / save as PDF ----------
+   Builds a clean document of the questions, the student's answers and, once the
+   section has been submitted, the answer key. Printing before submission prints
+   the work without the key. The preview is shown on screen as well as sent to
+   the printer, because some embedded viewers refuse to open a print dialog. */
+const NAME_KEY = "toefl-practice/name";
+function studentName(){ try { return localStorage.getItem(NAME_KEY) || ""; } catch (e){ return ""; } }
+function saveName(v){ try { localStorage.setItem(NAME_KEY, v); } catch (e){} }
+function printBarHTML(){
+  return `<div class="printbar">
+    <label>Name <input id="pname" maxlength="60" placeholder="for the printout"
+      value="${esc(studentName())}"></label>
+    <button class="pill primary" id="bPrint">Print / Save as PDF</button>
+    <span class="hint">Prints the questions, your answers and the answer key.</span></div>`;
+}
+function printHead(title, bits){
+  const nm = studentName().trim();
+  return `<div class="pmast">TOEFL practice &middot; unofficial</div><h1>${esc(title)}</h1>
+    <p class="pmeta"><b>Name:</b> ${nm ? esc(nm) : "&nbsp;______________________"}
+      &nbsp;&middot;&nbsp; <b>Date:</b> ${esc(new Date().toLocaleDateString(undefined,
+        {year:"numeric", month:"long", day:"numeric"}))}</p>
+    <p class="pmeta">${bits.join(" &nbsp;&middot;&nbsp; ")}</p>`;
+}
+function printFoot(key){
+  return `<p class="pfoot">${key ? "Answer key included." :
+    "Printed before the section was submitted, so no answer key is included."}
+    Unofficial practice material. TOEFL is a registered trademark of ETS, which does not
+    endorse and was not involved in producing this.</p>`;
+}
+function buildPrintable(){
+  $("printable").innerHTML = `<div class="pdoc">${printableHTML()}</div>`;
+}
+function openPreview(){
+  buildPrintable();
+  document.body.classList.add("preview");
+  $("printable").scrollTop = 0;
+  $("bClosePrev").focus();
+  setTimeout(() => { try { window.print(); } catch (e){} }, 80);
+}
+function closePreview(){ document.body.classList.remove("preview"); }
+function wirePrint(){
+  const inp = $("pname"), btn = $("bPrint");
+  if (inp) inp.addEventListener("input", () => saveName(inp.value));
+  if (btn) btn.onclick = openPreview;
+}
+$("bPrintNow").onclick = () => { try { window.print(); } catch (e){} };
+$("bClosePrev").onclick = closePreview;
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && document.body.classList.contains("preview")) closePreview();
+});
+window.addEventListener("beforeprint", () => {
+  if (!document.body.classList.contains("preview")){
+    buildPrintable();
+    document.body.classList.add("printing");
+  }
+});
+window.addEventListener("afterprint", () => document.body.classList.remove("printing"));
+
+/* ---------- the printable document for these two tasks ---------- */
+function printTask(task, i, key){
+  const p = task.p, text = S.ed[i].text;
+  const lead = task.kind === "email"
+    ? `<p>${esc(p.scenario)}</p>
+       <p><b>Write an email to ${esc(p.to)}. In your email, do the following:</b></p>
+       <ul>${p.bullets.map(([, t]) => `<li>${esc(t)}</li>`).join("")}</ul>
+       <p><b>To:</b> ${esc(p.to)} &nbsp;&middot;&nbsp; <b>Subject:</b> ${esc(p.subject)}</p>`
+    : `<p>Your professor is teaching a class on ${esc(p.course)}. Write a post responding to the
+         professor's question. An effective response contains at least 100 words.</p>
+       <p><b>${esc(p.professor)}:</b> ${esc(p.question)}</p>
+       ${p.students.map(([n, t]) => `<p><b>${esc(n)}:</b> ${esc(t)}</p>`).join("")}`;
+  const rows = key ? checks(task, text) : [];
+  return `<div class="psrc">${lead}</div>
+    <p class="pans"><b>Your response</b> &mdash; ${wc(text)} words</p>
+    <div class="presp">${text.trim() ? esc(text) : "No response written."}</div>
+    ${key ? `<p class="pans"><b>Checks</b> &mdash; ${rows.filter(r => r[1]).length} of ${rows.length} met</p>
+      <ul class="pchecks">${rows.map(([lbl, ok, d]) =>
+        `<li>${ok ? "&#10003;" : "&#10007;"} <b>${lbl}</b> &mdash; ${d}</li>`).join("")}</ul>
+      <p class="pans"><b>Band 5 model response</b></p>
+      <div class="presp">${esc(p.model)}</div>` : ""}`;
+}
+function printableHTML(){
+  const key = S.screen === "report";
+  return printHead("Writing: email and academic discussion",
+      [`<b>Tasks:</b> an email in 07:00 and a discussion post in 10:00`]) +
+    TASKS.map((t, i) => `<h2>Question ${i + 1} of 2 &middot; ${
+      t.kind === "email" ? "Write an Email" : "Write for an Academic Discussion"}</h2>` +
+      printTask(t, i, key)).join("") + printFoot(key);
+}
 </script>
 </body>
 </html>

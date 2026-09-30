@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOEFL Practice Portal</title>
+<meta name="description" content="Timed TOEFL 2026 reading and writing practice that runs in the browser. Nothing to install, nothing to sign in to.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* ============================================================
+   Student portal. Layout: a teal masthead, one "start here"
+   strip, then the sections as cards in reading / writing
+   groups, with the focused drills below them. The palette and
+   the type are the ones the practice screens themselves use, so
+   the portal and the tests read as one system.
+   ============================================================ */
+:root{
+  --teal:#0e5a5e; --teal-2:#12706f; --teal-ink:#0b4a4d; --teal-soft:#e7f0f0;
+  --rule:#c9d2d3; --rule-2:#9fadaf;
+  --ink:#16201f; --ink-2:#4a5654; --ink-3:#6f7b7a;
+  --paper:#fff; --paper-2:#f4f7f7; --band:#eef2f2;
+  --sans:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --teal:#0b3f42; --teal-2:#12706f; --teal-ink:#bfe0df; --teal-soft:#16302f;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --band:#1f2a2a;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --teal:#0b3f42; --teal-2:#12706f; --teal-ink:#bfe0df; --teal-soft:#16302f;
+  --rule:#2c3a3b; --rule-2:#4a5c5d;
+  --ink:#e6eeed; --ink-2:#aebbba; --ink-3:#849392;
+  --paper:#141b1b; --paper-2:#1a2323; --band:#1f2a2a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55}
+button,input{font:inherit;color:inherit}
+a{color:var(--teal-2)}
+:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px}
+.wrap{max-width:1060px;margin:0 auto;padding-inline:18px}
+
+/* masthead */
+.top{background:var(--teal);color:#fff}
+.top .wrap{padding-block:46px 40px}
+.brand{font-size:19px;font-weight:700;letter-spacing:.01em;margin:0 0 26px}
+.brand span{opacity:.72;font-size:13px;vertical-align:2px}
+h1{font-size:clamp(30px,5.2vw,44px);font-weight:900;line-height:1.1;margin:0 0 14px;
+  text-wrap:balance;letter-spacing:-.015em}
+.lede{font-size:17.5px;max-width:60ch;margin:0;color:#dcebea}
+
+/* start-here strip */
+.strip{background:var(--band);border-bottom:1px solid var(--rule)}
+.strip .wrap{padding-block:20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.strip label{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+.strip input{border:1px solid var(--rule-2);border-radius:4px;padding:9px 12px;
+  min-width:220px;background:var(--paper);color:var(--ink)}
+.strip .said{font-size:14.5px;color:var(--ink-2);flex:1 1 260px;min-width:0}
+.strip .said b{color:var(--ink)}
+
+main .wrap{padding-block:38px 10px}
+h2.sec{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+  margin:34px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+h2.sec:first-child{margin-top:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.card{border:1px solid var(--rule);border-radius:5px;background:var(--paper);
+  padding:22px 22px 20px;display:flex;flex-direction:column;min-width:0}
+.card.lead{border-left:5px solid var(--teal-2)}
+.card h3{font-size:20px;margin:0 0 4px;letter-spacing:-.01em}
+.card .kind{font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;margin:0 0 10px}
+.card p.blurb{margin:0 0 14px;color:var(--ink-2);font-size:15px}
+.parts{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:7px}
+.parts li{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline;
+  font-size:15px;padding-bottom:7px;border-bottom:1px dotted var(--rule)}
+.parts li:last-child{border-bottom:0;padding-bottom:0}
+.parts .clock{font-family:var(--mono);font-size:13.5px;color:var(--teal-2);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.parts .shape{font-size:13.5px;color:var(--ink-3);white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+.chip{font-size:12.5px;border:1px solid var(--rule);border-radius:20px;
+  padding:3px 11px;color:var(--ink-2);background:var(--paper-2)}
+.go{margin-top:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;background:var(--teal);color:#fff;
+  border:1px solid var(--teal);border-radius:24px;padding:10px 22px;font-weight:700;font-size:15px}
+.btn:hover{background:var(--teal-2);border-color:var(--teal-2)}
+.btn.ghost{background:transparent;color:var(--teal-2);border-color:var(--rule-2)}
+.btn.ghost:hover{background:var(--teal-soft);color:var(--teal-ink)}
+.go .total{font-family:var(--mono);font-size:13.5px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums}
+
+/* how it works */
+.how{background:var(--paper-2);border-top:1px solid var(--rule);margin-top:46px}
+.how .wrap{padding-block:34px}
+.how h2{font-size:22px;margin:0 0 18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.grid3 h3{font-size:16px;margin:0 0 6px}
+.grid3 p{margin:0;color:var(--ink-2);font-size:15px}
+.grid3 kbd{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule-2);
+  border-bottom-width:2px;border-radius:4px;padding:1px 5px}
+
+footer{border-top:1px solid var(--rule)}
+footer .wrap{padding-block:26px 40px;color:var(--ink-3);font-size:13.5px}
+footer p{margin:0 0 8px;max-width:78ch}
+@media (max-width:560px){
+  .top .wrap{padding-block:34px 30px}
+  .parts li{grid-template-columns:1fr}
+  .parts .clock,.parts .shape{grid-column:1}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="brand">toefl practice<span>&nbsp;&middot; unofficial</span></p>
+    <h1>Sit a timed section, then take the answer key away with you.</h1>
+    <p class="lede">Reading and writing practice for the 2026 TOEFL iBT, built to run the way the
+      real screens do: one clock per task, no going back, and a score report at the end that you can
+      print or save as a PDF with the questions, your answers and the correct answers side by
+      side.</p>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <label for="name">Your name <input id="name" maxlength="60" placeholder="optional"></label>
+    <p class="said" id="said">Printed at the top of every report you produce.
+      <b>Stored in this browser only</b> &mdash; nothing is uploaded and there is nothing to sign in to.</p>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <h2 class="sec">Full sections</h2>
+    <div class="cards">
+
+      <article class="card lead">
+        <p class="kind">Reading</p>
+        <h3>Reading section</h3>
+        <p class="blurb">One 20-question module, three task types, a single clock for all of
+          them &mdash; as in the real section, the module is not divided into separate timed parts.</p>
+        <ul class="parts">
+          <li>Complete the Words &mdash; 10 items<span class="shape">typed, one screen</span></li>
+          <li>Read in Daily Life &mdash; 5 items<span class="shape">2 texts</span></li>
+          <li>Read an Academic Passage &mdash; 5 items<span class="shape">1 passage</span></li>
+        </ul>
+        <div class="meta">
+          <span class="chip">32 word-completion paragraphs</span>
+          <span class="chip">14 everyday texts</span>
+          <span class="chip">7 academic passages</span>
+        </div>
+        <div class="go"><a class="btn" href="reading-module.html">Start the reading module</a>
+          <span class="total">13:00</span></div>
+      </article>
+
+      <article class="card lead">
+        <p class="kind">Writing</p>
+        <h3>Writing section</h3>
+        <p class="blurb">All three writing tasks in one sitting. Each task has its own clock and
+          hands over by itself when the time runs out; you cannot return to a task once you leave it.</p>
+        <ul class="parts">
+          <li>Build a Sentence &mdash; 10 items<span class="clock">06:50</span></li>
+          <li>Write an Email<span class="clock">07:00</span></li>
+          <li>Write for an Academic Discussion<span class="clock">10:00</span></li>
+        </ul>
+        <div class="meta">
+          <span class="chip">1,000 sentence items</span>
+          <span class="chip">60 email prompts</span>
+          <span class="chip">60 discussion prompts</span>
+        </div>
+        <div class="go"><a class="btn" href="writing-section.html">Start the writing section</a>
+          <span class="total">23:50</span></div>
+      </article>
+
+    </div>
+
+    <h2 class="sec">Focused practice &mdash; one task at a time</h2>
+    <div class="cards">
+
+      <article class="card">
+        <p class="kind">Writing &middot; drill</p>
+        <h3>Build a Sentence</h3>
+        <p class="blurb">Ten items on their own, with a level control: standard, hard, or the mixed
+          set the real test uses. Drag a word onto a blank, or select and place it with the keyboard.</p>
+        <div class="meta">
+          <span class="chip">500 standard</span><span class="chip">500 hard</span>
+          <span class="chip">50 grammar targets</span>
+        </div>
+        <div class="go"><a class="btn ghost" href="build-a-sentence.html">Start the drill</a>
+          <span class="total">06:50</span></div>
+      </article>
+
+      <article class="card">
+        <p class="kind">Writing &middot; drill</p>
+        <h3>Email and discussion</h3>
+        <p class="blurb">The two written tasks without the sentence items, for a session spent
+          entirely on composing. Cut, paste and undo work as they do in the test.</p>
+        <div class="meta">
+          <span class="chip">60 email prompts</span><span class="chip">60 discussion prompts</span>
+          <span class="chip">band-5 model answers</span>
+        </div>
+        <div class="go"><a class="btn ghost" href="writing-tasks.html">Start the drill</a>
+          <span class="total">17:00</span></div>
+      </article>
+
+    </div>
+  </div>
+
+  <section class="how">
+    <div class="wrap">
+      <h2>Before you start</h2>
+      <div class="grid3">
+        <div>
+          <h3>The clock runs</h3>
+          <p>Each section starts as soon as it loads and submits itself when the time is gone.
+            Hide the clock if it distracts you; the section still ends on time.</p>
+        </div>
+        <div>
+          <h3>Print the report</h3>
+          <p>Every report has a <b>Print / Save as PDF</b> button. The printout carries the
+            questions, what you answered and the answer key, with the grammar note or the band-5
+            model for the writing tasks. Choose &ldquo;Save as PDF&rdquo; as the destination to keep
+            a copy, or press <kbd>Ctrl</kbd>&#8209;<kbd>P</kbd>.</p>
+        </div>
+        <div>
+          <h3>Nothing is saved for you</h3>
+          <p>Answers live in the browser tab and disappear when you close it. Print the report
+            before you leave, and hand the PDF to your teacher if that is what was asked for.</p>
+        </div>
+        <div>
+          <h3>No mouse needed</h3>
+          <p>Tab moves between controls, <kbd>Enter</kbd> picks a word up and places it, and
+            <kbd>Esc</kbd> cancels. Everything works on a phone or tablet too.</p>
+        </div>
+        <div>
+          <h3>A fresh set every time</h3>
+          <p>Questions are drawn at random from the banks, so a second sitting is a different
+            paper. The writing prompts change with it.</p>
+        </div>
+        <div>
+          <h3>What is scored</h3>
+          <p>Reading and Build a Sentence are marked right or wrong automatically. The email and
+            the discussion cannot be machine scored, so the report runs the mechanical checks, shows
+            a band-5 model and leaves the rubric to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Unofficial practice material, written for this project. TOEFL and TOEFL iBT are registered
+      trademarks of Educational Testing Service, which does not endorse, sponsor or have any
+      involvement in this site.</p>
+    <p>Part of <a href="https://github.com/igtheshyftw/Capybara">Capybara Motion</a>. Every question
+      here is original; nothing is reproduced from a published test.</p>
+  </div>
+</footer>
+
+<script>
+/* the name is shared with the practice screens, which print it on the report */
+const KEY = "toefl-practice/name";
+const box = document.getElementById("name");
+try { box.value = localStorage.getItem(KEY) || ""; } catch (e){}
+box.addEventListener("input", () => {
+  try { localStorage.setItem(KEY, box.value); } catch (e){}
+});
+</script>
+</body>
+</html>

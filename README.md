@@ -221,3 +221,69 @@ correct one, plus the evidence line and the skill tested. Passages, lessons,
 teacher comments and the progress report were written for this project.
 
 All students, scores and teacher comments are fictional.
+
+---
+
+## TOEFL practice portal
+
+A second, self-contained thing lives in `public/`: standalone HTML pages that
+simulate the 2026 TOEFL iBT reading and writing sections. They share no code
+with the Next.js app, need no build step and no server, and open straight from
+the file system or from GitHub Pages.
+
+`public/index.html` is the portal students land on.
+
+| Page | What it is | Clock |
+| --- | --- | --- |
+| `index.html` | the portal: links, instructions, the student's name | — |
+| `reading-module.html` | Complete the Words (10), Read in Daily Life (5), Academic Passage (5) | 13:00 |
+| `writing-section.html` | Build a Sentence (10), Write an Email, Academic Discussion | 6:50 / 7:00 / 10:00 |
+| `build-a-sentence.html` | Build a Sentence on its own, with a level control | 6:50 |
+| `writing-tasks.html` | the two written tasks on their own | 7:00 / 10:00 |
+
+Questions are drawn at random each sitting from banks of 1,000 sentence items
+(500 standard, 500 hard, across 50 grammar targets), 60 email prompts, 60
+discussion prompts, 32 word-completion paragraphs, 14 everyday texts and 7
+academic passages. Every item was written for this project.
+
+### The printable report
+
+Each score report has a **Print / Save as PDF** button. It opens a clean
+document — the questions, the student's answers, the answer key, and for the
+written tasks the mechanical checks and a band-5 model — and sends it to the
+printer; choosing "Save as PDF" as the destination keeps a copy. The student's
+name comes from the portal (`localStorage`, this browser only). Printing before
+a section is submitted prints the work **without** the key.
+
+### Publishing it
+
+`.github/workflows/pages.yml` publishes `public/` to GitHub Pages on every push
+to `main`. Turn it on once under **Settings → Pages → Build and deployment →
+Source: GitHub Actions**; the portal is then at
+`https://<user>.github.io/<repo>/`. Nothing is uploaded from the student's
+browser and there is nothing to sign in to.
+
+The Next.js app has its own `/` route, so `public/index.html` is shadowed when
+you run `npm run dev`; open `/index.html` for the portal there.
+
+### Rebuilding the content
+
+Content is authored in Python under `scripts/` and injected between the
+`CONTENT:START` / `CONTENT:END` markers in the HTML. Each builder validates
+before it writes and exits non-zero on any problem, so a page can never ship an
+item that breaks its own rules.
+
+```bash
+python3 scripts/build_bank.py             # sentence bank -> build-a-sentence.html
+python3 scripts/build_reading.py          # reading content -> reading-module.html
+python3 scripts/build_writing.py          # email + discussion -> writing-tasks.html
+python3 scripts/build_writing_section.py  # both of the above -> writing-section.html
+```
+
+`scripts/calibration.py` holds real items transcribed for measurement only.
+They are never emitted into a bank; the builder prints our distribution against
+theirs on every run.
+
+TOEFL and TOEFL iBT are registered trademarks of Educational Testing Service.
+This material is unofficial, was written for this project, and ETS has no
+involvement in it.
