@@ -319,23 +319,45 @@ td.n{font-family:var(--mono);color:var(--ink-3);width:1%;white-space:nowrap}
   .who{flex:none;text-align:left;padding-top:0}
   .slot{min-width:80px}
 }
-/* ---------- printable report: questions, the student's answers, the key ---------- */
+/* ---------- portal chrome: print, preview and quit ----------
+   These controls appear on four pages with three different palettes, so they
+   carry their own tokens and button class rather than borrowing each page's. */
+/* these follow each page's own tokens, so the controls match whichever
+   palette the page uses, in light and dark alike */
+:root{
+  --pc-on:var(--teal-2, var(--accent, #0e5a5e));
+  --pc-line:var(--rule, #c9d2d3);
+  --pc-fill:var(--paper, #fff);
+  --pc-ink:var(--ink, #16201f);
+  --pc-soft:var(--paper-2, #eef2f2);
+}
+.pcbtn{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+  font-family:inherit;font-size:14px;font-weight:700;line-height:1.2;text-decoration:none;
+  border:1px solid var(--pc-line);border-radius:22px;padding:8px 17px;
+  background:var(--pc-fill);color:var(--pc-ink)}
+.pcbtn:hover{background:var(--pc-soft)}
+.pcbtn.on{background:var(--pc-on);border-color:var(--pc-on);color:#fff}
+.pcbtn.on:hover{filter:brightness(1.1)}
+.pcbtn.light{background:#fff;border-color:#fff;color:var(--pc-on)}
+.pcbtn.clear{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
+.pcbtn.clear:hover{background:rgba(255,255,255,.14)}
+
 #printable{display:none}
 .printbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 24px;
-  padding:14px 16px;border:1px solid var(--rule);border-radius:4px;background:var(--paper-2)}
-.printbar label{font-size:14.5px;color:var(--ink-2);display:flex;align-items:center;gap:9px}
-.printbar input{border:1px solid var(--rule);border-radius:4px;padding:7px 10px;min-width:200px;
-  background:var(--paper);color:var(--ink)}
-.printbar .hint{font-size:13.5px;color:var(--ink-3);flex:1 1 200px;min-width:0}
+  padding:14px 16px;border:1px solid var(--pc-line);border-radius:5px;background:var(--pc-soft)}
+.printbar label{display:flex;align-items:center;gap:9px;font-size:14.5px;color:var(--pc-ink)}
+.printbar input{border:1px solid var(--pc-line);border-radius:4px;padding:8px 10px;
+  min-width:190px;background:var(--pc-fill);color:var(--pc-ink);font-size:14.5px}
+.printbar .hint{font-size:13.5px;opacity:.72;flex:1 1 190px;min-width:0}
 .prevbar{position:fixed;top:0;left:0;right:0;z-index:91;display:none;gap:12px;align-items:center;
-  flex-wrap:wrap;padding:10px 16px;background:var(--teal);color:#fff}
-.prevbar .tip{font-size:13px;opacity:.85;flex:1 1 220px;min-width:0}
+  flex-wrap:wrap;padding:10px 16px;background:var(--pc-on);color:#fff}
+.prevbar .tip{font-size:13px;opacity:.88;flex:1 1 220px;min-width:0}
 body.preview{overflow:hidden}
 body.preview .prevbar{display:flex}
 body.preview #printable{display:block;position:fixed;inset:0;z-index:90;overflow:auto;
   background:#fff;padding:70px 20px 60px}
 body.preview #printable .pdoc{max-width:690px;margin:0 auto}
-.pdoc{color:#000;background:#fff;font-family:var(--sans);font-size:11pt;line-height:1.45}
+.pdoc{color:#000;background:#fff;font-family:var(--sans,system-ui,sans-serif);font-size:11pt;line-height:1.45}
 .pdoc .pmast{font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:#444;
   border-bottom:1.5pt solid #000;padding-bottom:4pt;margin-bottom:11pt}
 .pdoc h1{font-size:16pt;margin:0 0 5pt}
@@ -363,6 +385,7 @@ body.preview #printable .pdoc{max-width:690px;margin:0 auto}
 .pdoc table{border-collapse:collapse;margin:0 0 6pt;font-size:10pt}
 .pdoc th,.pdoc td{border:.5pt solid #888;padding:3pt 6pt;text-align:left}
 .pdoc .pfoot{margin-top:20pt;border-top:.75pt solid #888;padding-top:7pt;font-size:9pt;color:#444}
+.scrim.quit .modal footer{gap:10px}
 @media print{
   body.preview,body.printing{overflow:visible;background:#fff}
   body.preview > *:not(#printable),body.printing > *:not(#printable){display:none !important}
@@ -384,6 +407,7 @@ body.preview #printable .pdoc{max-width:690px;margin:0 auto}
     <span class="meter" id="counter">Question 1 of 10</span>
   </div>
   <div class="btns">
+    <button class="cbtn" id="bQuit">Quit</button>
     <button class="cbtn" id="bTime">Hide Time</button>
     <button class="cbtn" id="bHelp">Help</button>
     <button class="cbtn" id="bReview">Review</button>
@@ -410,8 +434,8 @@ body.preview #printable .pdoc{max-width:690px;margin:0 auto}
 <div class="sr" id="live" aria-live="polite"></div>
 
 <div class="prevbar">
-  <button class="pill primary" id="bPrintNow">Print</button>
-  <button class="pill" id="bClosePrev">Close</button>
+  <button class="pcbtn light" id="bPrintNow">Print</button>
+  <button class="pcbtn clear" id="bClosePrev">Close</button>
   <span class="tip">If no print dialog opened, press Ctrl&#8209;P (&#8984;&#8209;P on a Mac). Choose
     &ldquo;Save as PDF&rdquo; as the destination to keep a copy.</span>
 </div>
@@ -2060,20 +2084,22 @@ if (window.claude && window.claude.hot){
   }));
   window.claude.hot.ready ? window.claude.hot.ready(boot) : boot(window.claude.hot.data);
 } else { boot(null); }
-/* ---------- print / save as PDF ----------
-   Builds a clean document of the questions, the student's answers and, once the
-   section has been submitted, the answer key. Printing before submission prints
-   the work without the key. The preview is shown on screen as well as sent to
-   the printer, because some embedded viewers refuse to open a print dialog. */
-const NAME_KEY = "toefl-practice/name";
+/* ---------- print, preview and quit ----------
+   The printout carries the questions, the student's answers and, once the
+   section has been submitted, the answer key; printing before submission
+   prints the work without the key. The preview is shown on screen as well as
+   sent to the printer, because some embedded viewers refuse to open a print
+   dialog. Quit returns to the portal, after a warning about what is lost. */
+const NAME_KEY = "toefl-practice/name", PORTAL = "index.html";
 function studentName(){ try { return localStorage.getItem(NAME_KEY) || ""; } catch (e){ return ""; } }
 function saveName(v){ try { localStorage.setItem(NAME_KEY, v); } catch (e){} }
 function printBarHTML(){
   return `<div class="printbar">
     <label>Name <input id="pname" maxlength="60" placeholder="for the printout"
       value="${esc(studentName())}"></label>
-    <button class="pill primary" id="bPrint">Print / Save as PDF</button>
-    <span class="hint">Prints the questions, your answers and the answer key.</span></div>`;
+    <button class="pcbtn on" id="bPrint">Print / Save as PDF</button>
+    <a class="pcbtn" href="${PORTAL}">Back to the portal</a>
+    <span class="hint">The printout carries the questions, your answers and the answer key.</span></div>`;
 }
 function printHead(title, bits){
   const nm = studentName().trim();
@@ -2107,9 +2133,6 @@ function wirePrint(){
 }
 $("bPrintNow").onclick = () => { try { window.print(); } catch (e){} };
 $("bClosePrev").onclick = closePreview;
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && document.body.classList.contains("preview")) closePreview();
-});
 window.addEventListener("beforeprint", () => {
   if (!document.body.classList.contains("preview")){
     buildPrintable();
@@ -2117,6 +2140,36 @@ window.addEventListener("beforeprint", () => {
   }
 });
 window.addEventListener("afterprint", () => document.body.classList.remove("printing"));
+
+function openQuit(){
+  if (document.querySelector(".scrim.quit")) return;
+  const scored = S.screen === "report";
+  const d = document.createElement("div");
+  d.className = "scrim quit";
+  d.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Leave this section">
+    <header><span>Leave this section?</span></header>
+    <div class="body">${scored
+      ? `<p>Your score report is not stored anywhere. If you want to keep it, print it first and
+           then come back to this screen.</p>`
+      : `<p>This section is still running. Leaving now loses your answers, nothing is recorded,
+           and the clock does not stop while this message is open.</p>`}
+      <p>You will go back to the practice portal, where you can start any section again.</p>
+    </div>
+    <footer><button class="pcbtn" id="bQuitYes">Leave the section</button>
+      <button class="pcbtn on" id="bQuitNo">Stay here</button></footer></div>`;
+  document.body.appendChild(d);
+  d.addEventListener("click", e => { if (e.target === d) d.remove(); });
+  $("bQuitYes").onclick = () => { window.location.href = PORTAL; };
+  $("bQuitNo").onclick = () => { d.remove(); $("bQuit").focus(); };
+  $("bQuitNo").focus();
+}
+$("bQuit").onclick = openQuit;
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (document.body.classList.contains("preview")){ closePreview(); return; }
+  const q = document.querySelector(".scrim.quit");
+  if (q){ q.remove(); $("bQuit").focus(); }
+});
 
 /* ---------- the printable document for this task ---------- */
 function printFrame(it){

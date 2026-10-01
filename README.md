@@ -255,6 +255,10 @@ printer; choosing "Save as PDF" as the destination keeps a copy. The student's
 name comes from the portal (`localStorage`, this browser only). Printing before
 a section is submitted prints the work **without** the key.
 
+Every section has a **Quit** button in the top bar. It confirms first — the
+answers in a running section are lost — and returns to the portal. The score
+report also carries a **Back to the portal** link beside the print button.
+
 ### Publishing it
 
 `.github/workflows/pages.yml` publishes `public/` to GitHub Pages on every push
